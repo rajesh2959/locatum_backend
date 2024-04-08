@@ -1,0 +1,189 @@
+<form class="form-horizontal border-left hor-height" name="frm" novalidate>
+    <div class="panel-body" style="padding-top:22px;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7" style="margin-left:-11px;">
+                <h2 style="padding-bottom:7px;">Floor Plans</h2>
+            </div>
+        </div>
+        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 fv-panel-header" style="padding-top: 6px;">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="margin-top:15px;">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <select ng-disabled="vm.venueList.length==0 || !vm.venueList" ng-model="vm.selectedVenue" no-results-text="'No Floor found'" class="connection2 col-md-6 col-sm-9 col-xs-6 form-control"
+                            ng-options="item.id as item.newUid for item in vm.venueList"
+                            ng-change="vm.onVenueChange(vm.selectedVenue)" style="padding-top:3px;width:220px;">
+                        <option ng-if="vm.venueList.length==0 || !vm.venueList" value="">No records found</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="padding-top:54px;">
+                <ul class="nav nav-tabs floor-tab">
+                    <li ng-class="vm.tabIndex==1 ? 'tabactive' : ''" ng-init="vm.tabIndex=1"><a href="" ng-click="vm.tab(1)" data-toggle="tab" aria-expanded="false" style="background:none;border-top: none"><span class="fa icon-list" style="font-size:15px !important;vertical-align: middle;"></span>&nbsp;&nbsp;<span style="font-size:13px;">List View</span></a></li>
+                    <li ng-class="vm.tabIndex==2 ? 'tabactive' : ''"><a href="" ng-click="vm.tab(2)" data-toggle="tab" aria-expanded="true" style="background:none;border-top: none"><span class="fa icon-card_view" style="font-size:16px !important;vertical-align: text-top;"></span>&nbsp;&nbsp;<span style="font-size:13px;">Card View</span></a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-right fv-add-btn">
+                <div class="span-bar text-right" style="padding-top:18px;">
+                    <a ui-sref="dashboard.floorplan.addfloorplan({spid:0})" style="color: black !important;text-decoration: none !important;font-size:13px;"><span><span class="fa icon-add" style="font-size: 15px !important;vertical-align:middle;"></span>&nbsp;&nbsp;<span class="floor-list-text" style="font-weight:400">Add Floorplan</span></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button style="cursor:pointer; border:none; background-color:transparent" ng-class="vm.venueList.length==0 || !vm.venueList || vm.floorsdata.length == 0 ||!vm.floorsdata ? 'backgroundGrayOut' : 'color-red'" ng-disabled="vm.venueList.length==0 || !vm.venueList || vm.floorsdata.length == 0 ||!vm.floorsdata" ng-click="vm.multiDeleteFloor()"><span class="fa fa-trash "></span>&nbsp;&nbsp;
+                    <span ng-class="vm.floorsdata.length==0 || !vm.floorsdata ? 'clickdisabled' : ''" style="color:red;font-weight:400;" class="floor-list-text">Delete</span></button>
+                </div>
+            </div>
+        </div>
+        <div class="panel card-height" style="width:98%;margin-left:18px;overflow: auto!important;">
+            <div class="panel-heading" style="padding-top:0px">
+                <div class="row col-md-12">
+                    <hr style="margin: -1px -6px 5px -6px; ">
+                </div>
+            </div>
+            <div ng-if="vm.floorsdata.length>0">
+                <div class="col-lg-12" ng-if="vm.tabIndex==1">
+                    <div id="myTabContent" class="tab-content">
+                        <div ng-repeat="flooritem in  vm.floorsdata" class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 container-res">
+                            <div class="col-lg-1 col-md-1">
+                                <input type="checkbox" ng-model="flooritem.isChecked" />
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <img class="fv-img" src="{{flooritem.imagePath}}" style="background-color: lightgray;border-radius: 10px;">
+                            </div>
+                            <div class="col-lg-9 col-md-9 fv-desc">
+                                <h4 style="font-weight:700;padding-bottom:0px; margin-bottom:4px; font-family: Roboto !important;">{{flooritem.uid}}</h4>
+                                <div style="color:#8b91a0;font-weight:400 !important;word-wrap: break-word;font-family:Roboto;height:40px;width:95%">{{flooritem.description}}</div>
+                                <div class="floor-desc" style="padding-top: 27px;margin-left: 0px !important;">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" class="margin-left-1%;">
+                                        <span class="fa icon-Edit" style="color:#625B5B;vertical-align:sub;"></span>  <span ng-click="vm.editFloor(flooritem.id)" class="floor-list-text"> Edit</span>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-2 col-xs-2" style="margin-left: -7%;">
+                                        <span class="fa icon-geo" style="color:#0c0c0c;font-size: 14px !important;vertical-align:middle;"></span>  <span ng-click="vm.geoConfig(flooritem.id)" class="floor-list-text"> Geo Configuration</span>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-2 col-xs-2" style="margin-left: -5%;">
+                                        <span class="fa icon-network_configuration" style="color:#0c0c0c;font-size: 15px !important;vertical-align:middle;"></span>  <span ng-click="vm.networkConfig(flooritem.id)" class="floor-list-text"> Network Configuration</span>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin-left: -2%;">
+                                        <span class="fa icon-geo_location " style="color:#0c0c0c;font-size: 15px !important;vertical-align:middle;"></span>  <span ng-click="vm.geofence(flooritem.id)" class="floor-list-text"> Geofence</span>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin-left: -3%;">
+                                        <span class="fa fa-trash" style="font-size:13px;color:red">&nbsp;</span>  <span ng-click="vm.deleteFloor(flooritem.id)" class="floor-list-text"> Delete</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1 col-md-1 pull-right view-btn">
+                                <input type="submit" class="btn fv-desc-btn" ng-click="vm.viewFloor(flooritem.id)" value="View">
+                            </div>
+                            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:0px !important;padding-top:20px;border-top: 1px solid #eeeeee;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12" style="height:400px;overflow:auto;" ng-if="vm.tabIndex==2">
+                    <div id="myTabContent" class="tab-content">
+                        <div ng-repeat="flooritem in  vm.floorsdata" class="row col-lg-4 col-md-6 col-sm-12 col-xs-12 floorcontainer" style="margin-bottom:25px;">
+                            <div class="col-lg-12 col-md-12 col-sm-2 col-xs-2">
+                                <div class="panel-body" style="overflow-y:unset !important;height:250px;">
+                                    <div class="mapping-section" id="mappinghover">
+                                        <img class="imghover" style="width:274px;height:219px;border:solid 1px #DDDEE1;border-bottom: none;border-top-left-radius: 6px;border-top-right-radius:6px;" src="{{flooritem.imagePath}}">
+                                        <div class="overlay"></div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:-210px;">
+                                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="margin-left:-12px;"> <input type="checkbox" ng-model="flooritem.isChecked" /> </div>
+                                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 allhide" style="margin-left: 90px;margin-top: -25px;;display:none;">
+                                                <span class="fa icon-Edit" title="Edit" ng-click="vm.editFloor(flooritem.id)" style="cursor:pointer;  color:white;vertical-align:-2px;margin-left:-35px;"></span> &nbsp;
+                                                <span class="fa icon-geo" title="Geo Configuration" ng-click="vm.geoConfig(flooritem.id)" style="cursor:pointer;  color:white;font-size: 14px !important;vertical-align:baseline;margin-left:15px;"></span> &nbsp;
+                                                <span class="fa icon-network_configuration" title="Network Configuration" ng-click="vm.networkConfig(flooritem.id)" style="cursor:pointer;  color:white;font-size: 15px !important;vertical-align:baseline;margin-left:20px;"></span> &nbsp;
+                                                <span class="fa icon-geo_location" title="Geofence" ng-click="vm.geofence(flooritem.id)" style="cursor:pointer;  color:white;font-size: 15px !important;vertical-align:baseline;margin-left:20px;"></span> &nbsp;
+                                                <span class="fa fa-trash" title="Delete" ng-click="vm.deleteFloor(flooritem.id)" style="cursor:pointer;  font-size:15px;color:white;margin-left:10px;vertical-align:2px;">&nbsp;</span>
+                                            </div>
+                                            <div class="allhide" style="margin-top:75px;margin-left:85px;display:none;">
+                                                <input type="submit" class="btn" ng-click="vm.viewFloor(flooritem.id)" value="View" style="width: auto;border: 1.4px solid white;background-color: transparent;color: white;padding-left: 25px;padding-right: 25px;padding-top: 7px;padding-bottom: 7px;font-size:13px;border-radius:6px;box-shadow: none !important;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-lg-11 col-md-11" style="border:solid 1px #DDDEE1;margin-left:15px;margin-top:-16px;width:274px;border-bottom-left-radius: 6px;border-bottom-right-radius:6px;border-top:unset;">
+                                    <h4 style="font-weight:700;font-family: Roboto !important;margin-top:10px;">{{flooritem.uid}}</h4>
+                                    <div style="color:#8b91a0;font-weight:400 !important;height:50px;overflow:auto;margin-top:-7px;">{{flooritem.description}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="height:500px;text-align: center;font-weight: bold;font-size: 20px;" ng-if="!vm.floorsdata.length>0">
+                <span>There are no floor plans for this venue. Add a floor plan to begin with.</span>
+            </div>
+        </div>
+    </div>
+</form>
+
+<style>
+
+    .nav-tabs > li.tabactive > a, .nav-tabs > li.tabactive > a:focus {
+        border: none;
+        -webkit-box-shadow: inset 0 -2px 0 #1caf9a;
+        border-bottom: 1px solid #1caf9a;
+        color: black;
+    }
+
+    .nav-tabs > li > a:hover, .nav-tabs > li > a:focus:hover {
+        background-color: transparent;
+        -webkit-box-shadow: inset 0 -2px 0 #1caf9a;
+        box-shadow: inset 0 -2px 0 #1caf9a;
+        color: black;
+    }
+
+    .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus:hover {
+        border: none;
+        color: black;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 15px;
+        left: 16px;
+        width: 274px;
+        height: 219px;
+        background: rgba(0, 0, 0, 0);
+        transition: background 0.5s ease;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+    }
+
+    .mapping-section:hover .overlay {
+        display: block;
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+    .mapping-section:hover .allhide {
+        display: block !important;
+    }
+
+    .mapping-section:hover {
+        opacity: 1;
+    }
+    .floorcontainer {
+        margin-top: 10px !important;
+    }
+    .scrollarea {
+        height: 400px;
+        overflow-y: scroll !important;
+    }
+    @media only screen and (min-height: 765px) and (max-height: 770px) {
+   .scrollarea {
+        height: 300px;
+        overflow-y: scroll !important;
+        margin-bottom: 20%;
+    }
+    }
+    @media only screen and (min-width: 1315px){
+        .view-btn {
+            margin-top:-134px !important;
+        }
+    }
+    @media only screen and (min-width: 771px) and (max-width: 1315px){
+        .view-btn {
+            margin-top:-104px !important;
+        }
+        .container-res{
+            margin-top: 10px !important;
+        }
+    }
+</style>

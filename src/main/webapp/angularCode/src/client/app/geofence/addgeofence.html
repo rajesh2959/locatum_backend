@@ -1,0 +1,205 @@
+﻿<form class="form-horizontal border-left" name="frm" novalidate ng-style="{'height':vm.pageHeight}">
+    <div class="panel-body networkconfig-sec">
+        <div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding"  style="margin-left: 15px;">
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 removepadding" style="padding-top:8px;">
+                    <h2><b>Geofence</b> <span ng-if="vm.venueDetails!=null">({{vm.venueDetails.newUid}})</span></h2>
+                </div>
+            </div>
+
+            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel">
+                    <div class="panel-heading ui-draggable-handle mr-top-10 pd-b-5">
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <select ng-model="vm.spid" no-results-text="'No Floor Found'" ng-disabled="true" class="connection2 col-md-6 col-sm-9 col-xs-6 form-control" style="padding-left:0px;"
+                                        ng-options="item.id as item.name for item in vm.floorDetails" ng-change="vm.onFloorChanges(vm.spid)">
+                                    <option ng-if="vm.floorDetails.length==0 || !vm.floorDetails" value="">No records found</option>
+                                </select>
+                            </div>
+                            <!--<div class="row col-md-2 col-sm-2 col-xs-2">
+                                <select class=" form-control" style="color:{{vm.selectedColor.color}}" ng-model="vm.selectedColor" ng-change="vm.colorChange()" ng-options="color as color.name for color in vm.colorList"></select>
+                            </div>-->
+                            <!-- <div class="row col-md-2 col-sm-2 col-xs-2"> -->
+                            <!--<select class="form-control" ng-model="vm.color" no-results-text="'No Color Found'" ng-options="item.color for item in vm.colorList">
+                                <option ng-if="vm.colorList.length==0 || !vm.colorList" value="">No records found</option>
+                            </select>-->
+                            <!--<select ng-model="vm.color" class="form-control" ng-change="vm.colorChange()">
+                                <option value="">--- Select a color ---</option>
+                                <option value="{{c.value}}" style="background-color:{{c.color}}" ng-repeat="c in vm.colorList">
+                                    {{c.name}}
+                                </option>
+                            </select>-->
+                            <!--<select ng-model="vm.selectedColor" ng-options="o.color for o in vm.colorList" ng-change="vm.colorChange()"
+                                    option-class-expr="color.toLowerCase()">
+                                <option value="">--- Select a color ---</option>
+                            </select>-->
+                            <!-- </div> -->
+                        </div>
+                        <hr style="margin: 45px 20px 8px 20px; ">
+                    </div>
+
+                    <div class="col-md-4 " style="padding-left: 35px;">
+                        <div class="panel-heading text-uppercase lead" style="margin-bottom:0"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h3 class="form-group" style="font-family: Roboto;font-size: 18px;letter-spacing: 0.4px;">{{vm.pageName}}</h3>
+                            <div class="form-group" show-errors>
+                                <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+                                    <input type="text" class="form-control" name="title" autocomplete="off" placeholder="Name"
+                                           style="font-family:Roboto-Light;font-size: 14px;" ng-model="vm.fence.name" alphabet
+                                           data-server-validate maxlength="20" required tabindex="1">
+                                </div>
+                                <div class="col-md-offset-2 col-sm-offset-2">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+                                    <label class="control-label devicelbl"
+                                           for="pwd">
+                                        Geofence Type
+                                    </label>
+                                </div>
+                                <div class="col-md-offset-2 col-sm-offset-2">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group" style="margin-left: 5px;">
+                                    <label class="radio-inline radio-color geo-radio">
+                                        <input type="radio" name="shape" ng-checked="(vm.fence.fenceType == 'Circle')"
+                                               ng-click="vm.addShape(2)">&nbsp;Circle
+                                    </label>
+                                    <label class="radio-inline geo-radio">
+                                        <input type="radio" name="shape" ng-checked="(vm.fence.fenceType == 'Triangle')"
+                                               ng-click="vm.addShape(3)">&nbsp;Triangle
+                                    </label>
+                                    <label class="radio-inline geo-radio">
+                                        <input type="radio" name="shape" ng-checked="(vm.fence.fenceType == 'Rectangle')"
+                                               ng-click="vm.addShape(1)">&nbsp;Rectangle
+                                    </label>
+                                </div>
+                                <div class="col-md-offset-2 col-sm-offset-2">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+                                    <label class="control-label devicelbl" 
+                                           for="pwd">Status</label>
+                                </div>
+                                <div class="col-md-offset-2 col-sm-offset-2">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+
+                                    <label class="switch switch-default">
+                                        <input type="checkbox" ng-model="vm.fence.statusflag" ng-change="vm.onStatusChange()" />
+                                        <span></span>
+                                    </label>
+                                    <span style="vertical-align: super;padding-left: 3px;">&nbsp;{{vm.fence.statusType}}</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+                                    <label class="control-label " style="font-size: 18px;font-family:Roboto;color:#000;font-weight:500;letter-spacing:0.6px;"
+                                           for="pwd">Alerts</label>
+                                    <hr style="margin: 0px 20px 8px 0px; ">
+                                    <div style="min-height:40px;max-height:95px;overflow:auto">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding" data-ng-repeat="alert in vm.alertList">
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" ng-model="alert.isChecked" />{{alert.name}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <hr style="margin: 0px 20px 8px 0px; ">
+                            </div>
+                            <div clas5="form-group">
+                                <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group" style="margin:-20px 0px 16px -15px">
+                                    <a ui-sref="dashboard.addgeofencealerts({geofencealertid:0,pagefrom:1, isAdd: vm.isAdd, spid: vm.spid, geofenceid: vm.geofenceid })"> + Add New Alert</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="button-bar pull-left buttonsavecancel" style="margin-bottom:40px">
+                            <input type="button" class="btn" ng-click="vm.cancel()" value="Cancel" style="width: auto;border: 2px solid #9ca4ab;background-color: white;color: #888;padding-left: 16px;padding-right: 16px;border-radius:6px;box-shadow: none !important;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="submit" class="btn btn-primary" ng-click="vm.save(frm)" value="Submit" style="width: auto;padding-top: 6px;padding-bottom: 6px;padding-left: 25px;padding-right: 25px;box-shadow: none !important;">
+                        </div>
+                    </div>
+                    <div class="col-md-8 pull-right">
+                        <div style="width:590px;height:400px; overflow:auto">
+                            <!--<button id="delete" ng-click="vm.delete()">Delete</button>-->
+                            <canvas style="border:dashed 1px grey;" id="canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+<style>
+    input[type="radio"]:after,
+    .radio input[type="radio"]:after,
+    .radio-inline input[type="radio"]:after {
+        border-color: lightgray;
+    }
+
+    .resize-container {
+        display: inline-block;
+        width: 100%;
+        height: 240px;
+    }
+
+    .button {
+        width: 100px;
+        background-color: #18a79d;
+        border-color: #1caf9a;
+        border-radius: 8px;
+        color: white
+    }
+
+    input[type="checkbox"]:after,
+    .checkbox input[type="checkbox"]:after,
+    .checkbox-inline input[type="checkbox"]:after {
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+    }
+
+    input[type="checkbox"]:checked:after,
+    .checkbox input[type="checkbox"]:checked:after,
+    .checkbox-inline input[type="checkbox"]:checked:after {
+        background-color: #18a79d;
+        border-color: #18a79d;
+    }
+
+    input[type="checkbox"]:focus:after,
+    .checkbox input[type="checkbox"]:focus:after,
+    .checkbox-inline input[type="checkbox"]:focus:after {
+        border-color: #18a79d;
+    }
+
+    .switch span {
+        width: 40px !important;
+        height: 20px !important;
+    }
+
+        .switch span:after {
+            width: 16px !important;
+        }
+
+    .color-select {
+        color: red !important;
+    }
+
+    option:not(:checked) {
+        color: black !important;
+    }
+</style>

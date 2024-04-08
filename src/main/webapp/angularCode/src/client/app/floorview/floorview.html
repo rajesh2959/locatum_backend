@@ -1,0 +1,126 @@
+<form class="form-horizontal border-left hor-height" name="frm" novalidate>
+    <div class="panel-body" style="padding-top:22px;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7" style="margin-left:-11px;">
+                <h2 style="padding-bottom:7px">Floor View <span ng-if="vm.venueDetails!=null">({{vm.venueDetails.newUid}})</span></h2>
+            </div>
+        </div>
+        <div class="panel" style="width:98%;margin-left:18px;">
+            <div class="panel-heading ui-draggable-handle mr-top-10 pd-b-5">
+                <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                        <select ng-model="vm.selectedFloor" no-results-text="'No Floor found'" class="connection2 col-md-6 col-sm-9 col-xs-6 form-control"
+                                ng-options="item.id as item.name for item in vm.floorDetails"
+                                ng-change="vm.onFloorChanges(vm.selectedFloor)">
+                            <option ng-if="vm.floorDetails.length==0 || !vm.floorDetails" value="">No records found</option>
+                        </select>
+                    </div>
+                    <div class="tag-bar pull-right text-right">
+                        <span class="tag"><span class="fa fa-tag color-blue"></span><span class="count">{{vm.totalCheckedoutTags}}</span><span>Total Tags</span></span>
+                        <span class="tag"><span class="fa fa-tag color-green"></span><span class="count">{{vm.activeTags}}</span><span>Active Tags</span></span>
+                        <span class="tag"><span class="fa fa-tag color-purple"></span><span class="count">{{vm.idleTags}}</span><span>ldle Tags</span></span>
+                        <span class="tag"><span class="fa fa-tag color-red"></span><span class="count">{{vm.inactiveTags}}</span><span>Inactive Tags</span></span>
+                    </div>
+                </div>
+                <hr style="margin: 40px 10px -5px 10px; ">
+            </div>
+            <div class="row col-sm-offset-8">
+                <div class="floorCanvas card-height pd-lr-20">
+                    <div class="panel-heading ui-draggable-handle na-panel remove-padding-all mr-top-10">
+                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 remove-padding-all mr-left-min-5">
+                            <label class="switch switch-large">
+                                <input type="checkbox" ng-model="vm.switchONOFF" checked id="switchONOFF" />
+                                <span>Device</span>
+                            </label>
+                            <label class="switch switch-large">
+                                <input type="checkbox" ng-model="vm.tagsONOFF" checked id="tagsONOFF" />
+                                <span>Tags</span>
+                            </label>
+                            <label ng-show="vm.tagsONOFF" class="switch switch-large">
+                                <input type="checkbox" ng-model="vm.inactiveONOFF" checked id="inactiveONOFF" />
+                                <span>Inactive</span>
+                            </label>
+                            <div ng-show="vm.tagsONOFF" class="catFilter filterUI active" style="padding-left: 10px;">
+                                <select class="multiselect-ui" multiple style="opacity: 0;height:0;"></select>
+                            </div>
+                            <label ng-show="vm.showFloorDropDown" class="sel">
+                                <select style="outline:none;box-shadow: inset 0 0 #ddd;width:15em;" ng-model="vm.selectedFloor" no-results-text="'No Floor found'" class="custom-select"
+                                        ng-options="item.id as item.name for item in vm.floorDetails"
+                                        ng-change="vm.onFloorChanges(vm.selectedFloor)">
+                                    <option ng-if="vm.floorDetails.length==0 || !vm.floorDetails" value="">No records found</option>
+                                </select>
+                                <i class="fa fa-sort-desc" style="color:white;margin-left: -30px;"></i>
+                            </label>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 zoom-panel removepadding" unselectable="on" onselectstart="return false;" onmousedown="return false;">
+                            <span class="z-btn" id="zoom-in"><span class="fa icon-zoom-in icon"></span><span class="lable"> Zoom In</span></span>
+                            <span class="z-btn" id="zoom-out"><span class="fa icon-zoom-out icon"></span><span class="lable"> Zoom Out</span></span>
+                            <span class="z-btn" id="reset"><span class="fa icon-reset1 icon"></span><span class="lable"> Reset</span></span>
+                            <span class="z-btn" id="enlarge"><span class="fa icon-arrow icon"></span></span>
+                        </div>
+                    </div>
+                    <div class="panel-body floorsvgCont floorsvgSmall" style="height: 82%!important">
+                        <div class="mapping-section" style="overflow: hidden; position: relative;">
+                            <div class="maping-canvas panzoom" id="main-div">
+                                <div class="canvas-container">
+                                    <svg class="floorsvg" id="flrmap" ng-style="{ 'width' : vm.width, 'height' : vm.height}">
+                                        <!--<svg:circle [attr.cx]="20" [attr.cy]="20" r="100" />-->
+                                        <g class="uiFloorGroupOuter" transform="translate(5,5)">
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<style>
+    .removepading {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .tooltip {
+        z-index: 10000 !important;
+    }
+
+    .btn {
+        height: 26px;
+    }
+
+    .sle {
+        margin-left: 10px;
+        width: 110px;
+        height: 26px;
+        margin-top: 0px;
+        background-color: #18A79D !important;
+        color: #fff;
+        border: none;
+        border-color: #fff;
+        -webkit-appearance: none;
+        -webkit-border-radius: 25px;
+        padding: 0px 20px 0px 12px;
+    }
+
+    .selectDropdown {
+        height: 26px;
+        background-color: #18A79D !important;
+        font-size: 20px;
+        font-weight: 400;
+        font-size: 11px;
+        color: #fff;
+        box-shadow: inset 0 -1px 0 #fff;
+        background-image: none !important;
+    }
+
+     .mapping-section {
+         border: 1px solid #d5d5d5;
+         overflow: scroll !important;
+         position: relative;
+         background: #fff;
+        }
+</style>

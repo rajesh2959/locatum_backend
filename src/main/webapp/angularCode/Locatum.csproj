@@ -1,0 +1,599 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{19A5DD2D-1E1E-4771-BD8A-85E10C284EEF}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Locatum</RootNamespace>
+    <AssemblyName>Locatum</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".bowerrc" />
+    <Content Include="bower.json" />
+    <Content Include="package-lock.json" />
+    <Content Include="package.json" />
+    <Content Include="src\client\app\adddevice\adddevice.controller.js" />
+    <Content Include="src\client\app\adddevice\adddevice.html" />
+    <Content Include="src\client\app\adddevice\adddevice.module.js" />
+    <Content Include="src\client\app\adddevice\adddevice.route.js" />
+    <Content Include="src\client\app\customizedalert\customizedalert.controller.js" />
+    <Content Include="src\client\app\customizedalert\customizedalert.html" />
+    <Content Include="src\client\app\customizedalert\customizedalert.module.js" />
+    <Content Include="src\client\app\customizedalert\customizedalert.route.js" />
+    <Content Include="src\client\app\dashboard\adminhome.html" />
+    <Content Include="src\client\app\dashboard\adminhome.controller.js" />
+    <Content Include="src\client\app\dashboard\adminhome.route.js" />
+    <Content Include="src\client\app\device\registerdevice.html" />
+    <Content Include="src\client\app\device\registerdevice.route.js" />
+    <Content Include="src\client\app\drawfloorplan\drawfloorplan.module.js" />
+    <Content Include="src\client\app\drawfloorplan\ruler\jquery.ruler.js" />
+    <Content Include="src\client\app\gateway\gatewaystatus.html" />
+    <Content Include="src\client\app\inactivealerts\inactivealerts.controller.js" />
+    <Content Include="src\client\app\inactivealerts\inactivealerts.html" />
+    <Content Include="src\client\app\inactivealerts\inactivealerts.module.js" />
+    <Content Include="src\client\app\inactivealerts\inactivealerts.route.js" />
+    <Content Include="src\client\app\layout\directives\numericWithPlusMinus.js" />
+    <Content Include="src\client\app\services\customizedalert.service.js" />
+    <Content Include="src\client\app\services\gatewaystatusService.js" />
+    <Content Include="src\client\app\services\registerDeviceService.js" />
+    <Content Include="src\client\app\services\inactiveAlertsService.js" />
+    <Content Include="src\client\app\services\gatewayService.js" />
+    <Content Include="src\client\app\services\tagService.js" />
+    <Content Include="src\client\app\tag\tagdashboard.controller.js" />
+    <Content Include="src\client\app\tag\tagdashboard.html" />
+    <Content Include="src\client\app\tag\tag.controller.js" />
+    <Content Include="src\client\app\tag\tag.html" />
+    <Content Include="src\client\app\tag\tag.module.js" />
+    <Content Include="src\client\app\tag\tagdashboard.route.js" />
+    <Content Include="src\client\app\tag\tag.route.js" />
+    <Content Include="src\client\images\alerts\receiver.png" />
+    <Content Include="src\client\images\alerts\Tags.png" />
+    <Content Include="src\client\images\networkicons\_gitignore" />
+    <Content Include="src\client\app\device\registerdevice.controller.js" />
+    <Content Include="src\client\app\gateway\gatewaystatus.controller.js" />
+    <Content Include="src\client\app\gateway\gatewaystatus.route.js" />
+    <None Include="src\client\styles\ruler.less" />
+    <None Include="src\client\styles\floorplanBuilder.less" />
+    <Content Include="src\client\app\gateway\gateway.controller.js" />
+    <Content Include="src\client\app\gateway\gateway.html" />
+    <Content Include="src\client\app\gateway\gateway.module.js" />
+    <Content Include="src\client\app\gateway\gateway.route.js" />
+    <Content Include="src\client\app\geofencealerts\addgeofencealerts.controller.js" />
+    <Content Include="src\client\app\geofencealerts\addgeofencealerts.html" />
+    <Content Include="src\client\app\geofencealerts\geofencealerts.controller.js" />
+    <Content Include="src\client\app\geofencealerts\geofencealerts.html" />
+    <Content Include="src\client\app\geofencealerts\geofencealerts.module.js" />
+    <Content Include="src\client\app\geofencealerts\geofencealerts.route.js" />
+    <Content Include="src\client\app\geofencealerts\addgeofencealerts.route.js" />
+    <Content Include="src\client\app\geofence\addgeofence.controller.js" />
+    <Content Include="src\client\app\geofence\addgeofence.html" />
+    <Content Include="src\client\app\geofence\addgeofence.route.js" />
+    <Content Include="src\client\app\geofence\geofence.controller.js" />
+    <Content Include="src\client\app\geofence\geofence.html" />
+    <Content Include="src\client\app\geofence\geofence.module.js" />
+    <Content Include="src\client\app\geofence\geofence.route.js" />
+    <Content Include="src\client\app\services\geoFenceAlertService.js" />
+    <Content Include="src\client\app\services\geoFenceService.js" />
+    <Content Include="src\client\app\services\venuesession.js" />
+    <Content Include="src\client\images\ap_active.png" />
+    <Content Include="src\client\images\ap_idle.png" />
+    <Content Include="src\client\images\ap_inactive.png" />
+    <Content Include="src\client\images\floorplan\icons\arc.png" />
+    <Content Include="src\client\images\floorplan\icons\arc1.png" />
+    <Content Include="src\client\images\floorplan\icons\arrow.png" />
+    <Content Include="src\client\images\floorplan\icons\back.png" />
+    <Content Include="src\client\images\floorplan\icons\bg-color.png" />
+    <Content Include="src\client\images\floorplan\icons\bold.png" />
+    <Content Include="src\client\images\floorplan\icons\bring-forward.png" />
+    <Content Include="src\client\images\floorplan\icons\bring-front.png" />
+    <Content Include="src\client\images\floorplan\icons\circle.png" />
+    <Content Include="src\client\images\floorplan\icons\effects.png" />
+    <Content Include="src\client\images\floorplan\icons\fill-color.png" />
+    <Content Include="src\client\images\floorplan\icons\insert-text.png" />
+    <Content Include="src\client\images\floorplan\icons\italics.png" />
+    <Content Include="src\client\images\floorplan\icons\line-color.png" />
+    <Content Include="src\client\images\floorplan\icons\line.png" />
+    <Content Include="src\client\images\floorplan\icons\rectangle.png" />
+    <Content Include="src\client\images\floorplan\icons\redo.png" />
+    <Content Include="src\client\images\floorplan\icons\rounded-rectangle.png" />
+    <Content Include="src\client\images\floorplan\icons\save.png" />
+    <Content Include="src\client\images\floorplan\icons\send-back.png" />
+    <Content Include="src\client\images\floorplan\icons\send-backward.png" />
+    <Content Include="src\client\images\floorplan\icons\settings.png" />
+    <Content Include="src\client\images\floorplan\icons\shapes.png" />
+    <Content Include="src\client\images\floorplan\icons\underline.png" />
+    <Content Include="src\client\images\floorplan\icons\undo.png" />
+    <Content Include="src\client\app\drawfloorplan\modernizr.min.js" />
+    <Content Include="src\client\app\environments.config.json" />
+    <Content Include="src\client\app\floorplan\addfloorplan.controller.js" />
+    <Content Include="src\client\app\floorplan\addfloorplan.html" />
+    <Content Include="src\client\app\floorplan\addfloorplan.route.js" />
+    <Content Include="src\client\app\drawfloorplan\drawfloorplan.controller.js" />
+    <Content Include="src\client\app\drawfloorplan\drawfloorplan.html" />
+    <Content Include="src\client\app\drawfloorplan\drawfloorplan.route.js" />
+    <Content Include="src\client\app\floorplan\floorplan.controller.js" />
+    <Content Include="src\client\app\floorplan\floorplan.html" />
+    <Content Include="src\client\app\floorplan\floorplan.module.js" />
+    <Content Include="src\client\app\floorplan\floorplan.route.js" />
+    <Content Include="src\client\app\floorplan\floorplan.route.spec.js" />
+    <Content Include="src\client\app\floorview\floorview.controller.js" />
+    <Content Include="src\client\app\floorview\floorview.html" />
+    <Content Include="src\client\app\floorview\floorview.module.js" />
+    <Content Include="src\client\app\floorview\floorview.route.js" />
+    <Content Include="src\client\app\floorview\floorview.route.spec.js" />
+    <Content Include="src\client\app\geoconfig\geoconfig.controller.js" />
+    <Content Include="src\client\app\geoconfig\geoconfig.html" />
+    <Content Include="src\client\app\geoconfig\geoconfig.module.js" />
+    <Content Include="src\client\app\geoconfig\geoconfig.route.js" />
+    <Content Include="src\client\app\layout\deviceModal.html" />
+    <Content Include="src\client\app\layout\deviceModal.controller.js" />
+    <Content Include="src\client\app\networkconfig\networkconfig.controller.js" />
+    <Content Include="src\client\app\networkconfig\networkconfig.html" />
+    <Content Include="src\client\app\networkconfig\networkconfig.module.js" />
+    <Content Include="src\client\app\networkconfig\networkconfig.route.js" />
+    <Content Include="src\client\app\reports\reports.html" />
+    <Content Include="src\client\app\reports\reports.module.js" />
+    <Content Include="src\client\app\reports\reports.route.js" />
+    <Content Include="src\client\app\reports\reports.controller.js" />
+    <Content Include="src\client\app\services\drawfloorService.js" />
+    <Content Include="src\client\app\services\floordataservice.js" />
+    <Content Include="src\client\app\services\geoConfigService.js" />
+    <Content Include="src\client\app\upgrade\upgrade.controller.js" />
+    <Content Include="src\client\app\upgrade\upgrade.html" />
+    <Content Include="src\client\app\upgrade\upgrade.module.js" />
+    <Content Include="src\client\app\upgrade\upgrade.route.js" />
+    <Content Include="src\client\app\users\users.controller.js" />
+    <Content Include="src\client\app\users\users.html" />
+    <Content Include="src\client\app\users\users.module.js" />
+    <Content Include="src\client\app\users\users.route.js" />
+    <Content Include="src\client\fonts\icomoon.eot" />
+    <Content Include="src\client\fonts\icomoon.ttf" />
+    <Content Include="src\client\fonts\icomoon.woff" />
+    <Content Include="src\client\images\location_icon.png" />
+    <Content Include="src\client\images\networkconfig\.gitignore" />
+    <Content Include="src\client\images\networkconfig\icon\.gitignore" />
+    <Content Include="src\client\images\networkconfig\icon\_gitignore" />
+    <Content Include="src\client\images\networkconfig\_gitignore" />
+    <Content Include="src\client\app\drawfloorplan\ruler\README.md" />
+    <None Include="src\client\styles\animate.min.less" />
+    <None Include="src\client\styles\blueimp-gallery.min.less" />
+    <Content Include="src\client\app\layout\directives\angular-google-maps-native.js" />
+    <Content Include="src\client\app\services\venuedataservice .js" />
+    <Content Include="src\client\app\venue\addvenue.controller.js" />
+    <Content Include="src\client\app\venue\addvenue.html" />
+    <Content Include="src\client\app\venue\addvenue.route.js" />
+    <Content Include="src\client\app\venue\venue.module.js" />
+    <Content Include="src\client\app\venue\venue.controller.js" />
+    <Content Include="src\client\app\venue\venue.html" />
+    <Content Include="src\client\app\venue\venue.route.js" />
+    <Content Include="src\client\fonts\icomoon.svg" />
+    <Content Include="src\client\images\fav.ico" />
+    <Content Include="src\client\images\floor_sample.png" />
+    <Content Include="src\client\images\guestSensor_inactive.png" />
+    <Content Include="src\client\images\locatumlogo.png" />
+    <Content Include="src\client\images\login_v2.jpg" />
+    <Content Include="src\client\images\networkconfig\._ap.png" />
+    <Content Include="src\client\images\networkconfig\._arrow2.png" />
+    <Content Include="src\client\images\networkconfig\._arrowdown.gif" />
+    <Content Include="src\client\images\networkconfig\._close.png" />
+    <Content Include="src\client\images\networkconfig\._connected.png" />
+    <Content Include="src\client\images\networkconfig\._filter.png" />
+    <Content Include="src\client\images\networkconfig\._full.png" />
+    <Content Include="src\client\images\networkconfig\._full2.png" />
+    <Content Include="src\client\images\networkconfig\._graph.png" />
+    <Content Include="src\client\images\networkconfig\._marker.png" />
+    <Content Include="src\client\images\networkconfig\._minus.png" />
+    <Content Include="src\client\images\networkconfig\._off.png" />
+    <Content Include="src\client\images\networkconfig\._plus.png" />
+    <Content Include="src\client\images\networkconfig\._reboot.png" />
+    <Content Include="src\client\images\networkconfig\._refresh.png" />
+    <Content Include="src\client\images\networkconfig\._search.png" />
+    <Content Include="src\client\images\networkconfig\._sensor.png" />
+    <Content Include="src\client\images\networkconfig\._server.png" />
+    <Content Include="src\client\images\networkconfig\._setting.png" />
+    <Content Include="src\client\images\networkconfig\._switch.png" />
+    <Content Include="src\client\images\networkconfig\activity.png" />
+    <Content Include="src\client\images\networkconfig\ap.png" />
+    <Content Include="src\client\images\networkconfig\arrow2.png" />
+    <Content Include="src\client\images\networkconfig\arrowdown.gif" />
+    <Content Include="src\client\images\networkconfig\capture-hover.png" />
+    <Content Include="src\client\images\networkconfig\capture.png" />
+    <Content Include="src\client\images\networkconfig\close.png" />
+    <Content Include="src\client\images\networkconfig\connected.png" />
+    <Content Include="src\client\images\networkconfig\delete.png" />
+    <Content Include="src\client\images\networkconfig\filter.png" />
+    <Content Include="src\client\images\networkconfig\full.png" />
+    <Content Include="src\client\images\networkconfig\full2.png" />
+    <Content Include="src\client\images\networkconfig\fullscreen.png" />
+    <Content Include="src\client\images\networkconfig\graph.png" />
+    <Content Include="src\client\images\networkconfig\icon.gif" />
+    <Content Include="src\client\images\networkconfig\icons.gif" />
+    <Content Include="src\client\images\networkconfig\icon\ap_active.png" />
+    <Content Include="src\client\images\networkconfig\icon\ap_idle.png" />
+    <Content Include="src\client\images\networkconfig\icon\ap_inactive.png" />
+    <Content Include="src\client\images\networkconfig\icon\guestSensor_inactive.png" />
+    <Content Include="src\client\images\networkconfig\icon\sensor_active.png" />
+    <Content Include="src\client\images\networkconfig\icon\sensor_idle.png" />
+    <Content Include="src\client\images\networkconfig\icon\sensor_inactive.png" />
+    <Content Include="src\client\images\networkconfig\icon\server_active.png" />
+    <Content Include="src\client\images\networkconfig\icon\server_idle.png" />
+    <Content Include="src\client\images\networkconfig\icon\server_inactive.png" />
+    <Content Include="src\client\images\networkconfig\icon\switch_active.png" />
+    <Content Include="src\client\images\networkconfig\icon\switch_idle.png" />
+    <Content Include="src\client\images\networkconfig\icon\switch_inactive.png" />
+    <Content Include="src\client\images\networkconfig\mapclose.png" />
+    <Content Include="src\client\images\networkconfig\marker.png" />
+    <Content Include="src\client\images\networkconfig\minus.png" />
+    <Content Include="src\client\images\networkconfig\off.png" />
+    <Content Include="src\client\images\networkconfig\plus.png" />
+    <Content Include="src\client\images\networkconfig\reboot.png" />
+    <Content Include="src\client\images\networkconfig\refresh.png" />
+    <Content Include="src\client\images\networkconfig\report-dark.png" />
+    <Content Include="src\client\images\networkconfig\report.png" />
+    <Content Include="src\client\images\networkconfig\reposition.png" />
+    <Content Include="src\client\images\networkconfig\save.png" />
+    <Content Include="src\client\images\networkconfig\search.png" />
+    <Content Include="src\client\images\networkconfig\sensor.png" />
+    <Content Include="src\client\images\networkconfig\server.png" />
+    <Content Include="src\client\images\networkconfig\setting.png" />
+    <Content Include="src\client\images\networkconfig\side\ap.png" />
+    <Content Include="src\client\images\networkconfig\side\ble.png" />
+    <Content Include="src\client\images\networkconfig\side\guestSensor.png" />
+    <Content Include="src\client\images\networkconfig\side\sensor.png" />
+    <Content Include="src\client\images\networkconfig\side\server.png" />
+    <Content Include="src\client\images\networkconfig\side\switch.png" />
+    <Content Include="src\client\images\networkconfig\switch.png" />
+    <Content Include="src\client\images\networkconfig\undo.png" />
+    <Content Include="src\client\images\networkconfig\__ap.png" />
+    <Content Include="src\client\images\networkconfig\__arrow2.png" />
+    <Content Include="src\client\images\networkconfig\__arrowdown.gif" />
+    <Content Include="src\client\images\networkconfig\__close.png" />
+    <Content Include="src\client\images\networkconfig\__connected.png" />
+    <Content Include="src\client\images\networkconfig\__filter.png" />
+    <Content Include="src\client\images\networkconfig\__full.png" />
+    <Content Include="src\client\images\networkconfig\__full2.png" />
+    <Content Include="src\client\images\networkconfig\__graph.png" />
+    <Content Include="src\client\images\networkconfig\__marker.png" />
+    <Content Include="src\client\images\networkconfig\__minus.png" />
+    <Content Include="src\client\images\networkconfig\__off.png" />
+    <Content Include="src\client\images\networkconfig\__plus.png" />
+    <Content Include="src\client\images\networkconfig\__reboot.png" />
+    <Content Include="src\client\images\networkconfig\__refresh.png" />
+    <Content Include="src\client\images\networkconfig\__search.png" />
+    <Content Include="src\client\images\networkconfig\__sensor.png" />
+    <Content Include="src\client\images\networkconfig\__server.png" />
+    <Content Include="src\client\images\networkconfig\__setting.png" />
+    <Content Include="src\client\images\networkconfig\__switch.png" />
+    <Content Include="src\client\images\networkicons\.gitignore" />
+    <Content Include="src\client\images\networkicons\ap_active.png" />
+    <Content Include="src\client\images\networkicons\ap_active_locate.gif" />
+    <Content Include="src\client\images\networkicons\ap_idle.png" />
+    <Content Include="src\client\images\networkicons\ap_idle_locate.gif" />
+    <Content Include="src\client\images\networkicons\ap_idle_locate.png" />
+    <Content Include="src\client\images\networkicons\ap_inactive.png" />
+    <Content Include="src\client\images\networkicons\ap_inactive_locate.gif" />
+    <Content Include="src\client\images\networkicons\ap_locate.png" />
+    <Content Include="src\client\images\networkicons\ap_offline_locate.gif" />
+    <Content Include="src\client\images\networkicons\ap_offline_locate.png" />
+    <Content Include="src\client\images\networkicons\ap_online_locate.gif" />
+    <Content Include="src\client\images\networkicons\ap_online_locate.png" />
+    <Content Include="src\client\images\networkicons\bt_active.png" />
+    <Content Include="src\client\images\networkicons\bt_idle.png" />
+    <Content Include="src\client\images\networkicons\bt_inactive.png" />
+    <Content Include="src\client\images\networkicons\guestSensor_inactive.png" />
+    <Content Include="src\client\images\networkicons\sensor_active.png" />
+    <Content Include="src\client\images\networkicons\sensor_active_locate.gif" />
+    <Content Include="src\client\images\networkicons\sensor_idle.png" />
+    <Content Include="src\client\images\networkicons\sensor_idle_locate.gif" />
+    <Content Include="src\client\images\networkicons\sensor_idle_locate.png" />
+    <Content Include="src\client\images\networkicons\sensor_inactive.png" />
+    <Content Include="src\client\images\networkicons\sensor_inactive_locate.gif" />
+    <Content Include="src\client\images\networkicons\sensor_locate.png" />
+    <Content Include="src\client\images\networkicons\sensor_offline_locate.gif" />
+    <Content Include="src\client\images\networkicons\sensor_offline_locate.png" />
+    <Content Include="src\client\images\networkicons\sensor_online_locate.gif" />
+    <Content Include="src\client\images\networkicons\server_active.png" />
+    <Content Include="src\client\images\networkicons\server_active_locate.gif" />
+    <Content Include="src\client\images\networkicons\server_idle.png" />
+    <Content Include="src\client\images\networkicons\server_idle_locate.gif" />
+    <Content Include="src\client\images\networkicons\server_idle_locate.png" />
+    <Content Include="src\client\images\networkicons\server_inactive.png" />
+    <Content Include="src\client\images\networkicons\server_inactive_locate.gif" />
+    <Content Include="src\client\images\networkicons\server_locate.png" />
+    <Content Include="src\client\images\networkicons\server_offline_locate.gif" />
+    <Content Include="src\client\images\networkicons\server_offline_locate.png" />
+    <Content Include="src\client\images\networkicons\server_online_locate.gif" />
+    <Content Include="src\client\images\networkicons\server_online_locate.png" />
+    <Content Include="src\client\images\networkicons\switch_active.png" />
+    <Content Include="src\client\images\networkicons\switch_active_locate.gif" />
+    <Content Include="src\client\images\networkicons\switch_idle.png" />
+    <Content Include="src\client\images\networkicons\switch_idle_locate.gif" />
+    <Content Include="src\client\images\networkicons\switch_idle_locate.png" />
+    <Content Include="src\client\images\networkicons\switch_inactive.png" />
+    <Content Include="src\client\images\networkicons\switch_inactive_locate.gif" />
+    <Content Include="src\client\images\networkicons\switch_locate.png" />
+    <Content Include="src\client\images\networkicons\switch_offline_locate.gif" />
+    <Content Include="src\client\images\networkicons\switch_offline_locate.png" />
+    <Content Include="src\client\images\networkicons\switch_online_locate.gif" />
+    <Content Include="src\client\images\networkicons\switch_online_locate.png" />
+    <Content Include="src\client\images\networkicons\tb2_idle.png" />
+    <Content Include="src\client\images\networkicons\tb2_offline.png" />
+    <Content Include="src\client\images\networkicons\tb2_online.png" />
+    <Content Include="src\client\images\networkicons\zbe_active.png" />
+    <Content Include="src\client\images\networkicons\zbe_idle.png" />
+    <Content Include="src\client\images\networkicons\zbe_inactive.png" />
+    <Content Include="src\client\images\sensor_active.png" />
+    <Content Include="src\client\images\sensor_idle.png" />
+    <Content Include="src\client\images\sensor_inactive.png" />
+    <Content Include="src\client\images\server-green.png" />
+    <Content Include="src\client\images\server-grey.png" />
+    <Content Include="src\client\images\server-orange.png" />
+    <Content Include="src\client\images\server-quber-old.png" />
+    <Content Include="src\client\images\server-quber.png" />
+    <Content Include="src\client\images\server-red.png" />
+    <Content Include="src\client\images\server-white.png" />
+    <Content Include="src\client\images\server_active.png" />
+    <Content Include="src\client\images\server_idle.png" />
+    <Content Include="src\client\images\server_inactive.png" />
+    <Content Include="src\client\images\switch-green.png" />
+    <Content Include="src\client\images\switch-grey.png" />
+    <Content Include="src\client\images\switch-orange.png" />
+    <Content Include="src\client\images\switch-quber.png" />
+    <Content Include="src\client\images\switch-red.png" />
+    <Content Include="src\client\images\switch-white.png" />
+    <Content Include="src\client\images\switch_active.png" />
+    <Content Include="src\client\images\switch_idle.png" />
+    <Content Include="src\client\images\switch_inactive.png" />
+    <Content Include="src\client\scripts\actions.js" />
+    <Content Include="src\client\scripts\d3.min.js" />
+    <Content Include="src\client\scripts\datatables.js" />
+    <Content Include="src\client\scripts\ng-google-chart.js" />
+    <Content Include="src\client\scripts\owl.carousel.min.js" />
+    <Content Include="src\client\scripts\plugins.js" />
+    <Content Include="src\client\scripts\svg-panzoom.js" />
+    <Content Include="src\client\styles\datatables.css" />
+    <Content Include="src\client\styles\navbar-sticky-footer.less" />
+    <Content Include="src\client\styles\ng-overlay.less" />
+    <Content Include="src\client\styles\NotificationBarModule.less" />
+    <Content Include="src\client\styles\styles.less" />
+    <Content Include="src\client\styles\codemirror.less" />
+    <Content Include="src\client\styles\dropzone.less" />
+    <Content Include="src\client\styles\fullcalendar.less" />
+    <Content Include="src\client\styles\rickshaw.less" />
+    <Content Include="src\client\styles\summernote.less" />
+    <Content Include="src\client\styles\jquery.mCustomScrollbar.less" />
+    <Content Include="src\client\web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="gulp.config.js" />
+    <Content Include="gulp.png" />
+    <Content Include="gulpfile.js" />
+    <Content Include="karma.conf.js" />
+    <Content Include="src\client\app\app.module.js" />
+    <Content Include="src\client\app\app.run.js" />
+    <Content Include="src\client\app\blocks\exception\exception-handler.provider.js" />
+    <Content Include="src\client\app\blocks\exception\exception-handler.provider.spec.js" />
+    <Content Include="src\client\app\blocks\exception\exception.js" />
+    <Content Include="src\client\app\blocks\exception\exception.module.js" />
+    <Content Include="src\client\app\blocks\logger\logger.js" />
+    <Content Include="src\client\app\blocks\logger\logger.module.js" />
+    <Content Include="src\client\app\blocks\router\router-helper.provider.js" />
+    <Content Include="src\client\app\blocks\router\router.module.js" />
+    <Content Include="src\client\app\constants.js" />
+    <Content Include="src\client\app\core\404.controller.js" />
+    <Content Include="src\client\app\core\404.html" />
+    <Content Include="src\client\app\core\config.js" />
+    <Content Include="src\client\app\core\constants.js" />
+    <Content Include="src\client\app\core\core.module.js" />
+    <Content Include="src\client\app\core\core.route.js" />
+    <Content Include="src\client\app\core\core.route.spec.js" />
+    <Content Include="src\client\app\core\insufficientpermissions.controller.js" />
+    <Content Include="src\client\app\core\InsufficientPermissions.html" />
+    <Content Include="src\client\app\dashboard\dashboard.controller.js" />
+    <Content Include="src\client\app\dashboard\dashboard.html" />
+    <Content Include="src\client\app\dashboard\dashboard.module.js" />
+    <Content Include="src\client\app\dashboard\dashboard.route.js" />
+    <Content Include="src\client\app\dashboard\dashboard.route.spec.js" />
+    <Content Include="src\client\app\dashboard\home.controller.js" />
+    <Content Include="src\client\app\dashboard\home.html" />
+    <Content Include="src\client\app\dashboard\home.route.js" />
+    <Content Include="src\client\app\layout\body.controller.js" />
+    <Content Include="src\client\app\layout\directives\alphabetFilter.js" />
+    <Content Include="src\client\app\layout\directives\compareTo.directive.js" />
+    <Content Include="src\client\app\layout\directives\datepicker.js" />
+    <Content Include="src\client\app\layout\directives\excelExportDirectives.js" />
+    <Content Include="src\client\app\layout\directives\floatDirective.js" />
+    <Content Include="src\client\app\layout\directives\formPanelDirective.js" />
+    <Content Include="src\client\app\layout\directives\hyperlinkButtonDirective.js" />
+    <Content Include="src\client\app\layout\directives\money.directive.js" />
+    <Content Include="src\client\app\layout\directives\multipleEmailsValidation.js" />
+    <Content Include="src\client\app\layout\directives\navButtonDirective.js" />
+    <Content Include="src\client\app\layout\directives\navButtonPlaceholderDirective.js" />
+    <Content Include="src\client\app\layout\directives\numericDirective.js" />
+    <Content Include="src\client\app\layout\directives\pdfReportDirective.js" />
+    <Content Include="src\client\app\layout\directives\pdfReportLoadingAnimationDirective.js" />
+    <Content Include="src\client\app\layout\directives\sectionHeadingDirective.js" />
+    <Content Include="src\client\app\layout\directives\selectSearchDirective.js" />
+    <Content Include="src\client\app\layout\directives\selectTextDirective.js" />
+    <Content Include="src\client\app\layout\directives\sortableTableHeader.js" />
+    <Content Include="src\client\app\layout\directives\validationMessageDirective.js" />
+    <Content Include="src\client\app\layout\genericDeleteConfirmationModal.controller.js" />
+    <Content Include="src\client\app\layout\genericDeleteConfirmationModal.html" />
+    <Content Include="src\client\app\layout\genericMessageModal.controller.js" />
+    <Content Include="src\client\app\layout\genericMessageModal.html" />
+    <Content Include="src\client\app\layout\genericQuestionModal.controller.js" />
+    <Content Include="src\client\app\layout\genericQuestionModal.html" />
+    <Content Include="src\client\app\layout\layout.module.js" />
+    <Content Include="src\client\app\layout\LayoutController.js" />
+    <Content Include="src\client\app\layout\pdfReportModal.controller.js" />
+    <Content Include="src\client\app\layout\pdfReportModal.html" />
+    <Content Include="src\client\app\layout\shell.controller.js" />
+    <Content Include="src\client\app\layout\shell.html" />
+    <Content Include="src\client\app\login\login.controller.js" />
+    <Content Include="src\client\app\login\login.html" />
+    <Content Include="src\client\app\login\login.module.js" />
+    <Content Include="src\client\app\login\login.route.js" />
+    <Content Include="src\client\app\services\AuthService.js" />
+    <Content Include="src\client\app\services\DashboardDataService.js" />
+    <Content Include="src\client\app\services\DataService.js" />
+    <Content Include="src\client\app\services\DateService.js" />
+    <Content Include="src\client\app\services\http.interceptor.service.js" />
+    <Content Include="src\client\app\services\InsufficientPermissionService.js" />
+    <Content Include="src\client\app\services\linqService.js" />
+    <Content Include="src\client\app\services\MessagingService.js" />
+    <Content Include="src\client\app\services\ModalService.js" />
+    <Content Include="src\client\app\services\navigation.js" />
+    <Content Include="src\client\app\services\NotificationBarModule.js" />
+    <Content Include="src\client\app\services\NotificationBarService.js" />
+    <Content Include="src\client\app\services\QueryBuilderService.js" />
+    <Content Include="src\client\app\services\session.js" />
+    <Content Include="src\client\app\utils\utils.js" />
+    <Content Include="src\client\app\viewmodels\simpleListScreenViewModel.js" />
+    <Content Include="src\client\browsercompatibility.html" />
+    <Content Include="src\client\images\bg.png" />
+    <Content Include="src\client\images\chosen-sprite%402x.png" />
+    <Content Include="src\client\images\chosen-sprite.png" />
+    <Content Include="src\client\images\favicon.ico" />
+    <Content Include="src\client\images\grey.png" />
+    <Content Include="src\client\images\ic_content_copy_black_24dp_2x.png" />
+    <Content Include="src\client\images\logo.png" />
+    <Content Include="src\client\images\NoImage.png" />
+    <Content Include="src\client\images\profile_logo.png" />
+    <Content Include="src\client\images\searchicon.png" />
+    <Content Include="src\client\images\sort.jpg" />
+    <Content Include="src\client\index.html" />
+    <Content Include="src\client\specs.html" />
+    <Content Include="src\client\test-helpers\bind-polyfill.js" />
+    <Content Include="src\client\test-helpers\mock-data.js" />
+    <Content Include="src\server\app.js" />
+    <Content Include="src\server\favicon.ico" />
+    <Content Include="src\server\utils\404.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58132</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:58132/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

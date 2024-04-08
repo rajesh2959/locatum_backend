@@ -1,0 +1,107 @@
+<form name="form" novalidate>
+    <div class="row">
+        <div class="col-md-12" style="padding-top:12px">
+            <div class="col-md-10" style="text-align:center;">
+                <label class="devicelbl" style="font-size:16px;">Visualization Confirmation</label>
+            </div>
+            <div class="col-md-2 pull-right">
+                <span class="close pull-right" style="cursor:pointer !important;pointer-events:all;" ng-click="vm.close()">&times;</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body" style="height:320px;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group" show-errors>
+                    <label class="devicelbl">Name</label>
+                    <input type="text" class="form-control" name="name"  placeholder="Name" ng-model="vm.name" required />
+                </div>
+                <div class="form-group" show-errors>
+                    <label class="devicelbl">Description</label>
+                    <input type="text" class="form-control" name="description" placeholder="Description" ng-model="vm.description" required />
+                </div>
+                <div style="text-align: center; padding-top: 12px;">
+                    <input type="submit" class="btn btn-primary devicesavebutton" ng-click="vm.save(form)" value="SAVE">
+                </div>
+                <div style="text-align: center; padding-top: 12px;">
+                    <input type="button" class="btn devicecancelbutton" style="border:none;" ng-click="vm.cancel()" value="Cancel">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<style>
+    .modal-content {
+        background-color: white;
+        width: 80%;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        font-weight: 425 !important;
+    }
+
+    textarea:focus, textarea.form-control:focus, input.form-control:focus, input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=number]:focus, [type=text].form-control:focus, [type=password].form-control:focus, [type=email].form-control:focus, [type=tel].form-control:focus, [contenteditable].form-control:focus {
+        -webkit-box-shadow: inset 0 -2px 0 #91d3cf;
+        box-shadow: inset 0 -2px 0 #91d3cf;
+    }
+
+    .devicesavebutton {
+        width: 350px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        padding-left: 25px;
+        padding-right: 25px;
+        box-shadow: none !important;
+        height: 50px;
+        border-radius: 10px;
+        font-size: 14px;
+    }
+
+    .devicecancelbutton {
+        width: 350px;
+        background-color: white;
+        padding-left: 16px;
+        padding-right: 16px;
+        border-radius: 6px;
+        box-shadow: none !important;
+    }
+
+    .modal-header {
+        padding: 0px;
+        background: none;
+        border: none;
+    }
+
+    .addborder {
+        border: 1px solid red !important;
+    }
+
+    .strong {
+        color: #060;
+        border-color: #0F0;
+    }
+
+    .medium {
+        color: #C60;
+        border-color: #FC0;
+    }
+
+    .weak {
+        color: #900;
+        border-color: #F00;
+    }
+
+    .strength {
+        padding: 1px 10px;
+        border: 2px solid;
+        color: #FFF;
+    }
+
+    .hor-height {
+        min-height: 670px !important;
+        overflow-y: auto;
+    }
+</style>

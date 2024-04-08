@@ -1,0 +1,42 @@
+{
+  "local": {
+    "environment": {
+      "serverBaseUrl": "http://localhost:8175/facesix",
+      "environment": "LOCAL",
+      "version": "_VERSION_",
+      "showEnvDetails": "true",
+      "api_auth_key": "902C77A0-753D-4B2E-B604-D0FAB805BDE5",
+      "userRole": "superadmin"
+    }
+  },
+  "dev": {
+    "environment": {
+      "serverBaseUrl": "http://locatum.qubercomm.com/facesix",
+      "environment": "DEV",
+      "version": "_VERSION_",
+      "showEnvDetails": "true",
+      "api_auth_key": "902C77A0-753D-4B2E-B604-D0FAB805BDE5",
+      "userRole": "superadmin"
+    }
+  },
+  "test": {
+    "environment": {
+      "serverBaseUrl": "http://locatum.qubercomm.com/facesix",
+      "environment": "TEST",
+      "version": "_VERSION_",
+      "showEnvDetails": "true",
+      "api_auth_key": "902C77A0-753D-4B2E-B604-D0FAB805BDE5",
+      "userRole": "superadmin"
+    }
+  },
+  "prod": {
+    "environment": {
+      "serverBaseUrl": "http://192.168.40.5:8175/facesix",
+      "environment": "LIVE",
+      "version": "_VERSION_",
+      "showEnvDetails": "",
+      "api_auth_key": "902C77A0-753D-4B2E-B604-D0FAB805BDE5",
+      "userRole": "superadmin"
+    }
+  }
+}

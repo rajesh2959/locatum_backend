@@ -1,0 +1,12 @@
+﻿<div class="modal-header clearfix">
+    <h3 style="color: aliceblue;" class="modal-title pull-left"><i class="fa fa-question-circle"></i> {{vm.title}}</h3>
+    <button type="button" class="close pull-right" ng-click="vm.ok()">&times;</button>
+</div>
+<div class="modal-body">
+    <p ng-bind-html="vm.message"></p>
+</div>
+<div class="modal-footer">
+    <div class="button-bar button-bar-modal">
+        <button type="submit" class="btn btn-primary" ng-click="vm.ok()"><i class="fa fa-check"></i> OK</button>
+    </div>
+</div>

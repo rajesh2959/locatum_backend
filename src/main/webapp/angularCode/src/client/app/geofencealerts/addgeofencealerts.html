@@ -1,0 +1,243 @@
+<form class="form-horizontal border-left hor-height" name="frm" novalidate>
+    <div class="panel-body networkconfig-sec" style="padding-top:22px;">
+        <div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7" style="margin-left:-11px;">
+                    <h2 style="padding-bottom:7px;">Geofence Alert</h2>
+                </div>
+            </div>
+        </div>
+        <div class="panel" style="width:98%;margin-left:18px;">
+            <div class="row col-lg-4 col-md-14 col-sm-12 col-xs-12">
+            </div>
+            <form class="form-horizontal" name="frm" novalidate>
+                <div class="row col-lg-4 col-md-14 col-sm-12 col-xs-12">
+                    <h3 style="font-weight:500;margin-left:-17px;margin-top:40px;">Alert</h3>
+                    <div class="form-group" show-errors>
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+
+                            <input type="text" class="form-control" name="Alert Name" autocomplete="off" placeholder="Alert Name" style="font-size:14px;"
+                                   alphabet data-server-validate maxlength="20" required tabindex="1" ng-model="vm.geoFenceAlertsDetails.name">
+                        </div>
+                        <div class="col-md-offset-2 col-sm-offset-2">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+                            <label class="control-label" style="font-family:Roboto;font-weight:500;margin-left:-3px;" for="pwd">Trigerred On</label>
+                        </div>
+                        <div class="col-md-offset-2 col-sm-offset-2">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+
+                            <table>
+                                <tr>
+                                    <td style="width:15%;padding-left:5px;">
+                                        <label class="radio-inline">
+                                            <input type="radio" ng-model="vm.geoFenceAlertsDetails.triggerType" name="triggerType"
+                                                   value="entry">
+                                        <span style="font-size: 12px">Entry</span>
+                                        </label>
+                                    </td>
+                                    <td style="width:15%">
+                                        <label class="radio-inline">
+                                            <input type="radio" ng-model="vm.geoFenceAlertsDetails.triggerType" name="triggerType"
+                                                   value="exit">
+                                        <span style="font-size: 12px">Exit</span>
+                                        </label>
+                                    </td>
+                                    <td style="width:15%">
+                                        <label class="radio-inline">
+                                            <input type="radio" ng-model="vm.geoFenceAlertsDetails.triggerType" name="triggerType"
+                                                   value="both">
+                                        <span style="font-size: 12px">Both</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-offset-2 col-sm-offset-2">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+                            <label class="control-label" style="font-family:Roboto;font-weight:500" for="pwd">Channel</label>
+                        </div>
+                        <div class="col-md-offset-2 col-sm-offset-2">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group" style="width:450px;">
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+                            <div class="" data-ng-repeat="channelName in vm.channelList">
+                                <div class="checkbox" style="width:120px;">
+                                    <label><input type="checkbox" ng-model="channelName.isChecked" />{{channelName.value}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-2 col-sm-offset-2">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+                            <label class="control-label" style="font-family:Roboto;font-weight:500" for="pwd">Category</label>
+                        </div>
+                        <div class="col-md-offset-2 col-sm-offset-2">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+                            <table>
+                                <tr>
+                                    <td style="width:15%;padding-left:8px;">
+                                        <label class="radio-inline">
+                                            <input type="radio" checked ng-change="vm.tagTypeChange()" ng-model="vm.geoFenceAlertsDetails.category"
+                                                   name="category" value="tagname">
+                                            <span style="font-size: 12px">Tag Name</span>
+                                        </label>
+                                    </td>
+                                    <td style="width:15%">
+                                        <label class="radio-inline">
+                                            <input type="radio" ng-model="vm.geoFenceAlertsDetails.category" ng-change="vm.tagTypeChange()"
+                                                   name="category" value="tagtype">
+                                            <span style="font-size: 12px">Tag Type</span>
+                                        </label>
+                                    </td>
+                                    <td style="width:15%"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-offset-2 col-sm-offset-2">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" ng-show="vm.geoFenceAlertsDetails.category == 'tagname'" style="margin-bottom: 0px!important">
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+                            <label class="control-label " for="pwd" style="font-family:Roboto;font-weight:500">Tag List</label>
+                            <hr style="margin: 0px 20px 8px 0px; ">
+                            <div class="col-sm-9" style="min-height:40px;max-height:115px;overflow:auto">
+                                &nbsp;&nbsp;
+                                <i class="fa fa-search gf-srch-icon" style="margin-top: -22px;color:#8b91a0;font-size: 15px;"></i>&nbsp;
+                                 <input type='text' ng-model='searchTagname' placeholder="Search Tagname" style="font-size: 13px;padding-bottom:4px;" />
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding" data-ng-repeat="tag in vm.tagList | filter:searchTagname">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" ng-model="tag.isChecked" />{{tag.assignedTo}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="margin: 0px 20px 8px 0px; ">
+                    </div>
+
+                    <div class="form-group" ng-show="vm.geoFenceAlertsDetails.category == 'tagtype'" style="margin-bottom: 0px!important">
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+                            <label class="control-label " for="pwd">Tag Type</label>
+                            <hr style="margin: 0px 20px 8px 0px; ">
+                            <div class="col-sm-9" style="min-height:40px;max-height:115px;overflow:auto">
+                                &nbsp;&nbsp;
+                                <i class="fa fa-search gf-srch-icon" style="margin-top: -22px;color:#8b91a0;font-size: 15px;"></i>&nbsp;
+                                <input type='text' ng-model='searchTagtype' placeholder="Search Tagtype" style="font-size: 13px;padding-bottom:4px;" />
+                                <br>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding" data-ng-repeat="tag in vm.tagType | filter:searchTagtype">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" ng-model="tag.isChecked" />{{tag.id}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="margin: 0px 20px 8px 0px; ">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+                            <label class="control-label " for="pwd" style="font-family:Roboto;font-weight:500">Status</label>
+                        </div>
+                        <div class="col-md-offset-2 col-sm-offset-2">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+                            <label class="switch switch-default">
+                                <input type="checkbox" ng-model="vm.geoFenceAlertsDetails.statusType" ng-change="vm.statusChange()" />
+                                <span></span>
+                            </label>
+                            <span ng-show="vm.geoFenceAlertsDetails.status == 'disabled'" style="vertical-align: super;padding-left: 3px;">&nbsp;Disabled</span>
+                            <span ng-show="vm.geoFenceAlertsDetails.status == 'enabled'" style="vertical-align: super;padding-left: 3px;">&nbsp;Enabled</span>
+                        </div>
+                    </div>
+
+                    <div ng-show="vm.showValidation">
+                        <label style="color:red">*All Fields Required</label>
+                    </div>
+                    <div class="form-group">
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group" style="margin-bottom:40px;">
+                            <input type="button" class="btn btn-default" ng-click="vm.cancel()" value="Cancel" style="width: auto;border: 2px solid #9ca4ab;background-color: white;color: #888;padding-left: 16px;padding-right: 16px;border-radius:6px;box-shadow: none !important;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="submit" class="btn btn-primary" ng-click="vm.save(frm)" value=Submit style="width: auto;padding-top: 6px;padding-bottom: 6px;padding-left: 20px;padding-right: 20px;box-shadow: none !important;">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="form-group">
+                <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<style>
+    input[type="radio"]:after,
+    .radio input[type="radio"]:after,
+    .radio-inline input[type="radio"]:after {
+        border: 1px solid #dddddd;
+        height: 14px;
+        width: 14px;
+    }
+
+    input[type="radio"]:before,
+    .radio input[type="radio"]:before,
+    .radio-inline input[type="radio"]:before {
+        left: -2px !important;
+        top: -5px !important;
+    }
+
+    input[type="checkbox"]:after,
+    .checkbox input[type="checkbox"]:after,
+    .checkbox-inline input[type="checkbox"]:after {
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        height: 15px;
+        width: 15px;
+    }
+
+    input[type="checkbox"]:checked:before,
+    .checkbox input[type="checkbox"]:checked:before,
+    .checkbox-inline input[type="checkbox"]:checked:before {
+        top: 0px !important;
+        left: 5px !important;
+    }
+
+    .switch span {
+        width: 40px !important;
+        height: 20px !important;
+    }
+
+    .switch span:after {
+        width: 16px !important;
+    }
+</style>

@@ -1,0 +1,229 @@
+<form class="form-horizontal border-left hor-height" name="frm" novalidate>
+    <div class="panel-body networkconfig-sec">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding">
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 removepadding">
+                <h2><b>Customized Alert</b></h2>
+            </div>
+        </div>
+        <div class="mr-top-11 row">
+            <div class="customiz-panel-flex-row">
+                <div class="panel mr-right-20 table-border pd-20 ">
+                    <h4 style="background:none;color:black;font-size:16px;font-family:Roboto;font-weight:600;padding-top:16px;">Gobal Alert Options</h4>
+                    <div style="height:260px;">
+                        <div class="customiz-panel-flex-wrapper">
+                            <div>Activate Email/SMS notification when Tags get inactive?</div>
+                            <div class="panel-flex-wrapper">
+                                <label class="switch switch-small">
+                                    <input type="checkbox" checked ng-model="vm.switchTagONOFF" />
+                                    <span></span>
+                                </label>
+                                <span class="customiz-switch-lable">on</span>
+                            </div>
+                        </div>
+                        <div class="customiz-panel-flex-wrapper">
+                            <div style="font-size:13px;">Activate Email/SMS notification when Devices get inactive?</div>
+                            <div class="panel-flex-wrapper">
+                                <label class="switch switch-small">
+                                    <input type="checkbox" checked ng-model="vm.switchDeviceONOFF" />
+                                    <span></span>
+                                </label>
+                                <span class="customiz-switch-lable">on</span>
+                            </div>
+                        </div>
+                        <div class="customiz-panel-flex-row  mr-top-15">
+                            <div class="mr-right-20">
+                                <div class="customiz-txt-color-black" style="font-size:13px;">Default Tag Inactivity Time (In Minutes)</div>
+                                <input type="number" ng-model="vm.taginactivity" number />
+                            </div>
+                            <div>
+                                <div class="customiz-txt-color-black">Gateway Inactivity Time (In Seconds)</div>
+                                <input type="number" id="seconds" ng-model="vm.gatewayinactivity" />
+                            </div>
+                        </div>
+                        <div class="customiz-panel-flex-row mr-top-15">
+                            <div class="mr-right-20">
+                                <div class="customiz-txt-color-black">Battery Threshold (%)</div>
+                                <input type="number" id="battery" ng-model="vm.batterythreshold" />
+                            </div>
+                        </div>
+
+                        <div ng-show="vm.requiredvalidation==true">
+                            <label style="color:red">*All Fields Required</label>
+                        </div>
+                    </div>
+                    <div class="mr-top-15 text-right mr-right-20" style="margin-top:25px;">
+                        <button class="btn-border" ng-click="vm.update()">Update</button>
+                    </div>
+                </div>
+                <div class="panel mr-right-10 table-border pd-20">
+                    <h4 style="background:none;color:black;font-size:16px;font-family:Roboto;font-weight:600;padding-top:16px;">Tag Inactivity Alert Configuration</h4>
+                    <div style="height:260px;">
+                        <div class="customiz-panel-flex-row  mr-top-15">
+                            <div class="customiz-panel-flex-content mr-right-20">
+                                <h5>Tag Type</h5>
+                                <select ng-model="vm.selectedTagtype" no-results-text="'No Tag Type found'" style="width:80%;font-size:14px !important;font-family:Roboto-Light !important"
+                                        ng-options="item for item in vm.tagtype"
+                                        ng-change="vm.onTagTypeChange(vm.selectedTagtype)">
+                                    <option ng-if="vm.tagtype.length==0 || !vm.tagtype" value="">No records found</option>
+                                </select>
+                            </div>
+                            <div class="customiz-panel-flex-content mr-right-20">
+                                <h5>Select Tag Names:</h5>
+                                <select ng-model="vm.selectedTagNames" no-results-text="'No Tages found'" style="width:80%;font-size:14px !important;font-family:Roboto-Light !important"
+                                        ng-options="item.tagid as item.name for item in vm.tagNames"
+                                        ng-change="vm.onTagNameChange(vm.selectedTagNames)">
+                                    <option value="">Select Name</option>
+                                    <option ng-if="vm.tagNames.length==0 || !vm.tagNames" value="">No records found</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="customiz-panel-flex-row  mr-top-15">
+                            <div class="customiz-panel-flex-content mr-right-20">
+                                <h5>Place</h5>
+                                <select ng-model="vm.selectedplace" no-results-text="'No Tag Type found'" style="width:80%;font-size:14px !important;font-family:Roboto-Light !important"
+                                        ng-options="item.key as item.value for item in vm.place"
+                                        ng-change="vm.onPlaceChange(vm.selectedplace)">
+                                    <option ng-if="vm.place.length==0 || !vm.place" value="No records found">No records found</option>
+
+                                </select>
+                            </div>
+                            <div class="customiz-panel-flex-content mr-right-20">
+                                <h5>Choose a place:</h5>
+                                <select ng-model="vm.selectedPlaceId" no-results-text="'No Tages found'" style="width:80%;font-size:14px !important;font-family:Roboto-Light !important"
+                                        ng-options="item.id as item.name for item in vm.placeName"
+                                        ng-change="vm.onPlaceNameChange(vm.selectedPlaceId)">
+                                    <option value="">Select Place</option>
+                                    <option ng-if="vm.placeName.length==0 || !vm.placeName" value="">No records found</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="customiz-panel-flex-row  mr-top-15">
+                            <div class="customiz-panel-flex-content mr-right-20">
+                                <h5>Inactivity Duration (In Minutes)</h5>
+                                <input type="number" ng-model="vm.inactivityDuration" />
+                            </div>
+                        </div>
+                        <div ng-show="vm.configValidation==true">
+                            <label style="color:red">*All Fields Required</label>
+                        </div>
+                    </div>
+                    <div class="mr-top-15 text-right mr-right-20">
+                        <button class="btn-border" ng-click="vm.saveAlert()">Submit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="mr-top-11 row">
+                <div class="panel table-border">
+                    <div class="col-md-12 ">
+
+                        <div class="col-md-12 grid-title-padding">
+                            <div class="col-md-4 title-left">
+
+                                <div class="col-md-6">
+                                    <span class=" grid-title">
+                                        Configured Tag Alert
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <span ng-click="vm.onRefreshConfigAlert(true)" class="grid-refresh pull-right">
+                                    <i class="fa icon-rotate_right "
+                                       style="color:#625B5B;vertical-align:sub;cursor:pointer;font-size:18px !important;"></i>
+                                    Refresh
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="panel-body panel-body-table" style="overflow-y: hidden;">
+                            <div class="table-responsive">
+                                <table class="table table-hover" ng-if="vm.pagedData.length > 0" style="font-size:13px;">
+                                    <thead style="border:thin;border-top: thin solid #e7e7e7;">
+                                        <tr>
+                                            <th colspan="2" style="background:none;color:black" class="table-hyper-a-small">
+                                                #
+                                            </th>
+                                            <th colspan="2" style="background:none;color:black" class="table-hyper-a-small">
+                                                <a href="" style="color:black" ng-click="vm.dataOperations.sortPredicate = 'tagtype'; vm.dataOperations.sortOrder = !vm.dataOperations.sortOrder; vm.getConfigAlert()">
+                                                    Tag Type
+                                                    <span ng-show="vm.dataOperations.sortPredicate == 'tagtype' && !vm.dataOperations.sortOrder"
+                                                          class="fa fa-caret-down"></span>
+                                                    <span ng-show="vm.dataOperations.sortPredicate == 'tagtype' && vm.dataOperations.sortOrder"
+                                                          class="fa fa-caret-up"></span>
+                                                </a>
+                                            </th>
+
+                                            <th colspan="2" style="background:none;color:black" class="table-hyper-a-small">
+                                                <a href="" style="color:black" ng-click="vm.dataOperations.sortPredicate = 'place'; vm.dataOperations.sortOrder = !vm.dataOperations.sortOrder; vm.getConfigAlert()">
+                                                    Place
+                                                    <span ng-show="vm.dataOperations.sortPredicate == 'place' && !vm.dataOperations.sortOrder"
+                                                          class="fa fa-caret-down"></span>
+                                                    <span ng-show="vm.dataOperations.sortPredicate == 'place' && vm.dataOperations.sortOrder"
+                                                          class="fa fa-caret-up"></span>
+                                                </a>
+                                            </th>
+                                            <th colspan="2" style="background:none;color:black" class="table-hyper-a-small">
+                                                <a href="" style="color:black" ng-click="vm.dataOperations.sortPredicate = 'placenames'; vm.dataOperations.sortOrder = !vm.dataOperations.sortOrder; vm.getConfigAlert()">
+                                                    Place Name
+                                                    <span ng-show="vm.dataOperations.sortPredicate == 'placenames' && !vm.dataOperations.sortOrder"
+                                                          class="fa fa-caret-down"></span>
+                                                    <span ng-show="vm.dataOperations.sortPredicate == 'placenames' && vm.dataOperations.sortOrder"
+                                                          class="fa fa-caret-up"></span>
+                                                </a>
+                                            </th>
+                                            <th colspan="2" style="background:none;color:black" class="table-hyper-a-small">
+                                                <a href="" style="color:black" ng-click="vm.dataOperations.sortPredicate = 'duration'; vm.dataOperations.sortOrder = !vm.dataOperations.sortOrder; vm.getConfigAlert()">
+                                                    Duration
+                                                    <span ng-show="vm.dataOperations.sortPredicate == 'duration' && !vm.dataOperations.sortOrder"
+                                                          class="fa fa-caret-down"></span>
+                                                    <span ng-show="vm.dataOperations.sortPredicate == 'duration' && vm.dataOperations.sortOrder"
+                                                          class="fa fa-caret-up"></span>
+                                                </a>
+                                            </th>
+                                            <th colspan="2" style="background:none;color:black" class="table-hyper-a-small">
+                                                <div style="color:black" class="mr-left-10">
+                                                    Action
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr data-ng-repeat="inactivealerts in vm.pagedData">
+                                            <td colspan="2">{{inactivealerts.gridsno}}</td>
+                                            <td colspan="2">{{inactivealerts.tagtype}}</td>
+                                            <td colspan="2">{{inactivealerts.place}}</td>
+                                            <td colspan="2">{{inactivealerts.placenames[0]}}</td>
+                                            <td colspan="2">{{inactivealerts.duration}}</td>
+                                            <td colspan="2"><button class="btn-text-danger" ng-click="vm.onDelete(inactivealerts.id)">Delete</button></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                                <hr style="margin: 15px 0 -20px 0 ;    border-top: thin solid #e7e7e7;">
+
+                                <table class="footer-center">
+                                    <tr>
+                                        <td>{{vm.currentPageDescription()}}</td>
+                                        <td>
+                                            <div class="pagination">
+                                                <ul uib-pagination boundry-links="true" ng-change="vm.getConfigAlert()"
+                                                    total-items="vm.filteredCount" items-per-page="vm.dataOperations.paging.pageSize"
+                                                    ng-model="vm.dataOperations.paging.currentPage" max-size="vm.dataOperations.paging.maxPagesToShow"
+                                                    class="pagination-small"></ul>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" numeric class="col-md-2 pagination-goto-text" ng-disabled="vm.pagedData.length <= vm.dataOperations.paging.pageSize" ng-model="vm.goToPageNumber" />&nbsp;
+                                            <input type="button" class="btn btn-primary pagination-grid-footer-btn" value="Go" data-ng-click="vm.goToPage()" style="background-color:#068e84"
+                                                   ng-disabled="!vm.goToPageNumber" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

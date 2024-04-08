@@ -1,0 +1,97 @@
+﻿<form class="form-horizontal border-left hor-height" name="addUserForm" novalidate >
+    <div class="col-md-12" style="margin-top:22px">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="width: 96%">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <h2 style="font-weight:700;padding-bottom:7px; font-family: Roboto !important;">Users</h2>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 button-bar pull-right">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding">
+                    <div class="inactive-btn">
+                        <span>
+                        <i class="fa fa-search" style="color:#8b91a0"></i>
+                        <input type="text" class="form-control" placeholder="search" data-ng-model="vm.search"
+                                 style="outline:none;box-shadow: inset 0 0 #ddd;font-size: 13px;font-family:Roboto-Light;width: 90px;display: unset !important;">
+                        </span>
+
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="browseButtn btn btn-primary btn-file" style="padding-top: 9px;padding-left: 8px;margin-top: 1px;">
+                            <label style="cursor:pointer;" >
+                                <input id="upload" name="fileInput" type="file" st="" class="fa fa-upload" nv-file-select="" nv-file-drop="" uploader="vm.uploader" accept="text/plain">
+                                <i class="fa fa-upload " style="color:white;font-size:12px;margin-right: -6px;" aria-hidden="true">
+                                    <span style="position: relative;font-size: 12px;font-family:Roboto;color: white;
+                                                                                    letter-spacing: 0.5px;padding-left: 5px;">Bulk Import</span>
+                                </i>
+                            </label>
+                        </span>
+
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-primary cus-btn" style="font-family:Roboto-Light;font-size:11px;margin-left: 10px;" ng-click="vm.goToUser(0, null)">
+                            <span class="fa icon-add" style="font-size: 15px !important;vertical-align:middle;"></span>Add New User
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12" ng-if="vm.userList.length > 0">
+            <div class="col-md-4" data-ng-repeat="user in vm.userList | filter : vm.search" ng-click="vm.goToUser(user.id, user)" style="cursor:pointer;margin-left: -13px;">
+                <div class="custom-box">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img ng-src="http://locatum.qubercomm.com/facesix/web/account/profilepic?userid={{user.id}}" alt="" style="height: 80px;width: 80px;" onError="this.src = '../images/avatar.png'" class="img-circle" />
+                        </div>
+                        <!--<div class="col-md-4 user-icon-small">
+                            <img src="http://locatum.qubercomm.com/facesix/web/account/profilepic?userid={{user.id}}"
+                                 alt="" style="height: 80px;width: 80px;margin-left: -10px;margin-top: -3px;" class="img-circle" />
+                        </div>-->
+                        <div class="col-md-1"></div>
+                        <div class="col-md-7">
+                            <h3 style="font-size:14px;">{{user.fname}}&nbsp;{{user.lname}}</h3>
+                            <p style="color:#999999">{{user.designation}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12" ng-if="vm.userList.length == 0">
+            <h2 style="text-align:center">No records found</h2>
+        </div>
+    </div>
+</form>
+
+<style>
+
+    @media(max-width: 768px ) and (min-width: 201px ) {
+        .cardtoppadding {
+            margin-top: -25px !important;
+        }
+
+        .cardlabeltoppadding {
+            margin-top: -20px !important;
+        }
+    }
+
+    @media(max-width: 768px) and (min-width: 451px) {
+        .venuepanel {
+            height: 820px !important;
+        }
+    }
+
+    @media(max-width: 450px) and (min-width: 251px) {
+        .venuepanel {
+            height: 900px !important;
+        }
+    }
+
+    @media(max-width: 768px) and (min-width: 201px) {
+        .allcardtoppadding {
+            padding-top: 15px !important;
+        }
+    }
+
+    @media(max-width: 768px) and (min-width: 201px) {
+        .venuedrpdwn {
+            width: 225px;
+        }
+    }
+</style>

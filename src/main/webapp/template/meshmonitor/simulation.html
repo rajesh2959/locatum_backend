@@ -1,0 +1,476 @@
+<body style="background: #eef2f6!important;">
+	<div id="page-content-wrapper" class=""
+		style="background-color: slategray;
+	/* margin-bottom: 66px; */ height: 58px;">
+		<div>
+			<h class="hStyle"> <i class="fa fa-users" style="color: white"></i>
+			Simulation</h>
+
+		</div>
+		<div>
+			<i class="fa fa-power-off power"></i>
+		</div>
+
+
+		<div class="container simulationview" style="width: 79% !important;margin-bottom: 40px;display:none">
+			<!-- <h2>Simulation Data</h2> -->
+			<ul class="nav nav-tabs" style="margin-top: 7px;">
+				<li class="active"><a data-toggle="tab" href="#home">Basic</a></li>
+				<li><a data-toggle="tab" href="#menu1">Profile</a></li>
+			</ul>
+
+			<div class="tab-content" style="margin-top: 15px;">
+				<div id="home" class="tab-pane fade in active">
+					<div>
+						<label for="" class="firstLabel">Free CPU <input
+							type="text" class="form-control maxval commonlabel valueCheck" id="cpupercantage" name="Free CPU"
+							maxlength="3"><p class="pscss" style="margin-top: -30px;float: right;margin-right: -20px;">%</p></label>
+						 <label for="" class="firstLabel">Free
+							Memory <input type="text" class="form-control maxval commonlabel valueCheck"
+							id="rampercentage" maxlength="3"><p class="pscss" style="margin-top: -30px;float: right;margin-right: 6px;">%</p>
+						</label> 
+						<label for="" class="firstLabel">Battery Remaining Time <input
+							type="text" class="form-control maxvalBat commonlabel valueCheck" id="batterytime"
+							maxlength="4"><p class="pscss" style="margin-top: -30px;float: right;margin-right: 45px;">minutes</p>
+						</label> 
+              			<!-- <label for="" class="firstLabel">Primary Link RSSI
+               				<input type="number" class="form-control maxvalLink commonlabel valueCheck"
+              				id="link" min="-30" max="-105" step="1" style="width: 200px;"><p class="pscss" style="margin-top: -30px;float: right;margin-right: 25px;">dBm</p>
+            			</label> 
+            			<label for="" class="firstLabel">Hops to Root<input
+              						type="text" class="form-control hops commonlabel valueCheck" id="hopcount" maxlength="2"><p class="pscss" style="margin-top: -30px;float: right;margin-right: -20px;">(1-16)</p>
+              			</label> -->
+              			<label for="" class="firstLabel"><p id="Error-message" style="color:red;"></p></label>
+
+					   </div>
+            <div>
+             
+          </div>
+
+
+					<!--  <div class="form-group  disp-inline nbMode" style="float: right;margin-top: -68px;margin-right: 55px;">
+						<div class="network_balancer">
+							<input type="checkbox" data-toggle="switch" for="network_balancer"
+								class="form-control disp-block valign" style="width: 250px"
+								id="network_balancer" name="network_balancer" /> <label
+								></label>
+						</div>
+					</div>   -->
+
+					<label class="switch" style="float: right;
+    margin-right: 101px;
+    margin-top: -47px;">
+	<p style="margin-left: -39px;
+    margin-top: 6px;">OFF</p>
+  <input type="checkbox" class="network_balancer" value="0">
+  <span class="slider round"></span><p style="margin-left: 65px;
+    margin-top: -38px;">ON</p>
+</label>
+          
+				</div>
+				<div id="menu1" class="tab-pane fade" style="margin-bottom: 27px;">
+					<div class="col-md-3 profilecss gamebg" title=" Free CPU: 15 % &#010; Free Memory: 20% &#010; Battery Remaining Time: 120 secs">
+						<h5 class="h5s">Gaming Profile</h5>
+            <input type="checkbox" class="firstradio commoncheck" name=""  style="width: 1.6em;height: 1.6em;margin-top: -28px" value="one">					                      
+					</div>
+
+            <div class="col-md-3 profilecss moderatebg" style="margin-left:40px"  title=" Free CPU: 50 % &#010; Free Memory: 50% &#010; Battery Remaining Time: 240 secs">
+              <h5 class="h5s">Moderate Profile</h5>
+            <input type="checkbox"  class="secondradio commoncheck" name="" style="width: 1.6em;height: 1.6em;margin-top: -28px" value="two">                       
+          </div>
+
+            <div class="col-md-3 profilecss idealbg" style="margin-left:40px;"  title=" Free CPU: 90 % &#010; Free Memory: 90% ">
+              <h5 class="h5s">Idle Profile</h5>
+            <input type="checkbox" name="" class="thirdradio commoncheck" style="width: 1.6em;height: 1.6em;margin-top: -28px" value="three">                     
+          </div>
+<!-- 
+    <div class="col-md-2" style="float: right;margin-top: 46px;">      
+    <div class="onoffswitch4">
+    <input type="checkbox" name="onoffswitch4" class="onoffswitch4-checkbox" id="myonoffswitch4" disabled="disabled">
+    <label class="onoffswitch4-label" for="myonoffswitch4">
+        <span class="onoffswitch4-inner"></span>
+        <span class="onoffswitch4-switch"></span>
+    </label>
+    </div>
+
+</div> -->
+
+<label class="switch" style="margin-left: 50px">
+	<p style="margin-left: -39px;
+    margin-top: 6px;">OFF</p>
+  <input type="checkbox" class="slider" onchange="sliderclass()" value="1" disabled="disabled">
+  <span class="slider round"></span><p style="margin-left: 65px;
+    margin-top: -38px;">ON</p>
+</label>
+
+
+				</div>
+			</div>
+		</div>
+	
+<div class="form-group  disp-inline lefthang">
+              <span for="" style="margin-left: 3px;color: #e1ffff">Device List</span><select class="form-control disp-block valign" style="font-size: 10px;width: fit-content;text-transform: uppercase;margin-top: 9px !important" name="root" id="root">
+                </select>
+            </div>
+	</div>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/facesix/static/meshmonitor/css/style.css" />
+
+	<script src="/facesix/static/meshmonitor/js/jquery-2.1.4.min.js" type="text/javascript"></script>
+	<script src="/facesix/static/meshmonitor/js/bootstrap.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/facesix/static/meshmonitor/js/c3.js"></script>
+	<script type="text/javascript" src="/facesix/static/meshmonitor/js/underscore-min.js"></script>
+	<script src="/facesix/static/meshmonitor/js/simulation.js" type="text/javascript"></script>
+	
+
+	<style type="text/css">
+
+  .lefthang{
+    z-index: 9999;
+    position: fixed;
+    top: 354px;
+    left: 10px;
+  }
+
+.tooltip div {
+  font: 10px sans-serif;
+  background-color: blue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: green;
+}
+
+	.h5s{
+		margin-left: 30px;
+    	margin-top: 10px;
+	}
+.firstLabel {
+	margin-right: 144px;
+}
+
+.container {
+	float: right;
+	border: 1px solid;
+	margin-top: 30px;
+  border-radius: 25px;
+}
+
+.above {
+	margin: 40px;
+	background-color: rgb(68, 68, 68); /* Needed for IEs */
+	-moz-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+	-webkit-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+	box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+	filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3, MakeShadow=true,
+		ShadowOpacity=0.30);
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)";
+	zoom: 0.1;
+}
+
+.above .ui-card {
+	position: relative;
+	/* This protects the inner element from being blurred */
+	padding: 100px;
+	background-color: #DDD;
+}
+
+.plug {
+	z-index: 9999;
+	position: absolute;
+	top: 0;
+	left: 126px;
+	font-size: 50px;
+}
+
+.battery {
+	z-index: 9999;
+	position: absolute;
+	top: 0;
+	right: 114px;
+}
+
+.cardCss {
+	background-color: #fff;
+	padding: 5px 0;
+	position: relative;
+	margin-bottom: 30px;
+	box-shadow: 5px 6px 5px #cdd9ef;
+}
+
+label {
+	font-family: "Nunito Sans", sans-serif !important;
+	font-weight: 400 !important;
+	font-size: 18px !important;
+}
+
+h4 {
+	font-family: "Nunito Sans", sans-serif;
+	font-weight: 400 !important;
+	font-size: 18px !important;
+}
+
+.c3-title, tspan {
+	font-family: 'Exo2SemiBold';
+	font-size: 13px !important;
+	/* color: azure; */
+	fill: gray !important;
+}
+
+.hStyle {
+	margin-left: 267px;
+	font-size: 18px;
+	font-family: inherit;
+	font-weight: 700;
+	line-height: 1.2;
+	/*color: #343a40;*/
+	color: white;
+}
+
+.power {
+	color: transparent;
+	float: right;
+	margin-top: -19px;
+	margin-right: 21px;
+	font-size: 23px !important;
+}
+
+.c3-ygrid-line line {
+	stroke: #e6e6e6;
+}
+
+.c3-xgrid-line line {
+	stroke: #e6e6e6;
+}
+
+.hs {
+	float: left;
+	margin-left: 215px;
+}
+
+.links {
+	float: right;
+	margin-right: 39px;
+	font-size: 20px;
+	margin-top: -32px !important;
+}
+
+.c3-chart-arc .c3-gauge-value {
+	font-size: 20px !important;
+}
+
+.uitag-card>div {
+	margin-bottom: -25px !important;
+}
+
+.subtitle {
+	font-size: 16px;
+	font-weight: 300;
+	color: #a1aab2;
+	margin-top: -10px;
+}
+
+.chart-box .netflowData label {
+	margin-top: -5px !important;
+}
+
+#chart {
+	width: 80%;
+	display: inline-block;
+}
+/*  .col-four {
+    width: 30.7% !important;
+}*/
+.ui-card {
+	height: 71px !important;
+	padding: 0px !important;
+}
+
+@media screen and (max-width: 1200px) and (min-width: 768px) {
+	.bat {
+		margin-left: 163px !important;
+	}
+	.hStyle {
+		margin-left: 210px;
+	}
+}
+
+@media screen and (max-width: 770px) and (min-width: 766px) {
+	.bat {
+		margin-left: 163px !important;
+	}
+	.hStyle {
+		margin-left: 210px;
+	}
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1350px) {
+	.bat {
+		margin-left: 163px !important;
+	}
+	.hStyle {
+		margin-left: 210px;
+	}
+  .ch {
+    width: 35% !important;
+    margin-right: -153px;
+}
+}
+
+.c3-axis-y text {
+	font-size: 12px;
+	font-family: "Nunito Sans",sans-serif !important;
+}
+
+.c3-axis-x text {
+	font-size: 12px;
+	font-family: "Nunito Sans",sans-serif !important;
+}
+
+.c3-tooltip td {
+	font-size: 13px;
+	padding: 3px 6px;
+	background-color: green border-left:1px dotted #999;
+	color: #000;
+}
+
+#myProgress {
+	width: 100%;
+	background-color: #ddd;
+	margin-bottom: 8px;
+}
+
+#maxtx {
+	width: 1%;
+	height: 20px !important;
+	background-color: #ff3333;
+}
+
+#mintx {
+	width: 1%;
+	height: 20px !important;
+	background-color: #39ac73;
+}
+
+#avgtx {
+	width: 1%;
+	height: 20px !important;
+	background-color: #1aa3ff;
+}
+
+#maxrx {
+	width: 1%;
+	height: 20px !important;
+	background-color: #ff3333;
+}
+
+#minrx {
+	width: 1%;
+	height: 20px !important;
+	background-color: #39ac73;
+}
+
+#avgrx {
+	width: 1%;
+	height: 20px !important;
+	background-color: #1aa3ff;
+}
+
+.hcss {
+	margin-top: 4px;
+	float: left;
+	margin-left: -55px;
+	font-size: 14px;
+}
+
+.btn-primary {
+	box-shadow: none !important;
+	background-color: #428bca !important;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus
+	{
+	background-color: #428bca !important;
+	color: white !important;
+}
+
+.profilecss{
+      border: 1px solid;
+    border-radius: 4px;
+    border-color: darkgray;
+    margin-bottom: 20px;        
+}
+
+/*.gamebg{
+    background-image: url("/facesix/static/meshmonitor/images/jjj.png");
+}
+.idealbg{
+  background-image: url("/facesix/static/meshmonitor/images/ideal.jpg");
+}
+.moderatebg{
+  background-image: url("/facesix/static/meshmonitor/images/moderate.jpg");
+}*/
+
+.profilelabel{
+  color: white;
+}
+
+.ui-card .fa:before {
+  left: 86% !important;
+}
+
+.commonlabel{
+	width: 80px !important;
+}
+
+.pscss{
+	font-size: 16px;
+    font-weight: 300;
+    color: #a1aab2;
+}
+.commoncheck{
+	cursor: pointer;
+}
+</style>
+
+	<script type="text/javascript">
+
+		$(".firstradio").on("click",function(){  
+       if ($(this).is(':checked')) {
+          $(".secondradio").prop("disabled",true);
+          $(".thirdradio").prop("disabled",true);
+       } else {
+          $(".firstradio").prop("disabled",false);
+          $(".secondradio").prop("disabled",false);
+          $(".thirdradio").prop("disabled",false);
+       } 
+
+    });
+      $(".secondradio").on("click",function(){  
+         if ($(this).is(':checked')) {
+            $(".firstradio").prop("disabled",true);
+            $(".thirdradio").prop("disabled",true);
+         } else {
+            $(".firstradio").prop("disabled",false);
+            $(".secondradio").prop("disabled",false);
+            $(".thirdradio").prop("disabled",false);
+         }
+               
+    });
+        $(".thirdradio").on("click",function(){  
+        if ($(this).is(':checked')) {
+             $(".secondradio").prop("disabled",true);
+             $(".firstradio").prop("disabled",true);
+         } else {
+             $(".firstradio").prop("disabled",false);
+             $(".secondradio").prop("disabled",false);
+             $(".thirdradio").prop("disabled",false);
+         }     
+       
+    });
+
+	</script>
+</body>
+{{>meshmonitor/leftpanel}}

@@ -1,0 +1,228 @@
+<body style="background: #eef2f6!important;">
+	<div id="page-content-wrapper" class=""
+		style="background-color: slategray;
+	/* margin-bottom: 66px; */ height: 58px;">
+		<div>
+			<h class="hStyle"> <i class="fa fa-map-signs" style="color: white"></i>
+			Path Selection</h>
+
+		</div>
+		<div>
+			<i class="fa fa-power-off power"></i>
+		</div>
+
+		<div class="col-md-10 padding-device padding-right-0 tableHide mob-pad path" style="float:right;margin-top:41px;display: none;">
+			<div class="chart-box acl-table-chart-box"></div>
+		</div>
+
+		<div class="col-md-10 padding-device padding-right-0 tableHide mob-pad histogram" style="float:right;margin-right: 37px;display: none;">
+			<div class="chart-box table-chart-box"></div>
+		</div> 	
+
+
+		<script id="chartbox-acl-template" type="text/x-handlebars-template">
+	<div class="device-coon-desc">
+		<label>Path Selection to Devices</label>
+		<span class="table-page pageref" data-table-name="dashboard-table"><i class="fa fa-refresh acl-refreshTable" aria-hidden="true"></i>\{{#if show_previous_button}}<i class="fa fa-caret-left acl-tablePreviousPage"></i>\{{/if}}&nbsp;\{{#if show_next_button}}<i class="fa fa-caret-right acl-tableNextPage"></i>\{{/if}}</span>
+		<select class="tablelength" id="tablelength" data-target="#dashboard-table">
+			<option value="5">5</option>
+			<option value="10" selected>10</option>
+			<option value="25">25</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+		</select>			
+	</div>
+
+	<div class="tableSection">
+		<table class="table dashboard-table" id="dashboard-table" data-current-page="\{{current_page}}" data-row-limit="10">
+			<thead>
+				<tr class="sel_tbl1">
+					<th class="width-40">#</th>
+					<th> Device</th>
+					<th>Next-Hop</th>
+					<th>Next-Hop Score</th>
+					<th>Number of Hops</th>
+					<th>Prev Next-Hop</th>
+					<th>Prev Next-Hop Score</th>
+					<th>Prev Number of Hops</th>
+					
+				</tr>
+			</thead>
+			<tbody id="spotid">
+				\{{#each data}}
+				<tr mac-id="\{{mac_address}}" ap="\{{ap}}" uid="{{uid}}" ssid="\{{ssid}}">
+					<td style="color: black;">\{{index}}</td>
+					<td style="color: black;">\{{destination}} </td>
+					<td style="color: black;">\{{nextHop}}</td>
+					<td style="color: black;">\{{score}}</td>
+					<td style="color: black;">\{{numHope}}</td>
+					<td style="color: black;">\{{prevHop}}</td>
+					<td style="color: black;">\{{prevScore}}</td>
+					<td style="color: black;">\{{prevNumHope}}</td>
+				</tr>
+				\{{/each}}
+			</tbody>
+		</table>
+	</div>	
+</script>
+
+
+
+<script id="chartbox-active-template" type="text/x-handlebars-template">
+	<div class="device-coon-desc">		
+		<label>Path Selection History</label>
+		<span class="table-page pagerefone" data-table-name="scanner-table"><i class="fa fa-refresh steer-refreshTable" aria-hidden="true"></i>\{{#if show_previous_button}}<i class="fa fa-caret-left steer-tablePreviousPage"></i>\{{/if}}&nbsp;\{{#if show_next_button}}<i class="fa fa-caret-right steer-tableNextPage"></i>\{{/if}}</span>
+		<select class="tablelengthone" id="tablelengthone" data-target="#scanner-table">
+			<option value="5">5</option>
+			<option value="10" selected>10</option>
+			<option value="25">25</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+		</select>			
+	</div>
+
+	<div class="tableSection">
+		<table class="table scanner-table" id="scanner-table" data-current-page="\{{current_page}}" data-row-limit="10">
+			<thead>
+				<tr class="sel_tbl1">
+					<th class="width-40">#</th>
+					<th>Timestamp</th>
+					<th>Event</th>
+					<th>Device</th>
+					<th>Next-Hop</th>
+					<th>Next-Hop Score</th>		
+					<th>Number of Hops</th>
+				</tr>
+			</thead>
+			<tbody id="newid">
+				\{{#each data}}
+				<tr mac-id="\{{mac_address}}" ap="\{{ap}}" uid="{{uid}}" ssid="\{{ssid}}">
+					<td style="color: black;">\{{index}}</td>
+					<td style="color: black;">\{{timeStamp}}</td>
+					<td style="color: black;">\{{event}}</td>
+					<td style="color: black;">\{{destination}}</td>
+					<td style="color: black;">\{{nextHop}}</td>
+					<td style="color: black;">\{{score}}</td>
+					<td style="color: black;">\{{numHope}}</td>
+				</tr>
+				\{{/each}}
+			</tbody>
+		</table>
+	</div>	
+</script>
+ 
+   <div class="form-group  disp-inline lefthang">
+              <span for="" style="margin-left: 3px;color: #e1ffff">Device List</span><select class="form-control disp-block valign" style="font-size: 10px;width: fit-content;text-transform: uppercase;margin-top: 9px !important" name="root" id="root">
+                </select>
+            </div>
+
+	</div>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="/facesix/static/meshmonitor/css/style.css" />
+<link href="/facesix/static/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<script src="/facesix/static/meshmonitor/js/jquery-2.1.4.min.js" type="text/javascript"></script>
+	<script src="/facesix/static/meshmonitor/js/bootstrap.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/facesix/static/meshmonitor/js/c3.js"></script>
+	<script type="text/javascript" src="/facesix/static/meshmonitor/js/underscore-min.js"></script>
+	<script src="/facesix/static/meshmonitor/js/dmesh.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/facesix/static/meshmonitor/js/handlebars.min.js"></script>
+	
+	<style type="text/css">
+
+  .lefthang{
+    z-index: 9999;
+    position: fixed;
+    top: 354px;
+    left: 10px;
+  }
+
+.hStyle {
+	margin-left: 267px;
+	font-size: 18px;
+	font-family: inherit;
+	font-weight: 700;
+	line-height: 1.2;
+	/*color: #343a40;*/
+	color: white;
+}
+
+.power {
+	color: transparent;
+	float: right;
+	margin-top: -19px;
+	margin-right: 21px;
+	font-size: 23px !important;
+}
+
+
+
+@media screen and (max-width: 1200px) and (min-width: 768px) {
+	.bat {
+		margin-left: 163px !important;
+	}
+	.hStyle {
+		margin-left: 210px;
+	}
+	
+	.col-md-10 {
+    width: 80.33333333% !important;
+}
+
+}
+
+@media screen and (max-width: 770px) and (min-width: 766px) {
+	.bat {
+		margin-left: 163px !important;
+	}
+	.hStyle {
+		margin-left: 210px;
+	}
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1350px) {
+	.bat {
+		margin-left: 163px !important;
+	}
+	.hStyle {
+		margin-left: 210px;
+	}
+  .ch {
+    width: 35% !important;
+    margin-right: -153px;
+}
+
+.col-md-10 {
+    width: 80.33333333% !important;
+}
+
+}
+
+
+@media screen and (min-width: 1350px) and (max-width: 1800px) {
+	
+.col-md-10 {
+    width: 79.33333333% !important;
+}
+	
+}
+
+
+</style>
+
+<script type="text/javascript">
+	//steerBoard.init();
+	$(document).ready(function(){
+		steerBoard.tables.setTable.activeClientsTable();
+		openTable();
+ 
+});
+
+
+
+</script>
+
+	
+</body>
+{{>meshmonitor/leftpanel}}

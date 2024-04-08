@@ -1,0 +1,23 @@
+
+<div class="modal-body" style="height: 500px;">
+
+        <div class="close-popup-height">
+                <h3 class="recent-title">Recent Alerts</h3>
+                <button type="submit" class="close pull-right" ng-click="vm.ok()" style="margin-top: -35px;">&times;</button>
+       </div>
+
+    <div  class="popup-alert-height">
+
+
+        <div class="recent-alr-panel" style="height: 425px!important;overflow-y: auto;">
+
+            <div ng-repeat="recentAlert in  vm.alertsData" class="recent-alert alert-pop-content">
+                <img ng-src="{{recentAlert.imageType}}" />&nbsp; {{recentAlert.text}}
+            </div>
+
+            <div class="form-control" style="text-align:center;padding-top:50px;font-family:arial;font-size:10px" ng-show="vm.alertsData.length==0">No alerts</div>           
+            
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,31 @@
+<div class="modal-body" style="height: 500px;">
+
+    <div class="close-popup-height">
+            <p class="recent-title">Floor vs Traffic</p>
+            <button type="submit" class="close pull-right" ng-click="vm.ok()" style="margin-top: -45px;">&times;</button>
+    </div>
+
+                  
+    <div ng-if="true>0" class="popup-alert-height">
+
+        <div class="recent-alr-t">
+
+            <div google-chart chart="vm.floorVsTraffic" class="fullfvt"                           
+            style="{{vm.floorVsTraffic.cssStyle}}" />
+            
+        </div>    
+            
+    </div>
+
+           
+</div>
+<style>
+.fullfvt{
+z-index: 9999;
+    height: 150px;
+    width: 100%;
+    font-family: Roboto !important;
+    position: relative;
+    top: 100px;
+}
+</style>

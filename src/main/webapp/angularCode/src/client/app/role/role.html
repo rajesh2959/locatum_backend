@@ -1,0 +1,69 @@
+﻿<form class="form-horizontal border-left hor-height" name="frm" novalidate>
+    <div class="panel-body networkconfig-sec">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding top-pg-align">
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 ">
+                <h2><b>Role </b> </h2>
+
+            </div>
+            
+            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel">
+                    <div class="panel-heading ui-draggable-handle mr-top-10 pd-b-5">
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-left: 0px;padding-left: 30px;padding-right: 30px;">
+                        <div class="panel-body panel-body-table" style="overflow-y: hidden;">
+                            <div class="table-responsive">
+                                <table class="table table-hover" style="font-family:Roboto;font-size:13px;  margin-bottom: 20px;">
+                                    <thead>
+                                        <tr>
+                                           
+                                            <th style="background:none;color:black">S.No</th>
+                                            <th style="background:none;color:black">
+                                                    Admin Type
+                                            </th>
+                                            <th style="background:none;color:black">
+                                                    Customer
+                                            </th>
+                                            <th style="background:none;color:black">
+                                                    Site
+                                            </th>
+                                            <th style="background:none;color:black">
+                                                    System
+                                            </th>
+                                            <th style="background:none;color:black">
+                                                    Account
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-if="vm.pagedData.length > 0">
+                                        <tr data-ng-repeat="role in vm.pagedData">
+                                            <td>{{role.gridsno}}</td>
+                                            <td>{{role.admintypes}}</td>
+                                            <td>{{role.customer}}</td>
+                                            <td>{{role.site}}</td>
+                                            <td>{{role.system}}</td>
+                                            <td>{{role.account}}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody ng-if="vm.pagedData.length <= 0">
+                                        <tr>
+                                            <td colspan="12" style="text-align: center;"> No records found</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+

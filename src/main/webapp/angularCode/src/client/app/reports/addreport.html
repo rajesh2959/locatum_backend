@@ -1,0 +1,262 @@
+﻿﻿<form class="form-horizontal border-left hor-height" name="frm" novalidate>
+    <div class="panel-body networkconfig-sec">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding top-pg-align">
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 ">
+                <h2><b>{{vm.titleChange}} </b> <span ng-if="vm.venueDetails!=null">({{vm.venueDetails.newUid}})</span></h2>
+            </div>
+            <div class="=col-lg-3 col-md-3 col-sm-6 col-xs-3 button-bar pull-right">
+                <div class="navbar-form navbar-left col-lg-8 col-md-8 col-sm-8 col-xs-8 removepadding removemargin" style="padding-left:22px;" role="search">
+                </div>
+            </div>
+            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel" style="min-height:380px !important;">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 20px;margin-bottom: 20px;">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <span class=" grid-title" ng-show="vm.name != 0">
+                                    {{vm.name}}
+                                </span>
+                                <!-- &nbsp;<i class="fa fa-edit" style="padding-top:2px;color:#A7CDF0">&nbsp;</i> -->
+                            </div>
+                            <div class="col-md-5 customize-panel-flex-date" style="padding-left: 115px;">
+                                <label style="margin-top:7px; margin-right:15px;font-size: 12px;">From</label>
+                                <datepicker date-format="yyyy/MM/dd" selector="form-control">
+                                        <div class="input-group">
+                                            <input class="form-control" name="fromdate" required ng-model="vm.fromDate"
+                                             placeholder="From Date" style="width: 65px;text-align: center;font-family:Roboto;font-size:12px;float: right;margin-right: 18px;height: 30px !important;" />
+                                        </div>
+                                    </datepicker>
+                                    <label style="margin-top:7px; margin-right:15px;font-size: 12px;">To</label>
+                                    <datepicker date-format="yyyy/MM/dd" selector="form-control">
+                                        <div class="input-group">
+                                            <input class="form-control" name="todate" required ng-model="vm.toDate"
+                                             placeholder="To Date" style="width: 65px;text-align: center;font-family:Roboto;font-size:12px;margin-right: 18px;height: 30px !important;" />
+                                            
+                                        </div>
+                                    </datepicker>
+                                    <input type="button" value="Go" class="btn btn-primary"  style="height: 29px;" ng-click="vm.go()"  />
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-7 col-xs-12 button-bar pull-right">
+                                <input type="button" value="Cancel" class="btn btn-primary" style="width: auto;border: 2px solid #9ca4ab;background-color: white;color: #888;padding-left: 16px;padding-right: 16px;border-radius:6px;box-shadow: none !important;" ng-click="vm.cancel()" />
+                                <input type="button" value="Save" class="btn btn-primary" ng-show=!vm.isedit ng-click="vm.save()"  style="width: auto;padding-top: 6px;padding-bottom: 6px;padding-left: 25px;padding-right: 25px;box-shadow: none !important;" />
+                            </div>
+                        </div>
+                        <hr style="margin: 45px 20px 8px 20px; ">
+                        <div class="panel-body panel-body-table" style="overflow-y: hidden;">
+                            <div gridstack class="grid-stack grid1" options="vm.options" on-change="vm.onChange(event,items)" on-drag-start="vm.onDragStart(event,ui)" on-drag-stop="vm.onDragStop(event,ui)" on-resize-start="vm.onResizeStart(event,ui)" on-resize-stop="vm.onResizeStop(event,ui)">
+                                <div gridstack-item ng-repeat="widget in vm.widgets" class="grid-stack-item" gs-item-x="widget.x" gs-item-y="widget.y" 
+                                     gs-item-width="widget.width" data-gs-min-width="2" data-gs-min-height="1" gs-item-height="widget.height" on-item-added="vm.onItemAdded(item)" on-item-removed="vm.onItemRemoved(item)" id="{{widget.chartId}}">
+                                    <div class="grid-stack-item-content">
+                                        <canvas ng-show="widget.chartType == 'bar'" class="chart chart-bar" chart-data="widget.chart.data" chart-labels="widget.chart.labels" chart-options="widget.chartoptions"
+                                                chart-series="widget.chart.series" chart-colors="widget.chart.colors" chart-click="vm.onClick"></canvas>
+                                        <canvas ng-show="widget.chartType == 'line'" class="chart chart-line" chart-data="widget.chart.data" chart-labels="widget.chart.labels" chart-options="widget.chartoptions"
+                                                chart-series="vm.series" chart-colors="widget.chart.colors" chart-click="vm.onClick"></canvas>
+                                        <canvas ng-show="widget.chartType == 'pie'" class="chart chart-doughnut"  chart-data="widget.chart.data" chart-labels="widget.chart.labels"                                       
+                                                chart-series="vm.series" chart-colors="widget.chart.colors" chart-click="vm.onClick" chart-options="widget.chartoptionspie"></canvas>
+                                        <div ng-if="widget.columns.length == 0 || widget.data.length == 0">
+                                         No data found
+                                        </div>
+                                        
+                                        <!--<a class="fa fa add" ng-click="vm.removeWidget(widget)">remove</a>-->
+                                        <div ng-show="widget.chartType == 'table'">
+                                            <div class="panel-body panel-body-table" style="overflow-y: hidden;">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" style="font-size:13px;">
+                                                        <thead style="border:thin;border-top: thin solid #e7e7e7;">
+                                                            <tr>
+                                                                <th style="background:none;color:black" class="table-hyper-a-small "
+                                                                    ng-repeat="col in vm.tableChart.columns">{{col}}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td ng-repeat="data in vm.tableChart.data">
+                                                                    <span class="row" ng-repeat="item in data">{{item}}</span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="fixed-plugin">
+
+        <a href="" id="iconopen">
+            <i class="fa fa-cog fa-2x"> </i>
+        </a>
+        <a href="" id="iconclose" style="display:none;">
+            <i class="fa fa-cog fa-2x"> </i>
+        </a>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 dropdown-menu" style="margin-top: 20px;margin-bottom: 20px;">
+
+
+
+            <div class="col-md-12">
+                <div class="col-md-12" style="margin-top: 10px;margin-left: 40px;">
+                    <span class=" grid-title">
+                        Add Visualization
+                    </span>
+                </div>
+            </div>
+
+            <hr style="margin: 45px 20px 8px 20px; ">
+
+            <div class="panel-body panel-body-table" style="overflow-y: hidden;margin-bottom:10px;">
+                <table class="table table-hover" style="font-family:Roboto;font-size:13px;">
+                    <tbody ng-if="vm.pagedData.length > 0" style="border-bottom: solid 1px #e5e5e5;">
+                        <tr data-ng-repeat="visual in vm.pagedData" >
+                                <td style="background:none;text-align:right;padding-top: 10px;width:110px;height:5px;">
+                                <label class="radio-inline">
+                                    <input style="margin-top: 0px;" ng-click="vm.addVisual(visual)" ng-model="visual.isChecked" type="checkbox" 
+                                    name="optradio">
+                                </label>
+                            </td>
+                            <td>{{visual.name}}</td>
+                            
+                        </tr>
+                    </tbody>
+                    <tbody ng-if="vm.pagedData.length <= 0">
+                        <tr>
+                            <td colspan="12" style="text-align: center;"> No records found</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pull-right" ng-if="vm.pagedData.length > 0">
+                    <table>
+                        <tr>
+                            <td style="font-size:8px;">{{vm.currentPageDescription()}}</td>
+                            <td>
+                                <div class="pagination">
+                                    <ul uib-pagination boundry-links="true" ng-change="vm.getData()"
+                                        total-items="vm.filteredCount" items-per-page="vm.dataOperations.paging.pageSize"
+                                        ng-model="vm.dataOperations.paging.currentPage" max-size="vm.dataOperations.paging.maxPagesToShow"
+                                        class="pagination-small">
+                                    </ul>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</form>
+
+<style type="text/css">
+    .grid1 {
+        background: #FFF;
+    }
+
+    .grid-stack-item-content {
+        color: #2c3e50;
+        text-align: center;
+        background-color: none;
+    }
+
+    #slideshow {
+        margin: 50px auto;
+        position: relative;
+        width: 240px;
+        height: 240px;
+        padding: 10px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+        #slideshow > div {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+        }
+
+
+        .pagination > li:first-child > a, .pagination > li:first-child > span {
+        margin-left: -21px;
+    }
+
+    .fixed-plugin .dropdown-menu li {
+        display: block;
+        padding: 2px 2px;
+        width: 25%;
+        float: left;
+        }
+
+    .customize-panel-flex-date {
+        float: left;
+        display: flex;
+        flex-direction: row;
+    }
+</style>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(".fixed-plugin a").click(function () {
+            $(".dropdown-menu").animate({
+                right: 75
+            });
+
+                       
+
+            $('#iconopen').hide();
+            $('#iconclose').show();
+        });
+
+
+        $("#iconclose").click(function () {
+            $(".dropdown-menu").animate({
+                right: -300
+            });
+
+            $('#iconopen').show();
+            $('#iconclose').hide();
+        });
+
+        $("#slideshow > div:gt(0)").hide();
+
+        setInterval(function () {
+            $('#slideshow > div:first')
+                .fadeOut(1000)
+                .next()
+                .fadeIn(1000)
+                .end()
+                .appendTo('#slideshow');
+        }, 3000);
+    });
+</script>
+
+
+<!--<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div gridstack class="grid-stack grid1" options="vm.options" on-change="vm.onChange(event,items)" on-drag-start="vm.onDragStart(event,ui)" on-drag-stop="vm.onDragStop(event,ui)" on-resize-start="vm.onResizeStart(event,ui)" on-resize-stop="vm.onResizeStop(event,ui)">
+                <div gridstack-item ng-repeat="w in vm.widgets" class="grid-stack-item" gs-item-x="w.x" gs-item-y="w.y"
+                     gs-item-width="w.width" gs-item-height="w.height" gs-item-autopos="1" on-item-added="vm.onItemAdded(item)" on-item-removed="vm.onItemRemoved(item)">
+                    <div class="grid-stack-item-content">
+                        <canvas class="chart chart-bar" chart-data="vm.data" chart-labels="vm.labels"
+                                chart-series="vm.series" chart-click="vm.onClick"></canvas>
+                        <a class="fa fa add" ng-click="vm.removeWidget(w)">remove</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

@@ -1,0 +1,373 @@
+<form class="form-horizontal border-left hor-height" name="frm" novalidate style="min-height: 0px !important;">
+    <div class="panel-body networkconfig-sec">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding">
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 removepadding">
+                <h2 style="margin-left:20px;text-transform:capitalize "><b>{{vm.chartType}} Chart Visualization</b></h2>
+            </div>
+        </div>
+        <div class="mr-top-11 row">
+
+            <div class="col-md-12">
+                <div class="col-md-6 panel1">
+                    <div class="panel mr-right-10 table-border pd-20">
+                       
+                            <div class="visual-section">
+                             <div class="collapseIconleft" ng-show="vm.data.length > 0 && vm.tableChart.data.length > 0">
+                                    <a href="" id="collapseIconLeft">
+                                        <i class="fa fa-chevron-circle-left  pull-right" style="font-size:20px;margin-bottom: 10px;cursor: pointer;color: #18a79d;" ></i>
+                                    </a>
+                            </div> 
+                            <div class="customiz-panel-flex-row  mr-top-15 paneltype">
+                                <div class="customiz-panel-flex-content mr-right-20 form-group" style="margin-left:0px;margin-top: -10px"
+                                    show-errors>
+                                    <h5>Category 1</h5>
+
+                                    <select class="form-control" name="category1" ng-model="vm.selectedCategory1" style="width:80%;font-size:14px !important;font-family:Roboto-Light !important"
+                                        ng-options="item.customLabel as item.customLabel for item in vm.metricsList"
+                                        ng-change="vm.onCategory1Change(vm.selectedCategory1)" required>
+                                        <option value="" disabled selected="selected"> Select </option>
+                                    </select>
+
+                                </div>
+                                <div class="customiz-panel-flex-content mr-right-20">
+                                    <h5>Custom Label - Category 1</h5>
+                                    <input type="text" class="" name="title" autocomplete="off" placeholder="Enter Name (Optional)"
+                                        style="font-family:Roboto-Light;font-size: 14px;" ng-model="vm.category1Name"
+                                        alphabet data-server-validate maxlength="20" tabindex="1"><br />
+                                    <span> e.g. y-axis</span>
+                                </div>
+                            </div>
+                            <div class="customiz-panel-flex-row  mr-top-15 paneltype">
+                                <div class="customiz-panel-flex-content mr-right-20 form-group" style="margin-left:0px;margin-top: -10px"
+                                 >
+                                    <h5>Category 2</h5>
+                                    <select class="form-control" name="category2" ng-model="vm.selectedCategory2" style="width:80%;font-size:14px !important;font-family:Roboto-Light !important"
+                                        ng-options="item.customLabel as item.customLabel for item in vm.bucketList"
+                                        ng-change="vm.onCategory2Change(vm.selectedCategory1)" required>
+                                        <option value="" disabled selected="selected"> Select </option>
+                                    </select>
+                                </div>
+                                <div class="customiz-panel-flex-content mr-right-20">
+                                    <h5>Custom Label - Category 2</h5>
+                                    <input type="text" class="" name="title" autocomplete="off" placeholder="Enter Name (Optional)"
+                                        style="font-family:Roboto-Light;font-size: 14px;" ng-model="vm.category2Name"
+                                        alphabet data-server-validate maxlength="20" tabindex="1"><br />
+                                    <span> e.g. x-axis</span>
+                                </div>
+                            </div>
+
+
+                            <div class="customiz-panel-flex-row  mr-top-15 paneltype">
+                                <div class="customiz-panel-flex-content mr-right-20">
+                                    <h5>Filters</h5>
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding" data-ng-repeat="filter in vm.filterList">
+                                        <div class="checkbox">
+                                            <label class="col-lg-4 col-md-4 col-sm-2 col-xs-2"><input type="checkbox"
+                                                    ng-click="vm.filterChecked(filter)" ng-model="filter.isChecked" />{{filter.label}}</label>
+                                            <label class="col-lg-2 col-md-2 col-sm-1 col-xs-1">is</label>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-dropdown-multiselect=""
+                                                disabled="filter.filterItemList.length == 0 ? true : false" checkboxes="true"
+                                                search-filter="vm.searchFilter" options="filter.filterItemList"
+                                                selected-model="filter.selectedfilterItemList" extra-settings="vm.dropdownsettings"
+                                                events="vm.selectFilter"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="customiz-panel-flex-row  mr-top-15 paneltype temphide" style="margin-top:30px !important">
+                                <div class="customiz-panel-flex-content mr-right-20 form-group" style="margin-left:0px"
+                                    show-errors>
+                                    <h5> From</h5>
+
+                                    <datepicker date-format="yyyy/MM/dd" selector="form-control">
+                                        <div class="input-group">
+                                            <input class="form-control" name="fromdate" required ng-model="vm.fromDate"
+                                             placeholder="From Date" style="font-family:Roboto;font-size:12px" />
+                                        </div>
+                                    </datepicker>
+                                </div>
+                                <div class="customiz-panel-flex-content mr-right-20 form-group" style="margin-left:0px"
+                                    show-errors>
+                                    <h5>To</h5>
+                                    <datepicker date-format="yyyy/MM/dd" selector="form-control">
+                                        <div class="input-group">
+                                            <input class="form-control" name="todate" required ng-model="vm.toDate"
+                                             placeholder="To Date" style="font-family:Roboto;font-size:12px" />
+                                            <!--<span class="input-group-addon" style="cursor: pointer">
+                                                <i class="fa fa-lg fa-calendar"></i>
+                                            </span>-->
+                                        </div>
+                                    </datepicker>
+                                </div>
+                            </div>
+
+                            <div class="customiz-panel-flex-row  mr-top-15 paneltype tempdate" style="margin-top:30px !important">
+                                <div class="customiz-panel-flex-content mr-right-20 form-group" style="margin-left:0px"
+                                    show-errors>
+                                    <h5> Date</h5>
+
+                                    <datepicker date-format="yyyy/MM/dd" selector="form-control">
+                                        <div class="input-group">
+                                            <input class="form-control" name="fromdate" required ng-model="vm.fromDate"
+                                             placeholder="From Date" style="font-family:Roboto;font-size:12px" />
+                                        </div>
+                                    </datepicker>
+                                </div>
+                                
+                            </div>
+
+                            <div class="customiz-panel-flex-row  mr-top-15" style="margin-top:30px !important">
+                                <div class="customiz-panel-flex-content mr-right-20">
+                                    <button class="btn btn-default" style="width:80px !important; border: 2px solid #9ca4ab;background-color: white;color: #888;padding-left: 16px;padding-right: 16px;border-radius:6px;box-shadow: none !important;"
+                                        ng-click="vm.cancel()">Cancel</button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button class="btn btn-primary paneledit" style="width:80px !important;padding-top: 6px;padding-bottom: 6px;padding-left: 25px;padding-right: 25px;box-shadow: none !important;"
+                                        ng-click="vm.previewOrSave(frm, false)">Save</button>
+                                        <button class="btn btn-primary panelview" style="width:80px !important;padding-top: 6px;padding-bottom: 6px;padding-left: 25px;padding-right: 25px;box-shadow: none !important;"
+                                        ng-click="vm.paneltype()">Edit</button>
+                                </div>
+                                <div class="customiz-panel-flex-content mr-right-20 pull-right paneledit">
+                                    <button class="btn btn-default preclick" style="width:80px !important; border: 2px solid #9ca4ab;background-color: white;color: #888;padding-left: 16px;padding-right: 16px;border-radius:6px;box-shadow: none !important;"
+                                        ng-click="vm.previewOrSave(frm, true)">Preview</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6 panel2">
+                    
+                    <div class="panel mr-right-20 table-border pd-20 ">
+                        <div class="ch-height"  style="height: 550px;">
+                            <div class="collapseIconright">
+                                    <a href="" id="collapseIconRight">
+                                        <i class="fa fa-chevron-circle-right" style="font-size:20px;margin-bottom: 10px;cursor: pointer;color: #18a79d;" ></i>
+                                    </a>
+                        </div> 
+                             <label class="visualcss" style="display: none;">Name : </label><p class="visualcss" id="name" style="margin-top: -27px;margin-left: 45px;display: none;"></p>
+                             <label class="visualcss" style="display: none;">Description : </label><p class="visualcss" id="description" style="margin-top: -27px;margin-left: 74px;display: none;"></p>
+                            <div class="customiz-panel-flex-wrapper">
+                                <div class="col-md-12" ng-show="vm.data.length >= 1" style="margin-top: 50px;margin-left: -14px">
+                                    <br />
+                                    <!--<ng-morris-bar-chart style="width:450px" chart-options="vm.options" chart-data="vm.data">
+                                    </ng-morris-bar-chart>-->
+                                    <!--<div id="myfirstchart" ></div>-->
+                                    <div id="barchartdiv">
+                                        <canvas id="barchart" ng-show="vm.chart == 'bar'" chart-click="vm.onClick"></canvas>
+                                    </div>
+                                    <div id="linechartdiv">
+                                        <canvas id="linechart" ng-show="vm.chart == 'line'" chart-click="vm.onClick"></canvas>
+                                    </div>
+                                    <div id="piechartdiv">
+                                        <canvas id="piechart" ng-show="vm.chart == 'pie'" chart-click="vm.onClick"></canvas>
+                                    </div>
+                                    <canvas class="chart chart-bar" ng-show="vm.chart == 'stackedbar'" chart-data="vm.stackedData" chart-labels="vm.labels" chart-colors="vm.barcolor" chart-options="vm.options" chart-series="vm.series"  chart-click="vm.onclick">
+                                    </canvas>
+                                    <!-- <canvas ng-show="vm.chart == 'bar'" class="chart chart-bar" chart-data="vm.data" chart-options="vm.options"
+                                        chart-labels="vm.labels" chart-series="vm.series" chart-click="vm.onClick"></canvas>
+                                    <canvas ng-show="vm.chart == 'line'" class="chart chart-line" chart-data="vm.data" chart-options="vm.options"
+                                        chart-labels="vm.labels" chart-series="vm.series" chart-click="vm.onClick"></canvas>
+                                    <canvas ng-show="vm.chart == 'pie'" class="chart chart-pie" chart-data="vm.data"
+                                        chart-labels="vm.labels" chart-series="vm.series" chart-click="vm.onClick"></canvas> -->
+
+                                    <div ng-show="vm.chart == 'table'">
+                                        <div class="panel-body panel-body-table" style="overflow-y: hidden;">
+                                            <div class="table-responsive" style="max-height: 400px;">
+                                                <table class="table table-hover" style="font-size:13px;">
+                                                    <thead style="border:thin;border-top: thin solid #e7e7e7;">
+                                                        <tr>
+                                                            <th style="background:none;color:black" class="table-hyper-a-small "
+                                                                ng-repeat="col in vm.tableChart.columns">{{col}}</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td ng-repeat="data in vm.tableChart.data" style="background: linear-gradient(to right, tomato {{data}}%,  green {{data}}%)">
+                                                                <span class="row" ng-repeat="item in data track by $index">{{item}}</span>
+                                                                
+                                                            </td>                                                            
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <!--<hr style="margin: 15px 0 -20px 0 ;    border-top: thin solid #e7e7e7;">-->
+                                                <!--<table class="footer-center">
+                                                    <tr>
+                                                        <td class="foot-desc">{{vm.dataOperationsTag.currentPageDescription()}}</td>
+                                                        <td>
+                                                            <div class="pagination">
+                                                                <ul uib-pagination boundry-links="true" ng-change="vm.getTaglist()"
+                                                                    total-items="vm.dataOperationsTag.filteredCount" items-per-page="vm.dataOperationsTag.dataOperations.paging.pageSize"
+                                                                    ng-model="vm.dataOperationsTag.dataOperations.paging.currentPage"
+                                                                    max-size="vm.dataOperationsTag.dataOperations.paging.maxPagesToShow"
+                                                                    class="pagination-small"></ul>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" numeric class="col-md-2 pagination-goto-text" ng-disabled="vm.allTagDetails.length <= vm.dataOperationsTag.dataOperations.paging.pageSize"
+                                                                   ng-model="vm.goToTagPageNumber" />&nbsp;
+                                                            <input type="button" class="btn btn-primary pagination-grid-footer-btn"
+                                                                   value="Go" data-ng-click="vm.goToTagPage()" style="background-color:#068e84"
+                                                                   ng-disabled="!vm.goToTagPageNumber" />
+                                                        </td>
+                                                    </tr>
+                                                </table>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" ng-show="vm.data.length <= 0 || vm.tableChart.data.length == 0">
+                                    <p style="text-align:center">No data with the given query</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</form>
+<!--
+        Function to collapse the left panel to view the chart in full screen size
+-->
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#collapseIconRight').hide();
+        $(".collapseIconleft a").click(function () {
+            $(".panel1").animate({
+                right: 850
+            });
+            $(".panel2").css('width','100%');
+            $(".ch-height").css('height','auto');
+            $(".panel2").css('position','absolute');            
+
+            $('#collapseIconLeft').hide();
+            $('#collapseIconRight').show();
+        });
+        $(".collapseIconright a").click(function () {
+            $(".panel1").animate({
+                right: 0
+            },);
+            $(".panel2").css('width','50%');
+            $(".ch-height").css('height','550');
+            $(".panel2").css('position','relative');            
+
+            $('#collapseIconLeft').show();
+            $('#collapseIconRight').hide();
+        });
+    });
+</script>
+
+
+<style>
+    input[type="radio"]:after,
+    .radio input[type="radio"]:after,
+    .radio-inline input[type="radio"]:after {
+        border-color: lightgray;
+    }
+    .resize-container {
+        display: inline-block;
+        width: 100%;
+        height: 240px;
+    }
+    .button {
+        width: 100px;
+        background-color: #18a79d;
+        border-color: #1caf9a;
+        border-radius: 8px;
+        color: white
+    }
+    input[type="checkbox"]:after,
+    .checkbox input[type="checkbox"]:after,
+    .checkbox-inline input[type="checkbox"]:after {
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+    }
+    input[type="checkbox"]:checked:after,
+    .checkbox input[type="checkbox"]:checked:after,
+    .checkbox-inline input[type="checkbox"]:checked:after {
+        background-color: #18a79d;
+        border-color: #18a79d;
+    }
+    input[type="checkbox"]:focus:after,
+    .checkbox input[type="checkbox"]:focus:after,
+    .checkbox-inline input[type="checkbox"]:focus:after {
+        border-color: #18a79d;
+    }
+    .switch span {
+        width: 40px !important;
+        height: 20px !important;
+    }
+    .switch span:after {
+        width: 16px !important;
+    }
+    .color-select {
+        color: red !important;
+    }
+    option:not(:checked) {
+        color: black !important;
+    }
+    .dropdown-menu>li>a:focus,
+    .dropdown-menu>li>a:hover,
+    .dropdown-menu>.active>a,
+    .dropdown-menu>.active>a:focus,
+    .dropdown-menu>.active>a:hover {
+        background: none;
+        color: #000;
+    }
+    .dropdown-menu {
+        height: 200px !important;
+        width: 100% !important;
+    }
+    .dropdown-menu>li>a {
+        border-bottom: none !important;
+    }
+    .btn {
+        border-bottom: 1px solid #999999;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        -webkit-transition: all 0.4s;
+        -o-transition: all 0.4s;
+        transition: all 0.4s;
+    }
+    .btn-default:hover {
+        color: #444444;
+        background-color: transparent;
+        border-color: none;
+    }
+    .hor-height {
+        min-height: 670px !important;
+        overflow-y: auto;
+    }
+    .visual-section {
+        padding-left:10px;
+        height: 550px;
+        position: relative; 
+        background: #fff;
+    }
+    .paneltype{
+        pointer-events: none;
+    }
+    .paneledit .panelview{
+        display: none;
+    }
+    ::-webkit-scrollbar {
+    width: 0.8em;
+    height: 2em
+}
+::-webkit-scrollbar-button {
+    background: #ccc
+}
+::-webkit-scrollbar-track-piece {
+    background: #ccc;
+}
+::-webkit-scrollbar-thumb {
+    background: gray
+}​
+</style>

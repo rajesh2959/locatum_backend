@@ -1,0 +1,367 @@
+﻿﻿<form class="form-horizontal border-left hor-height" name="frm" novalidate>
+    <div class="panel-body mr-15">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                <div class="col-lg-6 col-md-6 col-sm-5 col-xs-5">
+                    <h2 style="font-size: 28px;margin-left: 2px;"><b>Accounts - Overview</b> </h2>
+                </div>
+                <div class="col-lg-4 col-md-5 col-sm-7 col-xs-5 button-bar pull-right">
+                    <div class="navbar-form navbar-left col-lg-8 col-md-8 col-sm-6 col-xs-8 removepadding removemargin" role="search">
+                        <i class="fa fa-search" style="color:#9ca4ab"></i>&nbsp
+                        <input type="text" ng-keyup="vm.search()" ng-model="vm.searchText" class="form-control" placeholder="Search" style="width:100px;outline:none;box-shadow: inset 0 0 #ddd;font-size: 13px;font-family:Roboto-Light">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-6 col-xs-4 removepadding add-user-btn pull-right">
+                        <a href="" ng-click=vm.goToUser(0,null) class="btn btn-primary" style="padding-left:7px;padding-right:7px;font-size: 12px!important;     height: 34px;">
+                            <i class="fa icon-add"
+                               style="font-size:18px !important;vertical-align:bottom;padding-top:4px"></i> Add Customer
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 removepadding"></div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                <div id="myTabContent" class="tab-content">
+                    <div ng-repeat="customeritem in  vm.customerList track by $index" class="col-sm-4 col-md-4 col-lg-4 admingridcontainer" style="margin-bottom:1.5%;">
+                        <div class="row admin-top-tile" style="background-color: white;">
+                            <div class="col-md-3 col-lg-3 col-sm-3">
+                                <div class="customer-logo">
+                                    <img src="http://locatum.qubercomm.com/facesix/preferredLogoUrl?id={{customeritem.id}}" class="img-responsive" style="width: 45px;
+                                        position: relative;display: block;top: 15px;left: 10px;height: 30px;">
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-9">
+                                <div class="row" style="float:left;margin-left: 8px;margin-top: 25px;width:100%;">
+                                    <p style="font-weight: 900;font-size: 12px;">{{customeritem.customerName}} </p>
+                                    <p ng-class="customeritem.status=='INACTIVE' ? 'color-red' : ''" style="margin-top: -15px;color:#18a79d;font-size: 10px; text-transform:lowercase">{{customeritem.status}}</p>
+                                </div>
+                                <div class="row responsive-link" style="margin-left: -2px;font-size: 12px;width: 100%">
+                                    <div class="responsive-venue">
+                                        <i  ng-if="customeritem.status=='INACTIVE'" class="fa icon-xen-location" style="font-size:13px !important;color:#999999"></i>
+                                        <span  ng-if="customeritem.status=='INACTIVE'"> Venue</span>
+                                        <i  ng-if="customeritem.status=='ACTIVE'" ng-click="vm.venueClick(customeritem)" class="fa icon-xen-location" style="font-size:13px !important; cursor:pointer;color:#999999"></i>
+                                        <span  ng-if="customeritem.status=='ACTIVE'" ng-click="vm.venueClick(customeritem)" style="cursor:pointer"> Venue</span>
+                                    </div>
+                                    <div class="responsive-gatewaay">
+                                        <i ng-if="customeritem.status=='INACTIVE'" class="fa icon-finder_cofnig" style="color:#999999;font-size: 17px !important;vertical-align: middle;"></i>
+                                        <span ng-if="customeritem.status=='INACTIVE'"> Gateway Config</span>
+                                        <i ng-if="customeritem.status=='ACTIVE'" class="fa icon-finder_cofnig" style="color:#999999;font-size: 17px !important;vertical-align: middle;"></i>
+                                        <span ng-if="customeritem.status=='ACTIVE'" style="cursor:pointer" ng-click=" vm.gatewayClick(customeritem)"> Gateway Config</span>
+                                    </div>
+                                    <div class="responsive-edit">
+                                        <span ng-if="customeritem.status=='INACTIVE'" class="fa icon-Edit" style="color:#625B5B;vertical-align:sub;"></span>
+                                        <span  ng-if="customeritem.status=='INACTIVE'"> Edit</span>
+                                        <span ng-if="customeritem.status=='ACTIVE'" class="fa icon-Edit" style="color:#625B5B;vertical-align:sub; cursor:pointer;"></span>
+                                        <span ng-if="customeritem.status=='ACTIVE'" style="cursor:pointer" ng-click="vm.goToUser(customeritem.id, customeritem)"> Edit</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row admin-bottom-tile" style="border-bottom: 2px solid #f7f1f1;
+                            border-right: 2px solid #f7f1f1;
+                            border-left: 2px solid #f7f1f1;
+                            border-bottom-left-radius: 6px;
+                            border-bottom-right-radius: 6px;">
+                            </br>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <span> Support</span><br>
+                                    <label class="switch switch-small supportDisable">
+                                        <input type="checkbox" ng-model="customeritem.qubercommAssist" ng-change="'false" ng-true-value="'true'" ng-false-value="'false'" checked id="inactiveONOFF" disabled="disabled" />
+                                        <span></span>
+                                    </label>
+                                    <span ng-show="!customeritem.qubercommAssist || customeritem.qubercommAssist == 'false'" style="vertical-align: super;padding-left: 3px;">Off</span>
+                                    <span ng-show="customeritem.qubercommAssist == 'true'" style="vertical-align: super;padding-left: 3px;">On</span>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <span> Logs</span><br>
+                                    <label class="switch switch-small">
+                                        <input ng-if="customeritem.status=='INACTIVE'" style="pointer-events: none;" />
+                                        <input ng-if="customeritem.status=='ACTIVE'" type="checkbox" ng-model="customeritem.logs" ng-change="vm.updatelog(customeritem)" ng-true-value="'true'" ng-false-value="'false'" checked id="tagsONOFF" />
+                                        <span></span>
+                                    </label>
+                                    <span ng-show="!customeritem.logs || customeritem.logs == 'false'" style="vertical-align: super;padding-left: 3px;">Off</span>
+                                    <span ng-show="customeritem.logs =='true'" style="vertical-align: super;padding-left: 3px;">On</span>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <span> VPN</span><br>
+                                    <label class="switch switch-small">
+                                        <input ng-if="customeritem.status=='INACTIVE'"  style="pointer-events: none;" />
+                                        <input ng-if="customeritem.status=='ACTIVE'" type="checkbox" ng-model="customeritem.vpn" ng-change="vm.updatevpn(customeritem)" ng-true-value="'true'" ng-false-value="'false'" checked id="inactiveONOFF" />
+                                        <span></span>
+                                    </label>
+                                    <span ng-show="!customeritem.vpn ||customeritem.vpn == 'false'" style="vertical-align: super;padding-left: 3px;">Off</span>
+                                    <span ng-show="customeritem.vpn  == 'true'" style="vertical-align: super;padding-left: 3px;">On</span>
+                                </div>
+                            </div>
+                            <div class="row  col-lg-11 col-md-11 firstswitch">
+                                <samp style="font-size:10px;font-family:Roboto;color:#999999">Expiry Date:{{customeritem.serviceExpiryDate|date:' MMM  dd, yyyy HH:mm a'}}</samp>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div ng-repeat="customeritem in  vm.customerList track by $index" class="row col-lg-4 col-md-4 col-sm-6 col-xs-12 admingridcontainer" style="margin-bottom:20px;">
+                                    <div class="admin-top-tile">
+                                    <div class="customer-logo" style="margin-top: 22px;">
+                                        <img src="http://locatum.qubercomm.com/facesix/preferredLogoUrl?id={{customeritem.id}}" class="img-responsive"
+                                        style="width: 45px;
+                                        position: relative;
+                                        display: block;
+                                        top: 15px;
+                                        left: 10px;
+                                        height: 30px;">
+                                    </div>
+
+                                        <div style="float:left;margin-left: 8px;margin-top: 25px">
+                                            <p style="font-weight: 900;font-size: 12px;">{{customeritem.customerName}} </p>
+                                            <p ng-class="customeritem.status=='INACTIVE' ? 'color-red' : ''" style="margin-top: -15px;color:#18a79d;font-size: 10px; text-transform:lowercase">{{customeritem.status}}</p>
+                                            <div class="responsive-link" style="margin-left: -2px;font-size: 12px;">
+                                                <div class="responsive-venue">
+                                                    <i ng-click="vm.venueClick(customeritem)" class="fa icon-xen-location" style="font-size:13px !important; cursor:pointer;color:#999999"></i>
+                                                    <span ng-click="vm.venueClick(customeritem)" style="cursor:pointer"> Venue</span>
+                                                </div>
+                                                <div class="responsive-gatewaay">
+                                                    <i class="fa icon-finder_cofnig" style="color:#999999;font-size: 17px !important;vertical-align: middle;"></i>
+                                                    <span style="cursor:pointer" ng-click=" vm.gatewayClick(customeritem)"> Gateway Config</span>
+                                                </div>
+                                                <div class="responsive-edit">
+                                                    <span class="fa icon-Edit" style="color:#625B5B;vertical-align:sub; cursor:pointer;"></span>
+                                                    <span  style="cursor:pointer" ng-click="vm.goToUser(customeritem.id, customeritem)"> Edit</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                        </div>
+                                    </div>
+                                    <div class="admin-bottom-tile" style="border-bottom: 2px solid #f7f1f1;
+                                    border-right: 2px solid #f7f1f1;
+                                    border-left: 2px solid #f7f1f1;
+                                    border-bottom-left-radius: 6px;
+                                    border-bottom-right-radius: 6px;">
+                                        <div class="responsiveswitchlabel">Support</div>
+                                        <div class="responsiveswitchlabel">Logs</div>
+                                        <div class="responsiveswitchlabel">VPN</div>
+                                        <br>
+                                        <div class="responsiveswitch firstswitch">
+                                            <label class="switch switch-small supportDisable">
+                                                <input type="checkbox" ng-model="customeritem.qubercommAssist" ng-change= "'false" ng-true-value="'true'" ng-false-value="'false'" checked id="inactiveONOFF" disabled="disabled" />
+                                                <span></span>
+                                            </label>
+                                            <span ng-show="!customeritem.qubercommAssist || customeritem.qubercommAssist == 'false'" style="vertical-align: super;padding-left: 3px;">Off</span>
+                                            <span ng-show="customeritem.qubercommAssist == 'true'" style="vertical-align: super;padding-left: 3px;">On</span>
+                                        </div>
+                                        <div class="responsiveswitch">
+                                            <label class="switch switch-small">
+                                                <input type="checkbox" ng-model="customeritem.logs" ng-change= "vm.updatelog(customeritem)" ng-true-value="'true'" ng-false-value="'false'" checked id="tagsONOFF" />
+                                                <span></span>
+                                            </label>
+                                            <span ng-show="!customeritem.logs || customeritem.logs == 'false'" style="vertical-align: super;padding-left: 3px;">Off</span>
+                                            <span ng-show="customeritem.logs =='true'" style="vertical-align: super;padding-left: 3px;">On</span>
+                                        </div>
+                                        <div class="responsiveswitch">
+                                            <label class="switch switch-small">
+                                                <input type="checkbox" ng-model="customeritem.vpn" ng-change= "vm.updatevpn(customeritem)" ng-true-value="'true'" ng-false-value="'false'"checked id="inactiveONOFF" />
+                                                <span></span>
+                                            </label>
+                                            <span ng-show="!customeritem.vpn ||customeritem.vpn == 'false'" style="vertical-align: super;padding-left: 3px;">Off</span>
+                                            <span ng-show="customeritem.vpn  == 'true'" style="vertical-align: super;padding-left: 3px;">On</span>
+                                        </div>
+                                    </br>
+                    <div class="row  col-lg-11 col-md-11 firstswitch">
+                                            <samp style="font-size:10px;font-family:Roboto;color:#999999">Expiry Date:{{customeritem.serviceExpiryDate|date:' MMM  dd, yyyy HH:mm a'}}</samp>
+                                        </div>
+                                    </div>
+                                </div>-->
+                </div>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12" ng-show="vm.noCustomer">
+            <h2 style="text-align:center">No records found</h2>
+        </div>
+
+    </div>
+</form>
+<style>
+        p:first-letter {
+            text-transform: capitalize;
+        }
+
+        .admin-user-btn {
+            float: right !important;
+        }
+
+        .responsiveswitchlabel {
+            float: left;
+            width: 55px;
+            color: black;
+            margin-left: 37px;
+            margin-top: 11px;
+            font-size: 11px;
+            font-weight: 400;
+        }
+
+        .responsiveswitch {
+            float: left;
+            width: 55px;
+            color: black;
+            margin-left: 37px;
+        }
+
+        .firstswitch {
+            clear: left;
+        }
+        /*@media only screen and (min-width: 1328px) {
+                .admin-bottom-tile {
+        width: 100%;
+        margin-left: 2px;
+    }*/
+
+        .admin-top-tile {
+            height: 17% !important;
+        }
+
+        .responsiveswitchlabel {
+            margin-left: 15px;
+        }
+
+        .responsiveswitch {
+            margin-left: 12px;
+        }
+
+        }
+        /* @media (max-width: 992px)
+    {
+        .admin-user-btn {
+        margin-right: 2% !important;
+    }
+
+    }*/
+        @media (max-width: 940px) and (min-width: 760px) {
+            .admingridcontainer {
+                width: 71% !important;
+            }
+
+            .responsive-edit {
+                width: 190%;
+            }
+
+            .cedit {
+                margin-left: 280px;
+            }
+        }
+
+        @media (max-width: 1315px) and (min-width: 940px) {
+            .admingridcontainer {
+                width: 50% !important;
+            }
+
+            .responsive-link {
+                width: 300px;
+            }
+
+            .responsive-venue {
+                width: 25%;
+                float: left;
+            }
+
+            .responsive-edit {
+                width: 25%;
+                float: left;
+            }
+
+            .responsive-gatewaay {
+                width: 40%;
+                float: left;
+            }
+
+            .add-user-btn {
+                margin-right: 25px;
+            }
+        }
+
+        .supportDisable {
+            pointer-events: none;
+        }
+
+
+        @media (min-width: 1315px) {
+            .admingridcontainer {
+                width: 33.333% !important;
+            }
+
+            .responsive-link {
+                width: 225px;
+            }
+
+            .responsive-venue {
+                width: 25%;
+                float: left;
+            }
+
+            .responsive-edit {
+                width: 25%;
+                float: left;
+            }
+
+            .responsive-gatewaay {
+                width: 50%;
+                float: left;
+            }
+
+            .add-user-btn {
+                margin-right: 8px;
+            }
+        }
+
+        @media (max-width: 1200px) and (min-width: 1050px) {
+            .cedit {
+                margin-left: 245px;
+                margin-top: 24px;
+            }
+        }
+        /* @media (max-width: 1280px)
+    {
+    .admingridcontainer {
+        width: 45% !important;
+    }
+    } */
+        /* @media (max-width: 768px)
+    {
+    .admingridcontainer {
+        width: 80% !important;
+    }
+    } */
+        /* @media (max-width: 1074px) and (min-width: 888px)
+    {.admingridcontainer {
+        width: 50% !important;
+        padding-right: 2px;
+    }
+    } */
+        /*
+    @media (max-width: 700px) and (min-width: 556px)
+    {
+    .admingridcontainer {
+        width: 95% !important;
+    }
+    }
+    @media (max-width: 800px) and (min-width: 768px)
+    {
+    .admingridcontainer {
+        width: 76% !important;
+    }
+    }
+    @media (max-width: 950px) and (min-width: 800px)
+    {
+    .admingridcontainer {
+        width: 30% !important;
+    }
+    }        */
+
+</style>

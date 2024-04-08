@@ -1,0 +1,535 @@
+<form class="form-horizontal border-left hor-height" name="frm">
+    <div class="col-md-12 menutopview" style="margin-top:22px">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-left: -13px;">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <h2 style="font-weight:700;padding-bottom:7px; font-family: Roboto !important;">Gateway Status History</h2>
+            </div>
+            
+        </div>
+    <div class="panel venuepanel" style="height:auto;margin-left: 15px;width:97% !important;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group " style="margin: 0px!important"> 
+            <div class="module">
+              <span>
+                 <label style="font-size: 15px">Gateway &nbsp;&nbsp; </label>&nbsp;
+                <span for="tagids" class="fontwe"></span>
+               <select id="tagids" multiple="multiple"></select>   
+               
+              </span>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span >
+                  <label style="font-size: 15px"> Time Duration &nbsp;&nbsp; </label>&nbsp;
+                  <select class="timeInterval" style="font-size: 14px !important;font-weight: 400 !important;width: 70px">
+                    <option value="4h">4 Hours</option>
+                    <option value="8h">8 Hours</option>
+                    <option value="24h">24 Hours</option>
+                    <option value="2d">2 Days</option>
+                    <option value="7d">7 Days</option>
+                    <option value="14d">14 Days</option>
+                    <option value="21d">21 Days</option>
+                    <option value="30d">30 Days</option>
+                </select>
+            </span>
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+            <span>
+                <button class="btn btn-success go" ng-click="vm.getGatewayInfos()">GO</button>
+                
+              </span>
+          </div>
+        </div>
+                <div class="mr-top-11 row">
+                    <div class="panel-body panel-body-table" style="overflow-y: hidden;">
+                        <div class="table-responsive">
+                            <table class="table table-hover" style="font-size:13px;">
+                                <thead style="border:thin;border-top: thin solid #e7e7e7;">
+                                       <!--  <th style="background:none;color:black" class="table-hyper-a-small ">
+                                            <label class="radio-inline">
+                                                <input style="margin-top: 0px;left: 5px" ng-model="vm.ischekAll" ng-click="vm.inputCheckAll(vm.ischekAll)"
+                                                    type="checkbox" name="optradio">
+                                            </label>
+                                        </th> -->
+                                        <th style="background:none;color:black" class="table-hyper-a-small ">
+                                            #
+                                        </th>
+                                        <th style="background:none;color:black">
+                                            Location
+                                        </th>
+                                        <th style="background:none;color:black">
+                                            <a href="" style="color:black">
+                                                UID
+                                               
+                                            </a>
+                                        </th>
+                                        <th style="background:none;color:black">
+                                            <a href="" style="color:black">
+                                                Venue
+                                                
+                                            </a>
+                                        </th>
+                                         <th style="background:none;color:black">
+                                            <a href="" style="color:black">
+                                                Floor
+                                                
+                                            </a>
+                                        </th>
+                                         <th style="background:none;color:black">
+                                            <a href="" style="color:black">
+                                                Tag Count
+                                                
+                                            </a>
+                                        </th>
+                                        <th style="background:none;color:black">
+                                            <a href="" style="color:black">
+                                                Gateway Update time
+                                                
+                                            </a>
+                                        </th>
+                                        <th style="background:none;color:black">
+                                            <a href="" style="color:black">
+                                                Cloud Arrival Time
+                                                
+                                            </a>
+                                        </th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody ng-if="vm.pagedDataGatewayAlerts.length > 0">
+                                    <tr data-ng-repeat="receiver in vm.pagedDataGatewayAlerts">
+                                        <!-- <td style="background:none;text-align:right;padding-top: 15px;width:5px;height:5px;">
+                                            <label class="radio-inline">
+                                                <input style="margin-top: 0px;" ng-click="vm.isRowChecked()" ng-model="receiver.isChecked"
+                                                    type="checkbox" name="optradio">
+                                            </label>
+                                        </td> -->
+                                        <td>{{receiver.gridsno}}</td>
+                                        <td>{{receiver.location}}</td>
+                                        <td>{{receiver.uid}}</td>
+                                        <td>{{receiver.site}}</td>
+                                        <td>{{receiver.floor}}</td>
+                                        <td>{{receiver.tagCount}}</td>
+                                        <td>{{receiver.serverSent | date}}</td>
+                                        <td>{{receiver.cloudSeen | date}}</td>
+                                        
+                                                                                                                     
+                                    </tr>
+                                </tbody>
+                                <tbody ng-if="vm.pagedDataGatewayAlerts.length <= 0">
+                                    <tr>
+                                        <td colspan="12" style="text-align: center;"> No records found</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <hr style="margin: 15px 0 -20px 0 ;    border-top: thin solid #e7e7e7;">
+                            <table class="footer-center">
+                                <tr>
+                                    <td class="foot-desc">{{vm.dataOperationsGatewayAlerts.currentPageDescription()}}</td>
+
+                                    <td>
+                                        <div class="pagination">
+                                            <ul uib-pagination boundry-links="true" ng-change="vm.getGatewayInfos()"
+                                                total-items="vm.dataOperationsGatewayAlerts.filteredCount"
+                                                items-per-page="vm.dataOperationsGatewayAlerts.dataOperations.paging.pageSize"
+                                                ng-model="vm.dataOperationsGatewayAlerts.dataOperations.paging.currentPage"
+                                                max-size="vm.dataOperationsGatewayAlerts.dataOperations.paging.maxPagesToShow"
+                                                class="pagination-small"></ul>
+                                        </div>
+                                    </td>
+                                    <td class="foot-desc ng-binding">Go to Page</td>
+                                    <td>
+                                        <input type="text" numeric class="col-md-2 pagination-goto-text" ng-disabled="vm.allGatewayAlerts.length <= vm.dataOperationsGatewayAlerts.dataOperations.paging.pageSize"
+                                            ng-model="vm.goToGatewayPageNumber" />&nbsp;
+                                        <input type="button" class="btn btn-primary pagination-grid-footer-btn" value="Go"
+                                            data-ng-click="vm.goToGatewayPage()" style="background-color:#068e84"
+                                            ng-disabled="!vm.goToGatewayPageNumber" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+</form>
+<script type="text/javascript">
+    $('#tagids').multiselect({
+        templates: { // Use the Awesome Bootstrap Checkbox structure
+            li: '<li><div class="checkbox"><label></label></div></li>'
+        },
+         nonSelectedText: 'Select Gateway',
+         enableFiltering: true,
+         buttonWidth:'fix-content',
+         includeSelectAllOption: true,
+         numberDisplayed: 1,
+         buttonTitle: function() {},
+    });
+        // to remove the tooltip when dropdown is hidden, we can remove the title generated by the plugin
+        $('button[class="multiselect dropdown-toggle btn btn-default"]').removeAttr("title"); 
+
+        $('.multiselect-container div.checkbox').each(function (index) {
+
+        var id = 'multiselect-' + index,
+            $input = $(this).find('input');
+
+        // Associate the label and the input
+        $(this).find('label').attr('for', id);  
+        $input.attr('id', id);
+
+        // Remove the input from the label wrapper
+        $input.detach();
+
+        // Place the input back in before the label
+        $input.prependTo($(this));
+
+        $(this).click(function (e) {
+            // Prevents the click from bubbling up and hiding the dropdown
+            e.stopPropagation();
+        });
+
+    });
+
+         function tagChange(type){
+          var cid = location.search.split("&")[2].replace("?","").split("=")[1];
+                var type = type;  
+            $.ajax({
+                type : "GET",
+                url: "/facesix/rest/beaconAlertData/typeBasedTagNames?cid="+urlObj.cid+"&type="+type,
+                dataType : "json",
+                success : function(data) { 
+                    
+                    var filterCategories = [];
+                    var category        = [];
+                    
+                    //console.log("data length" + JSON.stringify(data.length));
+                    $.each(data, function(i, obj) { 
+                        category.push(obj);
+                    });
+                    
+                    $('#tagids').empty();   
+                        $.each(category, function(index, optionValue) {  
+                                var value = optionValue.name +" - "+ optionValue.tagid;
+                                $('#tagids').append( $('<option></option>').val(optionValue.tagid).html(value));
+                        });
+                        
+                    $('#tagids').multiselect('rebuild');  
+                    
+                    $.each($("#tagids"), function(){            
+                        filterCategories.push($(this).val());   
+                    });
+                    
+                }
+            }); 
+            
+      }
+
+</script>
+<style>
+
+    .selected{ 
+        background-color: rgba(211,211,211,.7);
+        color: black;
+    }
+    .colr{
+        border: 1px solid #ccc;
+    }
+    table{
+        cursor: default;
+    }
+    .btn-aln{
+        margin-top: 25px;
+    }
+    .al-aln{
+        margin-left: 52px;
+    }
+    .al-opt{
+        margin-left: -20px;
+    }
+    .tag-opt{
+        margin-left: 20px;
+        margin-top: 16px;
+        margin-bottom: 1px;
+    }
+    th{
+        
+        text-align: center;
+    }
+    .ajaxinput:not(.checked){ 
+        cursor: not-allowed;
+        background: #eee;
+    }
+    .uimax { 
+        overflow: auto;
+    }
+    .table-fixed{
+        table-layout: fixed;
+    }
+    .extratabs > div{
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    .acl-table-chart-box .device-coon-desc label{
+        margin-top: 0;
+    }
+    .extraoption{
+        display: table;
+        padding: 13px 10px;
+        width: 100%;
+        background: #f0f0f054;
+    }
+    .extraoption > div{
+        display: table-cell;
+        vertical-align: top; 
+    }
+    .extraoption > div:nth-child(2){
+        width: 150px;
+    }
+    .extraoption:nth-child(odd){
+        background: none;
+    }
+    .extraoption{ 
+    
+    } 
+    .input-group-addon{
+        padding: 11px 9px !important;
+    }
+    .btn{
+        box-shadow: unset;
+        border-bottom: 1px solid lightgray;
+    }
+    .caret{
+        margin-top: 8px !important;
+        margin-left: 6px !important;
+    }
+    .glyphicon-remove-circle{
+        font-size: 18px !important;
+        margin-right: -25px !important;
+       margin-bottom:5px;
+    }
+    .module {  
+      margin: 12px 10px;
+      border: solid 1px #e7e7e7;
+      border-radius: 4px;
+      padding:8px;
+      height: 46px;
+    }
+    .multiselect-clear-filter{
+         border-bottom: unset !important;
+    }
+    .dropdown-toggle{
+        padding: 2px 0px !important;
+        background: white!important;
+        box-shadow: unset !important;
+        -webkit-box-shadow: unset !important;
+    }
+    .pad0{
+        padding: 25px !important;
+        margin-left: -5px;
+        margin-top: 0px;
+    }
+    .flt-rgt{
+        float: right;
+        margin-right: 22px;
+    }
+    @media screen and (max-width: 480px){
+         .al-opt{
+            margin-top: 10px;
+            margin-left: 0px;
+         }
+         .aln-ca{
+            margin-left: 16px !important;
+            font-size: 16px !important;
+            margin-bottom: 40px !important;
+         }
+         .pad-md{
+         padding: 0px;    
+         margin-left: -5px;
+         margin-right: -11px;
+         }
+         .aln-center{
+            margin-left: 16px;
+         }
+    }
+    @media screen and (min-width: 1315px){
+        .btn-res{
+            margin-top: 81px !important;
+        } 
+    }
+    @media screen and (min-width: 1354px){
+        .btn-res{
+            margin-top: 63px !important;
+        } 
+    }
+    
+
+.framelen {
+    margin-top: -50px;
+    margin-left: 215px;
+}
+
+    
+    }
+    
+    body {
+    padding: 20px;
+}
+.multiselect-container div.checkbox {
+    margin: 0;
+}
+.multiselect-container label {
+    margin: 0;
+    white-space: nowrap;
+}
+.multiselect-container div.checkbox {
+    padding: 5px 15px 5px 35px;
+}
+
+.multiselect-container {
+    position: absolute;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    }
+    
+    .open>.dropdown-menu {
+    display: block;
+    height: 205px;
+    overflow-y: scroll;
+    width: fit-content;
+}
+.stylenew{
+width: 100%;
+}
+
+@media only screen 
+  and (min-device-width: 768px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+.w50 {width:50%;float:left}
+}
+
+
+
+.yeah{
+    display: table;
+    padding: 15px 10px;
+    width: max-content;
+}
+.No{
+    display: table;
+    padding: 15px 10px;
+    width: 85%;
+}
+
+.multiselect-selected-text{
+float:left;
+}
+
+.btn .caret {
+    margin-top: 10px;
+    float: right;
+}
+
+.multiselect-search{
+    padding: 20px;
+    margin-left: -12px!important;
+    font-size: 13px!important;
+    width: 150px!important; 
+}
+.multiselect-filter {
+    margin-left: 0px !important;
+}
+.multiselect-container li {
+   margin-left:-28px;
+}
+.glyphicon{
+    font-size: 15px;
+    margin-left: -20px!important;
+}
+.fontwe{
+    font-weight: 700;
+   
+}
+
+
+
+    .switch span {
+        width: 36px !important;
+        height: 16px !important;
+    }
+
+    .switch span:after {
+        width: 13px !important;
+    }
+
+    .pulse-button {
+        position: relative;
+        text-align: center;
+        box-shadow: 0 0 0 0 #A84155;
+        border-radius: 5px;
+        background-size: cover;
+        background: #000;
+        background-repeat: no-repeat;
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+        display: block;
+        -webkit-animation: pulse 2.25s infinite cubic-bezier(0.1, 0, 0, 1);
+        -moz-animation: pulse 2.25s infinite cubic-bezier(0.1, 0, 0, 1);
+        -ms-animation: pulse 2.25s infinite cubic-bezier(0.1, 0, 0, 1);
+        animation: pulse 2.25s infinite cubic-bezier(0.1, 0, 0, 1);
+    }
+
+    .pulse-button:hover {
+        -webkit-animation: none;
+        -moz-animation: none;
+        -ms-animation: none;
+        animation: none;
+    }
+
+    @-webkit-keyframes pulse {
+        to {
+            box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+        }
+    }
+
+    @-moz-keyframes pulse {
+        to {
+            box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+        }
+    }
+
+    @-ms-keyframes pulse {
+        to {
+            box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+        }
+    }
+
+    @keyframes pulse {
+        to {
+            box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+        }
+    }
+
+    .file-background {
+        background-color: white !important;
+    }
+    .timedrop{
+            position: relative;
+            z-index: 99;
+            top: -28px;
+    }
+    h3{
+        width: max-content;
+    }
+    .go{
+            background-color: #18a79d !important;
+    z-index: 99;
+    left: 477px;
+    top: -33px;
+    }
+
+ table > tbody > tr > td{
+ text-align:center;
+}
+
+</style>

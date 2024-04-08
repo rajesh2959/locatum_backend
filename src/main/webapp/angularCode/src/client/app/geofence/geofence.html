@@ -1,0 +1,147 @@
+﻿<form class="form-horizontal border-left hor-height" name="frm" novalidate>
+    <div class="panel-body networkconfig-sec">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding top-pg-align">
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 ">
+                <h2><b>Geofence </b> <span ng-if="vm.venueDetails!=null">({{vm.venueDetails.newUid}})</span></h2>
+            </div>
+            <div class="=col-lg-3 col-md-3 col-sm-6 col-xs-3 button-bar pull-right">
+                <div class="navbar-form navbar-left col-lg-8 col-md-8 col-sm-8 col-xs-8 removepadding removemargin" style="padding-left:22px;" role="search">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 removepadding geocus-btn">
+                    <button class="btn btn-primary cus-btn" ng-click="vm.addgeofence()">
+                        <span class="fa icon-add" style="font-size: 15px !important;font-family:Roboto-Light;font-weight:100; vertical-align:middle;"></span>Add
+                        Geofence
+                    </button>
+                </div>
+            </div>
+            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel">
+                    <div class="panel-heading ui-draggable-handle mr-top-10 pd-b-5">
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                                <select ng-model="vm.selectedFloor" no-results-text="'No Floor found'" class="connection2 col-md-6 col-sm-9 col-xs-6 form-control"
+                                        style="border-bottom:none !important" ng-options="item.id as item.name for item in vm.floorDetails"
+                                        ng-change="vm.onFloorChanges(vm.selectedFloor)">
+                                    <option ng-if="vm.floorDetails.length==0 || !vm.floorDetails" value="">No records found</option>
+                                </select>
+                            </div>
+                            <div  ng-class="vm.pagedData.length==0 || !vm.pagedData ? 'clickdisabled' : ''"  ng-click="vm.multiDeleteFence()" class="tag-bar pull-right"
+                                 style="cursor:pointer; color:#FF0000 ;margin-right: 6px;font-family:Roboto-Light;font-size:13px;">
+                                <i class="fa fa-trash" aria-hidden="true"> &nbsp;</i>
+                                <span style="font-weight:600;letter-spacing:0.8px">Delete</span>
+                            </div>
+                            <div class="form-group has-feedback col-lg-3 col-md-12 col-sm-12 col-xs-12 pull-right">
+
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-search gf-srch-icon" style="margin-top: -22px;color:#8b91a0;font-size: 15px;"></i></span>
+                                    <input type="text" data-ng-model="vm.dataOperations.search" data-ng-change="vm.searchBy(vm.dataOperations.search)" class="form-control" placeholder="Search" style="outline:none;box-shadow: inset 0 0 #ddd;font-size: 13px;font-family:Roboto-Light;padding-top:5px;width:max-content" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-left: 0px;padding-left: 30px;padding-right: 30px;">
+                        <div class="panel-body panel-body-table" style="overflow-y: hidden;">
+                            <div class="table-responsive">
+                                <table class="table table-hover" style="font-family:Roboto;font-size:13px;">
+                                    <thead style="border:thin;border-top: thin solid #e7e7e7;">
+                                        <tr>
+                                            <th style="background:none;padding-bottom: 3px;">
+                                                <label class="radio-inline">
+                                                    <input style="margin-top: 0px;left: 1px" ng-model="vm.ischekAll" ng-click="vm.inputCheckAll(vm.ischekAll)"
+                                                           type="checkbox" name="optradio">
+                                                </label>
+                                            </th>
+                                            <th style="background:none;color:black">#</th>
+                                            <th style="background:none;">
+                                                <a href="" class="table-hyper-a-small" ng-click="vm.dataOperations.sortPredicate = 'name'; vm.dataOperations.sortOrder = !vm.dataOperations.sortOrder; vm.getData()">
+                                                    Name
+                                                    <span ng-show="vm.dataOperations.sortPredicate == 'name' && !vm.dataOperations.sortOrder"
+                                                          class="fa fa-caret-down"></span>
+                                                    <span ng-show="vm.dataOperations.sortPredicate == 'name' && vm.dataOperations.sortOrder"
+                                                          class="fa fa-caret-up"></span>
+                                                </a>
+                                            </th>
+                                            <th style="background:none;">
+                                                <a href="" class="table-hyper-a-small" ng-click="vm.dataOperations.sortPredicate = 'fenceType'; vm.dataOperations.sortOrder = !vm.dataOperations.sortOrder; vm.getData()">
+                                                    Type
+                                                    <span ng-show="vm.dataOperations.sortPredicate == 'fenceType' && !vm.dataOperations.sortOrder"
+                                                          class="fa fa-caret-down"></span>
+                                                    <span ng-show="vm.dataOperations.sortPredicate == 'fenceType' && vm.dataOperations.sortOrder"
+                                                          class="fa fa-caret-up"></span>
+                                                </a>
+                                            </th>
+                                            <th class="table-hyper-a-small" style="background:none; color: black;">Alert</th>
+                                            <th style="background:none;">
+                                                <a href="" class="table-hyper-a-small" ng-click="vm.dataOperations.sortPredicate = 'statusType'; vm.dataOperations.sortOrder = !vm.dataOperations.sortOrder; vm.getData()">
+                                                    Status
+                                                    <span ng-show="vm.dataOperations.sortPredicate == 'statusType' && !vm.dataOperations.sortOrder"
+                                                          class="fa fa-caret-down"></span>
+                                                    <span ng-show="vm.dataOperations.sortPredicate == 'statusType' && vm.dataOperations.sortOrder"
+                                                          class="fa fa-caret-up"></span>
+                                                </a>
+                                            </th>
+                                            <th class="table-hyper-a-small" style="background:none; color: black;">
+                                                Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-if="vm.pagedData.length > 0" style="border-bottom: solid 1px #e5e5e5;">
+                                        <tr data-ng-repeat="fence in vm.pagedData">
+                                            <td style="background:none;">
+                                                <label class="radio-inline">
+                                                    <input style="margin-top: 0px;" ng-click="vm.isRowChecked()" ng-model="fence.isChecked" type="checkbox"
+                                                           name="optradio">
+                                                </label>
+                                            </td>
+                                            <td>{{fence.gridsno}}</td>
+                                            <td>{{fence.name}}</td>
+                                            <td>{{fence.fenceType}}</td>
+                                            <td>{{fence.alerts}}</td>
+                                            <td>{{fence.statusType}}</td>
+                                            <td>
+                                                <span ng-click="vm.edit(fence)" style="color:#18a79d;cursor:pointer">Edit</span>&nbsp;
+                                                |
+                                                &nbsp; <span ng-click="vm.delete(fence)" style="color:#FF0000;cursor:pointer">Delete</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody ng-if="vm.pagedData.length <= 0">
+                                        <tr>
+                                            <td colspan="12" style="text-align: center;"> No records found</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="pull-right">
+                                    <table>
+                                        <tr>
+                                            <td class="foot-desc">{{vm.currentPageDescription()}}</td>
+                                            <td>
+                                                <div class="pagination">
+
+                                                    <ul uib-pagination boundry-links="true" ng-change="vm.getData()"
+                                                        total-items="vm.filteredCount" items-per-page="vm.dataOperations.paging.pageSize"
+                                                        ng-model="vm.dataOperations.paging.currentPage" max-size="vm.dataOperations.paging.maxPagesToShow"
+                                                        class="pagination-small"></ul>
+                                                </div>
+                                            </td>
+                                            <td class="foot-desc ng-binding">Go to Page</td>
+                                            <td>
+                                                <input type="text" numeric class="col-md-2 pagination-goto-text" ng-disabled="vm.allData.length <= vm.dataOperations.paging.pageSize" ng-model="vm.goToPageNumber" />&nbsp;
+                                                <input type="button" class="btn btn-primary pagination-grid-footer-btn"
+                                                       value="Go" data-ng-click="vm.goToPage()" style="background-color:#068e84"
+                                                       ng-disabled="!vm.goToPageNumber" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div ng-show="vm.pagedData.length <= 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height:340px !important;margin-top:100px;text-align:center;font-weight: bold;font-size: 20px;">
+                        <span>There are no geofences for this floor. Add a geofence to begin with.</span>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

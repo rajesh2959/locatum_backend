@@ -1,0 +1,651 @@
+<body style="background: #eef2f6!important;">
+<div id="page-content-wrapper"  class="" style="background-color: slategray;
+    /* margin-bottom: 66px; */
+    height: 58px;">
+  <div>
+    <h class="hStyle"> <i class="fa fa-video-camera" style="color: white"></i> Video Statistics Dashboard</h>
+
+  </div>
+   <div><i class="fa fa-power-off power"></i></div>
+ <div class="pause" title="Pause"><i class="fa fa-pause fa-2x" style="color: white"></i></div>
+ <div class="play" title="Resume" style="display: none"><i class="fa fa-play fa-2x" style="color: white"></i></div>
+<div class="col-md-10 vidview" style="float: right;width: 79% !important">
+    <div class="uitag-card" style="margin-top: 30px;">
+                
+       <div class="col-md-3 col-sm-3 col" id="fetch">
+          <div class="ui-card cardCss fullname">
+             <i class="fa fa-file"></i>
+             <div class="topcards"><h5 style="font-weight:550;font-size:12px">File Name</h5>
+             
+             <h5 id="file">0</h5></div>
+             
+          </div>
+        </div> 
+         <div class="col-md-3 col-sm-3 col" id="fetch">
+          <div class="ui-card cardCss">
+            <i class="fa fa-television"></i>
+             <div class="topcards"><h5 style="font-weight:550;font-size:12px">Resolution</h5>
+             <h5 id="resolution">0</h5></div>
+          </div>
+        </div> 
+         <div class="col-md-3 col-sm-3 col" id="fetch">
+          <div class="ui-card cardCss">
+            <i class="fa fa-film"></i>
+            <div class="topcards"><h6 style="font-weight:550;font-size:12px">Frame Rate</h6>
+             <h5 id="frameRate">0</h5></div>
+          </div>
+        </div> 
+        <!--   <div class="col-md-2 col-sm-2 col" id="fetch">
+          <div class="ui-card cardCss">
+             <i class="fa fa-file-audio-o"></i>
+             <div class="topcards"><h6 style="font-weight:550;font-size:12px">Audio Bit Rate</h6>
+             <h5 id="frameRate">0</h5></div>
+          </div>
+        </div> --> 
+         <!-- <div class="col-md-2 col-sm-2 col" id="fetch">
+          <div class="ui-card cardCss">
+             <i class="fa fa-video-camera"></i>
+             <div class="topcards"><h6 style="font-weight:550;font-size:13px">Duration</h6>
+             <h5 id="video">0</h5></div>
+          </div>
+        </div>  --> 
+        <div class="col-md-3 col-sm-3 col" id="fetch">
+          <div class="ui-card cardCss">
+             <i class="fa fa-spinner"></i>
+             <div class="topcards"><h6 style="font-weight:550;font-size:12px">Initial Buffertime</h6>
+             <h5 id="initialbuffer">0</h5></div>
+          </div>
+        </div> 
+        <!--   <div class="col-md-2 col-sm-2 col" id="fetch">
+          <div class="ui-card cardCss">
+             <i class="fa fa-file-video-o"></i>
+             <div class="topcards"><h6 style="font-weight:550;font-size:12px">Video Bitrate</h6>
+             <h5 id="videoBitRate">0</h5></div>
+          </div>
+        </div> --> 
+        </div>     
+    </div>     
+
+
+        <div class="col-md-10 vidview" style="float: right;display:none">
+          <div class="col-md-6 col-sm-5">
+      <div class="chart-box venus-chart1 cb-mb fd-chartbox" style="height:380px">
+        <div class="netflowData select-filter-Plan venue-filter">
+          <label>Audio Video Latency</label>
+          <p class="subtitle">Past 120 Seconds</p>
+        </div>
+        <div class="cb-section">
+          <div class="chart1">
+            <div class="chart1Section">
+              <div id="cpugraph"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+  <div class="col-md-12" style="margin-top: -95px;">   
+   <div class="uitag-card">
+     <div class="col-md-4 col-sm-4" id="">
+         <div class="" style="height: 100px;text-align: center !important;">
+            <div id="ring"></div>
+            <div style="margin-top: -40px;">
+          </div>
+           <h5 style="margin-top: 40px;font-weight: 550;">Max</h5>
+         </div>
+       </div>  
+
+     <div class="col-md-4 col-sm-4" id="">
+          <div class="" style="height: 100px;text-align: center !important;">
+             <div id="mincpu"></div>
+             <div style="margin-top: -40px;">
+          </div>
+           <h5 style="margin-top: 40px;font-weight: 550;">Min</h5>
+         </div>
+         
+       </div>  
+     <div class="col-md-4 col-sm-4" id="" style="height: 100px;text-align: center !important;">
+         <div class="">
+             <div id="avgcpu">
+             </div>
+             <div style="margin-top: -40px;">
+          </div>
+           <h5 style="margin-top: 40px;font-weight: 550;">Avg</h5>
+         </div>
+       </div>             
+   </div>   
+</div> 
+</div>
+
+    <div class="col-md-6">
+      <div class="chart-box venus-chart1 cb-mb fd-chartbox" style="height:380px">
+        <div class="netflowData select-filter-Plan venue-filter">
+          <label>Frame Drops</label>
+          <p class="subtitle">Past 120 Seconds</p>
+        </div>
+        <div class="cb-section">
+          <div class="chart1">
+            <div class="chart1Section">
+              <div id="memorygraph"></div>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+        <div class="col-md-12" style="margin-top: -95px;margin-left: 10px;">   
+   <div class="uitag-card">
+     <div class="col-md-4 col-sm-4" id="">
+         <div class="" style="height: 100px;text-align: center !important;">
+            <div id="maxmem"></div>
+            <div style="margin-top: -40px;">
+          </div>
+           <h5 style="margin-top: 40px;font-weight: 550;">Max</h5>
+         </div>
+       </div>  
+
+     <div class="col-md-4 col-sm-4" id="">
+          <div class="" style="height: 100px;text-align: center !important;">
+             <div id="minmem"></div>
+             <div style="margin-top: -40px;">
+          </div>
+           <h5 style="margin-top: 40px;font-weight: 550;">Min</h5>
+         </div>
+         
+       </div>  
+     <div class="col-md-4 col-sm-4" id="" style="height: 100px;text-align: center !important;">
+         <div class="">
+             <div id="avgmem">
+             </div>
+             <div style="margin-top: -40px;">
+          </div>
+           <h5 style="margin-top: 40px;font-weight: 550;">Avg</h5>
+         </div>
+       </div>       
+      
+   </div>
+    
+</div> 
+    </div>
+
+        </div>
+
+<div class="col-md-10 vidview" style="float: right;display:none">
+  <div class="col-md-6">
+      <div class="chart-box venus-chart1 cb-mb fd-chartbox" style="height:410px">
+        <div class="netflowData select-filter-Plan venue-filter">
+          <label>Audio/video Buffer Size</label>
+          <p class="subtitle">Past 120 Seconds</p>
+        </div>
+        <div class="cb-section">
+          <div class="chart1">
+            <div class="chart1Section">
+              <div id="txrx"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+     <div class="col-md-10" style="margin-top: -117px;margin-left: 53px;">   
+     <div class="uitag-card" style="margin-top: -17px">
+     <div class=" col-sm-5" id="">                              
+           <h5 style="margin-bottom:30px"></h5>           
+          <div class="container maxhead" style="margin-left: 120px;">
+         <p style="font-weight:550">
+				<span>Max</span>
+           <span style="margin-left: 126px;" class="minhead">Min</span>
+         <span style="margin-left: 120px;"   class="avghead">Avg</span>
+         </p>
+      </div>          
+         <h5 class="hcss">Audio Buffer Size</h5>
+          <div class="container" style="margin-left: 116px;">
+             <span id="maxtx" class="aumax">0.00000</span>
+             <span id="mintx" style="margin-left: 95px;" class="aumin">0.00000</span> 
+             <span id="avgtx" style="margin-left: 94px;" class="auavg">0.00000</span>
+		</div>
+		<div>
+		<h5 class="hcss">Video Buffer Size</h5>
+          <div class="container" style="margin-left: 116px;">
+          	<span id="maxrx" class="vimax">0.00000</span>
+           	<span id="minrx" style="margin-left: 96px;" class="vimin">0.00000</span> 
+           	<span id="avgrx" style="margin-left: 93px;" class="viavg">0.00000</span>
+		</div>
+		</div>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-md-6">
+    <div class="chart-box venus-chart1 cb-mb fd-chartbox" style="height:410px">
+        <div class="netflowData select-filter-Plan venue-filter">
+          <label>Lag Duration</label>
+          <p class="subtitle">Past 120 Seconds</p>
+        </div>
+        <div class="cb-section">
+          <div class="chart1">
+            <div class="chart1Section">
+              <div id="channelgraph"></div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+       <div class="col-md-12" style="margin-top: -75px;margin-left: 10px;">   
+   <div class="uitag-card" style="margin-top: -22px">
+     <div class="col-md-4 col-sm-4" id="">
+         <div class="" style="height: 100px;text-align: center !important;">
+            <div id="maxlag"></div>
+            <div style="margin-top: -40px;">
+          </div>
+           <h5 style="margin-top: 40px;font-weight: 550;">Max</h5>
+         </div>
+       </div>  
+
+     <div class="col-md-4 col-sm-4" id="">
+          <div class="" style="height: 100px;text-align: center !important;">
+             <div id="minlag"></div>
+             <div style="margin-top: -40px;">
+          </div>
+           <h5 style="margin-top: 40px;font-weight: 550;">Min</h5>
+         </div>
+         
+       </div>  
+     <div class="col-md-4 col-sm-4" id="" style="height: 100px;text-align: center !important;">
+         <div class="">
+             <div id="avglag">
+             </div>
+             <div style="margin-top: -40px;">
+          </div>
+           <h5 style="margin-top: 40px;font-weight: 550;">Avg</h5>
+         </div>
+       </div>       
+      
+   </div>
+    
+</div>
+</div>
+    </div>
+<div class="form-group  disp-inline lefthang">
+              <span for="" style="margin-left: 3px;color: #e1ffff">Device List</span><select class="form-control disp-block valign" style="font-size: 10px;width: fit-content;text-transform: uppercase;margin-top: 9px !important" name="root" id="root">
+                </select>
+            </div>
+</div>
+<link rel="stylesheet" type="text/css" href="/facesix/static/meshmonitor/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="/facesix/static/meshmonitor/css/c3.css"/>
+<link rel="stylesheet" type="text/css" href="/facesix/static/meshmonitor/css/circularprogress.css"/>
+<!--#css-->
+<!-- js --> 
+<script src="/facesix/static/meshmonitor/js/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script src="/facesix/static/meshmonitor/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/facesix/static/meshmonitor/js/jquery.nicescroll.min.js"></script>
+<script src="/facesix/static/meshmonitor/js/circularprogress.jquery.min.js"></script>
+<script type="text/javascript" src="/facesix/static/meshmonitor/js/d3.min.js"></script>
+<script type="text/javascript" src="/facesix/static/meshmonitor/js/c3.js"></script>
+<script type="text/javascript" src="/facesix/static/meshmonitor/js/handlebars.min.js"></script>
+<script type="text/javascript" src="/facesix/static/meshmonitor/js/underscore-min.js"></script>
+<script src="/facesix/static/meshmonitor/js/videostats.js" type="text/javascript"></script>
+
+<style type="text/css">
+.pause{
+    float: right;
+    margin-right: 0px;
+    margin-top: -23px;
+    cursor: pointer;
+}
+
+.play{
+    float: right;
+    margin-right: 0px;
+    margin-top: -23px;
+    cursor: pointer;
+}
+  .lefthang{
+    z-index: 9999;
+    position: fixed;
+    top: 354px;
+    left: 10px;
+  }
+  .ui-card h2 {
+    margin: 0;
+    font-size: 17px !important;
+}
+.above {
+  margin: 40px;
+  background-color: rgb(68,68,68); /* Needed for IEs */
+
+  -moz-box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+  -webkit-box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+  box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+
+  filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)";
+  zoom: 0.1;
+}
+.above .ui-card {
+  position: relative; /* This protects the inner element from being blurred */
+  padding: 100px;
+  background-color: #DDD;
+}
+
+.plug{
+    z-index: 9999;
+    position: absolute;
+    top: 0;
+    left: 126px;
+    font-size: 50px;
+}
+
+.battery{
+    z-index: 9999;
+    position: absolute;
+    top: 0;
+    right: 114px;
+}
+.cardCss{
+    padding: 5px 0;
+    position: relative;
+    margin-bottom: 30px;
+   /* box-shadow: 5px 6px 5px #cdd9ef;*/
+}
+label{
+font-family: "Nunito Sans",sans-serif !important;
+    font-weight: 400 !important;
+    font-size: 18px !important;
+}
+
+h4{
+    font-family: "Nunito Sans",sans-serif;
+    font-weight: 400 !important;
+    font-size: 18px !important;
+}
+
+.c3-title, tspan {
+    font-family: 'Exo2SemiBold';
+    font-size: 13px !important;
+    /* color: azure; */
+    fill: gray !important;
+}
+
+.hStyle{
+  margin-left: 267px;
+    font-size: 18px;
+    font-family: inherit;
+    font-weight: 700;
+    line-height: 1.2;
+    /*color: #343a40;*/
+    color: white;
+}
+.power{
+    color: transparent;
+    float: right;
+    margin-top: -19px;
+    margin-right: 21px;
+    font-size: 23px !important;
+}
+
+.c3-ygrid-line line{
+    stroke: #e6e6e6;
+}
+
+.c3-xgrid-line line{
+    stroke: #e6e6e6;
+}
+
+.hs{
+	float: left;
+    margin-left: 215px;
+}
+
+.links{
+	float: right;
+    margin-right: 39px;
+    font-size: 20px;
+    margin-top: -32px !important;
+}
+.c3-chart-arc .c3-gauge-value{
+   font-size: 20px !important;
+ }
+
+ .uitag-card > div{
+  margin-bottom: -25px !important;
+ }
+ .subtitle{
+    font-size: 16px;
+    font-weight: 300;
+    color: #a1aab2;
+    margin-top: -10px;
+ }
+ .chart-box .netflowData label{
+  margin-top: -5px !important;
+ }
+ #chart {
+      width: 80%;
+      display: inline-block;
+    }
+    .col-four {
+    width: 18% !important;
+}
+
+.ui-card{
+  height: 71px !important;
+  padding: 0px !important;
+}
+
+@media screen and (max-width: 1200px) and (min-width: 768px){
+      .bat {
+        margin-left : 163px !important;
+      }
+      .hStyle{
+         margin-left: 210px;
+        }
+  }
+
+  @media screen and (max-width: 770px) and (min-width: 766px){
+   .bat {
+        margin-left : 163px !important;
+      }
+      .hStyle{
+         margin-left: 210px;
+        }
+    }
+
+     @media screen and (min-width: 1200px) and (max-width: 1350px){
+   .bat {
+        margin-left : 163px !important;
+      }
+      .hStyle{
+         margin-left: 210px;
+        }
+        
+       .maxhead{
+       		margin-left:82px !important;
+       }
+       
+       .minhead{
+       		margin-left:78px !important;
+       }
+       
+       .avghead{
+       		margin-left:90px !important;
+       } 
+        
+        .aumax{
+        	margin-left:-42px !important;
+        }        
+        .aumin{
+        	margin-left:48px !important;
+        }
+        .auavg{
+        	margin-left:69px !important;
+        }
+        
+        .vimax{
+        	margin-left:-42px !important;
+        }        
+        .vimin{
+        	margin-left:48px !important;
+        }
+        .viavg{
+        	margin-left:69px !important;
+        }
+        
+    }
+
+
+ @media screen and (min-width: 1350px) and (max-width: 1540px){   
+       .maxhead{
+       		margin-left:82px !important;
+       }
+       
+       .minhead{
+       		margin-left:102px !important;
+       }
+       
+       .avghead{
+       		margin-left:90px !important;
+       } 
+        
+        .aumax{
+        	margin-left:-42px !important;
+        }        
+        .aumin{
+        	margin-left:72px !important;
+        }
+        .auavg{
+        	margin-left:69px !important;
+        }
+        
+        .vimax{
+        	margin-left:-42px !important;
+        }        
+        .vimin{
+        	margin-left:72px !important;
+        }
+        .viavg{
+        	margin-left:69px !important;
+        }
+        
+    }
+    
+.c3-axis-y text 
+{
+ font-size: 12px;
+  font-family: "Nunito Sans",sans-serif !important;
+}
+.c3-axis-x text 
+{
+ font-size: 12px;
+  font-family: "Nunito Sans",sans-serif !important;
+}
+
+
+.c3-tooltip td {
+font-size:13px;
+padding: 3px 6px;
+background-color:green
+border-left:1px dotted #999;
+color: #000;
+}
+
+/* #myProgress {
+  width: 100%;
+  background-color: #ddd;
+  margin-bottom: 8px;
+} */
+
+#maxtx {
+  width: 1%;
+  height: 20px !important;
+ /* background-color: #e9967a; */
+}
+
+#mintx {
+  width: 1%;
+  height: 20px !important;
+  /* background-color: #8fbc8f; */
+}
+
+#avgtx {
+  width: 1%;
+  height: 20px !important;
+  /* background-color: #87cefa; */
+}
+
+#maxrx {
+  width: 1%;
+  height: 20px !important;
+  /* background-color: #e9967a; */
+}
+
+#minrx {
+  width: 1%;
+  height: 20px !important;
+  /* background-color: #8fbc8f; */
+}
+
+#avgrx {
+  width: 1%;
+  height: 20px !important;
+  /* background-color: #87cefa; */
+}
+
+.hcss{
+    margin-top: 4px;
+    float: left;
+    margin-left: -25px;
+    font-size: 14px;
+    font-weight: 550;
+}
+
+.ui-card{
+      padding: 15px !important;
+}
+
+.ui-card .fa{
+  font-size: 35px !important;
+}
+.ui-card .fa:before{
+  left:0% !important;
+}
+#fetch{
+      width: 25% !important;
+}
+.topcards{
+  margin-left: 15px;
+}
+.ui-card{
+  background : transparent !important;
+}
+
+.c3 svg {
+  font-size: 0px !important;
+}
+
+.c3-chart-arcs .c3-chart-arcs-background{
+  fill: transparent;
+}
+</style>
+
+<script type="text/javascript">
+
+$("#fetch").on("mouseover",function(){
+
+  $("fetch").addClass('.above');
+});
+
+
+var versionUpdate = (new Date()).getTime();  
+    var script = document.createElement("script");  
+    script.type = "text/javascript";  
+    script.src = "/facesix/static/meshmonitor/js/videostats.js?v=" + versionUpdate;  
+    document.body.appendChild(script);  
+</script>
+
+
+
+<script>
+
+</script>
+
+</body>
+{{>meshmonitor/leftpanel}}

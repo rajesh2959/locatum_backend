@@ -1,0 +1,13 @@
+﻿<div ng-class="{'danger': vm.includeDangerHeader}" class="modal-header clearfix">
+    <h3 ng-class="{'danger': vm.includeDangerHeader}" class="modal-title pull-left"><i class="fa fa-question-circle"></i> {{vm.title}}</h3>
+    <button type="button" class="close pull-right" ng-click="vm.no()">&times;</button>
+</div>
+<div class="modal-body">
+    <p ng-bind-html="vm.message"></p>
+</div>
+<div class="modal-footer">
+    <div class="button-bar button-bar-modal">
+        <button type="submit" class="btn btn-primary" ng-click="vm.yes()">Yes</button>
+        <button type="button" class="btn "  style="width: auto;border: 1px solid #9ca4ab;background-color: white;color: #888;padding-left: 16px;padding-right: 16px;border-radius:6px;"  ng-click="vm.no()">No</button>
+    </div>
+</div>

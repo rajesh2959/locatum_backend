@@ -1,0 +1,1178 @@
+<form name="addUserForm" novalidate>
+
+    <div class="modal-body" style="height:auto;">
+
+      <div class="row">
+
+          <div class="col-md-2 pull-right">
+                  <span type="submit" class="close pull-right" ng-click="vm.ok()" style="cursor:pointer !important;pointer-events:all;">×</span>
+          </div>
+          <div class="col-md-2 pull-right" ng-if="vm.customerid != null" style="color:red;padding-top:12px;margin-right: -20px;">
+                <i class="fa fa-trash" ng-click="vm.deleteCustomer()"><label class="devicelbl" style="cursor:pointer;    padding-left: 5px;">Delete</label></i>
+          </div>
+          <div ng-if="vm.customerid != null" style="margin-left: 130px;margin-top: -5px;">
+              <p class="wiz-heading">Edit Customer</p>
+          </div>
+
+          <div ng-if="vm.customerid == null">
+               <p class="wiz-heading">Add New Customer</p>
+          </div>
+                      <wizard on-finish="finishedWizard()" on-cancel="cancelledWizard()" indicators-position="top"> 
+
+                          <wz-step wz-title="Info">
+                              
+                              <ng-form name="infoform" novalidate>
+                               <div class="row">
+                                  
+                                   <div class="col-md-12" style="margin-top:20px">
+                                          <hr style="border:1px solid #ddd;margin-top:2px">
+                                  <div class="form-group" show-errors">
+                                      <label class="devicelbl">Name</label>
+                                      <input type="text" class="form-control" name="name" placeholder="Enter Name" ng-model="vm.user.customerName" required style="margin-top:-5px;" />
+                                  </div>
+                                  <div class="form-group " show-errors>
+                                      <label class="devicelbl">Address</label>
+                                      <input type="text" class="form-control" name="address" placeholder="Enter Address" ng-model="vm.user.address" required style="margin-top:-5px;" />
+                                  </div>
+                                  <div class="form-group col-md-6" style="margin-left: -15px;" show-errors>
+                                      <label class="devicelbl">City</label>
+                                      <input id="getcity" type="text" class="form-control" name="city" placeholder="Enter City" ng-model="vm.user.city" ng-blur="vm.getMap()" autocomplete="off" required style="margin-top:-5px;" />
+                                  </div>
+                                  <div class="form-group col-md-6" show-errors>
+                                      <label class="devicelbl" style="margin-left: 30px;">State</label>
+                                      <input type="text" class="form-control" name="state" placeholder="Enter State" ng-model="vm.user.state" required style="margin-top:-5px;margin-left: 30px;" />
+                                  </div>
+                                  <div class="form-group col-md-6" style="margin-left: -15px;" show-errors>
+                                      <label class="devicelbl">Country</label>
+                                      <input type="text" class="form-control" name="country" placeholder="Enter Country" style="margin-top:-5px;" ng-model="vm.user.country" required />
+                                  </div>
+                                  <div class="form-group col-md-6" show-errors >
+                                      <label class="devicelbl" style="margin-left: 30px;">Postal Code</label>
+                                      <input type="text" class="form-control" name="postalcode" placeholder="Enter Postal Code" style="margin-top:-5px;margin-left: 30px;" ng-model="vm.user.postalCode" numeric required />
+                                  </div>
+                                  <div class="form-group" show-errors>
+                                          <label class="devicelbl">Time zone</label>
+                                          <select name="timezone" ng-model="vm.user.timezone" class="form-control" required
+                                                  style="font-family:Roboto;font-size:12px !important;width:100%;color:#666666;margin-left:-5px;margin-top:-5px;"
+                                                  ng-options="item.zoneId as item.zoneName for item in vm.timezonelist">
+                                              <option value="" selected="selected">Select Value</option>
+                                          </select>
+                                  </div>
+                                  <div class="form-group col-md-6" style="margin-left: -15px;" show-errors>
+                                      <label class="devicelbl">Max Tagcount</label>
+                                      <input type="text" class="form-control" name="maxtagcount" placeholder="Enter value" style="margin-top:-5px;" ng-model="vm.user.tagcount" required />
+                                  </div>
+                                  <div class="form-group col-md-6" show-errors>
+                                      <label class="devicelbl" style="margin-left: 30px;">Tag Threshold</label>
+                                      <input type="text" class="form-control" name="tagthresold" placeholder="Enter value" style="margin-top:-5px;margin-left: 30px;" ng-model="vm.user.threshold" required />
+                                  </div>
+                                <!--   The below commented out code to be removed Later  -->
+
+                                 <!-- <div class="form-group" show-errors>
+                                      <label class="devicelbl">Package</label>
+                                      <select name="package" ng-model="vm.user.offerPackage" class="form-control" required
+                                              style="font-family:Roboto;font-size:12px !important;width:100%;color:#666666;margin-left:-5px;margin-top:-5px;"
+                                              ng-options="item.key as item.value for item in vm.offerPackage">
+                                          <option ng-if="!vm.user.offerPackage" value="" >Select Package</option>
+                                          <option ng-if="vm.user.offerPackage.length > 0" value="">{{vm.user.offerPackage}}</option>
+                                      </select>
+                                  </div>
+                                  <div class="form-group" show-errors>
+                                      <label class="devicelbl">Solution</label>
+                                      <select name="solution" ng-model="vm.user.solution" class="form-control" required
+                                              style="font-family:Roboto;font-size:12px !important;width:100%;color:#666666;margin-left:-5px;margin-top:-5px;"
+                                              ng-options="item.key as item.value for item in vm.solutionlist">
+                                          <option ng-if="!vm.user.solution" value="" >Select Solution</option>
+                                          <option ng-if="vm.user.solution.length > 0" value="">{{vm.user.solution}}</option>
+                                      </select>
+                                  </div> 
+                                -->
+                                  <div class="form-group" show-errors>
+                                      <label class="devicelbl">Tag Inactivity Interval (Minutes)</label>
+                                      <input type="text" class="form-control" name="taginactivityintervel" ng-model="vm.user.tagInact" placeholder="Enter value" style="margin-top:-5px;" required />
+                                  </div> 
+                              </div>
+                               </div>
+                           
+                               <div style="text-align: center;">
+                                      <button type="button"  style="width:65px !important;margin-left:10px;" class="btn btn-primary" ng-disabled="!infoform.$valid" wz-next>Next </button>
+                               </div>
+
+                                  <!-- <div style="text-align: center; padding-top: 12px;">
+                                      <input type="button" class="btn devicecancelbutton" ng-click="vm.cancel()" value="Cancel">
+                                  </div> -->
+                             
+                              </ng-form>
+                              
+                          </wz-step>
+                          <wz-step wz-title="Token">
+                              <ng-form name="tokenform" novalidate>
+                                  <div class="row">
+
+                                          <div class="col-md-12" style="margin-top:20px">
+                                                  <hr style="border:1px solid #ddd;margin-top:2px">
+
+                                              <div class="form-group">
+                                                      <label class="devicelbl">Enable OAuth</label>
+                                                      <div>
+                                                          <label class="switch switch-default">
+                                                              <input type="checkbox" ng-model="vm.user.oauth" 
+                                                              ng-change="emptyToken(vm.user.oauth)" ng-true-value="'true'" ng-false-value="'false'" 
+                                                              checked id="outhONOFF" />
+                                                              <span style="margin-bottom: -5px"></span>
+                                                          </label>
+                                                          <span ng-show="vm.user.oauth == 'false'" style="vertical-align: centre;padding-left: 3px;">Off</span>
+                                                        <span ng-show="vm.user.oauth == 'true'" style="vertical-align: centre;padding-left: 3px;">On</span>                                                      
+                                                      </div>
+                                              </div>   
+
+
+                                           <div class="form-group " show-errors>
+                                                  <label class="devicelbl">REST API Token</label>
+
+                                                  <code ng-show="vm.user.restToken && vm.user.oauth == 'true'" style="padding: 5px; margin: 15px 0; background: #ffd5d5; display: inline-block; border-radius: 5px;" class="ng-binding">{{vm.user.restToken}}</code>
+
+                                                      <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="vm.user.jwtrestToken" name="jwtrestToken" style="display:none">
+                                                      <input ng-if="vm.user.oauth == 'true'" type="text" class="form-control ng-pristine ng-scope ng-not-empty ng-valid ng-valid-required ng-touched" ng-model="vm.user.restToken" name="restToken" required="">
+                                                      <input ng-if="vm.user.oauth == 'false'" type="text" class="form-control" ng-model="" name="restToken" disabled="">
+
+
+                                                      <div ng-if="vm.user.oauth == 'true'" class="ng-scope"  style="text-align: center; padding-top: 12px;">
+                                                          <button type="button" ng-if="!vm.user.restToken" ng-click="vm.GenerateToken()" class="btn btn-primary devicesavebutton" style="width: 225px;">Create REST API Token</button>
+                                                      </div>
+                                                      <div ng-if="vm.user.oauth == 'false'" class="ng-scope"  style="text-align: center; padding-top: 12px;">
+                                                          <button type="button" class="btn btn-primary devicesavebutton" style="width: 225px;" disabled="">Create REST API Token</button>
+                                                      </div>
+
+                                                      <div ng-if="vm.user.oauth == 'true'" class="ng-scope" style="text-align: center; padding-top: 12px;">
+                                                          <a href="" ng-show="!vm.newToken" ng-if="vm.user.restToken" ng-click="vm.AskGenerateNewToken()" class="btn btn-primary devicesavebutton" style="width: 225px;">Create New REST API Token</a>
+                                                      </div>
+
+
+                                                      <div ng-if="vm.user.oauth == 'true'" class="ng-scope" style="text-align: center; padding-top: 12px;">
+                                                          <a href="" ng-show="!vm.newToken" ng-if="newCus.restToken" ng-click="vm.AskGenerateNewToken()" class="btns btn-secondary devicesavebutton ng-hide" style="width: 225px;">Create New REST API Token</a>
+                                                             
+                                                          <div ng-if="vm.newToken" class="cnbox ng-scope">
+                                                                <div class="title">
+                                                                        <label class="devicelbl">  Are you sure to want create new REST API Token? </label>
+                                                                </div>
+                                                                <button class="btn btn-warning w-auto fl" ng-click="vm.GenerateToken()" ng-disabled="preloadTrue"
+                                                                style="background-color: #18a79d;border: 1px solid #9ca4ab;box-shadow: none !important;
+                                                                border-radius: 10px;
+                                                                width: 50px;">
+                                                                    yes</button>
+                                                                <button class="btn w-auto fl" ng-click="vm.GenerateNewTokenClose()" style="margin-left: 10px;width: 50px;
+                                                                background-color: white;color: #888;box-shadow: none !important;
+                                                                border-radius: 10px;
+                                                                border: 1px solid #9ca4ab;"> 
+                                                                     No
+                                                                </button>
+                                                          </div>
+                                                      </div>
+
+
+                                          </div>
+
+
+                                          <div class="form-group " show-errors>
+                                              <label class="devicelbl">MQTT API Token</label>
+
+                                              <code ng-show="vm.user.mqttToken && vm.user.oauth == 'true'" style="padding: 5px; margin: 15px 0; background: #ffd5d5; display: inline-block; border-radius: 5px;" class="ng-binding">{{vm.user.mqttToken}}</code>
+
+                                                  <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="vm.user.jwtmqttToken" name="jwtmqttToken" style="display:none">
+                                                  <input ng-if="vm.user.oauth == 'true'" type="text" class="form-control ng-pristine ng-scope ng-not-empty ng-valid ng-valid-required ng-touched" ng-model="vm.user.mqttToken" name="mqttToken" required="">
+                                                  <input ng-if="vm.user.oauth == 'false'" type="text" class="form-control" ng-model="" name="mqttToken" disabled="">
+
+
+                                                  <div ng-if="vm.user.oauth == 'true'" class="ng-scope"  style="text-align: center; padding-top: 12px;">
+                                                      <button type="button" ng-if="!vm.user.mqttToken" ng-click="vm.GenerateMqtt_token()" class="btn btn-primary devicesavebutton" style="width: 225px;">Create MQTT API Token</button>
+                                                  </div>
+                                                  <div ng-if="vm.user.oauth == 'false'" class="ng-scope"  style="text-align: center; padding-top: 12px;">
+                                                      <button type="button" class="btn btn-primary devicesavebutton" style="width: 225px;" disabled="">Create MQTT API Token</button>
+                                                  </div>
+
+                                                  <div ng-if="vm.user.oauth == 'true'" class="ng-scope" style="text-align: center; padding-top: 12px;">
+                                                      <a href="" ng-show="!vm.newMqtt_token" ng-if="vm.user.mqttToken" ng-click="vm.AskGenerateNewMqtt_token()" class="btn btn-primary devicesavebutton" style="width: 225px;">Create New MQTT API Token</a>
+                                                  </div>
+
+
+                                                  <div ng-if="vm.user.oauth == 'true'" class="ng-scope" style="text-align: center; padding-top: 12px;">
+                                                      <a href="" ng-show="!vm.newMqtt_token" ng-if="newCus.mqttToken" ng-click="vm.AskGenerateNewMqtt_token()" class="btns btn-secondary devicesavebutton ng-hide" style="width: 225px;">Create New MQTT API Token</a>
+                                                         
+                                                      <div ng-if="vm.newMqtt_token" class="cnbox ng-scope">
+                                                            <div class="title">
+                                                                    <label class="devicelbl">  Are you sure to want create new MQTT API Token? </label>
+                                                            </div>
+                                                            <button class="btn btn-warning w-auto fl" ng-click="vm.GenerateMqtt_token()" ng-disabled="preloadTrue"
+                                                            style="background-color: #18a79d;border: 1px solid #9ca4ab;box-shadow: none !important;
+                                                            border-radius: 10px;
+                                                            width: 50px;">
+                                                                 yes</button>
+                                                            <button class="btn w-auto fl" ng-click="vm.GenerateNewMqtt_tokenClose()" style="margin-left: 10px;width: 50px;
+                                                            background-color: white;color: #888;box-shadow: none !important;
+                                                            border-radius: 10px;
+                                                            border: 1px solid #9ca4ab;"> 
+                                                                 No
+                                                            </button>
+                                                        </div>
+                                                  </div>
+                                      </div>
+                                 
+                                      </div>
+                                       </div>
+
+                                  <div style="text-align: center;">
+                                          <button type="button" class="btn btn-primary" style="width:65px !important; border: 1px solid #9ca4ab;background-color: white;color: #888;padding-left: 16px;padding-right: 16px;border-radius:4px;box-shadow: none !important;padding-top: 3px;padding-bottom: 3px;" wz-previous>Prev</button>
+                                          <button type="button" class="btn btn-primary" style="width:65px !important;margin-left:10px;" wz-next ng-disabled="!tokenform.$valid">Next</i></button>
+                                  </div>
+
+                                  </ng-form>
+                          </wz-step>
+                          <wz-step wz-title="Licence">
+                              <ng-form name="licenseform" novalidate>
+                                  <div class="row">
+
+                                          <div class="col-md-12" style="margin-top:20px">
+                                                  <hr style="border:1px solid #ddd;margin-top:2px">
+                                          <div class="form-group col-md-6" show-errors style="margin-left:-15px">
+                                              <label class="devicelbl">Service Start Date</label>
+                                             <datepicker date-format="yyyy-MM-dd" selector="form-control">
+                                                  <div class="input-group">
+                                                      <input class="form-control" name="fromdate" required ng-model="vm.user.serviceStartDate" autocomplete="off" ng-change ="vm.setServiceExpiryDate()"
+                                                          placeholder="From Date" style="font-family:Roboto;font-size:12px" />
+                                                  </div>
+                                              </datepicker>
+                                          </div>
+                                          
+
+                                          <div class="form-group col-md-6" show-errors>
+                                                  <label class="devicelbl">Service Duration in Month</label>
+                                                  <input type="number" string-to-number class="form-control" ng-model="vm.user.serviceDurationinMonths" ng-change="vm.setServiceExpiryDate()" name="serviceDurationinMonths" required min="1" style="font-family:Roboto;font-size:12px" >
+                                          </div>
+
+                                              <div class="form-group col-md-6" show-errors style="margin-left: -179px;padding-left: 0px;">
+                                              <label class="devicelbl">Service Expiry Date</label>
+                                              <datepicker date-format="yyyy-MM-dd" selector="form-control">
+                                                      <div class="input-group">
+                                                          <input class="form-control" name="todate" ng-model="vm.user.serviceExpiryDate" disabled="" 
+                                                              placeholder="To Date" style="margin-top:-5px;" />
+                                                      </div>
+                                                  </datepicker>
+                                          </div>
+
+                                          <div class="form-group col-md-6" style="padding-left: 0px;">
+                                                  <label class="devicelbl">Qubercomm Assist</label>
+                                                  <div>
+                                                      <label class="switch switch-default">
+                                                          <input type="checkbox" ng-model="vm.user.qubercommAssist" ng-true-value="'true'" ng-false-value="'false'" checked/>
+                                                          <span style="margin-bottom: -5px"></span>
+                                                      </label>
+                                                      <span ng-show="vm.user.qubercommAssist == null || vm.user.qubercommAssist == 'false'"" style="vertical-align: center;padding-left: 3px;">Off</span>
+                                                      <span ng-show="vm.user.qubercommAssist == 'true'" style="vertical-align: center;padding-left: 3px;">On</span>
+                                                  </div>
+                                          </div>
+                                          <div class="form-group col-md-6" style="margin-left:-15px">
+                                                  <label class="devicelbl">Simulation Status</label>
+                                                  <div>
+                                                      <label class="switch switch-default">
+                                                          <input type="checkbox" ng-model="vm.user.simulationStatus" ng-true-value="'true'" ng-false-value="'false'" checked/>
+                                                          <span style="margin-bottom: -5px"></span>
+                                                      </label>
+                                                      <span ng-show="vm.user.simulationStatus == null || vm.user.simulationStatus == 'false'"" style="vertical-align: center;padding-left: 3px;">Off</span>
+                                                      <span ng-show="vm.user.simulationStatus == 'true'" style="vertical-align: center;padding-left: 3px;">On</span>
+                                                  </div>
+                                          </div>
+                                        
+                                      </div>
+                                       </div>
+
+                                       <div style="text-align: center;">
+                                              <button type="button" class="btn btn-primary" style="width:65px !important; border: 1px solid #9ca4ab;background-color: white;color: #888;padding-left: 16px;padding-right: 16px;border-radius:4px;box-shadow: none !important;;padding-top: 5px;padding-bottom: 3px;" wz-previous>Prev</button>
+                                              <button type="button" class="btn btn-primary" style="width:65px !important;margin-left:10px;" ng-disabled="!licenseform.$valid" wz-next>Next</i></button>
+                                      </div>
+                                      </ng-form>
+                                      
+                          </wz-step>
+
+                          <wz-step wz-title="Contact">
+                              <ng-form name="contactform" novalidate>
+                                  <div class="row">
+                                     
+                                    <div class="col-md-12" style="margin-top:20px">
+                                        <hr style="border:1px solid #ddd;margin-top:2px">
+                                        <!-- 
+                                            In Edit Customer, user can update the contact person details 
+                                                1) By selecting the mailId of the existing user or
+                                                2) By creating a new user
+                                        -->
+                                        <div ng-if="vm.customerid != null">
+                                            <div class="form-group col-md-6" style="margin-left:-15px">
+                                                    <input type="checkbox" name="existingUser" ng-model="vm.isExistingUser"
+                                                    ng-true-value="true" ng-false-value="false" ng-change="vm.existingUser()" >
+                                                    <label>Existing User</label>
+                                            </div>
+                                            <div class="form-group col-md-6" style="margin-left:-70px">
+                                                    <input type="checkbox" name="newUser" ng-model="vm.isNewUser" ng-true-value="true" ng-false-value="false" ng-change="vm.newUser()" >
+                                                    <label>New User</label>
+                                            </div>
+                                        </div>
+                                        <!-- 
+                                              All the fields in the "Contact" form are editable while
+                                                1) "Add Customer" -- A Customer/user  is created for the first time
+                                                2) "Edit Customer" -- Contact person is updated to a new user
+                                        -->
+                                        <div  ng-if="vm.customerid == null || vm.isNewUser">
+                                          <div class="form-group col-md-6" show-errors style="margin-left:-15px">
+                                              <label class="devicelbl">First Name</label>
+                                              <input type="text" class="form-control" name="fname" placeholder="Enter first name" ng-model="vm.user.contactPerson" required style="margin-top:-5px;" />
+                                          </div>
+                                          <div class="form-group col-md-6" show-errors style="padding-left:0px">
+                                              <label class="devicelbl" style="margin-left: 30px;">Last Name</label>
+                                              <input type="text" class="form-control" name="lname" placeholder="Enter last name" ng-model="vm.user.contactPersonlname" required style="margin-top:-5px;margin-left: 30px;" />
+                                          </div>
+
+                                          <div class="form-group " show-errors>
+                                            <label class="devicelbl">Mobile Number</label>
+                                            <input type="text" class="form-control" name="Mobile" placeholder="Enter Mobile number" style="margin-top:-5px;" ng-model="vm.user.mobileNumber" numeric minlength="10" maxlength="10" required />
+                                          </div>
+
+                                          <div class="form-group " show-errors>
+                                                  <label class="devicelbl">Email</label>
+                                                  <input type="text" class="form-control" name="Email" placeholder="Enter Email" ng-model="vm.user.email" ng-blur="vm.checkemailDuplication(vm.user.email)" autocomplete="off" required style="margin-top:-5px;" />
+                                            </div>
+
+                           
+                                            <div class="form-group" show-errors>
+                                                      <label class="devicelbl">Designation</label>
+                                                      <input type="text" class="form-control" name="Designation" placeholder="Enter Designation" ng-model="vm.user.designation" style="margin-top:-5px;" required/>
+                                            </div>
+
+                                            <div class="form-group " show-errors>
+                                                    <label class="devicelbl">Contact Number</label>
+                                                    <input type="text" class="form-control" name="Contact" placeholder="Enter Contact number" style="margin-top:-5px;" ng-model="vm.user.contactNumber" numeric minlength="10" maxlength="10" required />
+                                            </div>
+
+                                            <div class="form-group" show-errors>
+                                                          <label class="devicelbl">Password</label>
+                                                          <input type="password" class="form-control" style="margin-top:-5px;" name="password" placeholder="minimum 8 characters" minlength="8" ng-model="vm.user.password" password-strength="vm.user.password" autocomplete="off" required />
+                                                          <span class="help-inline" data-ng-show='addUserForm.password.$valid && addUserForm.password.$dirty' data-ng-class="strength">This password is {{strength}} </span>
+                                                          <span style="font-family:-webkit-body;font-size:12px !important;">Atleast one special char, numeric and uppercase</span>
+                                                  </div>
+
+                                                  <div class="form-group" show-errors>
+                                                          <label class="devicelbl">Confirm Password</label>
+                                                          <input type="password" class="form-control" style="margin-top:-5px;" name="cpassword" minlength="8" ng-model="vm.user.cpassword" autocomplete="off" required />
+                                                          <span ng-if="vm.user.password && vm.user.cpassword && vm.user.password != vm.user.cpassword" style="color:red;">Password and confirm password are not the same</span>
+                                                  </div>
+
+                                                      <div>
+                                                          <label class="devicelbl" style="font-size:16px">Alert Notification</label>
+                                                      </div>
+                                                          
+                                                      <div class="form-group" style="margin-left:-13px;">
+                                                              <div class="form-group row col-md-5">
+                                                                  <label class="devicelbl">Email</label>
+                                                                  <div>
+                                                                      <label class="switch switch-default">
+                                                                          <input type="checkbox" ng-model="vm.user.inactivityMail" ng-true-value="'true'" ng-false-value="'false'" checked/>
+                                                                          <span style="margin-bottom: -5px"></span>
+                                                                      </label>
+                                                                      <span ng-show="vm.user.inactivityMail == 'false'" style="vertical-align: center;padding-left: 3px;">Off</span>
+                                                                      <span ng-show="vm.user.inactivityMail == 'true'" style="vertical-align: center;padding-left: 3px;">On</span>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="form-group row col-md-5">
+                                                                  <label class="devicelbl">SMS</label>
+                                                                  <div>
+                                                                      <label class="switch switch-default">
+                                                                          <input type="checkbox" ng-model="vm.user.inactivitySMS" ng-true-value="'true'" ng-false-value="'false'" checked/>
+                                                                          <span style="margin-bottom: -5px"></span>
+                                                                      </label>
+                                                                      <span ng-show="vm.user.inactivitySMS == 'false'" style="vertical-align: center;padding-left: 3px;">Off</span>
+                                                                      <span ng-show="vm.user.inactivitySMS == 'true'" style="vertical-align: center;padding-left: 3px;">On</span>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+
+                                        </div>
+                                        <!-- 
+                                              All the fields in the "Contact" form (except mailId,Mobile number and Designation) are disabled while
+                                                1) "Edit Customer" -- Contact person is updated to an existing user
+                                        -->
+                                        <div ng-if="vm.isExistingUser && vm.customerid != null">
+                                              <div class="form-group col-md-6" show-errors style="margin-left:-15px">
+                                              <label class="devicelbl">First Name</label>
+                                              <input type="text" class="form-control" name="fname" placeholder="Enter first name" ng-model="vm.user.contactPerson" disabled="" style="margin-top:-5px;" />
+                                          </div>
+                                          <div class="form-group col-md-6" show-errors style="padding-left:0px">
+                                              <label class="devicelbl" style="margin-left: 30px;">Last Name</label>
+                                              <input type="text" class="form-control" name="lname" placeholder="Enter last name" ng-model="vm.user.contactPersonlname" disabled="" style="margin-top:-5px;margin-left: 30px;" />
+                                          </div>
+
+                                          <div class="form-group " show-errors>
+                                            <label class="devicelbl">Mobile Number</label>
+                                            <input type="text" class="form-control" name="Mobile" placeholder="Enter Mobile number" style="margin-top:-5px;" ng-model="vm.user.mobileNumber" numeric minlength="10" maxlength="10" required=""/>
+                                          </div>
+                                          <div class="form-group" show-errors>
+                                            <label class="devicelbl">Email</label>
+                                            <select name="Email" ng-model="vm.user.email" class="form-control" required
+                                                    style="font-family:Roboto;font-size:12px !important;width:100%;color:#666666;margin-left:-5px;margin-top:-5px;"
+                                                    ng-change="vm.getUserDetails(vm.user.email)">
+
+                                                <option ng-repeat="user in vm.userList" value="{{user.email}}" selected="selected">{{user.email}}</option>
+                                            </select>
+                                          </div>
+                           
+                                            <div class="form-group" show-errors>
+                                                      <label class="devicelbl">Designation</label>
+                                                      <input type="text" class="form-control" name="Designation" placeholder="Enter Designation" ng-model="vm.user.designation" style="margin-top:-5px;" required=""/>
+                                            </div>
+
+                                            <div class="form-group " show-errors>
+                                                    <label class="devicelbl">Contact Number</label>
+                                                    <input type="text" class="form-control" name="Contact" placeholder="Enter Contact number" style="margin-top:-5px;" ng-model="vm.user.contactNumber" numeric minlength="10" maxlength="10" disabled="" />
+                                            </div>
+
+                                                      <div>
+                                                          <label class="devicelbl" style="font-size:16px">Alert Notification</label>
+                                                      </div>
+                                                          
+                                                      <div class="form-group" style="margin-left:-13px;">
+                                                              <div class="form-group row col-md-5">
+                                                                  <label class="devicelbl">Email</label>
+                                                                  <div>
+                                                                      <label class="switch switch-default">
+                                                                          <input type="checkbox" ng-model="vm.user.inactivityMail" ng-true-value="'true'" ng-false-value="'false'" checked disabled="" />
+                                                                          <span style="margin-bottom: -5px"></span>
+                                                                      </label>
+                                                                      <span ng-show="vm.user.inactivityMail == 'false'" style="vertical-align: center;padding-left: 3px;">Off</span>
+                                                                      <span ng-show="vm.user.inactivityMail == 'true'" style="vertical-align: center;padding-left: 3px;">On</span>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="form-group row col-md-5">
+                                                                  <label class="devicelbl">SMS</label>
+                                                                  <div>
+                                                                      <label class="switch switch-default">
+                                                                          <input type="checkbox" ng-model="vm.user.inactivitySMS" ng-true-value="'true'" ng-false-value="'false'" checked disabled="" />
+                                                                          <span style="margin-bottom: -5px"></span>
+                                                                      </label>
+                                                                      <span ng-show="vm.user.inactivitySMS == 'false'" style="vertical-align: center;padding-left: 3px;">Off</span>
+                                                                      <span ng-show="vm.user.inactivitySMS == 'true'" style="vertical-align: center;padding-left: 3px;">On</span>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                        </div>
+                                      </div>
+                                       </div>
+
+
+                                       <div style="text-align: center;">
+                                              <button type="button" class="btn btn-primary" style="width:65px !important; border: 1px solid #9ca4ab;background-color: white;color: #888;padding-left: 16px;padding-right: 16px;border-radius:4px;box-shadow: none !important;;padding-top: 3px;padding-bottom: 3px;" wz-previous>Prev</button>
+                                              <button type="button" class="btn btn-primary"  ng-disabled="contactform.$invalid" style="width:65px !important;margin-left:10px;" wz-next>Next</i></button>
+                                      </div>
+                                      </ng-form>
+                                      
+                          </wz-step>
+
+
+                          <wz-step wz-title="Theme">
+                                  <ng-form name="themeform" novalidate>
+
+                              <div class="row">
+                                  <div class="col-md-12" style="margin-top:20px;">
+                                          <hr style="border:1px solid #ddd;margin-top:2px">
+                                    <div class="form-group" show-errors">
+                                         <!-- <label class="devicelbl">Logo</label> -->
+                                           <label type="button" id="get_logos" onclick="document.getElementById('file_logo').click();">Logo <i class="fa fa-folder-open-o" style="margin-left: 17px;cursor: pointer;"></i></label>
+
+
+                                         <div class="form-group"> 
+                                
+                                            <input type="file" name="file" id="file_logo" class="file" file-model="vm.user.file" onchange="document.getElementById('logofile').value = this.value.split('\\').pop().split('/').pop()" accept=".jpg,.png" style="display: none;">
+                                            
+                                            <input type="text" id="logofile" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="vm.user.logofile" name="logofile" placeholder="">
+              
+                                         </div>
+
+                                         <!-- <div class=""style="margin-top: 8px;border:dashed 1px grey;border-radius:5px;height:70px;text-align: center;margin-left: 0px;border-color:#d5d5d5;">
+
+                                          <input type="file" name="file" id="upload" class="inputfile" />
+                              <span class="fa icon-Cloud-upload " style="vertical-align: -4px;"></span>
+                              <label for="file" style="font-weight:100 !important; margin-top: 17px;">
+                                  Drop files to upload, or
+                              </label>
+                              <label style="cursor:pointer; font-weight:100 !important;color:deepskyblue;">
+                                  <input id="debitFormId" name="fileInput1" type="file" class="btnfile"
+                                         nv-file-select="" ng-click="vm.clearControl()"
+                                         nv-file-drop="" nv-file-over="" uploader="vm.uploader" />
+                                  Browse
+                              </label>
+                                        
+                                      </div> -->
+                                    </div>
+
+                                     <!--   The below commented out code to be removed Later  -->
+                                  <!--    <div class="form-group" show-errors>
+                                              <label class="devicelbl">Facebook Link</label>
+                                              <input type="url" class="form-control" name="facebook" placeholder="paste link here" ng-model="vm.user.facebook"  style="margin-top:-5px;" />
+                                          </div>
+
+                                          <div class="form-group" show-errors>
+                                                  <label class="devicelbl">Twitter Link</label>
+                                                  <input type="url" class="form-control" name="twitter" placeholder="paste link here" ng-model="vm.user.twitter"  style="margin-top:-5px;" />
+                                          </div>
+
+                                              
+                                              <div class="form-group" show-errors>
+                                                      <label class="devicelbl">Linkedin Link</label>
+                                                      <input type="url" class="form-control" name="linkedin" placeholder="paste link here" ng-model="vm.user.linkedin"  style="margin-top:-5px;" />
+                                              </div>
+
+
+                                                   <div class="form-group" show-errors">
+                                                         
+                                                          <label type="button" id="get_logos2" onclick="document.getElementById('file_background').click();">Login Background<i class="fa fa-folder-open-o" style="margin-left: 17px;cursor: pointer;"></i></label>
+
+                                                          <div class="form-group"> 
+                                                 
+                                                             <input type="file" name="file" id="file_background" class="file" file-model="vm.user.file" onchange="document.getElementById('background').value = this.value.split('\\').pop().split('/').pop()" accept=".jpg,.png" style="display: none;">
+                                                             
+                                                             <input type="text" id="background" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="vm.user.background" name="background" placeholder="">
+                                                          </div> 
+
+
+                                                          <div class=""style="margin-top: 8px;border:dashed 1px grey;border-radius:5px;height:70px;text-align: center;margin-left: 0px;border-color:#d5d5d5;">
+                                                                  <input type="file" name="file" id="upload" class="inputfile" />
+                                                                  <span class="fa icon-Cloud-upload " style="vertical-align: -4px;"></span>
+                                                                  <label for="file" style="font-weight:100 !important; margin-top: 17px;">
+                                                                      Drop files to upload, or
+                                                                  </label>
+                                                                  <label style="cursor:pointer; font-weight:100 !important;color:deepskyblue;">
+                                                                      <input id="debitFormId" name="fileInput1" type="file" class="btnfile"
+                                                                             nv-file-select="" ng-click="vm.clearControl()"
+                                                                             nv-file-drop="" nv-file-over="" uploader="vm.uploader" />
+                                                                      Browse
+                                                                  </label>
+                                                         
+                                                       </div>
+                                                      </div>
+
+                                                       <div class="form-group" show-errors>
+                                                              <label class="devicelbl">Discover Link</label>
+                                                              <input type="url" class="form-control" name="discover_link" placeholder="paste link here" ng-model="vm.user.discover_link" style="margin-top:-5px;"/>
+                                                        </div> -->
+      
+
+
+                                  </div>
+                              </div>    
+
+
+                              <div style="text-align: center;">
+                                      <button type="button" class="btn btn-primary" style="width:65px !important; border: 1px solid #9ca4ab;background-color: white;color: #888;padding-left: 16px;padding-right: 16px;border-radius:4px;box-shadow: none !important;;padding-top: 3px;padding-bottom: 3px;" wz-previous>Prev</button>
+                                      <button type="button" class="btn btn-primary" style="width:65px !important;margin-left:10px;"  ng-disabled="themeform.$invalid" wz-next>Next</i></button>
+                                      </div>
+
+                              </ng-form>
+                              </wz-step>
+                          
+
+                          
+                          <wz-step wz-title="Save">
+                            <ng-form name="saveform" novalidate>
+
+                              <div class="row">
+                                  <div class="col-md-12" style="margin-top:20px;">
+                                     
+                                          <div class="accordion" id="accordionExample">
+                                                  <!-- <div class="card"> -->
+                                                    <div class="card-header" id="headingOne">
+                                                      <h5 class="mb-0" style="height: 20px;">
+                                                        
+                                                             <h7 style="font-size: 14px;margin-left: 150px;">Customer Info</h7> &nbsp;
+                                                             
+                                                             <!-- <i class="fa fa-angle-right" aria-hidden="true" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></i> -->
+                                                       
+                                                             <i class="fa fa-caret-down" 
+                                                             style="font-size: 15px;
+                                                             cursor: pointer;"
+                                                             aria-hidden="true" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                                                             ng-class="{'fa fa-caret-down': isClickedCustomer, 'fa fa-caret-right' : !isClickedCustomer}" ng-click="isClickedCustomer = !isClickedCustomer"></i>
+
+
+                                                      </h5>
+                                                    </div>
+                                                
+                                                    <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                      <div class="card-body">
+                                                        
+                                                      <ul style="list-style-type:none;padding-left: 0px;">
+
+                                                         <strong>Name:</strong> 
+                                                         <input type="text" class="form-control"  ng-model="vm.user.customerName" disabled />
+
+
+                                                          <strong>Address:</strong> 
+                                                          <input type="text" class="form-control"  ng-model="vm.user.address" disabled />
+
+                                                          <strong>City:</strong> 
+                                                          <input type="text" class="form-control"  ng-model="vm.user.city" disabled />
+
+                                                          <strong>Postal Code: </strong>
+                                                          <input type="text" class="form-control"  ng-model="vm.user.postalCode" disabled />
+
+                                                          <strong>State:</strong> 
+                                                          <input type="text" class="form-control"  ng-model="vm.user.state" disabled />
+
+                                                          <strong>Country:</strong>
+                                                          <input type="text" class="form-control"  ng-model="vm.user.country" disabled />
+
+                                                           <strong>Time Zone:</strong> 
+                                                          <input type="text" class="form-control"  ng-model="vm.user.timezone" disabled />
+
+                                                          <!-- <strong>Type:</strong> 
+                                                          <input type="text" class="form-control"  ng-model="vm.user.venueType" disabled /> -->
+
+                                                          <strong>Max TagCount: </strong>
+                                                          <input type="text" class="form-control"  ng-model="vm.user.tagcount" disabled />
+
+                                                          <strong>Tag Thresold:</strong> 
+                                                          <input type="text" class="form-control"  ng-model="vm.user.threshold" disabled />
+
+                                                          <!-- <strong>Package:</strong> 
+                                                          <input type="text" class="form-control"  ng-model="vm.user.offerPackage" disabled />
+
+                                                          <strong>Solution:</strong> 
+                                                          <input type="text" class="form-control"  ng-model="vm.user.solution" disabled /> -->
+
+                                                          <strong>Tag Inactivity Interval(Minutes):</strong> 
+                                                          <input type="text" class="form-control"  ng-model="vm.user.tagInact" disabled />
+
+                                                      </ul>
+
+                                                      </div>
+                                                    </div>
+                                                  <!-- </div> -->
+
+                                                  <!-- <div class="card"> -->
+                                                    <div class="card-header" id="headingTwo">
+                                                          <h5 class="mb-0" style="height: 20px;">
+                                                        
+                                                                  <h7 style="font-size: 14px;margin-left: 150px;">Token</h7> 
+                                                                  &nbsp;
+                                                                  <!-- <i class="fa fa-angle-right" aria-hidden="true" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></i> -->
+                                                            
+                                                                  <i class="fa fa-caret-right" 
+                                                                  style="font-size: 15px;
+                                                                  cursor: pointer;"
+                                                                  aria-hidden="true" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"
+                                                                  ng-class="{'fa fa-caret-down': isClickedToken, 'fa fa-caret-right' : !isClickedToken}" ng-click="isClickedToken = !isClickedToken"></i>
+   
+   
+                                                           </h5>
+                                                    </div>
+                                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                                      <div class="card-body">
+
+                                                          <ul style="list-style-type:none;padding-left: 0px;">
+
+                                                              <strong>Rest API Token:</strong> 
+                                                              <input type="text" class="form-control"  ng-model="vm.user.restToken" disabled />
+
+                                                              <strong>MQTT API Token:</strong> 
+                                                              <input type="text" class="form-control"  ng-model="vm.user.mqttToken" disabled />
+
+
+                                                          </ul>
+                                                      </div>
+                                                    </div>
+                                                  <!-- </div> -->
+
+                                                  <!-- <div class="card"> -->
+                                                    <div class="card-header" id="headingThree">
+                                                          <h5 class="mb-0" style="height: 20px;">
+                                                        
+                                                                  <h7 style="font-size: 14px;margin-left: 150px;">License</h7> &nbsp;
+                                                                  
+                                                                  <!-- <i class="fa fa-angle-right" aria-hidden="true" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></i> -->
+                                                            
+                                                                  <i class="fa fa-caret-right" 
+                                                                  style="font-size: 15px;
+                                                                  cursor: pointer;"
+                                                                  aria-hidden="true" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree"
+                                                                  ng-class="{'fa fa-caret-down': isClickedLicense, 'fa fa-caret-right' : !isClickedLicense}" ng-click="isClickedLicense = !isClickedLicense"></i>
+   
+   
+                                                           </h5>
+                                                    </div>
+                                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                                      <div class="card-body">
+
+                                                          <ul style="list-style-type:none;padding-left: 0px;">
+
+                                                              <strong>Service Start Date:</strong> 
+                                                              <input type="text" class="form-control"  ng-model="vm.user.serviceStartDate" disabled />
+
+                                                              <strong>Service Expiry Date:</strong> 
+                                                              <input type="text" class="form-control"  ng-model="vm.user.serviceExpiryDate" disabled />
+
+                                                              <strong>Service Duration In Month:</strong> 
+                                                              <input type="text" class="form-control"  ng-model="vm.user.serviceDurationinMonths" disabled />
+                                      
+                                                              <strong>Qubercomm Assist:</strong> 
+                                                              <input type="text" class="form-control"  ng-model="vm.user.qubercommAssist" disabled />
+
+                                                              <strong>Simulation Status:</strong> 
+                                                              <input type="text" class="form-control"  ng-model="vm.user.simulationStatus" disabled />
+
+                                                          </ul>
+
+                                                      </div>
+                                                    </div>
+                                                  <!-- </div> -->
+
+                                                  <!-- <div class="card"> -->
+                                                          <div class="card-header" id="headingFour">
+                                                                  <h5 class="mb-0" style="height: 20px;">
+                                                        
+                                                                          <h7 style="font-size: 14px;margin-left: 150px;">Contact</h7> 
+                                                                          &nbsp;
+                                                                          <!-- <i class="fa fa-angle-right" aria-hidden="true" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></i> -->
+                                                                    
+                                                                          <i class="fa fa-caret-right" 
+                                                                          style="font-size: 15px;
+                                                                          cursor: pointer;"
+                                                                          aria-hidden="true" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour"
+                                                                          ng-class="{'fa fa-caret-down': isClickedContact, 'fa fa-caret-right' : !isClickedContact}" ng-click="isClickedContact = !isClickedContact"></i>
+           
+           
+                                                                   </h5>
+                                                          </div>
+                                                          <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                                                            <div class="card-body">
+    
+                                                              <ul style="list-style-type:none;padding-left: 0px;">
+
+                                                                    <strong>First Name:</strong> 
+                                                                    <input type="text" class="form-control"  ng-model="vm.user.contactPerson" disabled />
+
+                                                                    <strong>Last Name: </strong>
+                                                                    <input type="text" class="form-control"  ng-model="vm.user.contactPersonlname" disabled />
+
+                                                                    <strong>Mobile Number: </strong>
+                                                                    <input type="text" class="form-control"  ng-model="vm.user.mobileNumber" disabled />
+
+                                                                    <strong>Email:</strong> 
+                                                                    <input type="text" class="form-control"  ng-model="vm.user.email" disabled />
+
+                                                                    <strong>Contact Number: </strong>
+                                                                    <input type="text" class="form-control"  ng-model="vm.user.contactNumber" disabled />
+
+                                                                    <strong>Designation:</strong> 
+                                                                    <input type="text" class="form-control"  ng-model="vm.user.designation" disabled />
+
+                                                                    <!-- <strong>Alert Notification:</strong>  -->
+                                                                    <strong>Email:</strong> 
+                                                                    <input type="text" class="form-control"  ng-model="vm.user.inactivityMail" disabled />
+
+                                                                    <strong>SMS:</strong> 
+                                                                    <input type="text" class="form-control"  ng-model="vm.user.inactivitySMS" disabled />
+
+                                                              </ul>
+    
+                                                            </div>
+                                                          </div>
+                                                  <!-- </div> -->
+
+                                                  <!-- <div class="card"> -->
+                                                          <div class="card-header" id="headingFive">
+                                                                  <h5 class="mb-0" style="height: 20px;">
+                                                        
+                                                                          <h7 style="font-size: 14px;margin-left: 150px;">Theme</h7> 
+                                                                          &nbsp;
+                                                                          <!-- <i class="fa fa-angle-right" aria-hidden="true" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></i> -->
+                                                                    
+                                                                          <i class="fa fa-caret-right" 
+                                                                          style="font-size: 15px;
+                                                                          cursor: pointer;"
+                                                                          aria-hidden="true" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive"
+                                                                          ng-class="{'fa fa-caret-down': isClickedTheme, 'fa fa-caret-right' : !isClickedTheme}" ng-click="isClickedTheme = !isClickedTheme"></i>
+           
+           
+                                                                   </h5>
+                                                          </div>
+                                                          <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                                                            <div class="card-body">
+    
+                                                               <ul style="list-style-type:none;padding-left: 0px;">
+
+                                                                    <strong>Logo:</strong>
+                                                                    <input type="text" class="form-control"  ng-model="vm.user.logofile" disabled />
+
+
+                                                                    <!-- <strong>Facebook Link:</strong>
+                                                                    <input type="text" class="form-control"  ng-model="vm.user.facebook" disabled />
+
+
+                                                                    <strong>Twitter Link:</strong> 
+                                                                    <input type="text" class="form-control"  ng-model="vm.user.twitter" disabled />
+
+
+                                                                    <strong>Linkedin Link:</strong> 
+                                                                    <input type="text" class="form-control"  ng-model="vm.user.linkedin" disabled />
+
+                                                                    <strong>Discover Link:</strong> 
+                                                                    <input type="text" class="form-control"  ng-model="vm.user.discover_link" disabled />
+
+
+                                                                    <strong>Background:</strong>
+                                                                    <input type="text" class="form-control"  ng-model="vm.user.background" disabled /> -->
+
+                                                               </ul>
+    
+                                                            </div>
+                                                          </div>
+                                                  <!-- </div> -->
+                                          </div>
+                                 
+                                  </div>     
+                              </div>
+
+                              <div class="wizardendSubmit" style="text-align: center;">
+                                      <button type="button" class="btn btn-primary" style="width:65px !important; border: 1px solid #9ca4ab;background-color: white;color: #888;padding-left: 16px;padding-right: 16px;border-radius:4px;box-shadow: none !important;padding-top: 3px;padding-bottom: 3px;" wz-previous>Prev</button>
+                                      <input type="submit" class="btn btn-primary" style="width:65px !important;margin-left:10px;height: 27px;border-radius: 4px;padding-right: 16px;" ng-click="vm.save(addUserForm)"  ng-disabled="saveform.$invalid" ng-value="vm.customerid == null ? 'Create': 'Update'"/>                          
+                              </div>
+
+                              <!-- <button type="button"  style="width:65px !important;margin-left:10px;" class="btn btn-primary" ng-disabled="!infoform.$valid"> {{"vm.customerid == null ? 'CREATE': 'UPDATE'"}} </button> -->
+                    
+                          </ng-form>
+                              
+                          </wz-step>
+                      </wizard>
+
+                     
+                     
+
+      </div>
+  </div>
+</form>
+<style>
+  .wiardendSubmit {
+      margin-top:85px;
+  }
+  .modal-content {
+      background-color: white;
+      width: 80%;
+      left:10%;
+  }
+
+  .modal-body {
+  padding: 15px;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+  .macAddress label {
+      font-family: 'Roboto';
+      font-size: 20px;
+      vertical-align: middle;
+      text-align: center;
+  }
+
+  .macAddress .form-inline .form-control {
+      width: 35px;
+      border-radius: 0px;
+      padding: 0px 2px;
+      text-align: center;
+  }
+
+  .macAddress .form-inline span {
+      font-size: 17px;
+      font-family: 'Exo2SemiBold';
+      opacity: 1;
+      padding: 0px 5px;
+  }
+
+  label {
+      display: inline-block;
+      max-width: 100%;
+      font-weight: 425 !important;
+  }
+
+  textarea:focus, textarea.form-control:focus, input.form-control:focus, input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=number]:focus, [type=text].form-control:focus, [type=password].form-control:focus, [type=email].form-control:focus, [type=tel].form-control:focus, [contenteditable].form-control:focus {
+      -webkit-box-shadow: inset 0 -2px 0 #91d3cf;
+      box-shadow: inset 0 -2px 0 #91d3cf;
+  }
+
+  .devicesavebutton {
+      width: 350px;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      padding-left: 25px;
+      padding-right: 25px;
+      box-shadow: none !important;
+      height: 40px;
+      border-radius: 10px;
+      font-size: 14px;
+      margin-left: 0px;
+  }
+
+  .devicecancelbutton {
+      width: 290px;
+      background-color: white;
+      padding-right: 24px;
+      border-radius: 10px;
+      box-shadow: none !important;
+      border: none !important;
+  }
+
+  .modal-header {
+      padding: 0px;
+      background: none;
+      border: none;
+  }
+
+  .addborder {
+      border: 1px solid red !important;
+  }
+
+  .switch span {
+      width: 36px !important;
+      height: 16px !important;
+  }
+
+      .switch span:after {
+          width: 13px !important;
+      }
+
+  .strong {
+      color: #060;
+      border-color: #0F0;
+  }
+
+  .medium {
+      color: #C60;
+      border-color: #FC0;
+  }
+
+  .weak {
+      color: #900;
+      border-color: #F00;
+  }
+
+  .strength {
+      padding: 1px 10px;
+      border: 2px solid;
+      color: #FFF;
+  }
+
+  .form-control {
+      font-family: Roboto-Light !important;
+      font-size: 15px !important;
+  }
+
+  #scrolldiv::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+      background-color: #F5F5F5;
+  }
+
+  #scrolldiv::-webkit-scrollbar {
+      width: 5px;
+      background-color: #F5F5F5;
+  }
+
+  #scrolldiv::-webkit-scrollbar-thumb {
+      background-color: #999999;
+  }
+
+  .form-control {
+      margin-top: -10px;
+      font-size:12px !important;
+  }
+
+  .form-control {
+      margin-bottom:-2px !important;
+  }
+
+  .form-group
+  {
+      margin-bottom:20px !important;
+  }
+
+   .btn {
+      border-bottom: 1px solid #999999;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      -webkit-transition: all 0.4s;
+      -o-transition: all 0.4s;
+      transition: all 0.4s;
+  }
+
+  .btn-default:hover {
+      color: #444444;
+      background-color: transparent;
+      border-color: none;
+  }
+
+  .wiz-heading
+  {
+      text-align: center;
+  font-size: 16px;
+  margin-top: 10px;
+  font-weight: 500;
+  font-family: roboto;
+  }
+
+  .steps-indicator li a {
+      color: #000000;
+      text-decoration: none;
+      text-transform: none !important;
+      font-size:10px;
+      font-family: Roboto-Light !important;
+      transition: 0.25s;
+      cursor: pointer;
+      letter-spacing: 0.8px;
+}
+
+
+.steps-indicator li {
+position: relative;
+float: left;
+margin: 0;
+padding: 0;
+padding-top: 10px;
+text-align: center;
+line-height: 15px;
+}
+
+
+.steps-indicator {
+right: 0;
+bottom: 0;
+left: 0;
+margin: 0;
+padding: 20px 0 0 0;
+height: 30px;
+list-style: none;
+
+}
+.steps-indicator:before {
+background-color: #e6e6e6;
+content: '';
+position: absolute;
+height: 1px;
+}
+.steps-indicator.steps-2:before {
+left: calc(100% / 2 / 2);
+right: calc(100% / 2 / 2);
+}
+.steps-indicator.steps-3:before {
+left: calc(100% / 3 / 2);
+right: calc(100% / 3 / 2);
+}
+.steps-indicator.steps-4:before {
+left: calc(100% / 4 / 2);
+right: calc(100% / 4 / 2);
+}
+.steps-indicator.steps-5:before {
+left: calc(100% / 5 / 2);
+right: calc(100% / 5 / 2);
+}
+.steps-indicator.steps-6:before {
+left: calc(100% / 6 / 2);
+right: calc(100% / 6 / 2);
+}
+.steps-indicator.steps-7:before {
+left: calc(100% / 7 / 2);
+right: calc(100% / 7 / 2);
+}
+.steps-indicator.steps-8:before {
+left: calc(100% / 8 / 2);
+right: calc(100% / 8 / 2);
+}
+.steps-indicator.steps-9:before {
+left: calc(100% / 9 / 2);
+right: calc(100% / 9 / 2);
+}
+.steps-indicator.steps-10:before {
+left: calc(100% / 10 / 2);
+right: calc(100% / 10 / 2);
+}
+.steps-indicator * {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+.steps-indicator li a:before {
+position: absolute;
+top: -7px;
+left: calc(50% - 7px);
+width: 14px;
+height: 14px;
+border-radius: 100%;
+background-color: #e6e6e6;
+content: '';
+transition: 0.25s;
+}
+.steps-indicator li a:hover {
+color: #4d4d4d;
+}
+.steps-indicator.steps-2 li {
+width: calc(100% / 2);
+}
+.steps-indicator.steps-3 li {
+width: calc(100% / 3);
+}
+.steps-indicator.steps-4 li {
+width: calc(100% / 4);
+}
+.steps-indicator.steps-5 li {
+width: calc(100% / 5);
+}
+.steps-indicator.steps-6 li {
+width: calc(100% / 6);
+}
+.steps-indicator.steps-7 li {
+width: calc(100% / 7);
+}
+.steps-indicator.steps-8 li {
+width: calc(100% / 8);
+}
+.steps-indicator.steps-9 li {
+width: calc(100% / 9);
+}
+.steps-indicator.steps-10 li {
+width: calc(100% / 10);
+}
+.steps-indicator.steps-11 li {
+width: calc(100% / 11);
+}
+.steps-indicator li.default {
+pointer-events: none;
+}
+.steps-indicator li.default a:hover {
+color: #808080;
+}
+.steps-indicator li.current,
+.steps-indicator li.editing {
+pointer-events: none;
+}
+.steps-indicator li.current a:before {
+background-color: #18a79d;
+}
+.steps-indicator li.done a:before {
+background-color: #18a79d;
+}
+.steps-indicator li.editing a:before {
+background-color: #ff0000;
+}
+
+
+input[type="file"] {
+      display: none;
+  }
+
+
+</style>
+

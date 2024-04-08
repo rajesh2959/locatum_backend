@@ -1,0 +1,7 @@
+﻿<div class="modal-header clearfix">
+    <h3 class="modal-title pull-left"><i class="fa fa-file-pdf-o"></i> {{vm.reportName}}</h3>
+    <button type="submit" class="close pull-right" ng-click="vm.ok()">&times;</button>
+</div>
+<div class="modal-body">
+    <pdf-report iframesrc="vm.pdfUrl"></pdf-report>
+</div>

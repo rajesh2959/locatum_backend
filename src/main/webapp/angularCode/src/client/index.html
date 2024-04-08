@@ -1,0 +1,380 @@
+<html>
+<head>
+    <style>
+        .ng-hide {
+            display: none !important;
+        }
+
+        .spinner {
+            top: 40%;
+            left: 55%;
+            margin-left: -10% !important;
+            position: fixed;
+            margin: auto;
+            height: 100px;
+            width: 100px;
+            align-content: center;
+            animation: rotate 1s infinite linear;
+            border: 12px solid #1e96f0;
+            border: 12px solid rgba(30, 150, 240, 0.2);
+            border-right-color: #1caf9a;
+            border-radius: 50%;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <meta charset="utf-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <base href="/">
+
+    <link rel="shortcut icon" type="image/ico" href="images/fav.ico" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css" />
+    <!--<link rel="stylesheet" href="/src/client/app/drawfloorplan/ruler/ruler.css" />
+    <link rel="stylesheet" href="/src/client/styles/floorplanBuilder.css">-->
+    <!-- build:css styles/lib.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/angular-wizard/dist/angular-wizard.min.css" />
+    <link rel="stylesheet" href="/bower_components/components-font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/bower_components/chosen/chosen.css" />
+    <link rel="stylesheet" href="/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css" />
+    <link rel="stylesheet" href="/bower_components/angular-color-picker/dist/angularjs-color-picker.css" />
+    <link rel="stylesheet" href="/bower_components/bootstrap-multiselect/dist/css/bootstrap-multiselect.css" />
+    <link rel="stylesheet" href="/bower_components/gridstack/dist/gridstack.css" />
+    <link rel="stylesheet" href="/bower_components/angularjs-datepicker/dist/angular-datepicker.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css styles/app.css-->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/.tmp/NotificationBarModule.css">
+    <link rel="stylesheet" href="/.tmp/animate.min.css">
+    <link rel="stylesheet" href="/.tmp/blueimp-gallery.min.css">
+    <link rel="stylesheet" href="/.tmp/codemirror.css">
+    <link rel="stylesheet" href="/.tmp/dropzone.css">
+    <link rel="stylesheet" href="/.tmp/floorplanBuilder.css">
+    <link rel="stylesheet" href="/.tmp/fullcalendar.css">
+    <link rel="stylesheet" href="/.tmp/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="/.tmp/navbar-sticky-footer.css">
+    <link rel="stylesheet" href="/.tmp/ng-overlay.css">
+    <link rel="stylesheet" href="/.tmp/rickshaw.css">
+    <link rel="stylesheet" href="/.tmp/ruler.css">
+    <link rel="stylesheet" href="/.tmp/styles.css">
+    <link rel="stylesheet" href="/.tmp/summernote.css">
+    <!-- endinject -->
+    <!-- endbuild -->
+</head>
+<body ng-app="app" ng-controller="bodyController as vm" ng-class="vm.isOnLoginScreen() ? 'body-login' : 'page-container-boxed'">
+    <notifications-bar class="notifications"></notifications-bar>
+
+    <div ng-include="'app/layout/shell.html'"></div>
+    <div id="splash-page" ng-show="false">
+        <div class="page-splash">
+            <div class="page-splash-message">
+                <div id="loader-wrapper">
+                    <div id="loader"> </div>
+                    <div class="loader-section section-left"></div>
+                    <div class="loader-section section-right"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- build:js js/lib.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/bower_components/extras.angular.plus/ngplus-overlay.js"></script>
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/bower_components/angular-breadcrumb/release/angular-breadcrumb.js"></script>
+    <script src="/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/bower_components/angular-bootstrap-show-errors/src/showErrors.js"></script>
+    <script src="/bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+    <script src="/bower_components/angular-wizard/dist/angular-wizard.min.js"></script>
+    <script src="/bower_components/angular-google-analytics/dist/angular-google-analytics.min.js"></script>
+    <script src="/bower_components/bignumber.js/bignumber.js"></script>
+    <script src="/bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"></script>
+    <script src="/bower_components/angular-slimscroll-aiska/angular-slimscroll-aiska.js"></script>
+    <script src="/bower_components/chosen/chosen.jquery.js"></script>
+    <script src="/bower_components/angular-chosen-localytics/dist/angular-chosen.js"></script>
+    <script src="/bower_components/angular-google-chart/ng-google-chart.js"></script>
+    <script src="/bower_components/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="/bower_components/jquery.panzoom/dist/jquery.panzoom.js"></script>
+    <script src="/bower_components/svg-pan-zoom/dist/svg-pan-zoom.js"></script>
+    <script src="/bower_components/Snap.svg/dist/snap.svg-min.js"></script>
+    <script src="/bower_components/d3/d3.js"></script>
+    <script src="/bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="/bower_components/ng-file-upload-shim/ng-file-upload-shim.js"></script>
+    <script src="/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js"></script>
+    <script src="/bower_components/fabric.js/dist/fabric.min.js"></script>
+    <script src="/bower_components/tinycolor/tinycolor.js"></script>
+    <script src="/bower_components/angular-color-picker/dist/angularjs-color-picker.js"></script>
+    <script src="/bower_components/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
+    <script src="/bower_components/lodash/lodash.js"></script>
+    <script src="/bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="/bower_components/gridstack/dist/gridstack.js"></script>
+    <script src="/bower_components/gridstack-angular/dist/gridstack-angular.min.js"></script>
+    <script src="/bower_components/chart.js/dist/Chart.js"></script>
+    <script src="/bower_components/angular-chart.js/dist/angular-chart.js"></script>
+    <script src="/bower_components/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js"></script>
+    <script src="/bower_components/angularjs-datepicker/dist/angular-datepicker.js"></script>
+    <script src="/bower_components/ng-idle/angular-idle.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!--<script src="//cdn.jsdelivr.net/snap.svg/0.2.0/snap.svg.js"></script>-->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=AIzaSyBIb48XnrVG-JZvYup6AkfvNdCclhEnSwE" async defer></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular-animate.min.js"></script> -->
+    <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=" async defer></script>-->
+    <!-- build:js js/app.js-->
+    <!-- inject:js -->
+    <script src="/src/client/app/app.module.js"></script>
+    <script src="/src/client/app/adddevice/adddevice.module.js"></script>
+    <script src="/src/client/app/blocks/exception/exception.module.js"></script>
+    <script src="/src/client/app/blocks/logger/logger.module.js"></script>
+    <script src="/src/client/app/blocks/router/router.module.js"></script>
+    <script src="/src/client/app/core/core.module.js"></script>
+    <script src="/src/client/app/customizedalert/customizedalert.module.js"></script>
+    <script src="/src/client/app/dashboard/dashboard.module.js"></script>
+    <script src="/src/client/app/drawfloorplan/drawfloorplan.module.js"></script>
+    <script src="/src/client/app/floorplan/floorplan.module.js"></script>
+    <script src="/src/client/app/floorview/floorview.module.js"></script>
+    <script src="/src/client/app/gateway/gateway.module.js"></script>
+    <script src="/src/client/app/geoconfig/geoconfig.module.js"></script>
+    <script src="/src/client/app/geofence/geofence.module.js"></script>
+    <script src="/src/client/app/geofencealerts/geofencealerts.module.js"></script>
+    <script src="/src/client/app/inactivealerts/inactivealerts.module.js"></script>
+    <script src="/src/client/app/inactivecustomers/inactivecustomers.module.js"></script>
+    <script src="/src/client/app/layout/layout.module.js"></script>
+    <script src="/src/client/app/license/license.module.js"></script>
+    <script src="/src/client/app/login/login.module.js"></script>
+    <script src="/src/client/app/networkconfig/networkconfig.module.js"></script>
+    <script src="/src/client/app/reports/reports.module.js"></script>
+    <script src="/src/client/app/role/role.module.js"></script>
+    <script src="/src/client/app/support/support.module.js"></script>
+    <script src="/src/client/app/tag/tag.module.js"></script>
+    <script src="/src/client/app/upgrade/upgrade.module.js"></script>
+    <script src="/src/client/app/users/users.module.js"></script>
+    <script src="/src/client/app/venue/venue.module.js"></script>
+    <script src="/src/client/app/visualization/visualization.module.js"></script>
+    <script src="/src/client/app/adddevice/adddevice.controller.js"></script>
+    <script src="/src/client/app/adddevice/adddevice.route.js"></script>
+    <script src="/src/client/app/app.js"></script>
+    <script src="/src/client/app/app.run.js"></script>
+    <script src="/src/client/app/blocks/exception/exception-handler.provider.js"></script>
+    <script src="/src/client/app/blocks/exception/exception.js"></script>
+    <script src="/src/client/app/blocks/logger/logger.js"></script>
+    <script src="/src/client/app/blocks/router/router-helper.provider.js"></script>
+    <script src="/src/client/app/constants.js"></script>
+    <script src="/src/client/app/core/404.controller.js"></script>
+    <script src="/src/client/app/core/config.js"></script>
+    <script src="/src/client/app/core/constants.js"></script>
+    <script src="/src/client/app/core/core.route.js"></script>
+    <script src="/src/client/app/core/insufficientpermissions.controller.js"></script>
+    <script src="/src/client/app/customizedalert/customizedalert.controller.js"></script>
+    <script src="/src/client/app/customizedalert/customizedalert.route.js"></script>
+    <script src="/src/client/app/dashboard/adduseradmin.controller.js"></script>
+    <script src="/src/client/app/dashboard/adminhome.controller.js"></script>
+    <script src="/src/client/app/dashboard/adminhome.route.js"></script>
+    <script src="/src/client/app/dashboard/alert.controller.js"></script>
+    <script src="/src/client/app/dashboard/connectedtagtype.controller.js"></script>
+    <script src="/src/client/app/dashboard/dashboard.controller.js"></script>
+    <script src="/src/client/app/dashboard/dashboard.route.js"></script>
+    <script src="/src/client/app/dashboard/floortraffic.controller.js"></script>
+    <script src="/src/client/app/dashboard/home.controller.js"></script>
+    <script src="/src/client/app/dashboard/home.route.js"></script>
+    <script src="/src/client/app/device/registerdevice.controller.js"></script>
+    <script src="/src/client/app/device/registerdevice.route.js"></script>
+    <script src="/src/client/app/drawfloorplan/drawfloorplan.controller.js"></script>
+    <script src="/src/client/app/drawfloorplan/drawfloorplan.route.js"></script>
+    <script src="/src/client/app/drawfloorplan/modernizr.min.js"></script>
+    <script src="/src/client/app/drawfloorplan/ruler/jquery.ruler.js"></script>
+    <script src="/src/client/app/floorplan/addfloorplan.controller.js"></script>
+    <script src="/src/client/app/floorplan/addfloorplan.route.js"></script>
+    <script src="/src/client/app/floorplan/floorplan.controller.js"></script>
+    <script src="/src/client/app/floorplan/floorplan.route.js"></script>
+    <script src="/src/client/app/floorview/floorview.controller.js"></script>
+    <script src="/src/client/app/floorview/floorview.route.js"></script>
+    <script src="/src/client/app/gateway/gateway.controller.js"></script>
+    <script src="/src/client/app/gateway/gateway.route.js"></script>
+    <script src="/src/client/app/gateway/gatewayinfo.controller.js"></script>
+    <script src="/src/client/app/gateway/gatewayinfo.route.js"></script>
+    <script src="/src/client/app/gateway/gatewaystatus.controller.js"></script>
+    <script src="/src/client/app/gateway/gatewaystatus.route.js"></script>
+    <script src="/src/client/app/gateway/statushistory.controller.js"></script>
+    <script src="/src/client/app/gateway/statushistory.route.js"></script>
+    <script src="/src/client/app/geoconfig/geoconfig.controller.js"></script>
+    <script src="/src/client/app/geoconfig/geoconfig.route.js"></script>
+    <script src="/src/client/app/geofence/addgeofence.controller.js"></script>
+    <script src="/src/client/app/geofence/addgeofence.route.js"></script>
+    <script src="/src/client/app/geofence/geofence.controller.js"></script>
+    <script src="/src/client/app/geofence/geofence.route.js"></script>
+    <script src="/src/client/app/geofencealerts/addgeofencealerts.controller.js"></script>
+    <script src="/src/client/app/geofencealerts/addgeofencealerts.route.js"></script>
+    <script src="/src/client/app/geofencealerts/geofencealerts.controller.js"></script>
+    <script src="/src/client/app/geofencealerts/geofencealerts.route.js"></script>
+    <script src="/src/client/app/inactivealerts/inactivealerts.controller.js"></script>
+    <script src="/src/client/app/inactivealerts/inactivealerts.route.js"></script>
+    <script src="/src/client/app/inactivecustomers/inactivecustomers.controller.js"></script>
+    <script src="/src/client/app/inactivecustomers/inactivecustomers.route.js"></script>
+    <script src="/src/client/app/layout/body.controller.js"></script>
+    <script src="/src/client/app/layout/deviceModal.controller.js"></script>
+    <script src="/src/client/app/layout/devices-modal.controller.js"></script>
+    <script src="/src/client/app/layout/directives/alphabetFilter.js"></script>
+    <script src="/src/client/app/layout/directives/angular-google-maps-native.js"></script>
+    <script src="/src/client/app/layout/directives/compareTo.directive.js"></script>
+    <script src="/src/client/app/layout/directives/datepicker.js"></script>
+    <script src="/src/client/app/layout/directives/excelExportDirectives.js"></script>
+    <script src="/src/client/app/layout/directives/floatDirective.js"></script>
+    <script src="/src/client/app/layout/directives/formPanelDirective.js"></script>
+    <script src="/src/client/app/layout/directives/hyperlinkButtonDirective.js"></script>
+    <script src="/src/client/app/layout/directives/money.directive.js"></script>
+    <script src="/src/client/app/layout/directives/multipleEmailsValidation.js"></script>
+    <script src="/src/client/app/layout/directives/navButtonDirective.js"></script>
+    <script src="/src/client/app/layout/directives/navButtonPlaceholderDirective.js"></script>
+    <script src="/src/client/app/layout/directives/numericDirective.js"></script>
+    <script src="/src/client/app/layout/directives/numericWithPlusMinus.js"></script>
+    <script src="/src/client/app/layout/directives/passwordStrength.js"></script>
+    <script src="/src/client/app/layout/directives/pdfReportDirective.js"></script>
+    <script src="/src/client/app/layout/directives/pdfReportLoadingAnimationDirective.js"></script>
+    <script src="/src/client/app/layout/directives/sectionHeadingDirective.js"></script>
+    <script src="/src/client/app/layout/directives/selectSearchDirective.js"></script>
+    <script src="/src/client/app/layout/directives/selectTextDirective.js"></script>
+    <script src="/src/client/app/layout/directives/sortableTableHeader.js"></script>
+    <script src="/src/client/app/layout/directives/validationMessageDirective.js"></script>
+    <script src="/src/client/app/layout/genericDeleteConfirmationModal.controller.js"></script>
+    <script src="/src/client/app/layout/genericMessageModal.controller.js"></script>
+    <script src="/src/client/app/layout/genericQuestionModal.controller.js"></script>
+    <script src="/src/client/app/layout/LayoutController.js"></script>
+    <script src="/src/client/app/layout/pdfReportModal.controller.js"></script>
+    <script src="/src/client/app/layout/shell.controller.js"></script>
+    <script src="/src/client/app/license/license.controller.js"></script>
+    <script src="/src/client/app/license/license.route.js"></script>
+    <script src="/src/client/app/login/login.controller.js"></script>
+    <script src="/src/client/app/login/login.route.js"></script>
+    <script src="/src/client/app/login/reset.controller.js"></script>
+    <script src="/src/client/app/login/reset.route.js"></script>
+    <script src="/src/client/app/login/resetpassword.controller.js"></script>
+    <script src="/src/client/app/login/resetpassword.route.js"></script>
+    <script src="/src/client/app/networkconfig/networkconfig.controller.js"></script>
+    <script src="/src/client/app/networkconfig/networkconfig.route.js"></script>
+    <script src="/src/client/app/reports/addreport.controller.js"></script>
+    <script src="/src/client/app/reports/addreport.route.js"></script>
+    <script src="/src/client/app/reports/reportconfirmation.controller.js"></script>
+    <script src="/src/client/app/reports/reports.controller.js"></script>
+    <script src="/src/client/app/reports/reports.route.js"></script>
+    <script src="/src/client/app/role/role.controller.js"></script>
+    <script src="/src/client/app/role/role.route.js"></script>
+    <script src="/src/client/app/services/addUserService.js"></script>
+    <script src="/src/client/app/services/adminHomeService.js"></script>
+    <script src="/src/client/app/services/AuthService.js"></script>
+    <script src="/src/client/app/services/customizedalert.service.js"></script>
+    <script src="/src/client/app/services/DashboardDataService.js"></script>
+    <script src="/src/client/app/services/DataService.js"></script>
+    <script src="/src/client/app/services/DateService.js"></script>
+    <script src="/src/client/app/services/drawfloorService.js"></script>
+    <script src="/src/client/app/services/floordataservice.js"></script>
+    <script src="/src/client/app/services/gatewayinfoService.js"></script>
+    <script src="/src/client/app/services/gatewayService.js"></script>
+    <script src="/src/client/app/services/gatewaystatusService.js"></script>
+    <script src="/src/client/app/services/geoConfigService.js"></script>
+    <script src="/src/client/app/services/geoFenceAlertService.js"></script>
+    <script src="/src/client/app/services/geoFenceService.js"></script>
+    <script src="/src/client/app/services/http.interceptor.service.js"></script>
+    <script src="/src/client/app/services/inactiveAlertsService.js"></script>
+    <script src="/src/client/app/services/inactiveCustomersService.js"></script>
+    <script src="/src/client/app/services/InsufficientPermissionService.js"></script>
+    <script src="/src/client/app/services/licenseService.js"></script>
+    <script src="/src/client/app/services/linqService.js"></script>
+    <script src="/src/client/app/services/MessagingService.js"></script>
+    <script src="/src/client/app/services/ModalService.js"></script>
+    <script src="/src/client/app/services/navigation.js"></script>
+    <script src="/src/client/app/services/NotificationBarModule.js"></script>
+    <script src="/src/client/app/services/NotificationBarService.js"></script>
+    <script src="/src/client/app/services/QueryBuilderService.js"></script>
+    <script src="/src/client/app/services/registerDeviceService.js"></script>
+    <script src="/src/client/app/services/reportService.js"></script>
+    <script src="/src/client/app/services/roleService.js"></script>
+    <script src="/src/client/app/services/session.js"></script>
+    <script src="/src/client/app/services/statushistoryService.js"></script>
+    <script src="/src/client/app/services/supportservice.js"></script>
+    <script src="/src/client/app/services/tagService.js"></script>
+    <script src="/src/client/app/services/upgradedatahistoryservice.js"></script>
+    <script src="/src/client/app/services/upgradedataservice.js"></script>
+    <script src="/src/client/app/services/userService.js"></script>
+    <script src="/src/client/app/services/venuedataservice .js"></script>
+    <script src="/src/client/app/services/venuesession.js"></script>
+    <script src="/src/client/app/services/visualizationservice.js"></script>
+    <script src="/src/client/app/support/support.controller.js"></script>
+    <script src="/src/client/app/support/support.route.js"></script>
+    <script src="/src/client/app/tag/tag.controller.js"></script>
+    <script src="/src/client/app/tag/tag.route.js"></script>
+    <script src="/src/client/app/tag/tagdashboard.controller.js"></script>
+    <script src="/src/client/app/tag/tagdashboard.route.js"></script>
+    <script src="/src/client/app/tag/tagedit.controller.js"></script>
+    <script src="/src/client/app/tag/tagedit.route.js"></script>
+    <script src="/src/client/app/upgrade/upgrade.controller.js"></script>
+    <script src="/src/client/app/upgrade/upgrade.route.js"></script>
+    <script src="/src/client/app/upgrade/upgradehistory.controller.js"></script>
+    <script src="/src/client/app/upgrade/upgradehistory.route.js"></script>
+    <script src="/src/client/app/users/about.controller.js"></script>
+    <script src="/src/client/app/users/adduser.controller.js"></script>
+    <script src="/src/client/app/users/profile.controller.js"></script>
+    <script src="/src/client/app/users/profile.route.js"></script>
+    <script src="/src/client/app/users/resetPassword.controller.js"></script>
+    <script src="/src/client/app/users/users.controller.js"></script>
+    <script src="/src/client/app/users/users.route.js"></script>
+    <script src="/src/client/app/utils/utils.js"></script>
+    <script src="/src/client/app/venue/addvenue.controller.js"></script>
+    <script src="/src/client/app/venue/addvenue.route.js"></script>
+    <script src="/src/client/app/venue/venue.controller.js"></script>
+    <script src="/src/client/app/venue/venue.route.js"></script>
+    <script src="/src/client/app/venue/venuealert.controller.js"></script>
+    <script src="/src/client/app/viewmodels/simpleListScreenViewModel.js"></script>
+    <script src="/src/client/app/visualization/addvisualization.controller.js"></script>
+    <script src="/src/client/app/visualization/addvisualization.route.js"></script>
+    <script src="/src/client/app/visualization/visualconfirmation.controller.js"></script>
+    <script src="/src/client/app/visualization/visualization.controller.js"></script>
+    <script src="/src/client/app/visualization/visualization.route.js"></script>
+    <!-- endinject -->
+    <!-- inject:templates:js -->
+    <!-- endinject -->
+    <!-- endbuild -->
+</body>
+</html>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+<script type="text/javascript" language="javascript">
+    if (!Modernizr.canvas) {
+        window.location = "browsercompatibility.html";
+    }
+</script>
+<!--[if IE 9]>
+    <style>
+        select {
+            background: transparent !important;
+            padding: 0px 0px 0px 0px !important;
+            font-size: 16px !important;
+            border: 1px solid gray !important;
+            border-radius: 5px !important;
+            height: 37px !important;
+        }
+    </style>
+<![endif]-->

@@ -1,0 +1,440 @@
+<title ng-bind="customerName" ng-if="!vm.isOnLoginScreen()"></title>
+<div data-ng-controller="shellController as vm">
+    <div ng-if="!vm.isAuthenticated">
+        <div style=" width: 100%;height: 100%; background: #1caf9a;"></div>
+    </div>
+
+    <div ng-class="vm.isOnLoginScreen() ? 'body-login' : 'page-container'">
+        <!-- START PAGE SIDEBAR -->
+        <div class="" ng-class="vm.isOnAdmininScreen() ? 'admin-page-sidebar' : 'page-sidebar'" ng-show="!vm.isOnLoginScreen()">
+            <!-- START X-NAVIGATION -->
+            <ul class="x-navigation">
+                <li class="xn-logo" ng-click="vm.onLocatumLogoClick()">
+                    <a href="index.html" ng-if="vm.isOnAdmininScreen() ? 'admin-page-logo' : ''">
+                        <img src="../images/locatumlogo.png" alt="Locatum" href="index.html" />
+                        <a ng-if="!vm.isOnAdmininScreen()">
+                            <img ng-if="vm.cid != undefined" src="{{vm.logoUrl}}" alt="Locatum" style="cursor: pointer" />
+                        </a>
+                    </a>
+                    <a ng-show="!vm.isOnAdmininScreen()" href="#" class="x-navigation-control" title="Menu"></a>
+                </li>
+                <li class="xn-profile">
+                    <a href="#" class="profile-mini">
+                        <img src="../images/locatumlogo.png" alt="Locatum" />
+                    </a>
+                </li>
+
+                <!-- Start Venue Menu Pages -->
+                <li ng-show="vm.isVenue" ng-class="{ active:vm.isOnvenueScreen()}" style="padding-left:5px !important;padding-top:25px;">
+                    <a ui-sref="dashboard.venue" class=""><span class="fa fa-home"></span><span class="grey-txt">Venue</span></a>
+                </li>
+                <li ng-show="vm.isVenue" ng-class="{ active: vm.isOndashboardScreen()}" style="padding-left:5px !important">
+                    <a ui-sref="dashboard.home({sid:venueId})" class=""><span class="fa fa-dashboard"></span><span class="">Dashboard</span></a>
+                </li>
+                <li ui-sref="dashboard.floorplan" ng-show="vm.isVenue" ng-class="{ active: vm.isOnfloorplanScreen()&&(!vm.isActive('/adddevice/0'))}" class="xn-openable" style="padding-left:5px !important">
+                    <a ui-sref="dashboard.floorplan" class=""><span class="fa icon-Floor" style="vertical-align:middle;"></span> <span class="">Floor</span></a>
+                    <ul>
+                        <li ng-class="{ active: vm.isActive('/floorplan') || vm.isActive('/addfloorplan')}"><a ui-sref="dashboard.floorplan" class="subtitle "> Floor Plans</a></li>
+                        <li ng-class="{ active: vm.isOnfloorviewScreen()}"><a ui-sref="dashboard.floorview({spid:0})" class="subtitle "> Floor View</a></li>
+                        <li ng-class="{ active: vm.isActive('/networkconfig')||((vm.isActive('/adddevice'))&&(!vm.isActive('/adddevice/0')))}"><a ui-sref="dashboard.networkconfig({spid:0})" class="subtitle "> Network Config</a></li>
+                        <li ng-class="{ active: vm.isActive('/geoconfig')}"><a ui-sref="dashboard.geoconfig({spid:0})" class="subtitle "> Geo Config</a></li>
+                        <li ng-class="{ active: (vm.isActive('/geofence')||vm.isActive('/addgeofence'))&&(!vm.isActive('/addgeofencealerts'))}"><a ui-sref="dashboard.geofence({spid:0})" class="subtitle " ng-click="vm.fencecache()"> Geofence</a></li>
+                    </ul>
+                </li>
+                <li ng-show="vm.isVenue" ng-class="{ active: vm.isOngatewayScreen()||(vm.isActive('/adddevice/0'))}" style="padding-left:5px !important">
+                    <a ui-sref="dashboard.gateway" href="" class=""><span class="fa icon-APs" style="vertical-align:middle;"></span><span class="">Gateway</span></a>
+                </li>
+                <li ng-show="vm.isVenue" ng-class="{ active: vm.isOntagScreen()}" style="padding-left:5px !important">
+                    <a ui-sref="dashboard.tag" class=""><span class="fa fa-tag"></span><span class="xn-text">Tags</span></a>
+                </li>
+
+
+                <!-- End Venue Menu Pages -->
+                <!-- Start Report Menu Pages -->
+                <li ng-show="vm.isReports" ng-class="{ active:vm.isOnvisualizationScreen()}" style="padding-left:15px !important;padding-top:20px;">
+                    <a ui-sref="dashboard.visualization" class=""><span class="fa fa-th-large"></span><span class="">Visualization</span></a>
+                </li>
+
+                <li ng-show="vm.isReports" ng-class="{ active:vm.isOnreportScreen()}" style="padding-left:15px !important;">
+                    <a ui-sref="dashboard.reports" class=""><span class="fa icon-Report" style="vertical-align: bottom;"></span><span class="">Reports</span></a>
+                </li>
+
+                <!-- End Report Menu Pages -->
+                <!-- Start Users Menu Pages -->
+                <li ng-show="vm.isUsers" ng-class="{ active: vm.isuserScreen()}" style="padding-left:15px !important;padding-top:15px;">
+                    <a ui-sref="dashboard.users" class=""><span class="fa icon-user1" style="vertical-align: bottom;"></span><span class="xn-text">Users</span></a>
+
+                </li>
+                <li ng-show="vm.isUsers" ng-class="{ active: vm.isroleScreen()}" style="padding-left:15px !important;">
+                    <a ui-sref="dashboard.role" class=""><span class="fa icon-role1" style="vertical-align: bottom;"></span><span class="xn-text">Role</span></a>
+                </li>
+
+                <li ng-show="vm.isUsers" ng-class="{ active: vm.issupportScreen()}" style="padding-left:15px !important;">
+                    <a ui-sref="dashboard.support" class=""><span class="fa icon-support1" style="vertical-align: bottom;"></span><span class="xn-text">Support</span></a>
+                </li>
+
+                <li ng-show="vm.isUsers" ng-class="{ active: vm.islicenseCustomers()}" style="padding-left:15px !important;">
+                    <a ui-sref="dashboard.license" class=""><span class="fa fa-vcard-o" style="vertical-align: bottom;"></span><span class="xn-text">Licensed Customers</span></a>
+                </li>
+
+                <li ng-show="vm.isUsers" ng-class="{ active: vm.isinactiveCustomers()}" style="padding-left:15px !important;">
+                    <a ui-sref="dashboard.inactivecustomers" class=""><span class="fa fa-user-times" style="vertical-align: bottom;"></span><span class="xn-text">Inactive Customers</span></a>
+                </li>
+
+                <!-- End Users Menu Pages -->
+                <!-- Start upgrade Menu Pages -->
+                <li ng-show="vm.isUpgrade" ng-class="{ active: vm.isupgradeScreen()}" style="padding-left:15px !important;padding-top:15px;">
+                    <a ui-sref="dashboard.upgrade" class=""><span class="fa fa-user" style="vertical-align: bottom;margin-bottom: 3px;"></span><span class="xn-text">Upgrade</span></a>
+                </li>
+                <li ng-show="vm.isUpgrade" ng-class="{ active: vm.isupgradehistoryScreen()}" style="padding-left:15px !important;">
+                    <a ui-sref="dashboard.upgradehistory" class=""><span class="fa fa-history" style="vertical-align: bottom;"></span><span class="xn-text">Upgrade History</span></a>
+                </li>
+                <li ng-show="vm.isgeofencealerts" ng-class="{ active: vm.isOninactivityalertsScreen()}" style="padding-left:2px !important;padding-top:20px;">
+                    <a ui-sref="dashboard.inactivealerts" class=""><span class="fa icon-bell" style="vertical-align: bottom;"></span><span class="xn-text">Inactivity Alerts</span></a>
+                </li>
+                <li ng-show="vm.isgeofencealerts" ng-class="{ active: vm.isOngeofencealertsScreen()}" style="padding-left:2px !important;padding-top:1px;">
+                    <a ui-sref="dashboard.geofencealerts" class=""><span class="fa icon-geofence" style="vertical-align: bottom;"></span><span class="xn-text">Geofence Alerts</span></a>
+                </li>
+                <!-- End upgrade Menu Pages -->
+                <!-- Start my account Menu Pages -->
+                <li ng-show="vm.isMyAccount" style="padding-left:15px !important;padding-top:15px;background-color:#18a79d;">
+                    <center>
+                        <div class="row prof-action">
+                            <div class="col-md-12">
+                                <div class="col-md-2 pull-right">
+
+                                    <a href=""><i class="fa fa-times" style="color:white;"></i></a>
+                                </div>
+                                <div class="col-md-2 pull-right">
+
+                                    <span class="browseButtn file-background btn btn-primary btn-file">
+                                        <label style="cursor:pointer;" title="Click to choose a file">
+                                            <input id="upload" name="fileInput" type="file" st class="fa fa-upload"
+                                                   nv-file-select="" nv-file-drop="" uploader="vm.uploader" accept="text/plain" />
+                                            <i class="fa fa-camera" alt="Click to choose a file" style="color:white;font-size:14px;"
+                                               aria-hidden="true">&nbsp;</i>
+                                        </label>
+                                    </span>
+
+
+                                </div>
+                            </div>
+                            <div class="user-icon-small" style="height:100px; width:100px;">
+                                <img src="http://locatum.qubercomm.com/facesix/web/account/profilepic?userid={{vm.userId}}" alt="" style="height: 100px;width: 100px;margin-left: 0px;margin-top: 0px;border: solid 2px white" class="img-circle" />
+                            </div>
+                            <p class="xn-profile">{{vm.username}}</p>
+                            <p class="xn-profile profile-smallp" style="text-transform:capitalize">{{vm.role}}</p>
+                        </div>
+                    </center>
+                </li>
+                <li ng-show="vm.isMyAccount" ng-class="{ active: vm.ismyaccountScreen()}" style="padding-left:15px !important;padding-top:15px;">
+                    <a ui-sref="dashboard.profile" ng-click="vm.myaccount();" class=""><span class="fa icon-user" style="vertical-align: bottom;"></span><span class="xn-text">My Profile</span></a>
+                </li>
+                <li ng-show="vm.isMyAccount" style="padding-left:31px !important;">
+                    <span ng-click="vm.resetPassword();" style="cursor:pointer"><span class="fa icon-reset" style="vertical-align: bottom;color:#9A9A9A"></span><span class="xn-text">&nbsp;Reset Password</span></span>
+                </li>
+                <li ng-show="vm.isMyAccount" style="padding-left:31px !important;padding-top:15px;">
+                    <span ng-click="vm.about();" style="cursor:pointer"><span class="fa icon-about" style="vertical-align: bottom;color:#9A9A9A"></span><span class="xn-text">&nbsp;About</span></span>
+                </li>
+                <!-- End  my account Menu Pages -->
+
+            </ul>
+            <!--<ul class="x-navigation">-->
+            <!--</ul>-->
+            <!-- END X-NAVIGATION -->
+        </div>
+        <!-- END PAGE SIDEBAR -->
+        <!-- PAGE CONTENT -->
+        <div class="page-content" ng-class="vm.isOnAdmininScreen() ? 'admin-page-content' : ''">
+            <!-- START X-NAVIGATION VERTICAL -->
+            <ul class="x-navigation x-navigation-horizontal x-navigation-panel" style="border-bottom: solid 1px #e0dfdf !important;">
+                <div class="topmenuview">
+                    <div style="margin-left:-120px;margin-top: 8px;" ng-show="(vm.isVenue||vm.isReports||vm.isUpgrade||vm.isgeofencealerts || (vm.role=='appadmin'))">
+                        <div style="margin-left:20px;">
+                            <li class="layoutmenu"
+                                ng-class="{ activemenu:(vm.isActive('/login') || vm.isActive('/venue') || vm.isActive('/dashboard')||vm.isActive('/floor')||vm.isActive('/drawfloorplan')||vm.isActive('/networkconfig')||vm.isActive('/geoconfig')||vm.isActive('/tag') ||vm.isActive('/geofence') ||vm.isActive('/gateway') ||vm.isActive('/adddevice')||vm.isActive('/tag')||vm.isActive('/registerdevice')||vm.isActive('/addgeofence'))&&(!vm.isActive('/addgeofencealerts'))}"
+                                ng-init="vm.isVenue=(vm.isActive('/login') || vm.isActive('/venue') || vm.isActive('/dashboard')||vm.isActive('/floor')||vm.isActive('/drawfloorplan')||vm.isActive('/networkconfig')||vm.isActive('/geoconfig') ||vm.isActive('/geofence') ||vm.isActive('/gateway') ||vm.isActive('/adddevice')||vm.isActive('/tag')||vm.isActive('/registerdevice')||vm.isActive('/addgeofence'))&&(!vm.isActive('/addgeofencealerts'))"
+                                ng-click="vm.isVenue=true;vm.isReports=false;vm.isUsers=false;vm.isUpgrade=false;vm.isgeofencealerts=false;vm.isMyAccount=false">
+                                <a ui-sref="dashboard.venue" class="" style="margin-top:8px;padding-left:20px;"><span class="fa icon-xen-location" style="vertical-align: inherit;font-size:16px !important"></span><span class="xn-text-li">Venue</span></a>
+                                <div ng-show="(vm.isActive('/venue') ||  vm.isActive('/dashboard')||vm.isActive('/floor')||vm.isActive('/drawfloorplan')||vm.isActive('/networkconfig')||vm.isActive('/geoconfig') ||vm.isActive('/geofence')||vm.isActive('/addgeofence') ||vm.isActive('/gateway') ||vm.isActive('/tag') ||vm.isActive('/registerdevice'))&& (!vm.isActive('/addgeofencealerts'))" class="menu-active-border"></div>
+
+
+                            </li>
+
+                        </div>
+                        <div style="margin-left:20px;">
+                            <li class="layoutmenu"
+                                ng-class="{ activemenu: vm.isActive('/fencealerts')|| vm.isActive('/inactivealerts')||vm.isActive('/addgeofencealerts')||vm.isActive('/customizedalert')}"
+                                ng-init="vm.isgeofencealerts=vm.isActive('/fencealerts')|| vm.isActive('/inactivealerts')||vm.isActive('/addgeofencealerts')||vm.isActive('/customizedalert')"
+                                ng-click="vm.isUpgrade=false;vm.isVenue=false;vm.isReports=false;vm.isUsers=false;vm.isgeofencealerts=true;vm.isMyAccount=false">
+                                <a ng-show="vm.isVenue||vm.isReports||vm.isUsers||vm.isUpgrade||vm.isgeofencealerts||vm.isMyAccount" ui-sref="dashboard.inactivealerts" class="mb-control" style="background:none !important;color: #9ca4ab;     padding-bottom: 10px;padding-left:32px;margin-top:8px;padding-left:30px;">
+                                    <span class="fa icon-bell1" style="vertical-align: bottom;" ng-click="vm.isgeofencealerts=true;vm.isVenue=false;vm.isReports=false;vm.isUsers=false;vm.isUpgrade=false;vm.isMyAccount=false"></span><span class="xn-text-li">Alerts</span>
+                                </a>
+                                <div ng-show="vm.isActive('/fencealerts')|| vm.isActive('/inactivealerts')||vm.isActive('/addgeofencealerts')||vm.isActive('/customizedalert')" class="menu-active-border"></div>
+                            </li>
+                        </div>
+                        <div style="margin-left:20px;">
+                            <li class="layoutmenu" ng-class="{ activemenu: vm.isActive('/reports')||vm.isActive('/visualization')||vm.isActive('/addvisualization')||vm.isActive('/addreport')}" ng-init="vm.isReports=vm.isActive('/reports')||vm.isActive('/visualization')" ng-click="vm.isReports=true ;vm.isVenue=false;vm.isUsers=false;vm.isUpgrade=false;vm.isgeofencealerts=false;vm.isMyAccount=false">
+                                <a ui-sref="dashboard.visualization" class="" style="margin-top:8px;padding-left:30px;"><span class="fa icon-Report" style="vertical-align: bottom;"></span><span class="xn-text-li">Reports</span></a>
+                                <div ng-show="vm.isActive('/reports') || vm.isActive('/visualization')||vm.isActive('/addvisualization')||vm.isActive('/addreport')" class="menu-active-border"></div>
+                            </li>
+                        </div>
+
+                        <!-- <div style="margin-left:20px;">
+                        <li class="layoutmenu" ng-class="{ activemenu: vm.isActive('/users')|| vm.isActive('/support') ||vm.isActive('/role')}" ng-init="vm.isUsers=vm.isActive('/users')||vm.isActive('/support')||vm.isActive('/role')" ng-click="vm.isUsers=true;vm.isVenue=false;vm.isReports=false;vm.isUpgrade=false;vm.isgeofencealerts=false;vm.isMyAccount=false">
+                            <a ui-sref="dashboard.users" class="" style="margin-top:8px;padding-left:30px;"><span class="fa icon-user" style="vertical-align: bottom;"></span><span class="xn-text-li">Users</span></a>
+                            <div ng-show="vm.isActive('/users')|| vm.isActive('/support') ||vm.isActive('/role')" class="menu-active-border"></div>
+                        </li>
+                    </div> -->
+
+                        <div style="margin-left:20px;">
+                            <li class="layoutmenu" ng-class="{ activemenu: vm.isActive('/upgrade') || vm.isActive('/upgradehistory')}" ng-init="vm.isUpgrade=vm.isActive('/upgrade') || vm.isActive('/upgradehistory')" ng-click="vm.isUpgrade=true;vm.isVenue=false;vm.isReports=false;vm.isUsers=false;vm.isgeofencealerts=false;vm.isMyAccount=false">
+                                <a ui-sref="dashboard.upgrade" class="" style="margin-top:8px;padding-left:30px;"><span class="fa icon-upgrade" style="vertical-align: sub;"></span><span class="xn-text-li" style="font-family:roboto ">Upgrade</span></a>
+                                <div ng-show="vm.isActive('/upgrade') || vm.isActive('/upgradehistory')" class="menu-active-border"></div>
+                            </li>
+                        </div>
+                        <!-- <div style="margin-left:20px;cursor: pointer;" ng-show="vm.isActive('/networkconfig')">
+                        <li class="layoutmenu" ng-class="{ activemenu:vm.isActive('/networkconfig')}"  ng-init="vm.isTree=vm.isActive('/networkconfig')" ng-click="vm.showTree()"
+                             class="" style="margin-top:8px;padding-left:30px;"><span class="fa icon-tree" style="vertical-align: sub;"></span><span class="xn-text-li" style="margin-left: 12px;color: #9f9f9f;">Tree</span>
+                            <div ng-show="vm.showTreeActive" class="menu-active-borderTree"></div>
+                        </li>
+                    </div> -->
+                    </div>
+
+                    <!-- </div> -->
+                    <li class="pull-right">
+                        <a href="" class="mb-control" ng-click="vm.logout()" title="Logout" style="background:none !important;font-family: 'Roboto';font-weight:400;font-size: 13px;color: #999999; padding-top: 14px;margin-right:30px;">Logout</a>
+                    </li>
+                    <li class="pull-right">
+                        <!--<a href="" class="mb-control" ng-class="{ activemenu: vm.isActive('/profile')}" ng-init="vm.isMyAccount=vm.isActive('/profile')" ng-click="" title="My Account" style="background:none !important;font-family: 'Roboto';font-weight:400;font-size: 13px;color: #999999; padding-top: 14px;">-->
+                        <a href="" class="mb-control" ng-class="{ activemenu: vm.isActive('/profile')}" ng-init="vm.isMyAccount=vm.isActive('/profile')" ng-click="vm.myaccount();" " title="My Account" style="background:none !important;font-family: 'Roboto';font-weight:400;font-size: 13px;color: #999999; padding-top: 14px;">
+                            <span class="fa fa-user-circle-o" style="vertical-align: bottom;color:#8b91a0;padding-bottom:2px;font-size:16px;"></span>My Account
+                        </a>
+                    </li>
+                    <li class="pull-right">
+                        <a ui-sref="dashboard.users" class="mb-control" ng-class="{ activemenu: vm.isActive('/users')|| vm.isActive('/support') ||vm.isActive('/role')}" title="Users"
+                           ng-click="vm.isUsers=true;vm.isVenue=false;vm.isReports=false;vm.isUpgrade=false;vm.isgeofencealerts=false;vm.isMyAccount=false"
+                           style="background:none !important;font-family: 'Roboto';font-weight:400;font-size: 13px;color: #999999; padding-top: 13px;">
+                            <span class="fa fa icon-user1" style="vertical-align: bottom;color:#8b91a0;padding-bottom:0px;font-size:16px;"></span>Users
+                        </a>
+                    </li>
+                </div>
+                <div class="tab-view" style="background-color:white;height:140px;">
+                    <div style="margin-left:-120px;margin-top: 8px;" ng-show="(vm.isVenue||vm.isReports||vm.isUpgrade||vm.isgeofencealerts || (vm.role=='appadmin'))">
+                        <!-- (vm.isMyAccount && vm.role=='appadmin')-->
+                        <div style="margin-left:120px;">
+                            <li class="layoutmenu"
+                                ng-class="{ activemenu:(vm.isActive('/login') || vm.isActive('/venue') || vm.isActive('/dashboard')||vm.isActive('/floor')||vm.isActive('/drawfloorplan')||vm.isActive('/networkconfig')||vm.isActive('/geoconfig')||vm.isActive('/tag') ||vm.isActive('/geofence') ||vm.isActive('/gateway') ||vm.isActive('/adddevice')||vm.isActive('/tag')||vm.isActive('/registerdevice')||vm.isActive('/addgeofence'))&&(!vm.isActive('/addgeofencealerts'))}"
+                                ng-init="vm.isVenue=(vm.isActive('/login') || vm.isActive('/venue') || vm.isActive('/dashboard')||vm.isActive('/floor')||vm.isActive('/drawfloorplan')||vm.isActive('/networkconfig')||vm.isActive('/geoconfig') ||vm.isActive('/geofence') ||vm.isActive('/gateway') ||vm.isActive('/adddevice')||vm.isActive('/tag')||vm.isActive('/registerdevice')||vm.isActive('/addgeofence'))&&(!vm.isActive('/addgeofencealerts'))"
+                                ng-click="vm.isVenue=true;vm.isReports=false;vm.isUsers=false;vm.isUpgrade=false;vm.isgeofencealerts=false;vm.isMyAccount=false">
+                                <a ui-sref="dashboard.venue" class="" style="margin-top:8px;padding-left:20px;"><span class="fa icon-xen-location" style="vertical-align: inherit;font-size:16px !important"></span><span class="xn-text-li">Venue</span></a>
+                                <div ng-show="(vm.isActive('/venue') ||  vm.isActive('/dashboard')||vm.isActive('/floor')||vm.isActive('/drawfloorplan')||vm.isActive('/networkconfig')||vm.isActive('/geoconfig') ||vm.isActive('/geofence')||vm.isActive('/addgeofence') ||vm.isActive('/gateway') ||vm.isActive('/tag') ||vm.isActive('/registerdevice'))&& (!vm.isActive('/addgeofencealerts'))" class="menu-active-border"></div>
+
+
+                            </li>
+
+                        </div>
+                        <div style="margin-left:20px;">
+                            <li class="layoutmenu"
+                                ng-class="{ activemenu: vm.isActive('/fencealerts')|| vm.isActive('/inactivealerts')||vm.isActive('/addgeofencealerts')||vm.isActive('/customizedalert')}"
+                                ng-init="vm.isgeofencealerts=vm.isActive('/fencealerts')|| vm.isActive('/inactivealerts')||vm.isActive('/addgeofencealerts')||vm.isActive('/customizedalert')"
+                                ng-click="vm.isUpgrade=false;vm.isVenue=false;vm.isReports=false;vm.isUsers=false;vm.isgeofencealerts=true;vm.isMyAccount=false">
+                                <a ng-show="vm.isVenue||vm.isReports||vm.isUsers||vm.isUpgrade||vm.isgeofencealerts||vm.isMyAccount" ui-sref="dashboard.inactivealerts" class="mb-control" style="background:none !important;color: #9ca4ab;     padding-bottom: 10px;padding-left:32px;margin-top:8px;padding-left:30px;">
+                                    <span class="fa icon-bell1" style="vertical-align: bottom;" ng-click="vm.isgeofencealerts=true;vm.isVenue=false;vm.isReports=false;vm.isUsers=false;vm.isUpgrade=false;vm.isMyAccount=false"></span><span class="xn-text-li">Alerts</span>
+                                </a>
+                                <div ng-show="vm.isActive('/fencealerts')|| vm.isActive('/inactivealerts')||vm.isActive('/addgeofencealerts')||vm.isActive('/customizedalert')" class="menu-active-border"></div>
+                            </li>
+                        </div>
+                        <div style="margin-left:20px;">
+                            <li class="layoutmenu" ng-class="{ activemenu: vm.isActive('/reports')||vm.isActive('/visualization')||vm.isActive('/addvisualization')||vm.isActive('/addreport')}" ng-init="vm.isReports=vm.isActive('/reports')||vm.isActive('/visualization')" ng-click="vm.isReports=true ;vm.isVenue=false;vm.isUsers=false;vm.isUpgrade=false;vm.isgeofencealerts=false;vm.isMyAccount=false">
+                                <a ui-sref="dashboard.visualization" class="" style="margin-top:8px;padding-left:30px;"><span class="fa icon-Report" style="vertical-align: bottom;"></span><span class="xn-text-li">Reports</span></a>
+                                <div ng-show="vm.isActive('/reports') || vm.isActive('/visualization')||vm.isActive('/addvisualization')||vm.isActive('/addreport')" class="menu-active-border"></div>
+                            </li>
+                        </div>
+
+                        <!-- <div style="margin-left:20px;">
+                        <li class="layoutmenu" ng-class="{ activemenu: vm.isActive('/users')|| vm.isActive('/support') ||vm.isActive('/role')}" ng-init="vm.isUsers=vm.isActive('/users')||vm.isActive('/support')||vm.isActive('/role')" ng-click="vm.isUsers=true;vm.isVenue=false;vm.isReports=false;vm.isUpgrade=false;vm.isgeofencealerts=false;vm.isMyAccount=false">
+                            <a ui-sref="dashboard.users" class="" style="margin-top:8px;padding-left:30px;"><span class="fa icon-user" style="vertical-align: bottom;"></span><span class="xn-text-li">Users</span></a>
+                            <div ng-show="vm.isActive('/users')|| vm.isActive('/support') ||vm.isActive('/role')" class="menu-active-border"></div>
+                        </li>
+                    </div> -->
+
+                        <div style="margin-left:20px;">
+                            <li class="layoutmenu" ng-class="{ activemenu: vm.isActive('/upgrade') || vm.isActive('/upgradehistory')}" ng-init="vm.isUpgrade=vm.isActive('/upgrade') || vm.isActive('/upgradehistory')" ng-click="vm.isUpgrade=true;vm.isVenue=false;vm.isReports=false;vm.isUsers=false;vm.isgeofencealerts=false;vm.isMyAccount=false">
+                                <a ui-sref="dashboard.upgrade" class="" style="margin-top:8px;padding-left:30px;"><span class="fa icon-upgrade" style="vertical-align: sub;"></span><span class="xn-text-li" style="font-family: Roboto;">Upgrade</span></a>
+                                <div ng-show="vm.isActive('/upgrade') || vm.isActive('/upgradehistory')" class="menu-active-border"></div>
+                            </li>
+                        </div>
+                    </div>
+
+                    <li class="pull-right">
+                        <a href="" class="mb-control" ng-click="vm.logout()" title="Logout" style="background:none !important;font-family: 'Roboto';font-weight:400;font-size: 13px;color: #999999; padding-top: 14px;margin-right:30px;">Logout</a>
+                    </li>
+                    <li class="pull-right">
+                        <!--<a href="" class="mb-control" ng-class="{ activemenu: vm.isActive('/profile')}" ng-init="vm.isMyAccount=vm.isActive('/profile')" ng-click="" title="My Account" style="background:none !important;font-family: 'Roboto';font-weight:400;font-size: 13px;color: #999999; padding-top: 14px;">-->
+                        <a href="" class="mb-control" ng-class="{ activemenu: vm.isActive('/profile')}" ng-init="vm.isMyAccount=vm.isActive('/profile')" ng-click="vm.myaccount();" " title="My Account" style="background:none !important;font-family: 'Roboto';font-weight:400;font-size: 13px;color: #999999; padding-top: 14px;">
+                            <span class="fa fa-user-circle-o" style="vertical-align: bottom;color:#8b91a0;padding-bottom:2px;font-size:16px;"></span>My Account
+                        </a>
+                    </li>
+                    <li class="pull-right">
+                        <a ui-sref="dashboard.users" class="mb-control" ng-class="{ activemenu: vm.isActive('/users')|| vm.isActive('/support') ||vm.isActive('/role')}" title="Users"
+                           ng-click="vm.isUsers=true;vm.isVenue=false;vm.isReports=false;vm.isUpgrade=false;vm.isgeofencealerts=false;vm.isMyAccount=false"
+                           style="background:none !important;font-family: 'Roboto';font-weight:400;font-size: 13px;color: #999999; padding-top: 13px;">
+                            <span class="fa fa icon-user1" style="vertical-align: bottom;color:#8b91a0;padding-bottom:0px;font-size:16px;"></span>Users
+                        </a>
+                    </li>
+                </div>
+                <!-- <div class="tab-view" style="background-color:white;height:140px;">
+                <ul>
+                    <div style="background-color:white">
+                        <li class="layoutmenu" style="background-color:white"
+                            ng-class="{ activemenu:(vm.isActive('/login') || vm.isActive('/venue') || vm.isActive('/dashboard')||vm.isActive('/floor')||vm.isActive('/drawfloorplan')||vm.isActive('/networkconfig')||vm.isActive('/geoconfig') ||vm.isActive('/geofence') ||vm.isActive('/gateway') ||vm.isActive('/adddevice')||vm.isActive('/tag')||vm.isActive('/registerdevice')||vm.isActive('/addgeofence'))&&(!vm.isActive('/addgeofencealerts'))}"
+                            ng-init="vm.isVenue=(vm.isActive('/login') || vm.isActive('/venue') || vm.isActive('/dashboard')||vm.isActive('/floor')||vm.isActive('/drawfloorplan')||vm.isActive('/networkconfig')||vm.isActive('/geoconfig') ||vm.isActive('/geofence') ||vm.isActive('/gateway') ||vm.isActive('/adddevice') ||vm.isActive('/tag')||vm.isActive('/registerdevice')||vm.isActive('/addgeofence'))&&(!vm.isActive('/addgeofencealerts'))"
+                            ng-click="vm.isVenue=true;vm.isReports=false;vm.isUsers=false;vm.isUpgrade=false;vm.isgeofencealerts=false">
+                            <a ui-sref="dashboard.venue" class="" style="padding-left:20px;"><span class="fa icon-xen-location" style="font-size: 14px !important;"></span><span class="xn-text-li">Venue</span></a>
+                            <div ng-show="vm.isActive('/venue') ||  vm.isActive('/dashboard')" class="menu-active-border"></div>
+                        </li>
+                        <li class="layoutmenu" style="background-color:white"
+                            ng-class="{ activemenu: vm.isActive('/fencealerts')|| vm.isActive('/inactivealerts')||vm.isActive('/addgeofencealerts')||vm.isActive('/customizedalert')}"
+                            ng-init="vm.isgeofencealerts=vm.isActive('/fencealerts')|| vm.isActive('/inactivealerts')||vm.isActive('/addgeofencealerts')||vm.isActive('/customizedalert')"
+                            ng-click="vm.isUpgrade=false;vm.isVenue=false;vm.isReports=false;vm.isUsers=false;vm.isgeofencealerts=true">
+                            <a ng-show="vm.isVenue||vm.isReports||vm.isUsers||vm.isUpgrade||vm.isgeofencealerts" style="padding-left:20px;" ui-sref="dashboard.inactivealerts" class="mb-control" style="background:none !important;color: #9ca4ab;">
+                                <span class="fa icon-bell1" style="vertical-align: bottom;" ng-click="vm.isgeofencealerts=true;vm.isVenue=false;vm.isReports=false;vm.isUsers=false;vm.isUpgrade=false"></span><span class="xn-text-li">Alerts</span>
+                            </a>
+                            <div ng-show="vm.isActive('/fencealerts')|| vm.isActive('/inactivealerts')||vm.isActive('/addgeofencealerts')||vm.isActive('/customizedalert')" class="menu-active-border"></div>
+                        </li>
+
+
+                        <li class="layoutmenu" style="background-color:white"
+                            ng-class="{ activemenu: vm.isActive('/reports')}" ng-init="vm.isReports=vm.isActive('/reports')||vm.isActive('/visualization')||vm.isActive('/addvisualization')||vm.isActive('/addreport')" ng-click="vm.isReports=true ;vm.isVenue=false;vm.isUsers=false;vm.isUpgrade=false;vm.isgeofencealerts=false">
+                            <a ui-sref="dashboard.reports" class="" style="padding-left:20px;"><span class="fa icon-Report" style="vertical-align: bottom;"></span><span class="xn-text-li">Reports</span></a>
+                            <div ng-show="vm.isActive('/reports') || vm.isActive('/visualization')||vm.isActive('/addvisualization')" class="menu-active-border"></div>
+                        </li>
+
+                        <li class="layoutmenu" style="background-color:white" ng-class="{ activemenu: vm.isActive('/users')}" ng-init="vm.isUsers=vm.isActive('/users')||vm.isActive('/support')" ng-click="vm.isUsers=true;vm.isVenue=false;vm.isReports=false;vm.isUpgrade=false;vm.isgeofencealerts=false">
+                            <a ui-sref="dashboard.users" class="" style="padding-left:20px;"><span class="fa icon-user" style="vertical-align: bottom;"></span><span class="xn-text-li">Users</span></a>
+                            <div ng-show="vm.isActive('/users')" class="menu-active-border"></div>
+                        </li>
+                        <li class="layoutmenu" style="background-color:white" ng-class="{ activemenu: vm.isActive('/upgrade')}" ng-init="vm.isUpgrade=vm.isActive('/upgrade')" ng-click="vm.isUpgrade=true;vm.isVenue=false;vm.isReports=false;vm.isUsers=false;vm.isgeofencealerts=false">
+                            <a ui-sref="dashboard.upgrade" class="" style="padding-left:20px;"><span class="fa icon-upgrade" style="vertical-align: bottom;"></span><span class="xn-text-li">Upgrade</span></a>
+                            <div ng-show="vm.isActive('/upgrade')" class="menu-active-border"></div>
+                        </li>
+                        <li style="background-color:white">
+                            <a href="" class="mb-control"  ng-class="{ activemenu: vm.isActive('/profile')}"  ng-init="vm.isMyAccount=vm.isActive('/profile')" ng-click="vm.myaccount();vm.isUpgrade=false;vm.isVenue=false;vm.isReports=false;vm.isUsers=false;vm.isgeofencealerts=false;vm.isMyAccount=true" title="My Account">My Account</a>
+                        </li>
+                        <li style="background-color:white">
+                            <a href="" class="mb-control" ng-click="vm.logout()" title="Logout">Logout</a>
+                        </li>
+                    </div>
+                </ul>
+            </div> -->
+                <!-- END TASKS -->
+            </ul>
+            <!-- END X-NAVIGATION VERTICAL -->
+            <!-- START BREADCRUMB -->
+            <ul class="breadcrumb" ng-show="!vm.isOnLoginScreen()">
+                <div ncy-breadcrumb></div>
+            </ul>
+            <!-- END BREADCRUMB -->
+            <!-- PAGE CONTENT WRAPPER -->
+
+            <div class="page-content-wrap" style="border-left: solid 1px #e0dfdf !important;height:100%;">
+
+
+                <div class="grid-container" style="margin-top:0px;">
+                    <div ui-view class="shuffle-animation"></div>
+                    <div ngplus-overlay
+                         ngplus-overlay-delay-in="10"
+                         ngplus-overlay-delay-out="10"
+                         ngplus-overlay-animation="dissolve-animation">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+                <br />
+                <br />
+            </div>
+            <!-- END PAGE CONTENT WRAPPER -->
+        </div>
+        <!-- END PAGE CONTENT -->
+    </div>
+
+</div>
+<style>
+    .border-left {
+        border-left: none !important;
+    }
+
+    .xn-text {
+        font-family: Roboto;
+        font-size: 13px;
+        letter-spacing: 1px;
+        color: #9A9A9A;
+    }
+
+    .xn-profile {
+        font-family: Roboto;
+        font-size: 13px;
+        letter-spacing: 1px;
+        color: #ffffff;
+    }
+
+    .xn-text .active .span {
+        color: #000;
+    }
+
+
+    @media(min-width: 1399px ) {
+        .topmenuview {
+            margin-left: 340px;
+        }
+    }
+
+    @media(max-width: 1200px ) and (min-width: 1100px ) {
+        .topmenuview {
+            margin-left: 200px;
+        }
+    }
+
+    .admin-page-sidebar {
+        width: 220px;
+        float: left;
+        position: relative;
+        z-index: 100;
+    }
+
+    .admin-page-logo {
+        border-bottom: 0px solid #eee !important;
+        height: 50px !important;
+    }
+
+    .admin-page-content {
+        margin-left: 0px !important;
+    }
+
+    .admin-navigation-horizontal {
+        padding-right: 56px !important;
+    }
+
+    @media(max-width: 1024px ) and (min-width: 100px ) {
+        .admin-page-sidebar {
+            width: 100%;
+            float: left;
+            position: relative;
+            z-index: 100;
+        }
+    }
+
+    .profile-smallp {
+        font-size: 11px;
+        font-family: Roboto Light !important;
+        margin-top: -12px;
+    }
+
+    .menu-active-borderTree {
+        border-bottom: 4px solid #1caf9a !important;
+        width: 110%;
+        padding-top: 12px !important;
+        margin: 0 auto;
+        position: inherit;
+    }
+</style>

@@ -1,0 +1,326 @@
+<!-- Commented out as this is not a recommended practice. 
+  This will result in errors when navigating from upgrade page to anywhere else -->
+
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+<!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+<!------ Include the above in your HEAD tag ---------->
+
+
+<!-- <!DOCTYPE html> -->
+<!-- <html lang="en"> -->
+    <!-- <head>  -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+
+    <!-- Website CSS style -->
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- Website Font style -->
+      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"> -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- Google Fonts -->
+    <!-- <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'> -->
+    <!-- <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'> -->
+
+    <!-- <title>Admin</title> -->
+  <!-- </head> -->
+  <!-- <body> -->
+
+    <form class="form-horizontal border-left hor-height" name="upg" novalidate>
+      <div class="col-md-12" style="padding-top:35px;padding-left:30px;">
+       <!--  <h2 style="padding-bottom:7px; font-family: Roboto !important;"><b>Upgrade Settings</b> </h2> -->
+        <div class="panel" style="overflow : auto">
+          <div class="panel-heading text-uppercase lead" style="margin-bottom:0"></div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 " style="padding-left:35px;margin-top:15px;">
+              <p style="font-family: roboto;margin-bottom: 10px;font-size: 15px;font-weight: 500;color: #000000;margin-left: -15px;">Upgrade Settings</p>
+              <div class="form-group" show-errors style="padding-top:5px">
+                  <label for="name" class="cols-sm-2 control-label">Customer</label>
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">                          
+                          <input type="text" class="form-control" name="customer" data-server-validate ng-model="vm.upgradeDetails.customer" id="customerid" disabled="" tabindex="1">
+                        </div>
+              </div>
+
+              <div class="form-group" ng-hide="showall == false">
+                <label for="confirm" class="cols-sm-2 control-label">Macaddr</label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <input class="form-control" name="macaddr" data-server-validate ng-model="vm.upgradeDetails.macaddr" id="macid" disabled="disabled">
+                  </div>
+                </div>
+              </div> 
+
+              <div class="form-group" ng-hide="showall == true">
+                <label for="confirm" class="cols-sm-2 control-label">Venue</label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                     <select class="form-control" name="venue" data-server-validate ng-model="vm.upgradeDetails.venue" id="venueid" ng-change="vm.venuechange()" required>
+                     </select>
+                  </div>
+                </div>
+            </div> 
+
+            <div class="form-group" ng-hide="showall == false">
+              <label for="confirm" class="cols-sm-2 control-label">Venue</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <input class="form-control" name="venue" data-server-validate ng-model="vm.upgradeDetails.venue" id="venueid" required disabled="disabled">                
+                </div>
+              </div>
+            </div> 
+
+              
+           <div class="form-group" ng-hide="showall == true">
+              <label for="email" class="cols-sm-2 control-label">Floor</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                 <select class="form-control" name="floor" data-server-validate ng-model="vm.upgradeDetails.floor" id="floorid" ng-change="vm.floorchange()" required>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group" ng-hide="showall == false">
+              <label for="email" class="cols-sm-2 control-label">Floor</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                 <input class="form-control" name="floor" data-server-validate ng-model="vm.upgradeDetails.floor" id="floorid"  required disabled="disabled">
+               </div>
+              </div>
+            </div>
+
+
+             <div class="form-group" ng-hide="showall == true">
+              <label for="confirm" class="cols-sm-2 control-label">Location</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                 <select class="form-control" name="loaction" data-server-validate ng-model="vm.upgradeDetails.location" id="locationid" required>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+         
+            <div class="form-group">
+              <label for="username" class="cols-sm-2 control-label">Upgrade Type</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <select class="form-control" name="upgradetype" data-server-validate id="upgradetype" required>
+                    <option value="binary">Binary</option><option value="package">Package</option><option value="bsp">BSP</option></select>
+                </div>
+              </div>
+            </div>
+
+             <div class="form-group" ng-hide="showall == false">
+              <label for="confirm" class="cols-sm-2 control-label">Version</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <input class="form-control" name="macaddr" data-server-validate id="version" disabled="disabled">
+                </div>
+              </div>
+            </div> 
+
+             <div class="form-group" ng-hide="showall == false">
+              <label for="confirm" class="cols-sm-2 control-label">Build Time</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <input class="form-control" name="macaddr" data-server-validate id="buildtime" disabled="disabled">
+                </div>
+              </div>
+            </div> 
+
+            <div class="form-group">
+              <label for="password" class="cols-sm-2 control-label">Pick a file</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                      <div id="myTabContent" class="tab-content ng-scope"  style="height:100px;">
+                            <div class="fileuploadcss" style="margin-top: 15px;">
+                                <span style="vertical-align: -3px;"><i class="fa icon-Cloud-upload" style="margin-top: 23px;"></i></span>Drop files to upload, or
+                                <label style="cursor:pointer; font-weight:100 !important;color:deepskyblue;">
+                                     <input type="file" accept=".ipk,.bin"  nv-file-select="" 
+                                           nv-file-drop="" nv-file-over="" uploader="vm.uploader" style="display: none;" name="selectedfile" data-server-validate id="selectedfile" required>
+                                    &nbsp Browse
+                                </label>
+                                <p id="dispfilename" style="color: deepskyblue;margin-top: -12px;"></p>
+                                 
+                            </div>
+                           
+                        </div>
+               </div>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px">
+              <a type="button" id="button" ng-click="vm.upgradeSubmit(upg)" class="btn btn-primary btn-lg btn-block">Upgrade</a>
+            </div>
+            
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- <script src="js/bootstrap.min.js"></script> -->
+  <!-- </body> -->
+<style type="text/css">
+  
+#playground-container {
+    height: 500px;
+    overflow: hidden !important;
+    -webkit-overflow-scrolling: touch;
+}
+body, html{
+     height: 100%;
+  background-repeat: no-repeat;
+  font-family: 'Oxygen', sans-serif;
+      background-size: cover;
+}
+
+.main{
+  margin:50px 20px;
+}
+
+h1.title { 
+  font-size: 50px;
+  font-family: 'Passion One', cursive; 
+  font-weight: 400; 
+}
+
+hr{
+  width: 10%;
+  color: #fff;
+}
+
+.form-group{
+  margin-bottom: 15px;
+}
+
+label{
+  margin-bottom: 15px;
+}
+
+input,
+input::-webkit-input-placeholder {
+    font-size: 11px;
+    padding-top: 3px;
+}
+
+.main-login{
+ 
+}
+.form-control {
+    height: auto!important;
+    font-size: 15px;
+    font-weight: 500;
+    padding:5px 0px!important;
+}
+.input-group {
+   width: 100%;
+}
+#button {
+        border: 1px solid #ccc;
+    margin-top: 28px;
+    padding: 15px 12px;
+    background: #1caf9a;   
+    cursor: pointer;
+    background: #1caf9a;
+}
+.main-center{
+      margin-top: 30px;
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 10px 40px;
+    float: right;
+    z-index: 9999;
+    position: relative;
+    right: 468px;
+    box-shadow:0px 5px 5px 4px #cdd9ef;
+}
+span.input-group-addon i {
+    color: #009edf;
+    font-size: 17px;
+}
+
+.login-button{
+  margin-top: 5px;
+}
+
+.login-register{
+  font-size: 11px;
+  text-align: center;
+}
+
+.customiz-panel-flex-content select, select.form-control{
+  font-weight: unset;
+  line-height: unset !important;
+  cursor: pointer;
+}
+
+.control-label {
+    color: black;
+    font-family: Roboto;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+.fileuploadcss{
+    border: dashed 1px grey;
+    border-radius: 5px;
+    text-align: center;
+    border-color: #d5d5d5;
+    height: 70px;
+}
+
+@media screen and (min-width: 1240px) and (max-width: 1400px){
+
+.main-center{
+    margin-top: 30px;
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 10px 40px;
+    float: right;
+    z-index: 9999;
+    position: relative;
+    right: 583px;
+}
+
+}
+
+@media screen and (max-width: 1200px){
+
+.main-center{
+    margin-top: 30px;
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 10px 40px;
+    float: right;
+    z-index: 9999;
+    position: relative;
+    right: 383px;
+}
+
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1240px){
+
+.main-center{
+    margin-top: 30px;
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 10px 40px;
+    float: right;
+    z-index: 9999;
+    position: relative;
+    right: 669px;
+}
+
+}
+
+</style>
+<!-- </html>

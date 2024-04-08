@@ -1,0 +1,235 @@
+<title>Login</title>
+<section id="login-view" class="center-block">
+    <div class="login-container panel-fullscreen-wrap">
+        <div class="login-box animated fadeInDown">
+
+            <div class="login-body logindesign l-body-res" ng-if="vm.clkforgetpassword == false">
+                <div class="login-logo l-cont-res"></div>
+                <form ng-submit="vm.login(vm.credentials, loginForm)" class="form-horizontal" name="loginForm" method="post" novalidate>
+                    <div class="form-group" show-errors>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="fa icon-mail"></span></span>
+                                <input type="text" data-ng-model="vm.credentials.username" class="form-control" name="username" autocomplete="off" ng-pattern="/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/"
+                                       placeholder="Email Address" required />
+                            </div>
+                        </div>
+                        <div class="col-md-offset-2 col-sm-offset-2">
+                            <span class="help-block" ng-if="loginForm.username.$error.required"></span>
+                        </div>
+                    </div>
+                    <div class="form-group" show-errors>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="fa icon-lock"></span></span>
+                                <input type="password" data-ng-model="vm.credentials.password" name="password"
+                                       class="form-control" placeholder="Password" required />
+                            </div>
+                        </div>
+                        <div class="col-md-offset-2 col-sm-offset-2">
+                            <span class="help-block" ng-if="loginForm.password.$error.required"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 button-bar-vertical" style="        padding-left: 30px;
+        padding-right: 30px">
+                        <button type="submit" class="btn btn-block loginvenuebold" style="        background-color: #18a79d;
+        border-color: #1caf9a;
+        border-radius: 8px;
+        font-size: 14px;
+        color: white">LOGIN</button>
+                        <a href="" ng-click="vm.clkforgetpasswordevnt()" class="btn-link" style="        font-weight: 400 !important;
+        color: rgba(0, 0, 0, 0.6) !important;">Forgot Password?</a>
+                    </div>
+                </form>
+                <global-error-feedback></global-error-feedback>
+            </div>
+
+            <div class="login-body logindesign" ng-if="vm.clkforgetpassword == true" ng-hide="vm.mailverify == true" style="        width: 462px;
+        height: 380px;
+        margin-left: -45px;
+        margin-top: 50px;
+        margin-bottom: 50px;">
+                <form ng-submit="vm.reLogin(vm.credentials, reloginForm)" class="form-horizontal" name="reloginForm" method="post" novalidate>
+                    <h2 style="        text-align: center;
+        font-weight: bolder;
+        margin-top: 15px;">Forgot Password</h2>
+                    <label style="        text-align: center;
+        font-weight: 400;
+        margin-top: 15px;
+        color: #6f6f6f;
+        margin-left: 65px;
+        width: 275px;
+        font-family: Roboto-Light;">We will send you instruction on how to reset your password by email.</label>
+                    <div class="form-group" style="        margin-top: 20px;" show-errors>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="fa icon-mail"></span></span>
+                                <input type="text" data-ng-model="vm.credentials.emailUserName"
+                                       class="form-control ng-invalid ng-touched " ng-pattern="/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/"
+                                       autocomplete="off" name="emailUserName" placeholder="Email Address" required />
+                            </div>
+                        </div>
+                        <div class="col-md-offset-2 col-sm-offset-2">
+                            <span class="help-block" ng-if="reloginForm.emailUserName.$error.required"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 button-bar-vertical" style="        padding-left: 30px;
+        padding-right: 30px">
+                        <button type="submit" class="btn btn-block loginvenuebold" ng-click="vm.mailverifyevnt()" style="        background-color: #1caf9a;
+        border-color: #1caf9a;
+        border-radius: 5px;
+        font-size: 14px;
+        color: white">SUBMIT</button>
+                        <a href="" class="btn-link">Just Remembered?</a>
+                        <a href="" class="btn-link" ng-click="vm.undoclkforgetpasswordevnt()" style="        color: deepskyblue;
+        font-weight: 300;">Login</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- <a class="login-body logindesign" ng-if="vm.mailverify == true" ng-hide="vm.pswdchng == true" ng-click="vm.pswdchngevnt()" style="width: 462px;height: 180px;margin-left: -45px;margin-top: 150px;margin-bottom: 247px;text-decoration:none">
+                <h2 style="text-align:center;font-weight:bolder;margin-top:30px;">Thank you!</h2>
+                <label style="text-align:center;font-weight:400;color:grey;margin-left:65px;width:275px;">Please check your email.</label>
+            </a> -->
+            <!-- <div class="login-body logindesign" ng-if="vm.pswdchng == true" ng-hide="vm.rstpswdchngd == true" style="width: 462px;height: 350px;margin-left: -45px;margin-top: 50px;margin-bottom: 166px;">
+                <h2 style="text-align:center;font-weight:bolder;margin-top:15px;margin-bottom:30px;">Reset Password</h2>
+                <div class="form-group" style="margin-bottom:100px;">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="fa icon-lock"></span></span>
+                            <input type="password" data-ng-model="vm.credentials.newpassword" name="newpassword"
+                                   class="form-control" placeholder="New Password" required />
+                        </div>
+                    </div>
+                    <div class="col-md-offset-2 col-sm-offset-2">
+                        <span class="help-block" ng-if="loginForm.password.$error.required"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="fa icon-lock"></span></span>
+                            <input type="password" data-ng-model="vm.credentials.confirmpassword" name="confirmpassword"
+                                   class="form-control" placeholder="Confirm New Password" required />
+                        </div>
+                    </div>
+                    <div class="col-md-offset-2 col-sm-offset-2">
+                        <span class="help-block" ng-if="loginForm.password.$error.required"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 button-bar-vertical" style="padding-left:30px;padding-right:30px">
+                    <button type="submit" class="btn btn-block loginvenuebold" ng-click="vm.rstpswdchngdevnt()" style="background-color: #1caf9a;border-color: #1caf9a;border-radius: 5px;font-size: 14px;color:white">SUBMIT</button>
+                </div>
+            </div> -->
+            <!-- <div class="login-body logindesign" ng-if="vm.rstpswdchngd == true" ng-click="vm.pswdchngevnt()" style="width: 444px;height: 440px;margin-left: -15px;margin-top: -40px;margin-bottom: 50px;">
+                <h2 style="text-align:center;font-weight:bolder;margin-top:30px;">Password Changed!</h2>
+                <a style="text-align:center;font-weight:400;color:grey;margin-left:105px;width:275px;text-decoration:none">Check</a>
+                <a href="" ng-click="vm.navigateloginevnt()" style="text-align:center;font-weight:400;color:deepskyblue;width:275px;text-decoration:none">here</a>
+                <a style="text-align:center;font-weight:400;color:grey;width:275px;text-decoration:none">to continue to Locatum.</a>
+            </div>
+            <div style="color:white;text-align:center;font-family:Roboto-Light !important;font-size:12px;font-weight:100 !important;letter-spacing:0.7px;">
+                Copyright &copy; 2018 Qubercomm.com All rights reserved.
+            </div> -->
+        </div>
+    </div>
+</section>
+
+<style>
+    @media only screen and (max-width: 768px) {
+        .login-container .login-box {
+            padding-top: 10% !important;
+        }
+    }
+    @media(max-width: 768px ) and (min-width: 491px ) {
+        .logindesign {
+            text-align: center;
+            margin-left: -25px !important;
+            margin-top: 20px;
+        }
+    }
+    @media(max-width: 490px ) and (min-width: 450px ) {
+        .logindesign {
+            text-align: center;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            width: 420px !important;
+        }
+    }
+    @media(max-width: 449px ) and (min-width: 200px ) {
+        .logindesign {
+            text-align: center;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            width: 375px !important;
+        }
+    }
+    input.ng-invalid.ng-touched {
+        border: 1px solid red;
+    }
+    @media (min-width: 3501px) {
+        .top-height {
+            margin-top: 32% !important;
+        }
+        .login-container .login-box {
+            width: 25% !important;
+            zoom: 2;
+        }
+    }
+    @media (min-width: 2501px) and (max-width: 3500px) {
+        .top-height {
+            margin-top: 50% !important;
+        }
+    }
+    @media (min-width: 2301px) and (max-width: 2500px) {
+        .top-height {
+            margin-top: 50% !important;
+        }
+    }
+    @media (min-width: 1901px) and (max-width: 2300px) {
+        .top-height {
+            margin-top: 40% !important;
+        }
+    }
+    @media (min-width: 1701px) and (max-width: 1900px) {
+        .top-height {
+            margin-top: 35% !important;
+        }
+    }
+    @media (min-width: 1401px) and (max-width: 1700px) {
+        .top-height {
+            margin-top: 35% !important;
+        }
+    }
+    @media (min-width: 1281px) and (max-width: 1400px) {
+        .top-height {
+            margin-top: 5% !important;
+        }
+    }
+    /*
+      ##Device = Laptops, Desktops
+      ##Screen = B/w 1025px to 1280px
+    */
+    @media (min-width: 1025px) and (max-width: 1280px) {
+        .top-height {
+            margin-top: 10% !important;
+        }
+    }
+    /*
+      ##Device = Tablets, Ipads (portrait)
+      ##Screen = B/w 768px to 1024px
+    */
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .top-height {
+            margin-top: 60% !important;
+        }
+    }
+    /*
+      ##Device = Tablets, Ipads (landscape)
+      ##Screen = B/w 768px to 1024px
+    */
+    @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+        .top-height {
+            margin-top: 15% !important;
+        }
+    }
+</style>

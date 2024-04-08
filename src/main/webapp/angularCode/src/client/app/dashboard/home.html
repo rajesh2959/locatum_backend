@@ -1,0 +1,201 @@
+<form class="form-horizontal border-left hor-height" name="frm" novalidate>
+
+    <div class="panel-body" style="margin-left:15px;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding" style="margin-top:8px">
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 removepadding">
+                <h2><b>Dashboard</b> <span ng-if="vm.venueDetails!=null"> ({{vm.venueDetails.newUid}}) </span></h2>
+            </div>
+        </div>
+        <div class="panel pd-b-20" style="margin-bottom:0px !important;padding-bottom:0px !important">
+            <div class="panel-heading ui-draggable-handle mr-top-10 pd-b-5">
+                <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                        <select ng-model="vm.selectedVenue" no-results-text="'No Floor found'" class="connection2 col-md-6 col-sm-9 col-xs-6 form-control res-controls" id="venuelist"
+                                ng-options="item.id as item.newName for item in vm.venueDetailslist"
+                                ng-change="vm.onVenueChanges(vm.selectedVenue)">
+                            <option ng-if="vm.venueDetailslist.length==0 || !vm.venueDetailslist" value="">No records found</option>
+                        </select>
+
+                    </div>
+                    <div class="tag-bar pull-right text-right">
+                        <span class="tag"><span class="fa fa-tag color-blue"></span><span class="count">{{vm.totalCheckedoutTags}}</span><span class="dash-span">Total Tags</span></span>
+                        <span class="tag"><span class="fa fa-tag color-green"></span><span class="count">{{vm.activeTags}}</span><span class="dash-span">Active Tags</span></span>
+                        <span class="tag"><span class="fa fa-tag color-orange"></span><span class="count">{{vm.idleTags}}</span><span class="dash-span">ldle Tags</span></span>
+                        <span class="tag"><span class="fa fa-tag color-red"></span><span class="count">{{vm.inactiveTags}}</span><span class="dash-span">Inactive Tags</span></span>
+                    </div>
+                </div>
+                <hr style="margin: 40px 10px 5px 10px; ">
+            </div>
+
+            <div class="col-md-12" style="margin-bottom: 30px;">
+
+                <div class="col-md-4 right-bor" style="height: 181px;">
+                    <div>
+                        <h5 style="font-size:13px;font-weight:bold;padding-top:10px">
+                            <b style="font-size:14px;font-weight:bold;font-family:Roboto">Recent Alerts</b>
+                        </h5>
+                        <span class="z-btn" id="enlarges"
+                              style="float: right;
+                            margin-top: -30px;cursor: pointer;" ng-click="vm.goToAlertData()">
+
+                            <span class="fa icon-arrow icon"></span>
+                        </span>
+
+                        <div class="recent-alr-panel" style="height: 120px;">
+                            <div ng-repeat="recentAlert in  vm.alertsData" class="recent-alert" style="margin-top: 2px;">
+                                <img ng-src="{{recentAlert.imageType}}" />&nbsp; {{recentAlert.text}}
+                            </div>
+                            <div class="form-control" style="text-align:center;padding-top:50px;font-family:arial;font-size:10px" ng-show="vm.alertsData.length==0">No alerts</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 right-bor">
+                    <span class="z-btn ctt" id="enlarges" ng-click="vm.goToCT()">
+                        <span class="fa icon-arrow icon"></span>
+                    </span>
+                    <div google-chart chart="vm.connectedTagType" style="{{vm.connectedTagType.cssStyle}}"></div>
+                </div>
+                <div class="col-md-4">
+                    <span class="z-btn fvt" id="enlarges" ng-click="vm.goToFT()">
+                        <span class="fa icon-arrow icon">&nbsp;</span>
+                    </span>
+                    <div google-chart chart="vm.floorVsTraffic" style="{{vm.floorVsTraffic.cssStyle}}"></div>
+                </div>
+
+            </div>
+
+            <div class="row col-sm-offset-8 card-height">
+                <div class="col-lg-7 col-md-7 col-sm-8 col-xs-8 image-panel floorCanvas pd-l-20 mr-top-min-10">
+                    <hr style="margin: -10px 10px 5px 10px; ">
+                    <div class="panel-heading ui-draggable-handle na-panel remove-padding-all mr-top-10">
+                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 remove-padding-all mr-left-min-5">
+                            <select ng-model="vm.selectedFloor" no-results-text="'No Floor found'" class="connection2 col-md-6 col-sm-9 col-xs-6 form-control res-controls"
+                                    ng-options="item.id as item.newName for item in vm.floorDetails"
+                                    ng-change="vm.onFloorChanges(vm.selectedFloor)">
+                                <option ng-if="vm.floorDetails.length==0 || !vm.floorDetails" value="">No records found</option>
+                            </select>
+
+                            <label class="switch switch-large">
+                                <input type="checkbox" ng-model="vm.switchONOFF" checked id="switchONOFF" />
+                                <span>Gateway</span>
+                            </label>
+                            <label class="switch switch-large">
+                                <input type="checkbox" ng-model="vm.tagsONOFF" checked id="tagsONOFF" />
+                                <span>Tags</span>
+                            </label>
+
+                            <label ng-show="vm.tagsONOFF" class="switch switch-large">
+                                <input type="checkbox" ng-model="vm.inactiveONOFF" checked id="inactiveONOFF" />
+                                <span>Inactive</span>
+                            </label>
+                            <div ng-show="vm.tagsONOFF" class="catFilter filterUI active" style="padding-left: 10px;">
+                                <select class="multiselect-ui" multiple style="opacity: 0;height:0;"></select>
+                            </div>
+                            <label ng-show="vm.showFloorDropDown" class="sel">
+                                <select style="outline:none;box-shadow: inset 0 0 #ddd;width:15em;" ng-model="vm.selectedFloor" no-results-text="'No Floor found'" class="custom-select"
+                                        ng-options="item.id as item.newName for item in vm.floorDetails"
+                                        ng-change="vm.onFloorChanges(vm.selectedFloor)">
+                                    <option ng-if="vm.floorDetails.length==0 || !vm.floorDetails" value="">No records found</option>
+                                </select>
+                                <i class="fa fa-sort-desc" style="color:white;margin-left: -30px;"></i>
+                            </label>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 zoom-panel removepadding res-zoom-ctrls pull-right" unselectable="on" onselectstart="return false;" onmousedown="return false;">
+                            <span class="z-btn" id="zoom-in"><span class="fa icon-zoom-in icon"></span><span class="lable"> Zoom In</span></span>
+                            <span class="z-btn" id="zoom-out"><span class="fa icon-zoom-out icon"></span><span class="lable"> Zoom Out</span></span>
+                            <span class="z-btn" id="reset"><span class="fa icon-reset1 icon"></span><span class="lable"> Reset</span></span>
+                            <span class="z-btn" id="enlarge"><span class="fa icon-arrow icon"></span></span>
+                        </div>
+                    </div>
+                    <div class="panel-body floorsvgCont floorsvgSmall">
+                        <div class="mapping-section">
+                            <div class="maping-canvas panzoom" id="main-div" style="height:auto">
+                                <div class="canvas-container" style="text-align: center;">
+                                    <svg class="floorsvg" id="flrmap" ng-style="{ 'width' : vm.width, 'height' : vm.height}">
+                                        <g class="uiFloorGroupOuter" transform="translate(0,0)">
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1 divider-panel"></div>
+
+            </div>
+
+        </div>
+    </div>
+</form>
+
+<style>
+    .removepading {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .tooltip {
+        z-index: 10000 !important;
+    }
+
+    .btn {
+        height: 26px;
+    }
+
+    .sle {
+        margin-left: 10px;
+        width: 110px;
+        height: 26px;
+        margin-top: 0px;
+        background-color: #18A79D !important;
+        color: #fff;
+        border: none;
+        border-color: #fff;
+        -webkit-appearance: none;
+        -webkit-border-radius: 25px;
+        padding: 0px 20px 0px 12px;
+    }
+
+    .selectDropdown {
+        height: 26px;
+        background-color: #18A79D !important;
+        font-size: 20px;
+        font-weight: 400;
+        font-size: 11px;
+        color: #fff;
+        box-shadow: inset 0 -1px 0 #fff;
+        background-image: none !important;
+    }
+
+    .mapping-section {
+        border: 1px solid #d5d5d5;
+        overflow: scroll !important;
+        position: relative;
+        background: #fff;
+    }
+
+    .image-panel {
+        width: 100% !important;
+    }
+
+    .right-bor {
+        border-right: solid 0.1px lightgray;
+    }
+
+    .ctt {
+        float: right;
+        cursor: pointer;
+        z-index: 99;
+        position: relative;
+        top: 9px;
+    }
+
+    .fvt {
+        float: right;
+        cursor: pointer;
+        z-index: 99;
+        position: relative;
+        top: 9px;
+    }
+</style>

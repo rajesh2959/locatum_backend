@@ -1,0 +1,288 @@
+<form  class="form-horizontal border-left hor-height" name="frm" novalidate>
+    <div class="panel-body mr-15">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding ">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding user-heading">
+                <h2 style="font-size: 20px;margin-left: 105px;height:15px">
+                    <i class="fa fa-bluetooth" style="font-size: 20px;background-color: #18a79d;border-color: #18a79d;text-transform: none;color: white;    border-radius: 5px;"></i>
+                    <b>{{vm.prevPageDetail.venue}} > {{vm.prevPageDetail.floor}} > {{vm.prevPageDetail.room}}</b> </h2>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div id="myTabContent" class="tab-content">
+                    <div class="row col-md-3" style="margin-bottom:50px;">
+                        <div class="admin-top-tile" style="width:auto;min-height:230px;border-radius: 15px;">
+                            <h2 id="titleConnectedInterfaces" style="font-size: 15px;margin-left: 80px;width:180px;color: #18a79d;margin-left: 25px;margin-top: 8px"><b></b> </h2>
+                            <canvas id="connectedInterfacesChart" style="display: block;width: 255px;height: 175px;margin-top: -15px;margin-left: 35px;"></canvas>
+                        </div>
+                    </div>
+                    <div class="row col-md-3" style="margin-bottom:50px;">
+                        <div class="admin-top-tile" style="width:auto;min-height:230px;border-radius: 15px">
+                            <h2 id="titleActiveTags" style="font-size: 15px;margin-left: 80px;width:180px;color: #18a79d;margin-left: 65px;margin-top: 8px"><b></b> </h2>
+                            
+                            <canvas id="ativeTagsChart" style="display: block;width: 255px;height:175px;margin-top: -15px;margin-left: 35px;"></canvas>
+                            <span id="activeTagsChart" class="fa fa-tag" style="margin-top: -43%;margin-left: 48%;color: #18a79d;"></span>
+                            <div id="activeTagsChart" style="display: none;margin-left: 55px;margin-top:-100px;color: gray;font-size: 15px;"> No data</div>
+                        </div>
+                    </div>
+                    <div class="row col-md-3" style="margin-bottom:20px;">
+                        <div class="admin-top-tile" style="width:auto;min-height:230px;border-radius: 15px">
+                            <h2 id="titlecpuUtilizationChart" style="font-size: 15px;margin-left: 80px;width:180px;color: #18a79d;margin-left: 50px;margin-top: 8px"><b></b> </h2>
+                            <canvas id="cpuUtilizationChart" style="display: block;width: 255px;height: 175px;margin-top: -15px;"></canvas>
+                            <div id="divcpuUtilizationChart" style="display: none;margin-left: 90px;margin-top:-100px;color: gray;font-size: 15px;"> No data</div>
+                        </div>
+                    </div>
+                    <div class="row col-md-3" style="margin-bottom:20px;">
+                        <div class="admin-top-tile" style="width:auto;min-height:230px;border-radius: 15px">
+                            <h2 id="titleMemoryUtilizationChart" style="font-size: 15px;margin-left: 80px;width:180px;color: #18a79d;margin-left: 50px;margin-top: 8px"><b></b> </h2>
+                            <canvas id="memoryUtilizationChart" style="display: block;width: 240px;height: 150px;margin-top: -15px;"></canvas>
+                            <div id="divmemoryUtilizationChart" style="display: none;margin-left: 97px;margin-top:-73px;color: gray;font-size: 15px;"> No data</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 removepadding user-heading">
+                <h2 style="font-size: 15px;margin-left: 105px;height:15px">
+                    <b>BLE Tags Activity</b> </h2>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div id="myTabContent" class="tab-content">
+                    <div class="row col-md-6" style="margin-bottom:20px;height: 400px;">
+                        <div class="admin-top-tile" style="width:auto;height: 405px;border-radius: 15px">
+                            <h2 id="titleBLETagsActivityChart" style="font-size: 15px;margin-left: 80px;width:180px;color: #18a79d;margin-left: 50px;margin-top: 8px"><b></b> </h2>
+                            <canvas id="BLEtagschart" style="display: block;width: 240px;height: 170px;margin-top: 10px;"></canvas>
+                            <div id="divbleTagsActivityChart" style="display: none;margin-left: 220px;color: gray;font-size: 15px;margin-top: -74px;"> No data</div>
+                        </div>
+                    </div>
+                    <div class="row col-md-6" style="margin-bottom:20px;height: 400px;">
+                        <div class="admin-top-tile" style="width:auto;height: 405px;border-radius: 15px">
+                            <h2 id="titleActiveTagsTypesChart" style="font-size: 15px;margin-left: 80px;width:180px;color: #18a79d;margin-left: 170px;margin-top: 8px"><b></b> </h2>
+                            <canvas id="activeTagsTypesChart" style="display: block;width: 240px;height: 100px;margin-top: -15px;"></canvas>
+                            <div id="divactiveTagsTypesChart" style="display: none;margin-left: 190px;color: gray;font-size: 15px;"> No data</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row col-md-6" style="margin-bottom:20px;height: 400px;">
+                <div class="admin-top-tile" style="width:480px;height: 300px;border-radius: 15px">
+                    <h2 id="titleBLETagsActivityChart" style="font-size: 15px;margin-left: 80px;width:180px;color: #18a79d;margin-left: 50px;margin-top: 8px"><b></b> </h2>
+                    <canvas id="BLEtagschart" style="display: block;width: 240px;height: 100px;margin-top: -15px;"></canvas>
+                    <div id="divbleTagsActivityChart" style="display: none;margin-left: 190px;color: gray;font-size: 15px;"> No data found</div>
+                </div>
+            </div> -->
+
+    <div class="fixed-plugin" title="Tree View">
+
+         <a href="" id="iconopen1" >
+            <i class="fa icon-tree" style="padding: 10px;""> </i>
+        </a>
+        <a href="" id="iconclose1" style="display:none;">
+            <i style="padding: 10px;" class="fa icon-tree"> </i>
+        </a>
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 dropdown-menu" style="margin-top: 20px;margin-bottom: 20px;">
+             <div class="col-md-12" style="padding-bottom: 17px;">
+                <div class="row" style="margin-top: 10px;margin-left: -27px;width: 130%;">
+                    <div class='col-lg-3 col-md-3 col-sm-3' style="margin-top: 8px;">
+                        <label style="font-size: 14px;color: #17a79d; font-family:Roboto;margin-left: 3px;height: 12px;">{{vm.networkDeviceList.length}} Devices</label>
+                        <br>
+                    </div>
+                        
+                        <div class="dropdowns col-lg-4 col-md-4">
+                               <div  ng-click="vm.isClicked=!vm.isClicked" style="cursor:pointer;margin-left: -2px;">
+                                <i class="icon-filters" style="color: #29b1a8"></i><label style="font-size: 13px;color: #666666;font-family: Roboto;font-weight: 600;padding-left: 5px;">Filter</label>
+                                <span style="position:absolute;margin-top: 10px;margin-left:6px" class="caret"></span>
+                               </div> 
+                               
+                                 <div ng-if="vm.isClicked" class="dropdown-content" >
+                                 <a style="cursor:pointer;margin-bottom: 5px;min-height: 27px;" ng-repeat=" devicelist in vm.devicesList" ng-click="vm.checkDeviceId(devicelist)"> <span>{{devicelist.label}}</span></a>
+                                 </div>
+                        </div>
+                        <div class="navbar-form navbar-left col-lg-4 col-md-4 col-sm-3 col-xs-3 removepadding" role="search"
+                        style="margin-top: 3px !important">
+                                <span>
+                                    <i class="fa fa-search" style="color:#29b1a8"></i>&nbsp
+                                    <input type="text" class="form-control" placeholder="Search" ng-model="vm.search" 
+                                    onkeyup="doInsert(this)" style="outline:none;box-shadow: inset 0 0 #ddd;font-size: 13px;font-family:Roboto-Light;font-weight: 600;width: 105px;display: unset !important;">
+                                </span>
+                        </div>
+                </div>
+            </div>
+             
+            <div class="panel-body panel-body-table panel-content">
+                         <div class="row list"  ng-if="vm.networkDeviceList.length > 0" class="hoverlist" data-ng-repeat="device in vm.networkDeviceList | filter : vm.search" ng-mouseover="vm.hoverIn(device.uid)" ng-mouseout="vm.hoverOut(device.uid)" class="hoverList" id="{{device.uid}}li" ng-click="vm.showDevice(device)">
+
+                                 <div style="margin-left: -25px;" class="col-lg-2 col-md-2 col-sm-2">
+                                <label class="radio-inline">
+                                    <img src="{{device.imagePath}}" style="width: 20px;height: 20px;">
+                                </label>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6" style="width: 153px;text-transform: uppercase">ble-{{device.uid}}</div>
+                            <div class="col-lg-6 col-md-6 col-sm-4" style="display: none; margin-left: 18px;" ng-attr-id="{{device.uid}}">
+                                <div class="row icon-lists">
+                                    <div class="col-lg-2 col-md-2 col-sm-2" style="cursor:pointer;padding-right: 12px;" ng-mouseover="vm.colorIn(device.uid+'1')" ng-click="vm.goToPage(device, 'gatewayinfo')" ng-mouseout="vm.colorOut(device.uid+'1')"><i class="fa icon-barchart" style="color: #908888;
+                                       " id="{{device.uid}}1" title="Device Dashboard"></i></div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2" style="cursor:pointer;padding-right: 12px;" ng-mouseover="vm.colorIn(device.uid+'6')" ng-click="vm.goToPage(device, 'upgrade')"  ng-mouseout="vm.colorOut(device.uid+'6')"><i class="fa icon-cloud-download" style="color: #908888;
+                                       " id="{{device.uid}}6" title="Upgrade"></i></div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2" style="cursor:pointer;padding-right: 12px;" ng-mouseover="vm.colorIn(device.uid+'2')" ng-click="vm.goToPage(device, 'gatewayedit')" ng-mouseout="vm.colorOut(device.uid+'2')"><i class="fa icon-settings" style="color: #908888;
+                                        " id="{{device.uid}}2" title="Edit"></i></div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2" style="cursor:pointer;padding-right: 12px;" ng-mouseover="vm.colorIn(device.uid+'5')"  ng-mouseout="vm.colorOut(device.uid+'5')">      <i class="fa icon-refresh" style="color: #908888;
+                                        " id="{{device.uid}}5" title="Reset"></i></div>
+                                        <div class="col-lg-2 col-md-2 col-sm-2" style="cursor:pointer;padding-right: 12px;" ng-mouseover="vm.colorIn(device.uid+'8')" ng-mouseout="vm.colorOut(device.uid+'8')"><i class="fa icon-power-on" style="color: #908888;
+                                            " id="{{device.uid}}8" title="Restart"></i></div>
+                            </div>
+                        </div>
+                        </div>
+                 </div>
+             </div>
+        </div>
+
+        </div>
+    </div>
+</form>
+
+<style>
+    p:first-letter {
+        text-transform: capitalize;
+    }
+
+    .spinner
+    {
+        display: none !important;
+    }
+    .panel-content {
+        margin-bottom:10px;margin-top:70px;width: 100%;
+    }
+    .dropdowns {
+      position: relative;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .fixed-plugin .dropdown-menu li {
+        display: block;
+        padding: 2px 2px;
+        width: 25%;
+        float: left;
+    }
+    .fixed-plugin .dropdown-menu {
+        left: auto;
+        border-radius: 0.1875rem;
+        padding: 0 10px;
+        display: inline;
+        width: 360px;
+        right: -370px;
+        top: -63px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 308px;
+        border-bottom: 2px solid white;
+    }
+    .fixed-plugin {
+        position: fixed;
+        top: 250px;
+        right: 0;
+        width: 60px;
+        /* background: rgba(0, 0, 0, 0.3); */
+        background: #18a79d;
+        z-index: 1031;
+        border-radius: 8px 0 0 8px;
+        text-align: center;
+    }
+    .dropdown-content {
+      display: block;
+      position: absolute;
+      background-color: #ffffff;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      margin-left: -62px;
+      margin-top: -7px;
+    }
+     .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdown-content span {
+        margin-top: -10px;
+        position: absolute;
+        margin-left: 5px;
+    }
+    .dropdown-content a:hover {background-color: #e2e2e2}
+     div.tooltip {              
+      text-align: center;           
+      width: 100px;           
+      height: 28px;                             
+      font: 12px Roboto;  
+      border: 0px;      
+      border-radius: 8px;           
+      /* pointer-events: none; */  
+    }
+    .icon-lists {
+        margin-left: 155px;margin-top: -17px;width: 110px;
+    }
+    .list {
+        cursor:pointer;background: transparent; width: 100%; padding: 4px;margin-top: 2px
+    }
+</style>
+
+ <script type="text/javascript">
+     $(document).ready(function () {
+       
+        $(".fixed-plugin a").click(function () {
+            $(".dropdown-menu").animate({
+                right: 62
+            });           
+            
+            $('#iconopen1').hide();
+            $('#iconclose1').show();
+        });
+         $("#iconclose1").click(function () {
+            $(".dropdown-menu").animate({
+                right: -370
+            });
+            
+            $('#iconopen1').show();
+            $('#iconclose1').hide();
+        });
+         $("#slideshow > div:gt(0)").hide();
+         setInterval(function () {
+            $('#slideshow > div:first')
+                .fadeOut(1000)
+                .next()
+                .fadeIn(1000)
+                .end()
+                .appendTo('#slideshow');
+        }, 3000);
+        $(".fixed-plugin").tooltip();
+  
+    $(".dropdown-menu").mouseover(function(){
+        $(".fixed-plugin").tooltip('disable');
+    })
+    
+    $(".dropdown-menu").mouseleave(function(){
+        $(".fixed-plugin").tooltip('enable');
+    })
+    });
+    
+    function doInsert(ctl) {
+        var vInit = ctl.value;
+        ctl.value = ctl.value.replace(/[^a-f0-9:]/ig, "");
+        var vCurrent = ctl.value;
+        if (vInit != vCurrent)
+            return false;
+         var v = ctl.value;
+        var l = v.length;
+        var lMax = 17;
+       
+        if (l >= lMax) {
+            return false;
+        }
+         if (l >= 2 && l < lMax) {
+            var v1 = v;
+            while (!(v1.indexOf(":") < 0)) { // Better use RegEx
+                v1 = v1.replace(":", "");
+            }
+            var arrv1 = v1.match(/.{1,2}/g); // ["ab", "dc","a"]
+            ctl.value = arrv1.join(":");
+        }
+    }
+</script>

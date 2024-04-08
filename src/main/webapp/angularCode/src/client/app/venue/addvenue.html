@@ -1,0 +1,58 @@
+<form class="form-horizontal border-left hor-height" name="frm" novalidate>
+    <div class="col-md-12" style="padding-top:35px;padding-left:30px;">
+        <h2 style="font-weight:bolder;padding-bottom:7px; font-family: Roboto !important;">{{vm.pageName}}</h2>
+        <div class="panel addvenuepanel" style="height:82.5%">
+            <div class="panel-heading text-uppercase lead" style="margin-bottom:0"></div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 " style="padding-left:35px">
+                    <div class="form-group" show-errors>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+                            <input type="text" class="form-control" name="Venue Title" autocomplete="off" placeholder="Venue Title" alphabet data-server-validate ng-model="vm.venueDetails.uid" maxlength="20" required tabindex="1">
+                        </div>
+                    </div>
+                    <div class="form-group" show-errors>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+                            <input class="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group" name="Venue Address" placeholder="Venue Address" data-server-validate ng-model="vm.venueDetails.name" tabindex="2" id="txtsearch" type="text" required>
+                        </div>
+                    </div>
+                    <div class="form-group" show-errors>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group">
+                            <textarea type="text" rows="7" class="form-control" maxlength="500" name="Description" placeholder="Description" data-server-validate ng-model="vm.venueDetails.description" tabindex="3" required></textarea>
+                        </div>
+                    </div>
+                    <div class="button-bar pull-right buttonsavecancel" style="margin-top:14%">
+                        <input type="button" class="btn" ng-click="vm.cancel()" value="Cancel" style="width: auto;border: 1.5px solid #999999;background-color: white;color: #888;padding-left: 16px;padding-right: 16px;border-radius:5px;box-shadow: none !important;"> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="submit" class="btn btn-primary" ng-click="vm.save(frm)" value="Save" style="width: auto;padding-top: 6px;padding-bottom: 6px;padding-left: 25px;padding-right: 25px;box-shadow: none !important;">
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 mapwidth" id="mapHeightId" style="height:90% !important;padding-top:10px;padding-left:50px;">
+                    <div id="map" style="height:100%;width:100%; position:fixed;padding:0px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<style>
+   
+    @media(max-width: 768px ) and (min-width: 201px ) {
+        .addvenuepanel{
+            height: 700px !important;
+        }
+        .buttonsavecancel{
+            padding-top: 0px !important;
+        }
+    }
+    @media(max-width: 768px ) and (min-width: 501px) {
+        .mapwidth{
+            width:110% !important;
+            margin-left:-45px !important;
+        }
+    }
+     @media(max-width: 500px ) and (min-width: 201px ) {
+        .mapwidth{
+            width:115% !important;
+            margin-left:-50px !important;
+        }
+    }
+</style>

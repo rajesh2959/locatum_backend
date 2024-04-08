@@ -1,0 +1,533 @@
+<form class="form-horizontal border-left card-height" name="frm" novalidate>
+    <div class="networkconfig" id="submenu-modal" style="display:none;position:fixed">
+        <div class="network-popHeading">
+            <label id="deviceHeading"></label>
+            <span class="pull-right">
+                <a style="cursor:pointer" onclick="javascript:$('#submenu-modal').hide();">
+                    <i class="fa fa-close"></i>
+                </a>
+            </span>
+        </div>
+        <div class="netRoute">
+            <span id="status"></span>
+        </div>
+        <label>
+            <a style="cursor:pointer;" id="reposition-menu">
+                <i class="fa fa-arrows"></i>
+                <span>Reposition</span>
+            </a>
+        </label>
+        <label>
+            <a style="cursor:pointer;margin-left:20px;margin-right:10px;" id="deleteDevice">
+                <i class="fa fa-power-off"></i>
+                <span>Delete</span>
+            </a>
+        </label>
+    </div>
+    <img src={{vm.server_inactive}} height="30" id="serverOffline" width="30" style="display:none">
+    <img src={{vm.switch_inactive}} height="30" id="switchOffline" width="30" style="display:none">
+    <img src={{vm.ap_inactive}} height="30" id="apOffline" width="30" style="display:none">
+    <img src={{vm.sensor_inactive}} height="30" id="sensorOffline" width="30" style="display:none">
+    <img src={{vm.guestSensor_inactive}} height="30" id="guestSensorOffline" width="30" style="display:none">
+    <div class="panel-body networkconfig-sec" style="padding-top:22px;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7" style="margin-left:-11px;">
+                <h2 style="padding-bottom:7px">Network Configuration<span ng-if="vm.venueDetails!=null">({{vm.venueDetails.newUid}})</span></h2>
+            </div>
+        </div>
+        <div class="panel" style="width:98%;margin-left:18px;">
+            <div class="panel-heading ui-draggable-handle mr-top-10 pd-b-5">
+                <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                        <select ng-model="vm.selectedFloor" no-results-text="'No Floor found'" class="connection2 col-md-6 col-sm-9 col-xs-6 form-control"
+                                ng-options="item.id as item.name for item in vm.floorDetails"
+                                ng-change="vm.onFloorChanges(vm.selectedFloor)">
+                            <option ng-if="vm.floorDetails.length==0 || !vm.floorDetails" value="">No records found</option>
+                        </select>
+                    </div>
+                    <div class="tag-bar pull-right text-right">
+                        <span id="sensorAdd" style="cursor:pointer" class="tag"><span class="fa icon-add_receiver" style="color:#DC143C;vertical-align:middle"></span><span>BLE</span></span>
+                        <span id="guestSensorAdd" style="cursor:pointer" class="tag"><span class="fa icon-bluetooth" style="color:#DC143C;vertical-align:middle"></span><span>RUCKUS-BLE</span></span>
+                    </div>
+                </div>
+                <hr style="margin: 40px 5px 5px 5px; ">
+            </div>
+            <div class="row col-sm-offset-8">
+                <div class="floorCanvas pd-lr-20">
+                    <div id="reposition-modal" class="clickfloor">
+                        <div class="left-section">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="panel-heading ui-draggable-handle na-panel remove-padding-all mr-top-10">
+                        <div class="col-md-5 remove-padding-all mr-left-min-10">
+                            <label class="switch switch-large">
+                                <input type="checkbox" ng-init="IsSwitchON=true" ng-model="IsSwitchON" checked />
+                                <span>Zoom</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div ng-show="IsSwitchON" class="slider-section" style="padding-left: 20px">
+                        <div class="slider">
+                            <label style="height: 0px;">
+                                <span class="z-btn row" id="enlarge"><span class="fa icon-arrow icon" style="font-size:18px !important;"></span></span>
+                            </label>
+                            <label class="full-screen" style="margin-top:12px;margin-left:1px">
+                                <span ng-click="vm.zoomInClick()" class="z-btn row zoom-in" id="zoom-in"><span class="fa icon-add" style="font-size:16px !important;font-weight:700;"></span></span>
+                            </label>
+                            <input ng-model="vm.zoom" type="range" id="rotationId" class="zoom-range sliderslide" style="background:grey;" min="1" max="4" step="0.1">
+                            <label>
+                                <span ng-click="vm.zoomOutClick()" class="z-btn row plus zoom-out" style="width:17px" id="zoom-out"><span class="fa fa-minus"></span></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="panel-body floorsvgCont floorsvgSmall" style="margin-left: 100px;width: 85%;">
+                        <div class="mapping-section" style="overflow: hidden; position: relative;">
+                            <div class="maping-canvas panzoom" id="main-div">
+                                <div class="canvas-container">
+                                    <svg  id="mapSVG" transform="translate(5,5)">
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="fixed-plugin" title="Tree View">
+
+        <a href="" id="iconopen" >
+            <i class="fa icon-tree" style="padding: 10px;""> </i>
+        </a>
+        <a href="" id="iconclose" style="display:none;">
+            <i style="padding: 10px;" class="fa icon-tree"> </i>
+        </a>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 dropdown-menu" style="margin-top: 20px;margin-bottom: 20px;">
+            <div class="col-md-12" style="padding-bottom: 17px;">
+                <div class="row" style="margin-top: 10px;margin-left: -27px;width: 130%;">
+                    <div class='col-lg-3 col-md-3 col-sm-3' style="margin-top: 8px;">
+                        <label style="font-size: 14px;color: #17a79d; font-family:Roboto;margin-left: 3px;height: 12px;">{{vm.networkDeviceList.length}} Devices</label>
+                        <br>
+                    </div>
+                        
+                        <div class="dropdowns col-lg-4 col-md-4">
+                               <div  ng-click="vm.isClicked=!vm.isClicked" style="cursor:pointer;margin-left: -2px;">
+                                <i class="icon-filters" style="color: #29b1a8"></i><label style="font-size: 13px;color: #666666;font-family: Roboto;font-weight: 600;padding-left: 5px;">Filter</label>
+                                <span style="position:absolute;margin-top: 10px;margin-left:6px" class="caret"></span>
+                               </div> 
+                               
+                                 <div ng-if="vm.isClicked" class="dropdown-content" >
+                                 <a style="cursor:pointer;margin-bottom: 5px;min-height: 27px;" ng-repeat=" devicelist in vm.devicesList" ng-click="vm.checkDeviceId(devicelist)"> <span>{{devicelist.label}}</span></a>
+                                 </div>
+                        </div>
+                        <div class="navbar-form navbar-left col-lg-4 col-md-4 col-sm-3 col-xs-3 removepadding" role="search"
+                        style="margin-top: 3px !important">
+                                <span>
+                                    <i class="fa fa-search" style="color:#29b1a8"></i>&nbsp
+                                    <input type="text" class="form-control" placeholder="Search" ng-model="vm.search" 
+                                    onkeyup="doInsert(this)" style="outline:none;box-shadow: inset 0 0 #ddd;font-size: 13px;font-family:Roboto-Light;font-weight: 600;width: 105px;display: unset !important;">
+                                </span>
+                        </div>
+                </div>
+            </div>
+            <div class="panel-body panel-body-table panel-content">
+
+                        <div class="row list"  ng-if="vm.networkDeviceList.length > 0" class="hoverlist" data-ng-repeat="device in vm.networkDeviceList | filter : vm.search" ng-mouseover="vm.hoverIn(device.uid)" ng-mouseout="vm.hoverOut(device.uid)" class="hoverList" id="{{device.uid}}li" ng-click="vm.showDevice(device)">
+            
+                                <div style="margin-left: -25px;" class="col-lg-2 col-md-2 col-sm-2">
+                                <label class="radio-inline">
+                                    <img src="{{device.imagePath}}" style="width: 20px;height: 20px;">
+                                </label>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6" style="width: 153px;text-transform: uppercase">ble-{{device.uid}}</div>
+                            <div class="col-lg-6 col-md-6 col-sm-4" style="display: none; margin-left: 18px;" ng-attr-id="{{device.uid}}">
+                                <div class="row icon-lists">
+                                    <div class="col-lg-2 col-md-2 col-sm-2" style="cursor:pointer;padding-right: 12px;" ng-mouseover="vm.colorIn(device.uid+'1')" ng-click="vm.goToPage(device, 'gatewayinfo')" ng-mouseout="vm.colorOut(device.uid+'1')"><i class="fa icon-barchart" style="color: #908888;
+                                       " id="{{device.uid}}1" title="Device Dashboard" ></i></div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2" style="cursor:pointer;padding-right: 12px;" ng-mouseover="vm.colorIn(device.uid+'6')" ng-click="vm.goToPage(device, 'upgrade')"  ng-mouseout="vm.colorOut(device.uid+'6')"><i class="fa icon-cloud-download" style="color: #908888;
+                                       " id="{{device.uid}}6" title="Upgrade"></i></div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2" style="cursor:pointer;padding-right: 12px;" ng-mouseover="vm.colorIn(device.uid+'2')" ng-click="vm.goToPage(device, 'gatewayedit')" ng-mouseout="vm.colorOut(device.uid+'2')"><i class="fa icon-settings" style="color: #908888;
+                                        " id="{{device.uid}}2" title="Edit"></i></div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2" style="cursor:pointer;padding-right: 12px;" ng-mouseover="vm.colorIn(device.uid+'5')"  ng-mouseout="vm.colorOut(device.uid+'5')">      <i class="fa icon-refresh" style="color: #908888;
+                                        " id="{{device.uid}}5" title="Reset"></i></div>
+                                        <div class="col-lg-2 col-md-2 col-sm-2" style="cursor:pointer;padding-right: 12px;" ng-mouseover="vm.colorIn(device.uid+'8')" ng-mouseout="vm.colorOut(device.uid+'8')"><i class="fa icon-power-on" style="color: #908888;
+                                            " id="{{device.uid}}8" title="Restart"></i></div>
+                            </div>
+                        </div>
+                        </div>
+                   
+                </div>
+              
+            </div>
+        </div>
+    </div>
+</form>
+<style>
+    .removepading {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .tooltip {
+        z-index: 10000 !important;
+    }
+
+    /*Zoom Container Start*/
+    .slider-section {
+        position: absolute;
+        z-index: 999;
+        left: 25px;
+        top: 125px;
+    }
+
+    .slider {
+        background-color: #f4f4f4;
+        border-radius: 4px;
+        border: 1px solid #cfcdcd;
+        height: 245px;
+        width: 19px;
+        box-shadow: 0px 0px 3px 0px rgba(88, 88, 88, 0.78);
+    }
+
+    .sliderslide {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 6px;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        border: 1px solid #cfcdcd;
+    }
+
+        .sliderslide::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background: #f4f4f4;
+            cursor: pointer;
+            border-radius: 15px;
+            border: 1px solid #959595;
+        }
+
+        .sliderslide::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+        }
+
+    .slider label {
+        cursor: pointer;
+    }
+
+    .full-screen {
+        z-index: 999;
+        border-bottom: 2px solid #ddd;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        font-weight: 700;
+    }
+
+    .zoom-range {
+        transform: rotate(-90deg);
+        width: 160px !important;
+        z-index: 9999;
+        position: absolute;
+        right: -70px;
+        top: 132px;
+        border-radius: 10px;
+    }
+
+    .slider label .plus {
+        margin-bottom: 0px;
+        border: none;
+        border-top: 1px solid #cfcdcd;
+        position: absolute;
+        bottom: 0px;
+        padding-left: 4px;
+    }
+
+    .mapping-section {
+        border: 1px solid #d5d5d5;
+        overflow: scroll !important;
+        position: relative;
+        background: #fff;
+    }
+
+    .maximise-canvas {
+        position: absolute;
+        top: 40px;
+        right: 40px;
+        cursor: pointer;
+        z-index: 9;
+    }
+
+    .networkconfig-sec svg {
+        position: relative;
+    }
+
+    .networkconfig-sec .fullscreen {
+        z-index: 9999;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+    .networkconfig-sec .canvas-container {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .networkconfig-sec svg {
+        background-size: contain !important;
+    }
+
+    .networkconfig-sec image {
+        cursor: pointer;
+    }
+
+    .networkconfig-sec .draggable {
+        cursor: move;
+    }
+
+    .sensor-idle, .sensor-offline, .sensor-online {
+        background-repeat: no-repeat;
+        max-width: 100%;
+        background-size: 100%;
+        background-image: url('../../images/sensor_inactive.png');
+    }
+
+    .sensor-idle {
+        background-position: 0 6px;
+        background-size: 100%;
+    }
+
+    .sensor-offline {
+        background-position: 0 50%;
+        background-size: 100%;
+    }
+
+    .sensor-online {
+        background-position: 0 100%;
+        background-size: 100%;
+    }
+
+    p {
+        margin: 0px;
+        margin-top: 8px;
+        font-size: 12px;
+        font-weight: 500;
+        font-family: Roboto;
+        margin: 0px;
+        margin-top: 8px;
+    }
+
+    .clickfloor {
+        display: none;
+        border: solid 1px green;
+        height: 40px;
+        text-align: center;
+        vertical-align: middle;
+        border-radius: 5px;
+        background-color: #f5f5f5;
+    }
+
+    .networkconfig {
+        display: block;
+        background-color: #fff;
+        padding: 10px 10px;
+        box-shadow: 0px 0px 4px 4px #d8d8d8;
+        position: fixed;
+        left: 280px;
+        top: 170px;
+    }
+    .fixed-plugin .dropdown-menu li {
+        display: block;
+        padding: 2px 2px;
+        width: 25%;
+        float: left;
+        }
+
+    .customize-panel-flex-date {
+        float: left;
+        display: flex;
+        flex-direction: row;
+    }
+.fixed-plugin .dropdown-menu {
+    left: auto;
+    border-radius: 0.1875rem;
+    padding: 0 10px;
+    display: inline;
+    width: 360px;
+    right: -370px;
+    top: -63px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 308px;
+    border-bottom: 2px solid white;
+}
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdowns {
+  position: relative;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.dropdown-content {
+  display: block;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  margin-left: -62px;
+  margin-top: -7px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content span {
+    margin-top: -10px;
+    position: absolute;
+    margin-left: 5px;
+}
+.fixed-plugin {
+    position: fixed;
+    top: 250px;
+    right: 0;
+    width: 60px;
+    /* background: rgba(0, 0, 0, 0.3); */
+    background: #18a79d;
+    z-index: 1031;
+    border-radius: 8px 0 0 8px;
+    text-align: center;
+}
+ .dropdown-content a:hover {background-color: #e2e2e2}
+ div.tooltip {              
+  text-align: center;           
+  width: 100px;           
+  height: 28px;                             
+  font: 12px Roboto;  
+  border: 0px;      
+  border-radius: 8px;           
+  /* pointer-events: none; */
+         
+}
+.large-tooltip .tooltip-inner {
+    width: 250px;
+}
+.panel-content {
+    margin-bottom:10px;margin-top:70px;width: 100%;
+}
+.list {
+    cursor:pointer;background: transparent; width: 100%; padding: 4px;margin-top: 2px
+}
+.icon-lists {
+    margin-left: 155px;margin-top: -17px;width: 110px;
+}
+@media only screen and (min-width: 768px) and (max-width: 990px) {
+  .list {
+    padding-top: 4px;
+    box-sizing: border-box;
+  }
+  .icon-lists {
+    margin-left: -6px;
+    margin-top: 2px;
+  }
+  .panel-content {
+    margin-top: -10px;
+  }
+}
+</style>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(".fixed-plugin a").click(function () {
+            $(".dropdown-menu").animate({
+                right: 62
+            });
+
+                       
+
+            $('#iconopen').hide();
+            $('#iconclose').show();
+        });
+
+
+        $("#iconclose").click(function () {
+            $(".dropdown-menu").animate({
+                right: -370
+            });
+
+            $('#iconopen').show();
+            $('#iconclose').hide();
+        });
+
+        $("#slideshow > div:gt(0)").hide();
+
+        setInterval(function () {
+            $('#slideshow > div:first')
+                .fadeOut(1000)
+                .next()
+                .fadeIn(1000)
+                .end()
+                .appendTo('#slideshow');
+        }, 3000);
+        $(".fixed-plugin").tooltip();
+  
+    $(".dropdown-menu").mouseover(function(){
+        $(".fixed-plugin").tooltip('disable');
+    })
+    
+    $(".dropdown-menu").mouseleave(function(){
+        $(".fixed-plugin").tooltip('enable');
+    })
+    });
+    
+  function doInsert(ctl) {
+        var vInit = ctl.value;
+        ctl.value = ctl.value.replace(/[^a-f0-9:]/ig, "");
+        var vCurrent = ctl.value;
+        if (vInit != vCurrent)
+            return false;
+
+        var v = ctl.value;
+        var l = v.length;
+        var lMax = 17;
+       
+        if (l >= lMax) {
+            return false;
+        }
+
+        if (l >= 2 && l < lMax) {
+            var v1 = v;
+            while (!(v1.indexOf(":") < 0)) { // Better use RegEx
+                v1 = v1.replace(":", "");
+            }
+            var arrv1 = v1.match(/.{1,2}/g); // ["ab", "dc","a"]
+            ctl.value = arrv1.join(":");
+        }
+    }
+</script>

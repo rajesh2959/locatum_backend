@@ -1,0 +1,186 @@
+<div class="modal-header clearfix">
+  <div class="head-title">
+        <button type="submit" style="font-size: 25px;" class="close pull-right" ng-click="vm.ok()">&times;</button>
+    <div class='device'>
+            <label style="margin-left: 40px;margin-top: 20p;padding-top: 10px;padding-bottom: 0px;font-size: 23px;color: white;">{{vm.devices.length}}</label>
+            <br>
+            <h3> Devices</h3>
+    </div>
+    <div class="search-box">
+        <input type="text" placeholder="Search Devices" ng-model="vm.searchItems" >
+        <i class="fa fa fa-search icon" style="color:lightgray;font-size: 14px;text-decoration: none;cursor:pointer" ng-click="vm.searchFilterDevices(vm.searchItems)"></i>
+    </div>
+            <div class="filter">
+                <div style="margin-left: -24px;"><i class="icon-filters" style="color: #29b1a8"></i><label style="font-size: 12px;color: #666666;font-family: Roboto;font-weight: 600;padding-left: 5px;">Filter</label></div>  
+            <div style="position: absolute;margin-top: -34px;" class="col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-dropdown-multiselect=""
+                                                disabled="vm.devicesList.length == 0 ? true : false" checkboxes="true"
+                                                search-filter="vm.searchFilter" options="vm.devicesList"
+                                                selected-model="vm.selectedItem" extra-settings="vm.dropdownsettings"
+                                                translation-texts="vm.customTexts" events="vm.selectFilter"
+                                                >
+          </div>
+    </div>
+  </div>
+  <!-- <button type="submit" class="close pull-right" ng-click="vm.ok()">&times;</button> -->
+</div>
+<div class="modal-body">
+  <div style="width: 560px;height: 300px;overflow: auto;">
+    <ul style="margin-left: -35px;">
+      <li ng-mouseover="vm.hoverIn(device.uid)" ng-mouseout="vm.hoverOut(device.uid)" class="hoverList" id="{{device.uid}}li" ng-repeat="device in vm.devices" style="padding: 10px 0 0 5px; font-size: 15px;cursor: pointer;" ng-click="vm.cloneDevice(device)">
+        <span style="padding-right: 5px;" ><img src="{{device.imagePath}}" style="width: 19px">
+        </span><label style="font-size:13px;font-weight: 400;">{{device.parent | uppercase}}-{{device.uid}}</label><div ng-attr-id="{{device.uid}}" style="margin-left: 250px;margin-top:-28px;display:none">
+            <ul class="list-unstyled" style="display:flex;">
+                    <li class="addhide" ng-mouseover="vm.colorIn(device.uid+'1')" ng-click="vm.goToPage(device.uid, 'gatewayinfo')" ng-mouseout="vm.colorOut(device.uid+'1')" action="reboot" btn-type="reboot" devtype="Server" uid="?">
+                            <a href="">
+                                <i class="fa icon-barchart" style="color: #908888;
+                                font-size: 20px;
+                                text-decoration: none;" id="{{device.uid}}1"></i>
+                            </a>
+                        </li>
+                  
+                    <li class="addhide" ng-mouseover="vm.colorIn(device.uid+'6')" ng-click="vm.goToPage(device.uid, 'upgrade')"  ng-mouseout="vm.colorOut(device.uid+'6')" action="reboot" btn-type="reboot" devtype="Server" uid="?">
+                            <a href="">
+                                <i class="fa icon-cloud-download" style="color: #908888;
+                                font-size: 20px;
+                                text-decoration: none;" id="{{device.uid}}6"></i>
+                            </a>
+                        </li>                                
+                    
+                    <li class="addhide" ng-mouseover="vm.colorIn(device.uid+'2')" ng-click="vm.goToPage(device.uid, 'gatewayedit')" ng-mouseout="vm.colorOut(device.uid+'2')" action="reboot" btn-type="reboot" devtype="Server" uid="?">
+                        <a href="">
+                            <i class="fa icon-settings" style="color: #908888;
+                            font-size: 20px;
+                            text-decoration: none;" id="{{device.uid}}2"></i>
+                        </a>
+                    </li>
+                    <li class="addhide" ng-mouseover="vm.colorIn(device.uid+'5')"  ng-mouseout="vm.colorOut(device.uid+'5')" action="reboot" btn-type="reboot" devtype="Server" uid="?">
+                            <a href="">
+                                <i class="fa icon-refresh" style="color: #908888;
+                                font-size: 20px;
+                                text-decoration: none;" id="{{device.uid}}5"></i>
+                            </a>
+                        </li>
+                        <li class="addhide" ng-mouseover="vm.colorIn(device.uid+'8')" ng-mouseout="vm.colorOut(device.uid+'8')" action="reboot" btn-type="reboot" devtype="Server" uid="?">
+                                <a href="">
+                                    <i class="fa icon-power-on" style="color: #908888;
+                                    font-size: 20px;
+                                    text-decoration: none;" id="{{device.uid}}8"></i>
+                                </a>
+                            </li>
+                </ul>
+            </div></li>
+    </ul>
+  </div>
+</div>
+
+<style> 
+
+    .device {
+    width: 135px;
+    background: #29b1a8;
+    height: 65px;
+    }
+    .modal-header {
+  background: transparent !important;
+  padding: 0px;
+  height: 65px;
+  border-color:transparent !important;
+}
+  .userFileWindow .modal-content {
+  width: 600px;
+  height:425px;
+  margin-left: 150px;
+  margin-top: 100px;
+}
+h3 {
+    margin-bottom: 0px;
+    font-size: 10px;
+    font-weight: 600;
+    margin-left: 31px;
+    padding-top: 0px;
+    color: white;
+}
+ul {
+    list-style-type: none;
+}
+li {
+    text-decoration: none;
+}
+/* .hoverList:hover {
+  background: #e2e2e2;
+} */
+.addhide {
+    padding-left: 35px;
+}
+.search-box {
+    margin-left: 160px;
+    position: absolute;
+    margin-top: -37px;
+    font-size: 16px;
+    line-height: 45px;
+}
+.icon {
+    color: lightgray;
+    font-size: 14px;
+    text-decoration: none;
+    position: absolute;
+    margin-top: -27px;
+    margin-left: 138px;
+}
+.filter {
+    position: absolute;
+    margin-left: 87%;
+    margin-top: -30px;
+}
+input[type=text]{
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    -webkit-box-shadow: inset 0 -1px 0 #ddd;
+    box-shadow: inset 0 -1px 0 #ddd;
+    font-size: 13px;
+    height: 35px;
+}
+.btn {
+     box-shadow: none !important;
+}
+.btn-default {
+    width:0px;
+    height: 0px;
+}
+.btn-default:active:hover, .btn-default.active:hover, .open>.dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open>.dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open>.dropdown-toggle.btn-default.focus {
+    color: #444444;
+    background-color: white !important;
+    border-color: rgba(0,0,0,0);
+}
+/* .checkbox:hover {
+    display:block;
+    color:#666666;
+    transition: none !important;
+}
+.dropdown-menu > li > a:hover {
+    color:#666666;
+    transition: none !important; 
+} */
+.multiselect-parent.ng-binding {
+    display: none;
+}
+.dropdown-menu > li > a {
+    padding: 8px 15px;
+    border-bottom: none !important;
+    line-height: 20px;
+}
+.clones {
+    animation-duration: 4s;
+    animation-name: slidein;
+    animation-direction: forward;
+}
+@keyframes slidein {
+    0%   {width: 5px;}
+    25%   {width: 10px;}
+    50%   {width: 20px;}
+    75%   {width: 305px;}
+    100% {width: 40px;}
+}
+</style>

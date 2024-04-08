@@ -1,0 +1,177 @@
+﻿<form class="form-horizontal border-left hor-height" name="frm" novalidate>
+    <div class="panel-body networkconfig-sec" ng-show="!vm.isSelectVisual">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding top-pg-align">
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 ">
+                <h2><b>License </b> </h2>
+
+            </div>
+            <div class="=col-lg-3 col-md-3 col-sm-6 col-xs-3 button-bar pull-right">
+                <div class="navbar-form navbar-left col-lg-8 col-md-8 col-sm-8 col-xs-8 removepadding removemargin" style="padding-left:22px;" role="search">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 removepadding viscus-btn">
+
+                </div>
+            </div>
+            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel">
+                    <div class="panel-heading ui-draggable-handle mr-top-10 pd-b-5">
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                                <span class=" grid-title">
+                                  Subscriptions
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-left: 0px;padding-left: 30px;padding-right: 30px;">
+                        <div class="panel-body panel-body-table" style="overflow-y: hidden;">
+                            <div class="table-responsive">
+                                <table class="table table-hover" style="font-family:Roboto;font-size:13px;">
+                                    <thead style="border:thin;border-top: thin solid #e7e7e7;">
+                                        <tr>
+                                            <th style="background:none;color:black">#</th>
+                                            <th style="background:none;">
+                                                <a href="" style="color:black" class="table-hyper-a-small" ng-click="vm.dataOperationsLicenseCustomers.dataOperations.sortPredicate = 'licenceFor'; vm.dataOperationsLicenseCustomers.dataOperations.sortOrder = !vm.dataOperationsLicenseCustomers.dataOperations.sortOrder; vm.getlicenseCustomersList()">
+                                                    Customer Name
+                                                    <span ng-show="vm.dataOperationsLicenseCustomers.dataOperations.sortPredicate == 'licenceFor' && !vm.dataOperationsLicenseCustomers.dataOperations.sortOrder"
+                                                          class="fa fa-caret-down"></span>
+                                                    <span ng-show="vm.dataOperationsLicenseCustomers.dataOperations.sortPredicate == 'licenceFor' && vm.dataOperationsLicenseCustomers.dataOperations.sortOrder"
+                                                          class="fa fa-caret-up"></span>
+                                                </a>
+                                            </th>
+                                            <th style="background:none;">
+                                                <a href="" style="color:black" class="table-hyper-a-small" ng-click="vm.dataOperationsLicenseCustomers.dataOperations.sortPredicate = 'type'; vm.dataOperationsLicenseCustomers.dataOperations.sortOrder = !vm.dataOperationsLicenseCustomers.dataOperations.sortOrder; vm.getlicenseCustomersList()">
+                                                   Type
+                                                   <span ng-show="vm.dataOperationsLicenseCustomers.dataOperations.sortPredicate == 'type' && !vm.dataOperationsLicenseCustomers.dataOperations.sortOrder"
+                                                          class="fa fa-caret-down"></span>
+                                                    <span ng-show="vm.dataOperationsLicenseCustomers.dataOperations.sortPredicate == 'type' && vm.dataOperationsLicenseCustomers.dataOperations.sortOrder"
+                                                          class="fa fa-caret-up"></span>
+                                                </a>
+                                            </th>
+
+                                            <th style="background:none;">
+                                                <a href="" style="color:black" class="table-hyper-a-small" ng-click="vm.dataOperationsLicenseCustomers.dataOperations.sortPredicate = 'purchasedOn' ; vm.dataOperationsLicenseCustomers.dataOperations.sortOrder = !vm.dataOperationsLicenseCustomers.dataOperations.sortOrder; vm.getlicenseCustomersList()">
+                                                    Purchased On
+                                                     <span ng-show="vm.dataOperationsLicenseCustomers.dataOperations.sortPredicate == 'purchasedOn' && !vm.dataOperationsLicenseCustomers.dataOperations.sortOrder"
+                                                          class="fa fa-caret-down"></span>
+                                                    <span ng-show="vm.dataOperationsLicenseCustomers.dataOperations.sortPredicate == 'purchasedOn' && vm.dataOperationsLicenseCustomers.dataOperations.sortOrder"
+                                                          class="fa fa-caret-up"></span>
+                                                </a>
+                                            </th>
+                                            <th style="background:none;">
+                                                <a href="" style="color:black" class="table-hyper-a-small" ng-click="vm.dataOperationsLicenseCustomers.dataOperations.sortPredicate = 'expriesOn'; vm.dataOperationsLicenseCustomers.dataOperations.sortOrder = !vm.dataOperationsLicenseCustomers.dataOperations.sortOrder; vm.getlicenseCustomersList()">
+                                                    Expires On
+                                                     <span ng-show="vm.dataOperationsLicenseCustomers.dataOperations.sortPredicate == 'expriesOn' && !vm.dataOperationsLicenseCustomers.dataOperations.sortOrder"
+                                                          class="fa fa-caret-down"></span>
+                                                    <span ng-show="vm.dataOperationsLicenseCustomers.dataOperations.sortPredicate == 'expriesOn' && vm.dataOperationsLicenseCustomers.dataOperations.sortOrder"
+                                                          class="fa fa-caret-up"></span>
+                                                </a>
+                                            </th>
+                                              <th style="background:none;">
+                                                <a href="" style="color:black" class="table-hyper-a-small" ng-click="vm.dataOperationsLicenseCustomers.dataOperations.sortPredicate = 'timeLeft'; vm.dataOperationsLicenseCustomers.dataOperations.sortOrder = !vm.dataOperationsLicenseCustomers.dataOperations.sortOrder;vm.getlicenseCustomersList()">
+                                                    Time Left
+                                                      <span ng-show="vm.dataOperationsLicenseCustomers.dataOperations.sortPredicate == 'timeLeft' && !vm.dataOperationsLicenseCustomers.dataOperations.sortOrder"
+                                                          class="fa fa-caret-down"></span>
+                                                    <span ng-show="vm.dataOperationsLicenseCustomers.dataOperations.sortPredicate == 'timeLeft' && vm.dataOperationsLicenseCustomers.dataOperations.sortOrder"
+                                                          class="fa fa-caret-up"></span>
+                                                </a>
+                                            </th>
+
+                                            <th style="background:none;color:black" class="table-hyper-a-small">
+                                                    Deactivation
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-if="vm.pagedDataLicense.length > 0" style="border-bottom: solid 1px #e5e5e5;">
+                                        <tr data-ng-repeat="licensedCustomers in vm.pagedDataLicense">
+                                            <td>{{licensedCustomers.gridsno}}</td>
+                                            <td>{{licensedCustomers.licenceFor}}</td>
+                                            <td>{{licensedCustomers.type}}</td>
+                                            <td>{{licensedCustomers.purchasedOn}}</td>
+                                            <td>{{licensedCustomers.expriesOn}}</td>
+                                            <td>{{licensedCustomers.timeLeft}}</td>
+                                            <td>
+  											  <label class="switch switch-default">
+                                                    <input type="checkbox" ng-model="licensedCustomers.status" ng-change="vm.onDeactivationStatus(licensedCustomers.cid,licensedCustomers.status)" />
+                                                    <span></span>
+                                                </label>
+                                                <span style="vertical-align: super;padding-left: 3px;">&nbsp;{{licensedCustomers.status ? "On":"Off"}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody ng-if="vm.pagedDataLicense.length <= 0">
+                                        <tr>
+                                            <td colspan="12" style="text-align: center;"> No records found</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="pull-right">
+                                    <table>
+                                        <tr>
+                                            <td>{{vm.dataOperationsLicenseCustomers.currentPageDescription()}}</td>
+                                            <td>
+                                                <div class="pagination">
+                                                    <ul uib-pagination boundry-links="true" ng-change="vm.getlicenseCustomersList()"
+                                                        total-items="vm.dataOperationsLicenseCustomers.filteredCount" items-per-page="vm.dataOperationsLicenseCustomers.dataOperations.paging.pageSize"
+                                                        ng-model="vm.dataOperationsLicenseCustomers.dataOperations.paging.currentPage" max-size="vm.dataOperationsLicenseCustomers.dataOperations.paging.maxPagesToShow"
+                                                        class="pagination-small"></ul>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="text" numeric class="col-md-2 pagination-goto-text" ng-disabled="vm.dataOperationsLicenseCustomers.length <= vm.dataOperationsLicenseCustomers.dataOperations.paging.pageSize" ng-model="vm.goToLicensePageNumber" />&nbsp;
+                                                <input type="button" class="btn btn-primary pagination-grid-footer-btn"
+                                                       value="Go" data-ng-click="vm.goToLicensePage()" style="background-color:#068e84"
+                                                       ng-disabled="!vm.goToLicensePageNumber" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style type="text/css">
+        input[type="radio"]:after, .radio input[type="radio"]:after, .radio-inline input[type="radio"]:after {
+            position: relative;
+            top: 2px;
+            border: 2px solid #666666;
+        }
+
+        input[type="radio"]:before, .radio input[type="radio"]:before, .radio-inline input[type="radio"]:before {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            background-color: #18a79d;
+            -webkit-transform: scale(0);
+            -ms-transform: scale(0);
+            -o-transform: scale(0);
+            transform: scale(0);
+        }
+
+
+        .chart-radio-inline:hover {
+            color: #18a79d !important;
+        }
+
+        .switch span {
+            width: 36px !important;
+            height: 16px !important;
+        }
+
+            .switch span:after {
+                width: 13px !important;
+            }
+
+        .input-group-addon, .input-group-btn, .input-group .form-control {
+            display: initial !important;
+        }
+
+        .file-background {
+            background-color: white !important;
+        }
+    </style>
+</form>

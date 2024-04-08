@@ -1,0 +1,310 @@
+<form class="form-horizontal border-left hor-height" name="frm" novalidate>
+    <div class="panel-body networkconfig-sec" ng-show="!vm.isSelectVisual">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding top-pg-align">
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 ">
+                <h2><b>Support </b> </h2>
+
+            </div>
+            <div class="=col-lg-3 col-md-3 col-sm-6 col-xs-3 button-bar pull-right">
+                <div class="navbar-form navbar-left col-lg-8 col-md-8 col-sm-8 col-xs-8 removepadding removemargin" style="padding-left:22px;" role="search">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 removepadding viscus-btn">
+
+                </div>
+            </div>
+            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div ng-if="vm.isSuperAdmin" class="panel">
+                    <div class="panel-heading ui-draggable-handle mr-top-10 pd-b-5">
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                                <span class=" grid-title">
+                                    Support Mail
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-left: 0px;padding-left: 30px;padding-right: 30px;">
+                        <div class="panel-body panel-body-table" style="overflow-y: hidden;">
+                            <div class="table-responsive">
+                                <table class="table table-hover" style="font-family:Roboto;font-size:13px;">
+                                    <thead style="border:thin;border-top: thin solid #e7e7e7;">
+                                        <tr>
+                                            <th style="background:none;color:black">#</th>
+                                            <th style="background:none;">
+                                                <a href="" class="table-hyper-a-small" ng-click="vm.dataOperationsSupport.dataOperations.sortPredicate = 'name'; vm.dataOperationsSupport.dataOperations.sortOrder = !vm.dataOperationsSupport.dataOperations.sortOrder; vm.getSupport()">
+                                                    Customer Name
+                                                    <span ng-show="vm.dataOperationsSupport.dataOperations.sortPredicate == 'customerName' && !vm.dataOperationsSupport.dataOperations.sortOrder"
+                                                          class="fa fa-caret-down"></span>
+                                                    <span ng-show="vm.dataOperationsSupport.dataOperations.sortPredicate == 'customerName' && vm.dataOperationsSupport.dataOperations.sortOrder"
+                                                          class="fa fa-caret-up"></span>
+                                                </a>
+                                            </th>
+                                            <th style="background:none;">
+                                                <a href="" class="table-hyper-a-small" ng-click="vm.dataOperationsSupport.dataOperations.sortPredicate = 'host'; vm.dataOperationsSupport.dataOperations.sortOrder = !vm.dataOperationsSupport.dataOperations.sortOrder; vm.getSupport()">
+                                                    Host
+                                                </a>
+                                            </th>
+
+                                            <th style="background:none;">
+                                                <a href="" class="table-hyper-a-small" ng-click="vm.dataOperationsSupport.dataOperations.sortPredicate = 'port'; vm.dataOperationsSupport.dataOperations.sortOrder = !vm.dataOperationsSupport.dataOperations.sortOrder; vm.getSupport()">
+                                                    Port
+                                                </a>
+                                            </th>
+                                            <th style="background:none;">
+                                                <a href="" class="table-hyper-a-small" ng-click="vm.dataOperationsSupport.dataOperations.sortPredicate = 'userName'; vm.dataOperationsSupport.dataOperations.sortOrder = !vm.dataOperationsSupport.dataOperations.sortOrder; vm.getSupport()">
+                                                    User Name
+                                                </a>
+                                            </th>
+
+                                            <th style="background:none;">
+                                                <a href="" class="table-hyper-a-small">
+                                                    Status
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-if="vm.pagedDataSupport.length > 0" style="border-bottom: solid 1px #e5e5e5;">
+                                        <tr data-ng-repeat="support in vm.pagedDataSupport">
+                                            <td>{{support.gridsno}}</td>
+                                            <td>{{support.customerName}}</td>
+                                            <td>{{support.host}}</td>
+                                            <td>{{support.port}}</td>
+                                            <td>{{support.username}}</td>
+                                            <td>
+                                                <label class="switch switch-default">
+                                                    <input type="checkbox" ng-model="support.support" ng-change="vm.onSupportStatus(support.cid,support.support)" />
+                                                    <span></span>
+                                                </label>
+                                                <span style="vertical-align: super;padding-left: 3px;">&nbsp;{{support.support ? "On":"Off"}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody ng-if="vm.pagedDataSupport.length <= 0">
+                                        <tr>
+                                            <td colspan="12" style="text-align: center;"> No records found</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="pull-right">
+                                    <table>
+                                        <tr>
+                                            <td>{{vm.dataOperationsSupport.currentPageDescription()}}</td>
+                                            <td>
+                                                <div class="pagination">
+                                                    <ul uib-pagination boundry-links="true" ng-change="vm.getSupport()"
+                                                        total-items="vm.dataOperationsSupport.filteredCount" items-per-page="vm.dataOperationsSupport.dataOperations.paging.pageSize"
+                                                        ng-model="vm.dataOperationsSupport.dataOperations.paging.currentPage" max-size="vm.dataOperationsSupport.dataOperations.paging.maxPagesToShow"
+                                                        class="pagination-small"></ul>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="text" numeric class="col-md-2 pagination-goto-text" ng-disabled="vm.dataOperationsSupport.length <= vm.dataOperationsSupport.dataOperations.paging.pageSize" ng-model="vm.goToSupportPageNumber" />&nbsp;
+                                                <input type="button" class="btn btn-primary pagination-grid-footer-btn"
+                                                       value="Go" data-ng-click="vm.goToSupportPage()" style="background-color:#068e84"
+                                                       ng-disabled="!vm.goToSupportPageNumber" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div ng-if="!vm.isSuperAdmin" class="panel">
+                    <form name="supportMail" ng-submit="vm.createSupportmail(vm.credentials)" method="post" novalidate>
+                        <div style="text-align: center;margin-bottom: 25px; font-weight: bolder; font-size: 15px">
+                            <p >Support Mail</p>
+                            <div class="form-group" style="" show-errors>
+                                
+                            </div>
+                        </div>
+                    </form>
+                    <!-- <form novalidate name="userAdd">
+                            <div class="panel w80 aln-tab2" style="width: 100%;margin-bottom: 0px;margin-right: -8px;padding: 10px;">
+                                <p style="text-align:center; margin-bottom: 25px;"><b>Support Mail</b></p>
+                                <div class="form-group" ng-class="{'error':userAdd.support.$invalid && errorMsgLable}" style="float: right;margin-right: 0px;;margin-bottom: 15px;">
+                                    <label class="switch"> <input type="checkbox" ng-true-value="'true'" ng-false-value="'false'" ng-model="udata.support" ng-change="supportEmailEdit(x)" id="support" name="support" /> STATUS <span>&nbsp;</span>
+                                    </label>
+                                </div>
+                                <div class="form-group" ng-class="{'error':userAdd.edit.$invalid && errorMsgLable}" style="float: right;margin-right: -15px">
+                                    <label><span id="editV"></span>
+                                    </label>
+                                    <input type="checkbox" ng-model="x.edit" ng-change="updateEditMail(x)" id="edit" name="edit">
+                                </div>
+                        <div style="width:100%;margin-top: 70px;">
+                            <div class="aln-order1" style="width:50%;float:left;">
+                                <div class="form-group " ng-class="{'error':userAdd.host.$invalid && errorMsgLable}">
+                                    <label style="color: #000;">Host</label>
+                                    <input type="text" class="form-control" ng-model="udata.host" id="host" name="host" tabindex=1 required ng-pattern="/^[a-z]+.[a-z]+.[a-z]+$/">
+                                </div>
+                                <div class="form-group " ng-class="{'error':userAdd.username.$invalid && errorMsgLable}">
+                                    <label style="color: #000;">Email Id</label>
+                                    <input type="email" class="form-control" ng-model="udata.username" id="username" name="username" tabindex=3 required ng-pattern="emailValidate">                           
+                                </div> 
+                            </div>
+                            <div class="aln-order2" style="width:50%;float:right" id="rightCss"> 
+                                <div class="form-group two" ng-class="{'error':userAdd.port.$invalid && errorMsgLable}">
+                                    <label style="color: #000;">Port</label>
+                                    <input type="text" class="form-control" maxlength="4" minlength="3" ng-model="udata.port" tabindex=2 id="port" name="port" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyDown="if(this.value.length==4 && event.keyCode!=8) return false;" pattern="[1-9][0-9]{3}" required ng-pattern="">
+                                </div>                         
+                                 <div class="form-group four" ng-class="{'error':userAdd.password.$invalid && errorMsgLable}" style="margin-bottom: 20px;">
+                                    <label style="color: #000;">Password</label>
+                                    <input type="text" class="form-control pw" minlength="3" ng-model="udata.password" id="password" name="password" tabindex=4 required ng-pattern="">
+                                </div> 
+                            
+                                <div class="form-group" ng-class="{'error':userAdd.password.$invalid && errorMsgLable}">
+                                 
+                                
+                                <button class="btn preloader" type="submit" ng-click="createSupportmail(udata)" id="mailData"  ng-hide="myVar" style="height:37px;float:right;margin-top: -8px;width: 70%; margin-bottom: 10px;">
+                                Submit
+                                
+                                </button>
+                                <p id="smallLoadingFloor" class="hide" style="float:right;margin-right: -87px;"></p>
+                                </div> 
+                                <p name="nameDisp" id="nameDisp"></p>
+                            </div>
+                            
+                            <div class="clearfix"></div>
+                        </div>      
+                            </div>
+                            </form>
+                     -->    
+                </div>
+
+            </div>
+
+            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:10px">
+                <div class="panel">
+                    <div class="panel-heading ui-draggable-handle mr-top-10 pd-b-5">
+                        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6">
+                                <span class=" grid-title">
+                                    Allow access to Qubercomm Support
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-left: 0px;padding-left: 30px;padding-right: 30px;">
+                        <div class="panel-body panel-body-table" style="overflow-y: hidden;">
+                            <div class="table-responsive">
+                                <table class="table table-hover" style="font-family:Roboto;font-size:13px;">
+                                    <thead style="border:thin;border-top: thin solid #e7e7e7;">
+                                        <tr>
+                                            <th style="background:none;color:black">#</th>
+                                            <th style="background:none;">
+                                                <a href="" class="table-hyper-a-small" ng-click="vm.dataOperationAccess.dataOperations.sortPredicate = 'name'; vm.dataOperationAccess.dataOperations.sortOrder = !vm.dataOperationAccess.dataOperations.sortOrder; vm.getAccessSupport()">
+                                                    Customer Name
+                                                    <span ng-show="vm.dataOperationsaccess.sortPredicate == 'customerName' && !vm.dataOperationsaccess.sortOrder"
+                                                          class="fa fa-caret-down"></span>
+                                                    <span ng-show="vm.dataOperationsaccess.sortPredicate == 'customerName' && vm.dataOperationsaccess.sortOrder"
+                                                          class="fa fa-caret-up"></span>
+                                                </a>
+                                            </th>
+                                            <th style="background:none;">
+                                                <a href="" class="table-hyper-a-small">
+                                                    Status
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-if="vm.pagedDataaccess.length > 0" style="border-bottom: solid 1px #e5e5e5;">
+                                       
+                                        <tr data-ng-repeat="support in vm.pagedDataaccess">
+                                            <td>{{support.gridsno}}</td>
+                                            <td>{{support.customerName}}</td>
+                                            <td>
+                                                <label class="switch switch-default">
+                                                    <input type="checkbox" ng-model="support.qubercommAssist" ng-change="vm.onAccessStatus(support.id, support.qubercommAssist)" ng-true-value="'true'" ng-false-value="'false'" checked />
+                                                    <span></span>
+                                                </label>
+                                                <span ng-show="!support.qubercommAssist || support.qubercommAssist == 'false'" style="vertical-align: super;padding-left: 3px;">&nbsp;Off</span>
+                                                <span ng-show="support.qubercommAssist == 'true'" style="vertical-align: super;padding-left: 3px;">&nbsp;On</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody ng-if="vm.pagedDataaccess.length <= 0">
+                                        <tr>
+                                            <td colspan="12" style="text-align: center;"> No records found</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="pull-right">
+                                    <table>
+                                        <tr>
+                                            <td>{{vm.dataOperationAccess.currentPageDescription()}}</td>
+                                            <td>
+                                                <div class="pagination">
+                                                    <ul uib-pagination boundry-links="true" ng-change="vm.getAccessSupport()"
+                                                        total-items="vm.dataOperationAccess.filteredCount" items-per-page="vm.dataOperationAccess.dataOperations.paging.pageSize"
+                                                        ng-model="vm.dataOperationAccess.dataOperations.paging.currentPage" max-size="vm.dataOperationAccess.dataOperations.paging.maxPagesToShow"
+                                                        class="pagination-small"></ul>
+                                                </div>
+                                              
+                                            </td>
+                                            
+                                            <td>
+                                              
+                                                <input type="text" numeric class="col-md-2 pagination-goto-text" ng-disabled="vm.dataOperationAccess.length <= vm.dataOperationAccess.dataOperations.paging.pageSize" ng-model="vm.goToAccessPageNumber" />&nbsp;
+                                                <input type="button" class="btn btn-primary pagination-grid-footer-btn"
+                                                       value="Go" data-ng-click="vm.goToAccessPage()" style="background-color:#068e84"
+                                                       ng-disabled="!vm.goToAccessPageNumber" />
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <style type="text/css">
+        input[type="radio"]:after, .radio input[type="radio"]:after, .radio-inline input[type="radio"]:after {
+            position: relative;
+            top: 2px;
+            border: 2px solid #666666;
+        }
+
+        input[type="radio"]:before, .radio input[type="radio"]:before, .radio-inline input[type="radio"]:before {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            background-color: #18a79d;
+            -webkit-transform: scale(0);
+            -ms-transform: scale(0);
+            -o-transform: scale(0);
+            transform: scale(0);
+        }
+
+
+        .chart-radio-inline:hover {
+            color: #18a79d !important;
+        }
+
+        .switch span {
+            width: 36px !important;
+            height: 16px !important;
+        }
+
+            .switch span:after {
+                width: 13px !important;
+            }
+
+        .input-group-addon, .input-group-btn, .input-group .form-control {
+            display: initial !important;
+        }
+
+        .file-background {
+            background-color: white !important;
+        }
+    </style>
+</form>

@@ -1,0 +1,264 @@
+﻿<form class="form-horizontal" name="frm" novalidate>
+    <div class="col-md-12" style="padding-top:22px;padding-left:30px;">
+        <h2 style="padding-bottom:7px; font-family: Roboto !important;"><b>{{vm.pagename}}</b> <span ng-if="vm.venueDetails!=null">({{vm.venueDetails.newUid}})</span></h2>
+        <div class="panel addvenuepanel" style="height:500px;overflow:auto;">
+            <div class="panel-heading text-uppercase lead" style="margin-bottom:0;margin-bottom: 8px;  "></div>
+            <h3 class="col-lg-11 col-md-11 col-sm-11 col-xs-11" style="margin-left: 14px; font-weight: 500;font-size:14px;color:black;letter-spacing:0.5px;">Please configure this new device and press submit button to save</h3>
+            <div class="divider" style="margin-left: 30px;margin-right: 30px;  margin-top: 70px;margin-bottom: 35px"></div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 " style="padding-left:80px">
+                    <div class=" row col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-top:12px">
+                        <div class="form-group row col-lg-3 col-md-3 col-sm-6 col-xs-12" show-errors>
+                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                <label class="devicelbl">Device UID</label>
+                                <input type="text" class="form-control devicetxt" ng-disabled="{{vm.isGatewayPage}}" minlength="17" maxlength="17" autocomplete="off" name="DeviceUID" onkeyup="doInsert(this)" placeholder="BLE Address" required data-server-validate ng-model="vm.deviceuid" ng-blur="vm.checkMacaddress(vm.deviceuid)" />
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" show-errors>
+                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                <label class="devicelbl">Location</label>
+                                <input type="text" class="form-control devicetxt" autocomplete="off" name="Location" placeholder="Device Name" required data-server-validate ng-model="vm.devicename" />
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" show-errors>
+                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                <label class="devicelbl">Source</label>
+                                <select ng-disabled="vm.isGatewayPage || vm.isEdit" name="deviceId" ng-model="vm.selectedSource" ng-disabled="{{vm.isAddconfig}}" no-results-text="'No Venue found'" class=" col-md-6 col-sm-9 col-xs-6 form-control" style="font-size:14px !important"
+                                        ng-options="item.key as item.value for item in vm.sourceList"
+                                        ng-change="vm.onSourceChange(vm.selectedSource)">
+                                    <option ng-if="vm.sourceList.length==0 || !vm.sourceList" value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="vm.serverDevicetype == 'ble' || vm.selectedSource == 'locatum'">
+                        <div class=" row col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-top:12px">
+                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                <label class="switch switch-small">
+                                    <input type="checkbox" ng-model="vm.isAutoConfigureOn" ng-init="vm.isAutoConfigureOn=false" ng-change="vm.autoConfigureChange()" checked id="tagsONOFF" />
+                                    <span></span>
+                                </label>
+                                <span class="devicelbl" style="font-size: 13px;padding-left: 10px;color: #545050;font-family: roboto-light">Auto configure BLE</span>
+                            </div>
+                        </div>
+                        <div class=" row col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-top:12px">
+                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                <span style="font-size: 20px;font-weight: 500;">BLE Device</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-top:54px;">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding" style="margin-left: -38px">
+                                <ul class="nav nav-tabs">
+                                    <li ng-class="vm.tabIndex==1 ? 'tabactive' : ''" ng-init="vm.tabIndex=1"><a href="" ng-click="vm.tab(1)" data-toggle="tab" aria-expanded="false" style="background:none;border-top: none;padding-left:0px;font-size:12px"><span>Basic</span></a></li>
+                                    <li ng-class="vm.tabIndex==2 ? 'tabactive' : ''"><a href="" ng-click="vm.tab(2)" data-toggle="tab" aria-expanded="true" style="background:none;border-top: none;padding-left:40px;font-size:12px"><span ng-class="vm.showAdvancedFormValidation&& advancedForm.$invalid? 'color-red' : ''">Advance</span></a></li>
+                                    <li ng-class="vm.tabIndex==3 ? 'tabactive' : ''"><a href="" ng-click="vm.tab(3)" data-toggle="tab" aria-expanded="true" style="background:none;border-top: none;padding-left:40px;font-size:12px"><span>Diagnostic</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div ng-show="vm.tabIndex==1" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-top:20px;">
+                            <div class=" row col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-top:12px">
+                                <div class="form-group row col-lg-3 col-md-3 col-sm-6 col-xs-12" show-errors>
+
+                                    <label class="devicelbl">Type</label>
+
+                                    <select name="TypeId" ng-model="vm.selectedType" no-results-text="'No Venue found'" class="col-md-6 col-sm-9 col-xs-6 form-control" style="width:280px;padding-left:0px;font-size:14px !important;"
+                                            ng-options="item.key as item.value for item in vm.typeList"
+                                            ng-change="vm.onTypeChange(vm.selectedType)">
+                                        <option ng-if="vm.typeList.length==0 || !vm.typeList" value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class=" row col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-top:12px">
+                                <div class="form-group row col-lg-3 col-md-3 col-sm-6 col-xs-12" show-errors>
+
+                                    <label class="devicelbl">Proximity</label>
+                                    <input type="text" class="form-control devicetxt" autocomplete="off" name="Proximity" placeholder="Proximity" required data-server-validate ng-model="vm.conf.proximity" style="width:280px;" />
+
+                                </div>
+                            </div>
+                            <div class=" row col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-top:12px">
+                                <div class="form-group row col-lg-3 col-md-3 col-sm-6 col-xs-12" show-errors>
+                                    <label class="devicelbl">Scan Duration</label>
+                                    <input type="text" class="form-control devicetxt" autocomplete="off" name="ScanDuration" placeholder="Scan Duration" required data-server-validate ng-model="vm.conf.scanduration" style="width:280px;" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-show="vm.tabIndex==2" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-top:20px;">
+                            <ng-form name="advancedForm">
+                                <div class=" row col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding" style="padding-top:12px">
+                                    <div class="form-group row col-lg-3 col-md-3 col-sm-6 col-xs-12" show-errors>
+                                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                            <label style="font-size: 14px;font-weight: 500;">SSID</label>
+                                            <input type="text" class="form-control" autocomplete="off" name="SSID" placeholder="SSID" required data-server-validate ng-model="vm.conf.ssid" style="width:120px;" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" show-errors>
+                                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                            <label style="font-size: 14px;font-weight: 500;">Battery Interval</label>
+                                            <input type="text" class="form-control" autocomplete="off" name="BatteryInterval" placeholder="Battery Interval" required data-server-validate ng-model="vm.conf.batteryinterval " style="width:120px;" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" show-errors>
+                                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                            <label style="font-size: 14px;font-weight: 500;">Log Level</label>
+                                            <select name="LogLevel" ng-model="vm.conf.loglevel" no-results-text="'No Venue found'" class=" col-md-6 col-sm-9 col-xs-6 form-control"
+                                                    ng-options="item.key as item.value for item in vm.logList"
+                                                    ng-change="vm.onlogChange(vm.selectedSource)" style="width:120px;">
+                                                <option ng-if="vm.logList.length==0 || !vm.logList" value=""></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" row col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding" style="padding-top:12px">
+                                    <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" show-errors>
+                                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                            <label style="font-size: 14px;font-weight: 500;">Encryption</label>
+                                            <select name="Encryption" ng-model="vm.conf.encryption" no-results-text="'No Venue found'" class=" col-md-6 col-sm-9 col-xs-6 form-control" style="width:120px;"
+                                                    ng-options="item.key as item.value for item in vm.encryptionList"
+                                                    ng-change="vm.onEncryptionChange(vm.selectedSource)">
+                                                <option ng-if="vm.encryptionList.length==0 || !vm.encryptionList" value=""></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" show-errors>
+                                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                            <label style="font-size: 14px;font-weight: 500;">Status Interval</label>
+                                            <input type="text" class="form-control" autocomplete="off" name="statusInterval" placeholder="Status Interval" required data-server-validate ng-model="vm.conf.statusinterval" style="width:120px;" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" show-errors>
+                                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                            <label style="font-size: 14px;font-weight: 500;">Configuration</label>
+                                            <select name="Configuration" ng-model="vm.conf.configuration" no-results-text="'No Venue found'" class="col-md-3 col-sm-9 col-xs-6 form-control"
+                                                    ng-options="item.key as item.value for item in vm.configurationList"
+                                                    ng-change="vm.onConfigurationChange(vm.selectedSource)" style="width:120px;">
+                                                <option ng-if="vm.configurationList.length==0 || !vm.configurationList" value=""></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" row col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding" style="padding-top:12px">
+                                    <div class="form-group row col-lg-3 col-md-3 col-sm-6 col-xs-12" show-errors>
+                                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                            <label style="font-size: 14px;font-weight: 500;">Key</label>
+                                            <input type="text" class="form-control" autocomplete="off" name="key" placeholder="Key" required data-server-validate ng-model="vm.conf.key" style="width:120px;" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" show-errors>
+                                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                            <label style="font-size: 14px;font-weight: 500;">TLU Interval</label>
+                                            <input type="text" class="form-control" autocomplete="off" name="Tluinterval" placeholder="TLU Interval" required data-server-validate ng-model="vm.conf.tluinterval" style="width:120px;" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" show-errors>
+                                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                            <label style="font-size: 14px;font-weight: 500;">Keep Alive</label>
+                                            <input type="text" class="form-control" autocomplete="off" name="keepaliveinterval" placeholder="Keep Alive" required data-server-validate ng-model="vm.conf.keepaliveinterval" style="width:120px;" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-form>
+                        </div>
+
+                        <div ng-show="vm.tabIndex==3" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-top:20px;">
+                            <ng-form name="diagnosticForm">
+                                <div class=" row col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding" style="padding-top:12px" data-ng-repeat="diagnostic in vm.diagnosticList">
+                                    <div class="form-group row col-lg-3 col-md-3 col-sm-6 col-xs-12" show-errors>
+                                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                            <label style="font-size: 14px;font-weight: 500;">Key</label>
+                                            <input type="text" class="form-control" autocomplete="off" name="key{{diagnostic.id}}" placeholder="Key" data-server-validate ng-model="diagnostic.diag_key" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" show-errors>
+                                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                            <label style="font-size: 14px;font-weight: 500;">Value</label>
+                                            <input type="text" class="form-control" autocomplete="off" name="value{{diagnostic.id}}" placeholder="Value" data-server-validate ng-model="diagnostic.diag_value" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" style="padding-top: 26px;">
+                                            <label ng-click="vm.addDiagnostic()" style="font-size: 14px;font-weight: 500;width: 40px;height: 40px;text-align: center;    border: 1px solid #dddddd;"><i style="vertical-align: bottom;" class="fa fa-plus"></i></label>
+                                            <label ng-click="vm.deleteDiagnostic(diagnostic)" style="margin-left:10px; font-size: 14px;font-weight: 500;width: 40px;height: 40px;text-align: center;    border: 1px solid #dddddd;"><i style="vertical-align: bottom;" class="fa fa-minus"></i></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-form>
+                        </div>
+                    </div>
+                    <div class="button-bar pull-left buttonsavecancel" style="padding-top: 40px;padding-left: 25px;margin-bottom: 60px;">
+                        <input type="button" class="btn" ng-click="vm.cancel()" value="Cancel" style="width: auto;border: 2px solid #9ca4ab;background-color: white;color: #888;padding-left: 16px;padding-right: 16px;border-radius:6px;box-shadow: none !important;"> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="submit" class="btn btn-primary" ng-click="vm.save(frm,advancedForm)" value={{vm.buttonName}} style="width: auto;padding-top: 6px;padding-bottom: 6px;padding-left: 25px;padding-right: 25px;box-shadow: none !important;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    function doInsert(ctl) {
+        var vInit = ctl.value;
+        ctl.value = ctl.value.replace(/[^a-f0-9:]/ig, "");
+        var vCurrent = ctl.value;
+        if (vInit != vCurrent)
+            return false;
+
+        var v = ctl.value;
+        var l = v.length;
+        var lMax = 17;
+
+        if (l >= lMax) {
+            return false;
+        }
+
+        if (l >= 2 && l < lMax) {
+            var v1 = v;
+            while (!(v1.indexOf(":") < 0)) { // Better use RegEx
+                v1 = v1.replace(":", "");
+            }
+            var arrv1 = v1.match(/.{1,2}/g); // ["ab", "dc","a"]
+            ctl.value = arrv1.join(":");
+        }
+    }
+</script>
+<style>
+    .nav-tabs > li.tabactive > a, .nav-tabs > li.tabactive > a:focus {
+        border: none;
+        -webkit-box-shadow: inset 0 -2px 0 #1caf9a;
+        box-shadow: inset 0 -2px 0 #1caf9a;
+        color: black;
+        font-weight: 500;
+    }
+
+    .nav-tabs > li > a:hover, .nav-tabs > li > a:focus:hover {
+        background-color: transparent;
+        -webkit-box-shadow: inset 0 -2px 0 #1caf9a;
+        box-shadow: inset 0 -2px 0 #1caf9a;
+        color: black;
+    }
+
+    .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus:hover {
+        border: none;
+        color: black;
+    }
+
+    select, select.form-control {
+        font-size: 16px;
+        font-weight: 400;
+        color: #6f6f6f;
+        box-shadow: inset 0 -1px 0 #ddd;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAJ1BMVEVmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmaP/QSjAAAADHRSTlMAAgMJC0uWpKa6wMxMdjkoAAAANUlEQVR4AeXJyQEAERAAsNl7Hf3X6xt0QL6JpZWq30pdvdadme+0PMdzvHm8YThHcT1H7K0BtOMDniZhWOgAAAAASUVORK5CYII=);
+    }
+
+        select:focus, select.form-control:focus {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAJ1BMVEVmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmaP/QSjAAAADHRSTlMAAgMJC0uWpKa6wMxMdjkoAAAANUlEQVR4AeXJyQEAERAAsNl7Hf3X6xt0QL6JpZWq30pdvdadme+0PMdzvHm8YThHcT1H7K0BtOMDniZhWOgAAAAASUVORK5CYII=);
+        }
+
+    .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+        background-color: #9999991f;
+        opacity: 1;
+        border-radius: 5px;
+        padding: 2px 2px 2px 4px;
+    }
+</style>

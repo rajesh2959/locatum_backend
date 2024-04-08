@@ -1,0 +1,158 @@
+<form class="form-horizontal venue-height" name="frm" novalidate>
+    <div class="col-md-12 menutopview" style="margin-top:1.5%">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-left: -13px;">
+            <div class="col-lg-10 col-md-10 col-sm-9 col-xs-7">
+                <h2 style="padding-bottom:7px;">Venue</h2>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5 button-bar pull-right">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-right btn-add-venu">
+                    <a ui-sref="dashboard.venue.addvenue({venueId:0})" class="btn btn-primary btn-txt"><i class="fa icon-xen-location" style="font-size:12px !important;"></i>Add Venue</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel venuepanel card-height" style="margin-left: 15px;width:98% !important;">
+            <div class="panel-heading" style="margin-top: 15px;">
+                <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-8 venuedrpdwn" style="margin-top:-10px;">
+                        <select ng-class="vm.venueList.length==0 || !vm.venueList ? 'clickdisabled' : ''" name="deviceId" ng-model="vm.selectedVenue" no-results-text="'No Venue found'" class="connection2 col-md-6 col-sm-9 col-xs-6 form-control" style="width:220px;"
+                                ng-options="item.id as item.newUid for item in vm.venueList"
+                                ng-change="vm.onVenueChange(vm.selectedVenue)">
+                            <option ng-if="vm.venueList.length==0 || !vm.venueList" value="">No records found</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 button-bar pull-right">
+
+                        <i ng-click="vm.viewDashboard()" class="fa icon-home" style="color:#625B5B;vertical-align:sub;cursor:pointer" ng-class="vm.venueList.length==0 || !vm.venueList ? 'clickdisabled' : ''"></i> <span ng-class="vm.venueList.length==0 || !vm.venueList ? 'clickdisabled' : ''" ng-click="vm.viewDashboard()" class="venue-hlink dashboardactive"> View Dashboard</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span ng-class="vm.venueList.length==0 || !vm.venueList ? 'clickdisabled' : ''" ng-click="vm.editVenue()" class="fa icon-Edit" style="color:#625B5B;vertical-align:sub; cursor:pointer"></span>  <span ng-class="vm.venueList.length==0 || !vm.venueList ? 'clickdisabled' : ''" ng-click="vm.editVenue()" class="venue-hlink"> Edit</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span ng-class="vm.venueList.length==0 || !vm.venueList ? 'clickdisabled' : ''" ng-click="vm.deleteVenue()" class="fa fa-trash" style="color:red;cursor:pointer">&nbsp;</span>  <span ng-class="vm.venueList.length==0 || !vm.venueList ? 'clickdisabled' : ''" ng-click="vm.deleteVenue()" class="venue-hlink" style="color:red"> Delete</span>
+                    </div>
+                </div>
+                <hr style="margin-top: 37px;margin-left:10px;margin-right:10px;">
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right" style="margin-top: -15px;">
+
+
+                <div ng-show="vm.venueList.length>0" class="col-md-8 col-lg-8 venue-map" id="mapHeightId">
+                    <div id="map" style="height:100%;width:100%; position:fixed;padding:0px"></div>
+                </div>
+                <div ng-show="!vm.venueList.length>0" class="col-md-8 col-lg-8" style="height:340px !important;margin-top:100px;text-align: center;font-weight: bold;    font-size: 20px;" id="mapHeightId">
+                    <span>Please add a Venue</span>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12 removepadding allcardtoppadding pull-right tab-card-view">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding tilealign">
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" ui-sref="dashboard.floorplan">
+                            <div class="content card-floor" ng-if="vm.floorCount == 0">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardpadding">
+                                        <i class="pull-right fa icon-Floor" style="margin-top: 3px;font-size: 16px !important;"></i>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardpadding cardtoppadding" style="margin-top: -15px;">
+                                        <span style="font-weight: bolder;font-size:23px;">{{vm.floorCount}}</span>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardpadding cardlabeltoppadding" style="word-wrap: break-word;line-height:17px; margin-top:-3px;font-size:10px;">
+                                        <span>Floor</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content card-floor" ng-if="vm.floorCount > 0" ui-sref="dashboard.floorplan">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardpadding">
+                                        <i class="pull-right fa icon-Floor" style="margin-top: 3px; font-size: 16px !important;"></i>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardpadding cardtoppadding" style="margin-top: -15px;">
+                                        <span style="font-weight: bolder;font-size:23px;">{{vm.floorCount}}</span>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardpadding cardlabeltoppadding" style="word-wrap: break-word;line-height:17px; margin-top:-3px;font-size:10px;">
+                                        <span>Floor</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" ui-sref="dashboard.gateway">
+                            <div class="content card-finder ">
+                                <div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardpadding">
+                                        <i class="pull-right fa icon-APs" style="margin-top: 3px;font-size: 16px !important;"></i>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardpadding cardtoppadding" style="margin-top: -15px;">
+                                        <span style="font-weight: bolder;font-size:23px;">{{vm.finderCount}}</span>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardpadding cardlabeltoppadding" style="word-wrap: break-word;line-height:17px; margin-top:-3px;font-size:10px;">
+                                        <span>Gateway</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 " ui-sref="dashboard.tag">
+                            <div class="content card-tags">
+                                <div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardpadding">
+                                        <i class="pull-right fa fa-tag" style="margin-top: 4px;font-size: 13px !important;"></i>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardpadding cardtoppadding" style="margin-top: -15px;">
+                                        <span style="font-weight: bolder;font-size:23px;">{{vm.tagsCount}}</span>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardpadding cardlabeltoppadding" style="word-wrap: break-word;line-height:17px; margin-top:0px;font-size:10px;">
+                                        <span>Tags</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="content card-devices">
+                                <div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardpadding">
+                                        <i class="pull-right fa fa-tag" style="margin-top: 3px;font-size: 14px !important;"></i>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardpadding cardtoppadding" style="margin-top: -12px;">
+                                        <span style="font-weight: bolder;font-size:23px;">{{vm.deviceCount}}</span>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardpadding cardlabeltoppadding" style="line-height:18px; margin-top:-3px;font-size:10px;padding-bottom:5px;">
+                                        <span>Active Tags</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading alert-panel">
+                            
+                    <div>
+                        <h3 style="font-size:14px; font-family: Roboto !important;color: black;">Recent Alerts</h3>
+
+                        <span class="z-btn" id="enlarges" 
+                        style="float: right;
+                        margin-top: -30px;cursor: pointer;" ng-click="vm.goToVenueData()">
+                        
+                        <span class="fa icon-arrow icon"></span></span>
+
+                        <hr style="margin-top: 0px;margin-bottom: 0px;" />
+
+                        <div class="venue-recent-alr-panel" id="recentAlertId">
+                            <div ng-repeat="alert in  vm.recentAlertsList" class="recent-alert">
+                                <img ng-src="{{alert.imageType}}" />&nbsp;
+                                <span>{{alert.text}}</span>
+                            </div>
+                            <div class="form-control" style="text-align:center;padding-top:90px" ng-show="!vm.recentAlertsList.length>0">No alerts</div>
+                        </div>
+
+                    </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>

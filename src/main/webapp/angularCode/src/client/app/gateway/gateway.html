@@ -1,0 +1,475 @@
+<form class="form-horizontal border-left hor-height" name="frm">
+    <div class="col-md-12 menutopview" style="margin-top:22px">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-left: -13px;">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <h2 style="font-weight:700;padding-bottom:7px; font-family: Roboto !important;">Gateway</h2>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 button-bar pull-right">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removepadding gateway-btn">
+                    <button class="btn btn-primary cus-btn" ng-click="vm.addDevice()">
+                        <span class="fa icon-add" style="font-size: 15px !important;font-family:Roboto-Light;font-weight:100; vertical-align:middle;"></span>
+                        Add Gateway
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="browseButtn btn btn-primary btn-file cus-btn" >
+                                        <label style="cursor:pointer;" 
+
+                            title="•   MS Excel File formats are supported.
+•   In the first 2 columns of Sheet1, 'Location', 'UID' columns are expected.
+•   If 'Location' is missing, default values will be used while processing.">
+
+                                <input id="upload" name="fileInput" type="file" st class="fa fa-upload"
+                                    nv-file-select="" nv-file-drop="" uploader="vm.uploader" accept="text/plain" />
+                                <i class="fa fa-upload "  
+                                
+                                  alt="•   MS Excel File formats are supported.
+•   In the first 2 columns of Sheet1, 'Location', 'UID' columns are expected.
+•   If 'Location' is missing, default values will be used while processing."                                
+                                style="color:white;font-size:14px;margin-right: -8px;padding-top: 2px;"
+                                    aria-hidden="true">
+                                   <span class="cus-btn" ">Bulk Import</span>
+                                    
+                                </i>
+                                
+                                        </label>
+                                </span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-primary cus-btn" ng-click="vm.gatewaystatus()">
+                        <i class="fa fa-bluetooth" style="font-size:13px;"></i>
+                        <span style="font-size: 15px !important;font-family:Roboto-Light;font-weight:100; vertical-align:middle;"></span>
+                        Gateway Status
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-primary cus-btn" ng-click="vm.registerDevice()" ng-show="vm.isAdmin">
+                        <i class="fa fa-bookmark" style="font-size:13px;"></i>
+                        <span style="font-size: 15px !important;font-family:Roboto-Light;font-weight:100; vertical-align:middle;"></span>
+                        Non-Configured Gateways
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="panel venuepanel" style="height:auto;margin-left: 15px;width:98% !important;">
+            <div class="mr-top-11 row">
+                <div class="col-md-12 ">
+                    <div class="col-md-12 grid-title-padding" style="margin-top: 22px;margin-bottom:-4px;">
+                        <div class="col-md-4 title-left">
+                            <div class="col-md-1">
+                                <i class="fa icon-add_receiver grid-title-icon" style="margin-top:-4px;margin-left:-8px;">&nbsp;</i>
+                            </div>
+                            <div class="col-md-6">
+                                <span class=" grid-title" style="margin-left:-8px;line-height: 0.846;">
+                                    Receivers
+                                </span>
+                                
+                            </div>
+                        </div>
+                        
+                            <div class="col-lg-8 col-md-4 col-sm-7 col-xs-12 button-bar pull-right" style="margin-top: -11px;">
+
+                                <i class="fa fa-search gateway-srch-icon" style="margin-top: 10px;color:#8b91a0;font-size: 15px;"></i>
+                                <input type="text" data-ng-model="vm.dataOperations.search" data-ng-change="vm.searchBy(vm.dataOperations.search)"
+                                    class="form-control" placeholder="Search" style="outline:none;box-shadow: inset 0 0 #ddd;font-size: 13px;font-family:Roboto-Light;padding-left:6px;width:max-content;display: unset !important;" />
+                        
+                                <!-- <span class="browseButtn file-background btn btn-primary btn-file">
+                                        <label style="cursor:pointer;" 
+
+                            title="•   MS Excel File formats are supported.
+•   In the first 2 columns of Sheet1, 'Location', 'UID' columns are expected.
+•   If 'Location' is missing, default values will be used while processing.">
+
+                                <input id="upload" name="fileInput" type="file" st class="fa fa-upload"
+                                    nv-file-select="" nv-file-drop="" uploader="vm.uploader" accept="text/plain" />
+                                <i class="fa fa-upload "  
+                                
+                                  alt="•   MS Excel File formats are supported.
+•   In the first 2 columns of Sheet1, 'Location', 'UID' columns are expected.
+•   If 'Location' is missing, default values will be used while processing."                                
+                                style="color:#625B5B;font-size:14px;margin-right: -6px;"
+                                    aria-hidden="true">
+                                   
+                                    <span style="position: relative;font-size: 13px;font-family:Roboto;color: #252424;
+                                                                                    letter-spacing: 0.5px;padding-left: 5px;">Bulk Import</span>
+                                </i>
+                                
+                                        </label>
+                                </span> -->
+
+                     
+                        
+                        <span ng-click="vm.getReceivers(true)" class="grid-refresh">
+                            <i class="fa icon-rotate_right" style="color:#625B5B;vertical-align:sub;cursor:pointer;font-size:18px !important"></i>
+                                <span style="position: relative;font-size: 13px;font-family:Roboto;color: #252424;
+                                                                                    letter-spacing: 0.5px;">Refresh</span>
+                        </span>
+                        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span ng-class="vm.pagedDataReceiverDetails.length==0 || !vm.pagedDataReceiverDetails ? 'clickdisabled' : ''"
+                                ng-click="vm.deleteAll(1)" class="fa fa-trash" style="color:red;cursor:pointer;font-size: 15px;">&nbsp;</span>
+                            <span ng-class="vm.pagedDataReceiverDetails.length==0 || !vm.pagedDataReceiverDetails ? 'clickdisabled' : ''"
+                                ng-click="vm.deleteAll(1)" class="venue-hlink" style="color:red">&nbsp;Delete</span>
+                        
+                        
+                    </div>
+
+
+                </div>
+                    </div>
+                    <div class="panel-body panel-body-table" style="overflow-y: hidden;">
+                        <div class="table-responsive">
+                            <table class="table table-hover" style="font-size:13px;">
+                                <thead style="border:thin;border-top: thin solid #e7e7e7;">
+                                    <tr>
+                                        <th style="background:none;color:black" class="table-hyper-a-small ">
+                                            <label class="radio-inline">
+                                                <input style="margin-top: 0px;left: 5px" ng-model="vm.ischekAll" ng-click="vm.inputCheckAll(vm.ischekAll)"
+                                                    type="checkbox" name="optradio">
+                                            </label>
+                                        </th>
+                                        <th style="background:none;color:black" class="table-hyper-a-small ">
+                                            #
+                                        </th>
+                                        <th style="background:none;color:black">
+                                            Location
+                                        </th>
+                                        <th style="background:none;color:black">
+                                            <a href="" style="color:black" ng-click="vm.dataOperationsReceiver.dataOperations.sortPredicate = 'dev_name'; vm.dataOperationsReceiver.dataOperations.sortOrder = !vm.dataOperationsReceiver.dataOperations.sortOrder; vm.getReceivers()">
+                                                UID
+                                                <span ng-show="vm.dataOperationsReceiver.dataOperations.sortPredicate == 'dev_name' && !vm.dataOperationsReceiver.dataOperations.sortOrder"
+                                                    class="fa fa-caret-down"></span>
+                                                <span ng-show="vm.dataOperationsReceiver.dataOperations.sortPredicate == 'dev_name' && vm.dataOperationsReceiver.dataOperations.sortOrder"
+                                                    class="fa fa-caret-up"></span>
+                                            </a>
+                                        </th>
+                                        <th style="background:none;color:black">
+                                            <a href="" style="color:black" ng-click="vm.dataOperationsReceiver.dataOperations.sortPredicate = 'source'; vm.dataOperationsReceiver.dataOperations.sortOrder = !vm.dataOperationsReceiver.dataOperations.sortOrder; vm.getReceivers()">
+                                                Source
+                                                <span ng-show="vm.dataOperationsReceiver.dataOperations.sortPredicate == 'source' && !vm.dataOperationsReceiver.dataOperations.sortOrder"
+                                                    class="fa fa-caret-down"></span>
+                                                <span ng-show="vm.dataOperationsReceiver.dataOperations.sortPredicate == 'source' && vm.dataOperationsReceiver.dataOperations.sortOrder"
+                                                    class="fa fa-caret-up"></span>
+                                            </a>
+                                        </th>
+                                        <th style="background:none;color:black">
+                                            <a href="" style="color:black" ng-click="vm.dataOperationsReceiver.dataOperations.sortPredicate = 'state'; vm.dataOperationsReceiver.dataOperations.sortOrder = !vm.dataOperationsReceiver.dataOperations.sortOrder; vm.getReceivers()">
+                                                Status
+                                                <span ng-show="vm.dataOperationsReceiver.dataOperations.sortPredicate == 'state' && !vm.dataOperationsReceiver.dataOperations.sortOrder"
+                                                    class="fa fa-caret-down"></span>
+                                                <span ng-show="vm.dataOperationsReceiver.dataOperations.sortPredicate == 'state' && vm.dataOperationsReceiver.dataOperations.sortOrder"
+                                                    class="fa fa-caret-up"></span>
+                                            </a>
+                                        </th>
+                                        <th style="background:none;color:black">
+                                            <a href="" style="color:black" ng-click="vm.dataOperationsReceiver.dataOperations.sortPredicate = 'ip'; vm.dataOperationsReceiver.dataOperations.sortOrder = !vm.dataOperationsReceiver.dataOperations.sortOrder; vm.getReceivers()">
+                                                IP
+                                                <span ng-show="vm.dataOperationsReceiver.dataOperations.sortPredicate == 'ip' && !vm.dataOperationsReceiver.dataOperations.sortOrder"
+                                                    class="fa fa-caret-down"></span>
+                                                <span ng-show="vm.dataOperationsReceiver.dataOperations.sortPredicate == 'ip' && vm.dataOperationsReceiver.dataOperations.sortOrder"
+                                                    class="fa fa-caret-up"></span>
+                                            </a>
+                                        </th>
+                                        <th style="background:none;color:black" ng-if="vm.userRole == vm.envRole">
+                                            <label class="switch switch-default" style="margin-bottom:0px;">
+                                                <input type="checkbox" ng-model="vm.isReceiverDebugAllOn" ng-change="vm.onReceiverDebugAllChange(1)" />
+                                                <span style="margin-bottom: -5px"></span>
+                                            </label>
+                                            <span style="padding-left: 3px;">&nbsp;Dbg</span>
+                                        </th>
+                                        <th style="background:none;color:black" class="table-hyper-a-small ">
+                                            SSH
+                                        </th>
+                                        <th class="table-hyper-a-small" style="background:none; color: black;font-family: Roboto;font-size: 14px;letter-spacing: 0.8px;">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody ng-if="vm.pagedDataReceiverDetails.length > 0">
+                                    <tr data-ng-repeat="receiver in vm.pagedDataReceiverDetails">
+                                        <td style="background:none;text-align:right;padding-top: 15px;width:5px;height:5px;">
+                                            <label class="radio-inline">
+                                                <input style="margin-top: 0px;" ng-click="vm.isRowChecked()" ng-model="receiver.isChecked"
+                                                    type="checkbox" name="optradio">
+                                            </label>
+                                        </td>
+                                        <td>{{ receiver.gridsno }}</td>
+                                        <td>{{receiver.dev_name}}</td>
+                                        <td style="color:#1CA89E;text-transform:uppercase;cursor: pointer;" ng-click="vm.gatewayinfo(receiver.mac_address, receiver)">{{receiver.mac_address}}</td>
+                                        <td style="text-transform:uppercase;">{{receiver.source}}</td>
+                                        <td>{{receiver.state}}</td>
+                                        <td ng-show="receiver.source == 'qubercomm'">{{receiver.ip}}</td>
+                                        <td ng-show="receiver.source == 'guest'">-</td>
+                                        <td ng-if="vm.userRole == vm.envRole">
+                                            <label class="switch switch-default">
+                                                <input  type="checkbox" ng-model="receiver.debugstatus" ng-change="vm.onDebugChange(receiver, 1)" />
+                                                <span ng-show="receiver.source == 'qubercomm'"></span>
+                                            </label>
+                                            <span ng-show="receiver.source == 'qubercomm'" style="vertical-align: super;padding-left: 3px;">&nbsp;{{receiver.debugstatus
+                                                ? "On":"Off"}}</span>
+                                                <span ng-show="receiver.source == 'guest'" style="vertical-align: super;padding-left: 3px;">&nbsp; -</span>
+                                        </td>
+
+                                        <td>
+                                            <input ng-show="receiver.source == 'qubercomm'" type="button" class="btn pulse-button" value="SSH >_" data-ng-click="vm.ssh(receiver)"
+                                                style="background-color:#068e84" />
+                                                
+                                        </td>
+                                        <td>
+                                            <span ng-click="vm.edit(receiver)" style="color:#18a79d;cursor:pointer">Edit</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                            <span ng-show="receiver.source == 'qubercomm'" ng-click="vm.upgrade(receiver)" style="color:#6ECAE7;cursor:pointer">Upgrade</span>
+                                            <span ng-show="receiver.source == 'guest'" style="color:#6ECAE7;pointer-events: none">Upgrade</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                            <span ng-click="vm.delete(receiver, 1)" style="color:#FF0000;cursor:pointer">Delete</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody ng-if="vm.pagedDataReceiverDetails.length <= 0">
+                                    <tr>
+                                        <td colspan="12" style="text-align: center;"> No records found</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <hr style="margin: 15px 0 -20px 0 ;    border-top: thin solid #e7e7e7;">
+                            <table class="footer-center">
+                                <tr>
+                                    <td class="foot-desc">{{vm.dataOperationsReceiver.currentPageDescription()}}</td>
+
+                                    <td>
+                                        <div class="pagination">
+                                            <ul uib-pagination boundry-links="true" ng-change="vm.getReceivers()"
+                                                total-items="vm.dataOperationsReceiver.filteredCount" items-per-page="vm.dataOperationsReceiver.dataOperations.paging.pageSize"
+                                                ng-model="vm.dataOperationsReceiver.dataOperations.paging.currentPage"
+                                                max-size="vm.dataOperationsReceiver.dataOperations.paging.maxPagesToShow"
+                                                class="pagination-small"></ul>
+                                        </div>
+                                    </td>
+                                    <td class="foot-desc ng-binding">Go to Page</td>
+                                    <td>
+                                        <input type="text" numeric class="col-md-2 pagination-goto-text" ng-disabled="vm.allReceiverDetails.length <= vm.dataOperationsReceiver.dataOperations.paging.pageSize"
+                                            ng-model="vm.goToReceiverPageNo" />&nbsp;
+                                        <input type="button" class="btn btn-primary pagination-grid-footer-btn" value="Go"
+                                            data-ng-click="vm.goToReceiverPage()" style="background-color:#068e84"
+                                            ng-disabled="!vm.goToReceiverPageNo" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 menutopview" style="margin-top:10px">
+        <div class="panel venuepanel" style="height:auto;margin-left: 15px;width:98% !important;">
+            <div class="col-md-12 grid-title-padding">
+                <div class="col-md-4 title-left">
+                    <div class="col-md-1">
+                        <i class="fa icon-add_server grid-title-icon" style="padding-top:4px;margin-left:-8px;">&nbsp;</i>
+                    </div>
+                    <div class="col-md-6">
+                        <span class=" grid-title" style="margin-left:-8px;">
+                            Server
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <span ng-click="vm.getServers(true)" class="grid-refresh pull-right">
+                        <i class="fa icon-rotate_right " style="color:#625B5B;vertical-align:sub;cursor:pointer;font-size:18px !important"></i>
+                        Refresh
+                    </span>
+                </div>
+            </div>
+            <div class="mr-top-11 row">
+                <div class="col-md-12 ">
+                    <div class="panel-body panel-body-table" style="overflow-y: hidden;">
+                        <div class="table-responsive">
+                            <table class="table table-hover" style="font-size:13px;">
+                                <thead style="border:thin;border-top: thin solid #e7e7e7;">
+                                    <tr>
+                                        <th style="background:none;color:black" class="table-hyper-a-small ">
+                                            #
+                                        </th>
+                                        <th style="background:none;color:black">
+                                            <a href="" style="color:black" ng-click="vm.dataOperationsServer.dataOperations.sortPredicate = 'macaddr'; vm.dataOperationsServer.dataOperations.sortOrder = !vm.dataOperationsServer.dataOperations.sortOrder; vm.getServers()">
+                                                Location
+                                                <span ng-show="vm.dataOperationsServer.dataOperations.sortPredicate == 'macaddr' && !vm.dataOperationsServer.dataOperations.sortOrder"
+                                                    class="fa fa-caret-down"></span>
+                                                <span ng-show="vm.dataOperationsServer.dataOperations.sortPredicate == 'macaddr' && vm.dataOperationsServer.dataOperations.sortOrder"
+                                                    class="fa fa-caret-up"></span>
+                                            </a>
+                                        </th>
+                                        <th style="background:none;color:black">
+                                            <a href="" style="color:black" ng-click="vm.dataOperationsServer.dataOperations.sortPredicate = 'uid'; vm.dataOperationsServer.dataOperations.sortOrder = !vm.dataOperationsServer.dataOperations.sortOrder; vm.getServers()">
+                                                UID
+                                                <span ng-show="vm.dataOperationsServer.dataOperations.sortPredicate == 'uid' && !vm.dataOperationsServer.dataOperations.sortOrder"
+                                                    class="fa fa-caret-down"></span>
+                                                <span ng-show="vm.dataOperationsServer.dataOperations.sortPredicate == 'uid' && vm.dataOperationsServer.dataOperations.sortOrder"
+                                                    class="fa fa-caret-up"></span>
+                                            </a>
+                                        </th>
+                                        <th style="background:none;color:black">
+                                            <a href="" style="color:black" ng-click="vm.dataOperationsServer.dataOperations.sortPredicate = 'source'; vm.dataOperationsServer.dataOperations.sortOrder = !vm.dataOperationsServer.dataOperations.sortOrder; vm.getServers()">
+                                                Source
+                                                <span ng-show="vm.dataOperationsServer.dataOperations.sortPredicate == 'source' && !vm.dataOperationsServer.dataOperations.sortOrder"
+                                                    class="fa fa-caret-down"></span>
+                                                <span ng-show="vm.dataOperationsServer.dataOperations.sortPredicate == 'source' && vm.dataOperationsServer.dataOperations.sortOrder"
+                                                    class="fa fa-caret-up"></span>
+                                            </a>
+                                        </th>
+                                        <th style="background:none;color:black">
+                                            <a href="" style="color:black" ng-click="vm.dataOperationsServer.dataOperations.sortPredicate = 'status'; vm.dataOperationsServer.dataOperations.sortOrder = !vm.dataOperationsServer.dataOperations.sortOrder; vm.getServers()">
+                                                Status
+                                                <span ng-show="vm.dataOperationsServer.dataOperations.sortPredicate == 'status' && !vm.dataOperationsServer.dataOperations.sortOrder"
+                                                    class="fa fa-caret-down"></span>
+                                                <span ng-show="vm.dataOperationsServer.dataOperations.sortPredicate == 'status' && vm.dataOperationsServer.dataOperations.sortOrder"
+                                                    class="fa fa-caret-up"></span>
+                                            </a>
+                                        </th>
+                                        <th style="background:none;color:black">
+                                            <a href="" style="color:black" ng-click="vm.dataOperationsServer.dataOperations.sortPredicate = 'ip'; vm.dataOperationsServer.dataOperations.sortOrder = !vm.dataOperationsServer.dataOperations.sortOrder; vm.getServers()">
+                                                IP
+                                                <span ng-show="vm.dataOperationsServer.dataOperations.sortPredicate == 'ip' && !vm.dataOperationsServer.dataOperations.sortOrder"
+                                                    class="fa fa-caret-down"></span>
+                                                <span ng-show="vm.dataOperationsServer.dataOperations.sortPredicate == 'ip' && vm.dataOperationsServer.dataOperations.sortOrder"
+                                                    class="fa fa-caret-up"></span>
+                                            </a>
+                                        </th>
+                                        <th style="background:none;color:black" ng-if="vm.userRole == vm.envRole">
+                                            <label class="switch switch-default" style="margin-bottom:0px;">
+                                                <input type="checkbox" ng-model="vm.isServerDebugAllOn" ng-change="vm.onServerDebugAllChange(2)" />
+                                                <span style="margin-bottom:-5px;"></span>
+                                            </label>
+                                            <span style="padding-left: 3px;">&nbsp;Dbg</span>
+                                        </th>
+
+                                        <th style="background:none;color:black" class="table-hyper-a-small ">
+                                            SSH
+                                        </th>
+                                        <th class="table-hyper-a-small" style="background:none; color: black;font-family: Roboto;font-size: 14px;letter-spacing: 0.8px;">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody ng-if="vm.pagedDataServerDetails.length > 0">
+                                    <tr data-ng-repeat="server in vm.pagedDataServerDetails">
+                                        <td>{{ server.gridsno }}</td>
+                                        <td>{{server.dev_name}}</td>
+                                        <td style="color:#1CA89E">{{server.mac_address}}</td>
+                                        <td style="text-transform:uppercase;">{{server.source}}</td>
+                                        <td>{{server.state}}</td>
+                                        <td>{{server.ip}}</td>
+                                        <td ng-if="vm.userRole == vm.envRole">
+                                            <label class="switch switch-default">
+                                                <input type="checkbox" ng-model="server.debugstatus" ng-change="vm.onDebugChange(server, 2)" />
+                                                <span></span>
+                                            </label>
+                                            <span style="vertical-align: super;padding-left: 3px;">&nbsp;{{server.debugstatus
+                                                ? "On":"Off"}}</span>
+                                        </td>
+                                        <td>
+                                            <input type="button" class="btn pulse-button" value="SSH >_" data-ng-click="vm.ssh(server)"
+                                                style="background-color:#068e84" />
+                                        </td>
+                                        <td>
+                                            <span ng-click="vm.edit(server)" style="color:#18a79d;cursor:pointer">Edit</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                            <span style="color:#6ECAE7;cursor:pointer">Upgrade</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                            <span ng-click="vm.delete(server, 2)" style="color:#FF0000;cursor:pointer">Delete</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody ng-if="vm.pagedDataServerDetails.length <= 0">
+                                    <tr>
+                                        <td colspan="12" style="text-align: center;"> No records found</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <hr style="margin: 15px 0 -20px 0 ;    border-top: thin solid #e7e7e7;">
+                            <table class="footer-center">
+                                <tr>
+                                    <td class="foot-desc">{{vm.dataOperationsServer.currentPageDescription()}}</td>
+                                    <td>
+                                        <div class="pagination">
+                                            <ul uib-pagination boundry-links="true" ng-change="vm.getServers()"
+                                                total-items="vm.dataOperationsServer.filteredCount" items-per-page="vm.dataOperationsServer.dataOperations.paging.pageSize"
+                                                ng-model="vm.dataOperationsServer.dataOperations.paging.currentPage"
+                                                max-size="vm.dataOperationsServer.dataOperations.paging.maxPagesToShow"
+                                                class="pagination-small"></ul>
+                                        </div>
+                                    </td>
+                                    <td class="foot-desc ng-binding">Go to Page</td>
+                                    <td>
+                                        <input type="text" numeric class="col-md-2 pagination-goto-text" ng-disabled="vm.allServerDetails.length <= vm.dataOperationsServer.dataOperations.paging.pageSize"
+                                            ng-model="vm.goToServerPageNo" />&nbsp;
+                                        <input type="button" class="btn btn-primary pagination-grid-footer-btn" value="Go"
+                                            data-ng-click="vm.goToServerPage()" style="background-color:#068e84"
+                                            ng-disabled="!vm.goToServerPageNo" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<style>
+    .switch span {
+        width: 36px !important;
+        height: 16px !important;
+    }
+
+    .switch span:after {
+        width: 13px !important;
+    }
+
+    .pulse-button {
+        position: relative;
+        text-align: center;
+        box-shadow: 0 0 0 0 #A84155;
+        border-radius: 5px;
+        background-size: cover;
+        background: #000;
+        background-repeat: no-repeat;
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+        display: block;
+        -webkit-animation: pulse 2.25s infinite cubic-bezier(0.1, 0, 0, 1);
+        -moz-animation: pulse 2.25s infinite cubic-bezier(0.1, 0, 0, 1);
+        -ms-animation: pulse 2.25s infinite cubic-bezier(0.1, 0, 0, 1);
+        animation: pulse 2.25s infinite cubic-bezier(0.1, 0, 0, 1);
+    }
+
+    .pulse-button:hover {
+        -webkit-animation: none;
+        -moz-animation: none;
+        -ms-animation: none;
+        animation: none;
+    }
+
+    @-webkit-keyframes pulse {
+        to {
+            box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+        }
+    }
+
+    @-moz-keyframes pulse {
+        to {
+            box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+        }
+    }
+
+    @-ms-keyframes pulse {
+        to {
+            box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+        }
+    }
+
+    @keyframes pulse {
+        to {
+            box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+        }
+    }
+
+    .file-background {
+        background-color: white !important;
+    }
+</style>

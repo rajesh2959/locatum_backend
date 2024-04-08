@@ -1,0 +1,13 @@
+﻿<div class="modal-header danger clearfix">
+    <h3 ng-class="{'danger': true}" class="modal-title pull-left"><i class="fa fa-exclamation-triangle"></i> Delete Confirmation</h3>
+    <button type="button" class="close pull-right" ng-click="vm.no()">&times;</button>
+</div>
+<div class="modal-body">
+    <p ng-bind-html="vm.confirmationMessage"></p>
+</div>
+<div class="modal-footer">
+    <div class="button-bar button-bar-modal">
+        <button type="submit" class="btn btn-danger" ng-click="vm.yes()">Yes</button>
+        <button type="button" class="btn btn-primary" ng-click="vm.no()">No</button>
+    </div>
+</div>

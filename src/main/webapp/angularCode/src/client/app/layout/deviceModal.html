@@ -1,0 +1,310 @@
+﻿<div class="modal-header danger clearfix">
+    <button type="button" class="close pull-right" ng-click="vm.close()">&times;</button>
+</div>
+
+<div class="modal-body">
+    <div class="macAddress">
+        <label style="width:100%">Enter Device Unique ID</label>
+
+            <form name="frm" class="form-inline" style="width: 100%;text-align: center;margin-bottom: 30px;">
+                <div class="form-group">
+                    <input type="text" maxlength="2" minlength="2" ng-model="vm.mac0" ng-init="vm.mac0=vm.selectuid(0)" required class="form-control macId">
+                </div>
+                <span>:</span>
+                <div class="form-group">
+                    <input type="text" maxlength="2" minlength="2" ng-model="vm.mac1" ng-init="vm.mac1=vm.selectuid(1)" required class="form-control macId">
+                </div>
+                <span>:</span>
+                <div class="form-group">
+                    <input type="text" maxlength="2" minlength="2" ng-model="vm.mac2" ng-init="vm.mac2=vm.selectuid(2)" required class="form-control macId">
+                </div>
+                <span>:</span>
+                <div class="form-group">
+                    <input type="text" maxlength="2" minlength="2" ng-model="vm.mac3" ng-init="vm.mac3=vm.selectuid(3)" required class="form-control macId">
+                </div>
+                <span>:</span>
+                <div class="form-group">
+                    <input type="text" maxlength="2" minlength="2" ng-model="vm.mac4" ng-init="vm.mac4=vm.selectuid(4)" required class="form-control macId">
+                </div>
+                <span>:</span>
+                <div class="form-group">
+                    <input type="text" maxlength="2" minlength="2" ng-model="vm.mac5" ng-init="vm.mac5=vm.selectuid(5)" required class="form-control macId">
+                </div>
+            </form>
+
+        <div style="text-align: center; padding-top: 12px;margin-bottom:20px;">
+            <!-- <select ng-model="vm.selectedmacId" no-results-text="'No mac address found'" class="form-control"  style="width: 186px;margin-left: 110px;margin-top:-25px;" -->
+            <select ng-model="vm.selectedmacId" no-results-text="'No mac address found'" class="form-control"  style="width: 300px;margin-left: 60px;margin-top:-25px;"
+                    ng-options="item.mac_address as item.mac_address for item in vm.macList"
+                    ng-change="vm.macaddrChange()">
+                <option value="" selected="selected">Choose from available MAC Address</option>
+            </select>
+        </div>
+
+
+        <div style="text-align: center; padding-top: 12px;">
+            <input type="submit" class="btn btn-primary devicesavebutton"ng-click="vm.save(frm)" value="SAVE">
+        </div>
+        <div style="text-align: center; padding-top: 12px;">
+            <input type="button" class="btn devicecancelbutton" ng-click="vm.cancel()" value="Cancel">
+        </div>
+        <!-- <div ng-if="vm.uid" style="text-align: center; padding-top: 12px;">
+            <span style="color:red">Duplicate UID.Cannot Save</span>
+        </div> -->
+
+    </div>
+</div>
+
+<!--<form name="addUserForm" novalidate>
+
+
+    <div class="modal-body" style="height:500px;overflow-y:auto" id="scrolldiv">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="form-group">
+                    <select ng-model="vm.selectedmacId" no-results-text="'No mac address found'" style="width: 280px;margin-left: 45px;"
+                            ng-options="item.id as item.mac_address for item in vm.macList"
+                            ng-change="vm.macaddrChange()">
+                    </select>
+                    <label class="devicelbl">Customer Name</label>
+                  
+                </div>
+              </div>
+        </div>
+    </div>
+</form>-->
+<style>
+    .modal-content {
+        background-color: white;
+        width: 80%;
+    }
+
+    .macAddress label {
+        font-family: 'Roboto';
+        font-size: 20px;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .macAddress .form-inline .form-control {
+        width: 35px;
+        border-radius: 0px;
+        padding: 0px 2px;
+        text-align: center;
+    }
+
+    .macAddress .form-inline span {
+        font-size: 17px;
+        font-family: 'Exo2SemiBold';
+        opacity: 1;
+        padding: 0px 5px;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        font-weight: 425 !important;
+    }
+
+    textarea:focus, textarea.form-control:focus, input.form-control:focus, input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=number]:focus, [type=text].form-control:focus, [type=password].form-control:focus, [type=email].form-control:focus, [type=tel].form-control:focus, [contenteditable].form-control:focus {
+        -webkit-box-shadow: inset 0 -2px 0 #91d3cf;
+        box-shadow: inset 0 -2px 0 #91d3cf;
+    }
+
+    .devicesavebutton {
+        width: 320px !important;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        padding-left: 25px;
+        padding-right: 25px;
+        box-shadow: none !important;
+        height: 50px;
+        border-radius: 10px;
+        font-size: 14px;
+    }
+
+    .devicecancelbutton {
+        width: 320px !important;
+        background-color: white;
+        padding-left: 16px;
+        padding-right: 16px;
+        border-radius: 6px;
+        box-shadow: none !important;
+    }
+
+    .modal-header {
+        padding: 0px;
+        background: none;
+        border: none;
+    }
+
+    .addborder {
+        border: 1px solid red !important;
+    }
+
+    .switch span {
+        width: 36px !important;
+        height: 16px !important;
+    }
+
+        .switch span:after {
+            width: 13px !important;
+        }
+
+    .strong {
+        color: #060;
+        border-color: #0F0;
+    }
+
+    .medium {
+        color: #C60;
+        border-color: #FC0;
+    }
+
+    .weak {
+        color: #900;
+        border-color: #F00;
+    }
+
+    .strength {
+        padding: 1px 10px;
+        border: 2px solid;
+        color: #FFF;
+    }
+
+    .form-control {
+        font-family: Roboto-Light !important;
+        font-size: 15px !important;
+    }
+
+    #scrolldiv::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+        background-color: #F5F5F5;
+    }
+
+    #scrolldiv::-webkit-scrollbar {
+        width: 5px;
+        background-color: #F5F5F5;
+    }
+
+    #scrolldiv::-webkit-scrollbar-thumb {
+        background-color: #999999;
+    }
+
+    .form-control {
+        margin-top: -10px;
+    }
+
+    .form-control {
+        margin-bottom: -2px !important;
+    }
+
+    .form-group {
+        margin-bottom: 20px !important;
+    }
+</style>
+
+
+
+<script>
+    function checkHexaValues(evt) {
+        var regx = new RegExp(/^[a-f0-9]+$/i)
+        if (regx.test(evt.target.value)) {
+            hexaError = false
+            return true;
+        } else {
+            var value = $(evt.target).val();
+            var value = value.substr(0, value.length - 1);
+            $(evt.target).val(value)
+            hexaError = true;
+            return false
+        }
+    }
+
+    $('.macId').on('input', function (evt) {
+        checkHexaValues(evt)
+        if (evt.target.value.length == 2)
+            $(evt.target).parent().next().next().find("input").focus();
+        if (evt.target.value.length > 2) {
+            var value = $(evt.target).val();
+            var value = value.substr(0, value.length - 1);
+            $(evt.target).val(value)
+            return false;
+        }
+    });
+</script>
+<style>
+
+
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 30% auto; /* 15% from the top and centered */
+        padding: 20px;
+        /*border: 1px solid #888;*/
+        width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    .macAddress label {
+        font-family: 'Roboto';
+        font-size: 20px;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .macAddress .form-inline .form-control {
+        width: 35px;
+        border-radius: 0px;
+        padding: 0px 2px;
+        text-align: center;
+    }
+
+    .macAddress .form-inline span {
+        font-size: 17px;
+        font-family: 'Exo2SemiBold';
+        opacity: 1;
+        padding: 0px 5px;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        font-weight: 425 !important;
+    }
+
+    textarea:focus, textarea.form-control:focus, input.form-control:focus, input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=number]:focus, [type=text].form-control:focus, [type=password].form-control:focus, [type=email].form-control:focus, [type=tel].form-control:focus, [contenteditable].form-control:focus {
+        -webkit-box-shadow: inset 0 -2px 0 #91d3cf;
+        box-shadow: inset 0 -2px 0 #91d3cf;
+    }
+
+    .devicesavebutton {
+        width: 350px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        padding-left: 25px;
+        padding-right: 25px;
+        box-shadow: none !important;
+        height: 50px;
+        border-radius: 10px;
+        font-size: 14px;
+    }
+
+    .devicecancelbutton {
+        width: 350px;
+        background-color: white;
+        padding-left: 16px;
+        padding-right: 16px;
+        border-radius: 6px;
+        box-shadow: none !important;
+    }
+
+    .modal-header {
+        padding: 0px;
+        background: none !important;
+        border: none !important;
+    }
+
+    .addborder {
+        border: 1px solid red !important;
+    }
+</style>
