@@ -72,22 +72,22 @@ public class Application extends SpringBootServletInitializer {
 	@Bean
 	public GeoServiceJniHandler geoServiceJniHandler() {
 		GeoServiceJniHandler Geohandler = null;
-		Path path = Paths.get(geojniLibPath);
-		if (Files.exists(path)) {
-			try {
-				
-				LOG.info("JNI FILE PATH " + geojniLibPath);
-				System.load(geojniLibPath);
-				LOG.info("JNI LIB LOADED SUCCESS");
-				Geohandler = new GeoServiceJniHandler();
-	
-			} catch (Exception ex) {
-				LOG.error("Error loading jni lib : " + ex.getLocalizedMessage(), ex);
-	
-			}			
-		} else {
-			LOG.info("JNI LIB NOT FOUND " + geojniLibPath);
-		}
+//		Path path = Paths.get(geojniLibPath);
+//		if (Files.exists(path)) {
+//			try {
+//				
+//				LOG.info("JNI FILE PATH " + geojniLibPath);
+//				System.load(geojniLibPath);
+//				LOG.info("JNI LIB LOADED SUCCESS");
+//				Geohandler = new GeoServiceJniHandler();
+//	
+//			} catch (Exception ex) {
+//				LOG.error("Error loading jni lib : " + ex.getLocalizedMessage(), ex);
+//	
+//			}			
+//		} else {
+//			LOG.info("JNI LIB NOT FOUND " + geojniLibPath);
+//		}
 
 		return Geohandler;
 	}
